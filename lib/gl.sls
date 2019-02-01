@@ -1444,43 +1444,44 @@
     (syntax-rules ()
       ((with-c-data ftype num proc)
        (let*
-	   ((fsize (* num (ftype-sizeof ftype)))
-	    (faddr (foreign-alloc fsize))
-	    (fptr  (make-ftype-pointer ftype faddr))
-	    (value (proc fptr)))
-	 (foreign-free (ftype-pointer-address fptr))
-	 value))))
+	   ((size (* num (ftype-sizeof ftype)))
+	    (addr (foreign-alloc size))
+	    (fptr (make-ftype-pointer ftype addr))
+	    (ret  (proc fptr)))
+	 (foreign-free addr)
+	 ret))))
 
   (define-syntax wgl-procedure
     (syntax-rules ()
       ((wgl-procedure name params return)
-       (let ([wgl-address ((foreign-procedure "wglGetProcAddress" (string) void*) name)])
+       (let ((wgl-address ((foreign-procedure "wglGetProcAddress" (string) void*) name)))
 	 (define-ftype wgl-ftype (function params return))
 	 (if (or (= wgl-address  0)
 		 (= wgl-address  1)
 		 (= wgl-address  2)
 		 (= wgl-address  3)
 		 (= wgl-address -1))
-	     (error 'GL "Unsupported function." name)
+	     (lambda args
+	       (error 'GL "OpenGL function unavailable." name))
 	     (ftype-ref wgl-ftype () (make-ftype-pointer wgl-ftype wgl-address)))))))
 
   (define-syntax glx-procedure
     (syntax-rules ()
       ((glx-procedure name params return)
-       (let ([glx-address ((foreign-procedure "glXGetProcAddressARB" (string) void*) name)])
+       (let ((glx-address ((foreign-procedure "glXGetProcAddressARB" (string) void*) name)))
 	 (define-ftype glx-ftype (function params return))
 	 (if (= glx-address 0)
-	     (error 'GL "Unsupported function." name)
+	     (lambda args
+	       (error 'GL "OpenGL function unavailable." name))
 	     (ftype-ref glx-ftype () (make-ftype-pointer glx-ftype glx-address)))))))
 
   (define-syntax ngl-procedure
     (syntax-rules ()
-      ((glx-procedure name params return)
-       (let ([glx-address ((foreign-procedure "glXGetProcAddressARB" (string) void*) name)])
-	 (define-ftype glx-ftype (function params return))
-	 (if (= glx-address 0)
-	     (error 'GL "Unsupported function." name)
-	     (ftype-ref glx-ftype () (make-ftype-pointer glx-ftype glx-address)))))))
+      ((ngl-procedure name params return)
+       (if (foreign-entry? name)
+	   (foreign-procedure name params return)
+	   (lambda args
+	     (error 'GL "OpenGL function unavailable." name))))))
 
   (define-syntax gl-procedure
     (syntax-rules ()
@@ -2935,6 +2936,167 @@
   (define *gl-depth-range*)
   (define *gl-viewport*)
 
+  (define *gl-draw-arrays*)
+  (define *gl-draw-elements*)
+  (define *gl-get-pointer-v*)
+  (define *gl-polygon-offset*)
+  (define *gl-copy-tex-image-1d*)
+  (define *gl-copy-tex-image-2d*)
+  (define *gl-copy-tex-sub-image-1d*)
+  (define *gl-copy-tex-sub-image-2d*)
+  (define *gl-tex-sub-image-1d*)
+  (define *gl-tex-sub-image-2d*)
+  (define *gl-bind-texture*)
+  (define *gl-delete-textures*)
+  (define *gl-gen-textures*)
+  (define *gl-is-texture*)
+
+  (define *gl-draw-range-elements*)
+  (define *gl-tex-image-3d*)
+  (define *gl-tex-sub-image-3d*)
+  (define *gl-copy-tex-sub-image-3d*)
+
+  (define *gl-active-texture*)
+  (define *gl-sample-coverage*)
+  (define *gl-compressed-tex-image-3d*)
+  (define *gl-compressed-tex-image-2d*)
+  (define *gl-compressed-tex-image-1d*)
+  (define *gl-compressed-tex-sub-image-3d*)
+  (define *gl-compressed-tex-sub-image-2d*)
+  (define *gl-compressed-tex-sub-image-1d*)
+  (define *gl-get-compressed-tex-image*)
+
+  (define *gl-blend-func-seperate*)
+  (define *gl-multi-draw-arrays*)
+  (define *gl-multi-draw-elements*)
+  (define *gl-point-parameter-f*)
+  (define *gl-point-parameter-fv*)
+  (define *gl-point-parameter-i*)
+  (define *gl-point-parameter-iv*)
+  (define *gl-blend-color*)
+  (define *gl-blend-equation*)
+
+  (define *gl-gen-queries*)
+  (define *gl-delete-queries*)
+  (define *gl-is-query*)
+  (define *gl-begin-query*)
+  (define *gl-end-query*)
+  (define *gl-get-query-iv*)
+  (define *gl-get-query-object-iv*)
+  (define *gl-get-query-object-uiv*)
+  (define *gl-bind-buffer*)
+  (define *gl-delete-buffers*)
+  (define *gl-gen-buffers*)
+  (define *gl-is-buffer*)
+  (define *gl-buffer-data*)
+  (define *gl-buffer-sub-data*)
+  (define *gl-get-buffer-sub-data*)
+  (define *gl-map-buffer*)
+  (define *gl-unmap-buffer*)
+  (define *gl-get-buffer-parameter-iv*)
+  (define *gl-get-buffer-pointer-v*)
+
+  (define *gl-blend-equation-separate*)
+  (define *gl-draw-buffers*)
+  (define *gl-stencil-op-separate*)
+  (define *gl-stencil-func-separate*)
+  (define *gl-stencil-mask-separate*)
+  (define *gl-attach-shader*)
+  (define *gl-bind-attrib-location*)
+  (define *gl-compile-shader*)
+  (define *gl-create-program*)
+  (define *gl-create-shader*)
+  (define *gl-delete-program*)
+  (define *gl-delete-shader*)
+  (define *gl-detach-shader*)
+  (define *gl-disable-vertex-attrib-array*)
+  (define *gl-enable-vertex-attrib-array*)
+  (define *gl-get-active-attrib*)
+  (define *gl-get-active-uniform*)
+  (define *gl-get-attached-shaders*)
+  (define *gl-get-attrib-location*)
+  (define *gl-get-program-iv*)
+  (define *gl-get-program-info-log*)
+  (define *gl-get-shader-iv*)
+  (define *gl-get-shader-info-log*)
+  (define *gl-get-shader-source*)
+  (define *gl-get-uniform-location*)
+  (define *gl-get-uniform-fv*)
+  (define *gl-get-uniform-iv*)
+  (define *gl-get-vertex-attrib-dv*)
+  (define *gl-get-vertex-attrib-fv*)
+  (define *gl-get-vertex-attrib-iv*)
+  (define *gl-get-vertex-attrib-pointer-v*)
+  (define *gl-is-program*)
+  (define *gl-is-shader*)
+  (define *gl-link-program*)
+  (define *gl-shader-source*)
+  (define *gl-use-program*)
+  (define *gl-uniform-1f*)
+  (define *gl-uniform-2f*)
+  (define *gl-uniform-3f*)
+  (define *gl-uniform-4f*)
+  (define *gl-uniform-1i*)
+  (define *gl-uniform-2i*)
+  (define *gl-uniform-3i*)
+  (define *gl-uniform-4i*)
+  (define *gl-uniform-1fv*)
+  (define *gl-uniform-2fv*)
+  (define *gl-uniform-3fv*)
+  (define *gl-uniform-4fv*)
+  (define *gl-uniform-1iv*)
+  (define *gl-uniform-2iv*)
+  (define *gl-uniform-3iv*)
+  (define *gl-uniform-4iv*)
+  (define *gl-uniform-matrix-2fv*)
+  (define *gl-uniform-matrix-3fv*)
+  (define *gl-uniform-matrix-4fv*)
+  (define *gl-validate-program*)
+  (define *gl-vertex-attrib-1d*)
+  (define *gl-vertex-attrib-1dv*)
+  (define *gl-vertex-attrib-1f*)
+  (define *gl-vertex-attrib-1fv*)
+  (define *gl-vertex-attrib-1s*)
+  (define *gl-vertex-attrib-1sv*)
+  (define *gl-vertex-attrib-2d*)
+  (define *gl-vertex-attrib-2dv*)
+  (define *gl-vertex-attrib-2f*)
+  (define *gl-vertex-attrib-2fv*)
+  (define *gl-vertex-attrib-2s*)
+  (define *gl-vertex-attrib-2sv*)
+  (define *gl-vertex-attrib-3d*)
+  (define *gl-vertex-attrib-3dv*)
+  (define *gl-vertex-attrib-3f*)
+  (define *gl-vertex-attrib-3fv*)
+  (define *gl-vertex-attrib-3s*)
+  (define *gl-vertex-attrib-3sv*)
+  (define *gl-vertex-attrib-4n-bv*)
+  (define *gl-vertex-attrib-4n-iv*)
+  (define *gl-vertex-attrib-4n-sv*)
+  (define *gl-vertex-attrib-4n-ub*)
+  (define *gl-vertex-attrib-4n-ubv*)
+  (define *gl-vertex-attrib-4n-uiv*)
+  (define *gl-vertex-attrib-4n-usv*)
+  (define *gl-vertex-attrib-4bv*)
+  (define *gl-vertex-attrib-4d*)
+  (define *gl-vertex-attrib-4dv*)
+  (define *gl-vertex-attrib-4f*)
+  (define *gl-vertex-attrib-4fv*)
+  (define *gl-vertex-attrib-4iv*)
+  (define *gl-vertex-attrib-4s*)
+  (define *gl-vertex-attrib-4sv*)
+  (define *gl-vertex-attrib-4ubv*)
+  (define *gl-vertex-attrib-4uiv*)
+  (define *gl-vertex-attrib-4usv*)
+  (define *gl-vertex-attrib-pointer*)
+
+  (define *gl-uniform-matrix-2x3-fv*)
+  (define *gl-uniform-matrix-3x2-fv*)
+  (define *gl-uniform-matrix-2x4-fv*)
+  (define *gl-uniform-matrix-4x2-fv*)
+  (define *gl-uniform-matrix-3x4-fv*)
+  (define *gl-uniform-matrix-4x3-fv*)
+
 
   ;;;;;;;;;;;;;;;;;;;
   ;;; Marshalling ;;;
@@ -3151,23 +3313,11 @@
 
 
   (define (gl-load-library . library-path)
-    (define (load-gl-1 minor)
-      minor)
-
-    (define (load-gl-2 minor)
-      minor)
-
-    (define (load-gl-3 minor)
-      minor)
-
-    (define (load-gl-4 minor)
-      minor)
-
     (if (null? library-path)
 	(let
-	    ([win-path "opengl32.dll"]
-	     [lin-path "libGL.so"]
-	     [mac-path "/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL"])
+	    ((win-path "opengl32.dll")
+	     (lin-path "libGL.so")
+	     (mac-path "/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL"))
 	  (case (machine-type)
 	    ((i3nt  ti3nt  a6nt  ta6nt)  (load-shared-object win-path))
 	    ((i3le  ti3le  a6le  ta6le)  (load-shared-object lin-path))
@@ -3180,8 +3330,6 @@
     ;; of the OpenGL ABI for Linux. On macOS, OpenGL is weakly
     ;; linked and, can just looked up in the general address space.
 
-    ;; Bootstrap with OpenGL 1.1 because of Windows and, load
-    ;; the rest based on the version of the context.
     (set! *gl-cull-face*
 	  (foreign-procedure "glCullFace" (unsigned) void))
     (set! *gl-front-face*
@@ -3279,20 +3427,322 @@
     (set! *gl-viewport*
 	  (foreign-procedure "glViewport" (int int int int) void))
 
+    (set! *gl-draw-arrays*
+	  (foreign-procedure "glDrawArrays" (unsigned int int) void))
+    (set! *gl-draw-elements*
+	  (foreign-procedure "glDrawElements" (unsigned int unsigned void*) void))
+    (set! *gl-get-pointer-v*
+	  (foreign-procedure "glGetPointerv" (unsigned void*) void))
+    (set! *gl-polygon-offset*
+	  (foreign-procedure "glPolygonOffset" (float float) void))
+    (set! *gl-copy-tex-image-1d*
+	  (foreign-procedure "glCopyTexImage1D" (unsigned int unsigned int int int int) void))
+    (set! *gl-copy-tex-image-2d*
+	  (foreign-procedure "glCopyTexImage2D" (unsigned int unsigned int int int int int) void))
+    (set! *gl-copy-tex-sub-image-1d*
+	  (foreign-procedure "glCopyTexSubImage1D" (unsigned int int int int int) void))
+    (set! *gl-copy-tex-sub-image-2d*
+	  (foreign-procedure "glCopyTexSubImage2D" (unsigned int int int int int int int) void))
+    (set! *gl-tex-sub-image-1d*
+	  (foreign-procedure "glTexSubImage1D" (unsigned int int int unsigned unsigned void*) void))
+    (set! *gl-tex-sub-image-2d*
+	  (foreign-procedure "glTexSubImage2D" (unsigned int int int int int unsigned unsigned void*) void))
+    (set! *gl-bind-texture*
+	  (foreign-procedure "glBindTexture" (unsigned unsigned) void))
+    (set! *gl-delete-textures*
+	  (foreign-procedure "glDeleteTextures" (int (* unsigned)) void))
+    (set! *gl-gen-textures*
+	  (foreign-procedure "glGenTextures" (int (* unsigned)) void))
+    (set! *gl-is-texture*
+	  (foreign-procedure "glIsTexture" (unsigned) unsigned-8))
+
+    (set! *gl-draw-range-elements*
+	  (gl-procedure "glDrawRangeElements" (unsigned unsigned unsigned int unsigned void*) void))
+    (set! *gl-tex-image-3d*
+	  (gl-procedure "glTexImage3D" (unsigned int int int int int int unsigned unsigned void*) void))
+    (set! *gl-tex-sub-image-3d*
+	  (gl-procedure "glTexSubImage3D" (unsigned int int int int int int int unsigned unsigned void*) void))
+    (set! *gl-copy-tex-sub-image-3d*
+	  (gl-procedure "glCopyTexSubImage3D" (unsigned int int int int int int int int) void))
+
+    (set! *gl-active-texture*
+	  (gl-procedure "glActiveTexture" (unsigned) void))
+    (set! *gl-sample-coverage*
+	  (gl-procedure "glSampleCoverage" (float unsigned-8) void))
+    (set! *gl-compressed-tex-image-3d*
+	  (gl-procedure "glCompressedTexImage3D" (unsigned int unsigned int int int int int void*) void))
+    (set! *gl-compressed-tex-image-2d*
+	  (gl-procedure "glCompressedTexImage2D" (unsigned int unsigned int int int int void*) void))
+    (set! *gl-compressed-tex-image-1d*
+	  (gl-procedure "glCompressedTexImage1D" (unsigned int unsigned int int int void*) void))
+    (set! *gl-compressed-tex-sub-image-3d*
+	  (gl-procedure "glCompressedTexSubImage3D" (unsigned int int int int int int int unsigned int void*) void))
+    (set! *gl-compressed-tex-sub-image-2d*
+	  (gl-procedure "glCompressedTexSubImage2D" (unsigned int int int int int unsigned int void*) void))
+    (set! *gl-compressed-tex-sub-image-1d*
+	  (gl-procedure "glCompressedTexSubImage1D" (unsigned int int int unsigned int void*) void))
+    (set! *gl-get-compressed-tex-image*
+	  (gl-procedure "glGetCompressedTexImage" (unsigned int void*) void))
+
+    (set! *gl-blend-func-seperate*
+	  (gl-procedure "glBlendFuncSeparate" (unsigned unsigned unsigned unsigned) void))
+    (set! *gl-multi-draw-arrays*
+	  (gl-procedure "glMultiDrawArrays" (unsigned (* int) (* int) int) void))
+    (set! *gl-multi-draw-elements*
+	  (gl-procedure "glMultiDrawElements" (unsigned (* int) unsigned void* int) void))
+    (set! *gl-point-parameter-f*
+	  (gl-procedure "glPointParameterf" (unsigned float) void))
+    (set! *gl-point-parameter-fv*
+	  (gl-procedure "glPointParameterfv" (unsigned (* float)) void))
+    (set! *gl-point-parameter-i*
+	  (gl-procedure "glPointParameteri" (unsigned int) void))
+    (set! *gl-point-parameter-iv*
+	  (gl-procedure "glPointParameteriv" (unsigned (* int)) void))
+    (set! *gl-blend-color*
+	  (gl-procedure "glBlendColor" (float float float float) void))
+    (set! *gl-blend-equation*
+	  (gl-procedure "glBlendEquation" (unsigned) void))
+
+    (set! *gl-gen-queries*
+	  (gl-procedure "glGenQueries" (int (* int)) void))
+    (set! *gl-delete-queries*
+	  (gl-procedure "glDeleteQueries" (int (* unsigned)) void))
+    (set! *gl-is-query*
+	  (gl-procedure "glIsQuery" (unsigned) unsigned-8))
+    (set! *gl-begin-query*
+	  (gl-procedure "glBeginQuery" (unsigned unsigned) void))
+    (set! *gl-end-query*
+	  (gl-procedure "glEndQuery" (unsigned) void))
+    (set! *gl-get-query-iv*
+	  (gl-procedure "glGetQueryiv" (unsigned unsigned (* int)) void))
+    (set! *gl-get-query-object-iv*
+	  (gl-procedure "glGetQueryObjectiv" (unsigned unsigned (* int)) void))
+    (set! *gl-get-query-object-uiv*
+	  (gl-procedure "glGetQueryObjectuiv" (unsigned unsigned (* int)) void))
+    (set! *gl-bind-buffer*
+	  (gl-procedure "glBindBuffer" (unsigned unsigned) void))
+    (set! *gl-delete-buffers*
+	  (gl-procedure "glDeleteBuffers" (int (* unsigned)) void))
+    (set! *gl-gen-buffers*
+	  (gl-procedure "glGenBuffers" (int (* unsigned)) void))
+    (set! *gl-is-buffer*
+	  (gl-procedure "glIsBuffer" (unsigned) unsigned-8))
+    (set! *gl-buffer-data*
+	  (gl-procedure "glBufferData" (unsigned size_t void* unsigned) void))
+    (set! *gl-buffer-sub-data*
+	  (gl-procedure "glBufferSubData" (unsigned size_t size_t void*) void))
+    (set! *gl-get-buffer-sub-data*
+	  (gl-procedure "glGetBufferSubData" (unsigned size_t size_t void*) void))
+    (set! *gl-map-buffer*
+	  (gl-procedure "glMapBuffer" (unsigned unsigned) void))
+    (set! *gl-unmap-buffer*
+	  (gl-procedure "glUnmapBuffer" (unsigned) unsigned-8))
+    (set! *gl-get-buffer-parameter-iv*
+	  (gl-procedure "glGetBufferParameteriv" (unsigned unsigned (* int)) void))
+    (set! *gl-get-buffer-pointer-v*
+	  (gl-procedure "glGetBufferPointerv" (unsigned unsigned void*) void))
+
+    (set! *gl-blend-equation-separate*
+	  (gl-procedure "glBlendEquationSeparate" (unsigned unsigned) void))
+    (set! *gl-draw-buffers*
+	  (gl-procedure "glDrawBuffers" (int (* unsigned)) void))
+    (set! *gl-stencil-op-separate*
+	  (gl-procedure "glStencilOpSeparate" (unsigned unsigned unsigned unsigned) void))
+    (set! *gl-stencil-func-separate*
+	  (gl-procedure "glStencilFuncSeparate" (unsigned unsigned int unsigned) void))
+    (set! *gl-stencil-mask-separate*
+	  (gl-procedure "glStencilMaskSeparate" (unsigned unsigned) void))
+    (set! *gl-attach-shader*
+	  (gl-procedure "glAttachShader" (unsigned unsigned) void))
+    (set! *gl-bind-attrib-location*
+	  (gl-procedure "glBindAttribLocation" (unsigned unsigned string) void))
+    (set! *gl-compile-shader*
+	  (gl-procedure "glCompileShader" (unsigned) void))
+    (set! *gl-create-program*
+	  (gl-procedure "glCreateProgram" () unsigned))
+    (set! *gl-create-shader*
+	  (gl-procedure "glCreateShader" (unsigned) unsigned))
+    (set! *gl-delete-program*
+	  (gl-procedure "glDeleteProgram" (unsigned) void))
+    (set! *gl-delete-shader*
+	  (gl-procedure "glDeleteShader" (unsigned) void))
+    (set! *gl-detach-shader*
+	  (gl-procedure "glDetachShader" (unsigned unsigned) void))
+    (set! *gl-disable-vertex-attrib-array*
+	  (gl-procedure "glDisableVertexAttribArray" (unsigned) void))
+    (set! *gl-enable-vertex-attrib-array*
+	  (gl-procedure "glEnableVertexAttribArray" (unsigned) void))
+    (set! *gl-get-active-attrib*
+	  (gl-procedure "glGetActiveAttrib" (unsigned unsigned int (* int) (* int) (* unsigned) string) void))
+    (set! *gl-get-active-uniform*
+	  (gl-procedure "glGetActiveUniform" (unsigned unsigned int (* int) (* int) (* unsigned) string) void))
+    (set! *gl-get-attached-shaders*
+	  (gl-procedure "glGetAttachedShaders" (unsigned int (* int) (* unsigned)) void))
+    (set! *gl-get-attrib-location*
+	  (gl-procedure "glGetAttribLocation" (unsigned string) int))
+    (set! *gl-get-program-iv*
+	  (gl-procedure "glGetProgramiv" (unsigned unsigned (* int)) void))
+    (set! *gl-get-program-info-log*
+	  (gl-procedure "glGetProgramInfoLog" (unsigned int (* int) (* char)) void))
+    (set! *gl-get-shader-iv*
+	  (gl-procedure "glGetShaderiv" (unsigned unsigned (* int)) void))
+    (set! *gl-get-shader-info-log*
+	  (gl-procedure "glGetShaderInfoLog" (unsigned int (* int) (* char)) void))
+    (set! *gl-get-shader-source*
+	  (gl-procedure "glGetShaderSource" (unsigned int (* int) (* char)) void))
+    (set! *gl-get-uniform-location*
+	  (gl-procedure "glGetUniformLocation" (unsigned string) int))
+    (set! *gl-get-uniform-fv*
+	  (gl-procedure "glGetUniformfv" (unsigned int (* float)) void))
+    (set! *gl-get-uniform-iv*
+	  (gl-procedure "glGetUniformiv" (unsigned int (* int)) void))
+    (set! *gl-get-vertex-attrib-dv*
+	  (gl-procedure "glGetVertexAttribdv" (unsigned unsigned (* double)) void))
+    (set! *gl-get-vertex-attrib-fv*
+	  (gl-procedure "glGetVertexAttribfv" (unsigned unsigned (* float)) void))
+    (set! *gl-get-vertex-attrib-iv*
+	  (gl-procedure "glGetVertexAttribiv" (unsigned unsigned (* int)) void))
+    (set! *gl-get-vertex-attrib-pointer-v*
+	  (gl-procedure "glGetVertexAttribPointerv" (unsigned unsigned void*) void))
+    (set! *gl-is-program*
+	  (gl-procedure "glIsProgram" (unsigned) unsigned-8))
+    (set! *gl-is-shader*
+	  (gl-procedure "glIsShader" (unsigned) unsigned-8))
+    (set! *gl-link-program*
+	  (gl-procedure "glLinkProgram" (unsigned) void))
+    (set! *gl-shader-source*
+	  (gl-procedure "glShaderSource" (unsigned int (* char) (* int)) void))
+    (set! *gl-use-program*
+	  (gl-procedure "glUseProgram" (unsigned) void))
+    (set! *gl-uniform-1f*
+	  (gl-procedure "glUniform1f" (int float) void))
+    (set! *gl-uniform-2f*
+	  (gl-procedure "glUniform2f" (int float float) void))
+    (set! *gl-uniform-3f*
+	  (gl-procedure "glUniform3f" (int float float float) void))
+    (set! *gl-uniform-4f*
+	  (gl-procedure "glUniform4f" (int float float float float) void))
+    (set! *gl-uniform-1i*
+	  (gl-procedure "glUniform1i" (int int) void))
+    (set! *gl-uniform-2i*
+	  (gl-procedure "glUniform2i" (int int int) void))
+    (set! *gl-uniform-3i*
+	  (gl-procedure "glUniform3i" (int int int int) void))
+    (set! *gl-uniform-4i*
+	  (gl-procedure "glUniform4i" (int int int int int) void))
+    (set! *gl-uniform-1fv*
+	  (gl-procedure "glUniform1fv" (int int (* float)) void))
+    (set! *gl-uniform-2fv*
+	  (gl-procedure "glUniform2fv" (int int (* float)) void))
+    (set! *gl-uniform-3fv*
+	  (gl-procedure "glUniform3fv" (int int (* float)) void))
+    (set! *gl-uniform-4fv*
+	  (gl-procedure "glUniform4fv" (int int (* float)) void))
+    (set! *gl-uniform-1iv*
+	  (gl-procedure "glUniform1iv" (int int (* int)) void))
+    (set! *gl-uniform-2iv*
+	  (gl-procedure "glUniform2iv" (int int (* int)) void))
+    (set! *gl-uniform-3iv*
+	  (gl-procedure "glUniform3iv" (int int (* int)) void))
+    (set! *gl-uniform-4iv*
+	  (gl-procedure "glUniform4iv" (int int (* int)) void))
+    (set! *gl-uniform-matrix-2fv*
+	  (gl-procedure "glUniformMatrix2fv" (int int unsigned-8 (* float)) void))
+    (set! *gl-uniform-matrix-3fv*
+	  (gl-procedure "glUniformMatrix3fv" (int int unsigned-8 (* float)) void))
+    (set! *gl-uniform-matrix-4fv*
+	  (gl-procedure "glUniformMatrix4fv" (int int unsigned-8 (* float)) void))
+    (set! *gl-validate-program*
+	  (gl-procedure "glValidateProgram" (unsigned) void))
+    (set! *gl-vertex-attrib-1d*
+	  (gl-procedure "glVertexAttrib1d" (unsigned double) void))
+    (set! *gl-vertex-attrib-1dv*
+	  (gl-procedure "glVertexAttrib1dv" (unsigned (* double)) void))
+    (set! *gl-vertex-attrib-1f*
+	  (gl-procedure "glVertexAttrib1f" (unsigned float) void))
+    (set! *gl-vertex-attrib-1fv*
+	  (gl-procedure "glVertexAttrib1fv" (unsigned) void))
+    (set! *gl-vertex-attrib-1s*
+	  (gl-procedure "glVertexAttrib1s" (unsigned integer-16) void))
+    (set! *gl-vertex-attrib-1sv*
+	  (gl-procedure "glVertexAttrib1sv" (unsigned (* integer-16)) void))
+    (set! *gl-vertex-attrib-2d*
+	  (gl-procedure "glVertexAttrib2d" (unsigned double double) void))
+    (set! *gl-vertex-attrib-2dv*
+	  (gl-procedure "glVertexAttrib2dv" (unsigned (* double)) void))
+    (set! *gl-vertex-attrib-2f*
+	  (gl-procedure "glVertexAttrib2f" (unsigned float float) void))
+    (set! *gl-vertex-attrib-2fv*
+	  (gl-procedure "glVertexAttrib2fv" (unsigned (* float)) void))
+    (set! *gl-vertex-attrib-2s*
+	  (gl-procedure "glVertexAttrib2s" (unsigned integer-16 integer-16) void))
+    (set! *gl-vertex-attrib-2sv*
+	  (gl-procedure "glVertexAttrib2sv" (unsigned (* integer-16)) void))
+    (set! *gl-vertex-attrib-3d*
+	  (gl-procedure "glVertexAttrib3d" (unsigned double double double) void))
+    (set! *gl-vertex-attrib-3dv*
+	  (gl-procedure "glVertexAttrib3dv" (unsigned (* double)) void))
+    (set! *gl-vertex-attrib-3f*
+	  (gl-procedure "glVertexAttrib3f" (unsigned float float float) void))
+    (set! *gl-vertex-attrib-3fv*
+	  (gl-procedure "glVertexAttrib3fv" (unsigned (* float)) void))
+    (set! *gl-vertex-attrib-3s*
+	  (gl-procedure "glVertexAttrib3s" (unsigned integer-16 integer-16 integer-16) void))
+    (set! *gl-vertex-attrib-3sv*
+	  (gl-procedure "glVertexAttrib3sv" (unsigned (* integer-16)) void))
+    (set! *gl-vertex-attrib-4n-bv*
+	  (gl-procedure "glVertexAttrib4Nbv" (unsigned (* unsigned-8)) void))
+    (set! *gl-vertex-attrib-4n-iv*
+	  (gl-procedure "glVertexAttrib4Niv" (unsigned (* int)) void))
+    (set! *gl-vertex-attrib-4n-sv*
+	  (gl-procedure "glVertexAttrib4Nsv" (unsigned (* integer-16)) void))
+    (set! *gl-vertex-attrib-4n-ub*
+	  (gl-procedure "glVertexAttrib4Nub" (unsigned unsigned-8 unsigned-8 unsigned-8 unsigned-8) void))
+    (set! *gl-vertex-attrib-4n-ubv*
+	  (gl-procedure "glVertexAttrib4Nubv" (unsigned (* unsigned-8)) void))
+    (set! *gl-vertex-attrib-4n-uiv*
+	  (gl-procedure "glVertexAttrib4Nuiv" (unsigned (* unsigned)) void))
+    (set! *gl-vertex-attrib-4n-usv*
+	  (gl-procedure "glVertexAttrib4Nusv" (unsigned (* unsigned-16)) void))
+    (set! *gl-vertex-attrib-4bv*
+	  (gl-procedure "glVertexAttrib4bv" (unsigned (* unsigned-8)) void))
+    (set! *gl-vertex-attrib-4d*
+	  (gl-procedure "glVertexAttrib4d" (unsigned double double double double) void))
+    (set! *gl-vertex-attrib-4dv*
+	  (gl-procedure "glVertexAttrib4dv" (unsigned (* double)) void))
+    (set! *gl-vertex-attrib-4f*
+	  (gl-procedure "glVertexAttrib4f" (unsigned float float float float) void))
+    (set! *gl-vertex-attrib-4fv*
+	  (gl-procedure "glVertexAttrib4fv" (unsigned (* float)) void))
+    (set! *gl-vertex-attrib-4iv*
+	  (gl-procedure "glVertexAttrib4iv" (unsigned (* int)) void))
+    (set! *gl-vertex-attrib-4s*
+	  (gl-procedure "glVertexAttrib4s" (unsigned integer-16 integer-16 integer-16 integer-16) void))
+    (set! *gl-vertex-attrib-4sv*
+	  (gl-procedure "glVertexAttrib4sv" (unsigned (* integer-16)) void))
+    (set! *gl-vertex-attrib-4ubv*
+	  (gl-procedure "glVertexAttrib4ubv" (unsigned (* unsigned-8)) void))
+    (set! *gl-vertex-attrib-4uiv*
+	  (gl-procedure "glVertexAttrib4uiv" (unsigned (* unsigned)) void))
+    (set! *gl-vertex-attrib-4usv*
+	  (gl-procedure "glVertexAttrib4usv" (unsigned (* integer-16)) void))
+    (set! *gl-vertex-attrib-pointer*
+	  (gl-procedure "glVertexAttribPointer" (unsigned int unsigned unsigned-8 int void*) void))
+
+    (set! *gl-uniform-matrix-2x3-fv*
+	  (gl-procedure "glUniformMatrix2x3fv" (int int unsigned-8 (* float)) void))
+    (set! *gl-uniform-matrix-3x2-fv*
+	  (gl-procedure "glUniformMatrix3x2fv" (int int unsigned-8 (* float)) void))
+    (set! *gl-uniform-matrix-2x4-fv*
+	  (gl-procedure "glUniformMatrix2x4fv" (int int unsigned-8 (* float)) void))
+    (set! *gl-uniform-matrix-4x2-fv*
+	  (gl-procedure "glUniformMatrix4x2fv" (int int unsigned-8 (* float)) void))
+    (set! *gl-uniform-matrix-3x4-fv*
+	  (gl-procedure "glUniformMatrix3x4fv" (int int unsigned-8 (* float)) void))
+    (set! *gl-uniform-matrix-4x3-fv*
+	  (gl-procedure "glUniformMatrix4x3fv" (int int unsigned-8 (* float)) void))
+
     (let
 	((major-version (car (gl-get-integer-v 1 GL-MAJOR-VERSION)))
 	 (minor-version (car (gl-get-integer-v 1 GL-MINOR-VERSION))))
-      (printf "OpenGL Version: ~a.~a~n" major-version minor-version)
-      (cond
-       ((= major-version 1) (load-gl-1 minor-version))
-       ((= major-version 2) (load-gl-1 5)
-	                    (load-gl-2 minor-version))
-       ((= major-version 3) (load-gl-1 5)
-	                    (load-gl-2 1)
-	                    (load-gl-3 minor-version))
-       ((= major-version 4) (load-gl-1 5)
-	                    (load-gl-2 1)
-	                    (load-gl-3 3)
-			    (load-gl-4 minor-version))
-       (else
-	(error 'GL "Unsupported version." major-version))))))
+      (printf "OpenGL Version: ~a.~a~n" major-version minor-version))))
