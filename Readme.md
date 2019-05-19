@@ -1,15 +1,15 @@
 # Chez-GL
 
-This is an interface to OpenGL's core profile for the Chez Scheme system. (in development)
+This is an interface to OpenGL's core profile for the Chez Scheme system.
 
 
 # Features
 
-* Support for OpenGL 4+
-* Scheme style interface to OpenGL
+* Support for OpenGL 4.6 core profile
 * Convenient high level interface
 * Lower level ftype interface provided
-
+* Supported on Windows, macOS, and Linux
+* No dependencies; no GLEW, no GLAD, no libepoxy, etc.
 
 # Quickstart Guide
 
