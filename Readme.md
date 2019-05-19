@@ -1,13 +1,14 @@
 # Chez-GL
 
-This is an interface to modern OpenGL for the Chez Scheme system. (in development)
+This is an interface to OpenGL's core profile for the Chez Scheme system. (in development)
 
 
 # Features
 
 * Support for OpenGL 4+
 * Scheme style interface to OpenGL
-* Full marshalling of Scheme data to C data
+* Convenient high level interface
+* Lower level ftype interface provided
 
 
 # Quickstart Guide

@@ -1,13 +1,11 @@
 ;;;; -*- mode: Scheme; -*-
 
-(import (gl)
+(import (gl ftype)
 	(sdl))
 
 
 
 (define (app-init)
-  (sdl-set-main-ready!)
-
   (sdl-init SDL-INIT-VIDEO
 	    SDL-INIT-EVENTS)
 
@@ -48,14 +46,17 @@
 	     (should-run?))))
 
     (define (loop t)
-      (gl-clear-color (sin t)
-		      0.4
-		      (cos t)
-		      1.0)
-      (gl-clear GL-COLOR-BUFFER-BIT)
+      (define start-time (sdl-get-performance-counter))
+ 
+      (glClearColor (sin t) 0.4 (cos t) 1.0)
+      (glClear GL_COLOR_BUFFER_BIT)
       (sdl-gl-swap-window *window*)
-      (if (should-run?)
-	  (loop (+ t 0.015))))
+
+      (let* ((end-time   (sdl-get-performance-counter))
+	     (delta-time (/ (- end-time start-time)
+			    (sdl-get-performance-frequency))))
+	(if (should-run?)
+	    (loop (+ t delta-time)))))
 
     ;; Try to use adaptive vsync.
     ;; Fallback to regular vsync if unavailable.
@@ -64,8 +65,8 @@
 
     ;; Load OpenGL and set the initial state.
     (gl-load-library)
-    (gl-clear-color 1.0 1.0 1.0 1.0)
-    (gl-viewport 0 0 640 480)
+    (glClearColor 1.0 1.0 1.0 1.0)
+    (glViewport 0 0 640 480)
 
     (loop 0.0))
 

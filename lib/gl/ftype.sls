@@ -1,0 +1,6205 @@
+;;;; -*- mode: Scheme; -*-
+
+(library (gl ftype)
+  (export gl-load-library
+
+	  glCullFace
+	  glFrontFace
+	  glHint
+	  glLineWidth
+	  glPointSize
+	  glPolygonMode
+	  glScissor
+	  glTexParameterf
+	  glTexParameterfv
+	  glTexParameteri
+	  glTexParameteriv
+	  glTexImage1D
+	  glTexImage2D
+	  glDrawBuffer
+	  glClear
+	  glClearColor
+	  glClearStencil
+	  glClearDepth
+	  glStencilMask
+	  glColorMask
+	  glDepthMask
+	  glDisable
+	  glEnable
+	  glFinish
+	  glFlush
+	  glBlendFunc
+	  glLogicOp
+	  glStencilFunc
+	  glStencilOp
+	  glDepthFunc
+	  glPixelStoref
+	  glPixelStorei
+	  glReadBuffer
+	  glReadPixels
+	  glGetBooleanv
+	  glGetDoublev
+	  glGetError
+	  glGetFloatv
+	  glGetIntegerv
+	  glGetString
+	  glGetTexImage
+	  glGetTexParameterfv
+	  glGetTexParameteriv
+	  glGetTexLevelParameterfv
+	  glGetTexLevelParameteriv
+	  glIsEnabled
+	  glDepthRange
+	  glViewport
+
+	  glDrawArrays
+	  glDrawElements
+	  glGetPointerv
+	  glPolygonOffset
+	  glCopyTexImage1D
+	  glCopyTexImage2D
+	  glCopyTexSubImage1D
+	  glCopyTexSubImage2D
+	  glTexSubImage1D
+	  glTexSubImage2D
+	  glBindTexture
+	  glDeleteTextures
+	  glGenTextures
+	  glIsTexture
+
+	  glDrawRangeElements
+	  glTexImage3D
+	  glTexSubImage3D
+	  glCopyTexSubImage3D
+
+	  glActiveTexture
+	  glSampleCoverage
+	  glCompressedTexImage3D
+	  glCompressedTexImage2D
+	  glCompressedTexImage1D
+	  glCompressedTexSubImage3D
+	  glCompressedTexSubImage2D
+	  glCompressedTexSubImage1D
+	  glGetCompressedTexImage
+
+	  glBlendFuncSeparate
+	  glMultiDrawArrays
+	  glMultiDrawElements
+	  glPointParameterf
+	  glPointParameterfv
+	  glPointParameteri
+	  glPointParameteriv
+	  glBlendColor
+	  glBlendEquation
+
+	  glGenQueries
+	  glDeleteQueries
+	  glIsQuery
+	  glBeginQuery
+	  glEndQuery
+	  glGetQueryiv
+	  glGetQueryObjectiv
+	  glGetQueryObjectuiv
+	  glBindBuffer
+	  glDeleteBuffers
+	  glGenBuffers
+	  glIsBuffer
+	  glBufferData
+	  glBufferSubData
+	  glGetBufferSubData
+	  glMapBuffer
+	  glUnmapBuffer
+	  glGetBufferParameteriv
+	  glGetBufferPointerv
+
+	  glBlendEquationSeparate
+	  glDrawBuffers
+	  glStencilOpSeparate
+	  glStencilFuncSeparate
+	  glStencilMaskSeparate
+	  glAttachShader
+	  glBindAttribLocation
+	  glCompileShader
+	  glCreateProgram
+	  glCreateShader
+	  glDeleteProgram
+	  glDeleteShader
+	  glDetachShader
+	  glDisableVertexAttribArray
+	  glEnableVertexAttribArray
+	  glGetActiveAttrib
+	  glGetActiveUniform
+	  glGetAttachedShaders
+	  glGetAttribLocation
+	  glGetProgramiv
+	  glGetProgramInfoLog
+	  glGetShaderiv
+	  glGetShaderInfoLog
+	  glGetShaderSource
+	  glGetUniformLocation
+	  glGetUniformfv
+	  glGetUniformiv
+	  glGetVertexAttribdv
+	  glGetVertexAttribfv
+	  glGetVertexAttribiv
+	  glGetVertexAttribPointerv
+	  glIsProgram
+	  glIsShader
+	  glLinkProgram
+	  glShaderSource
+	  glUseProgram
+	  glUniform1f
+	  glUniform2f
+	  glUniform3f
+	  glUniform4f
+	  glUniform1i
+	  glUniform2i
+	  glUniform3i
+	  glUniform4i
+	  glUniform1fv
+	  glUniform2fv
+	  glUniform3fv
+	  glUniform4fv
+	  glUniform1iv
+	  glUniform2iv
+	  glUniform3iv
+	  glUniform4iv
+	  glUniformMatrix2fv
+	  glUniformMatrix3fv
+	  glUniformMatrix4fv
+	  glValidateProgram
+	  glVertexAttrib1d
+	  glVertexAttrib1dv
+	  glVertexAttrib1f
+	  glVertexAttrib1fv
+	  glVertexAttrib1s
+	  glVertexAttrib1sv
+	  glVertexAttrib2d
+	  glVertexAttrib2dv
+	  glVertexAttrib2f
+	  glVertexAttrib2fv
+	  glVertexAttrib2s
+	  glVertexAttrib2sv
+	  glVertexAttrib3d
+	  glVertexAttrib3dv
+	  glVertexAttrib3f
+	  glVertexAttrib3fv
+	  glVertexAttrib3s
+	  glVertexAttrib3sv
+	  glVertexAttrib4Nbv
+	  glVertexAttrib4Niv
+	  glVertexAttrib4Nsv
+	  glVertexAttrib4Nub
+	  glVertexAttrib4Nubv
+	  glVertexAttrib4Nuiv
+	  glVertexAttrib4Nusv
+	  glVertexAttrib4bv
+	  glVertexAttrib4d
+	  glVertexAttrib4dv
+	  glVertexAttrib4f
+	  glVertexAttrib4fv
+	  glVertexAttrib4iv
+	  glVertexAttrib4s
+	  glVertexAttrib4sv
+	  glVertexAttrib4ubv
+	  glVertexAttrib4uiv
+	  glVertexAttrib4usv
+	  glVertexAttribPointer
+
+	  glUniformMatrix2x3fv
+	  glUniformMatrix3x2fv
+	  glUniformMatrix2x4fv
+	  glUniformMatrix4x2fv
+	  glUniformMatrix3x4fv
+	  glUniformMatrix4x3fv
+
+	  glColorMaski
+	  glGetBooleani_v
+	  glGetIntegeri_v
+	  glEnablei
+	  glDisablei
+	  glIsEnabledi
+	  glBeginTransformFeedback
+	  glEndTransformFeedback
+	  glBindBufferRange
+	  glBindBufferBase
+	  glTransformFeedbackVaryings
+	  glGetTransformFeedbackVarying
+	  glClampColor
+	  glBeginConditionalRender
+	  glEndConditionalRender
+	  glVertexAttribIPointer
+	  glGetVertexAttribIiv
+	  glGetVertexAttribIuiv
+	  glVertexAttribI1i
+	  glVertexAttribI2i
+	  glVertexAttribI3i
+	  glVertexAttribI4i
+	  glVertexAttribI1ui
+	  glVertexAttribI2ui
+	  glVertexAttribI3ui
+	  glVertexAttribI4ui
+	  glVertexAttribI1iv
+	  glVertexAttribI2iv
+	  glVertexAttribI3iv
+	  glVertexAttribI4iv
+	  glVertexAttribI1uiv
+	  glVertexAttribI2uiv
+	  glVertexAttribI3uiv
+	  glVertexAttribI4uiv
+	  glVertexAttribI4bv
+	  glVertexAttribI4sv
+	  glVertexAttribI4ubv
+	  glVertexAttribI4usv
+	  glGetUniformuiv
+	  glBindFragDataLocation
+	  glGetFragDataLocation
+	  glUniform1ui
+	  glUniform2ui
+	  glUniform3ui
+	  glUniform4ui
+	  glUniform1uiv
+	  glUniform2uiv
+	  glUniform3uiv
+	  glUniform4uiv
+	  glTexParameterIiv
+	  glTexParameterIuiv
+	  glGetTexParameterIiv
+	  glGetTexParameterIuiv
+	  glClearBufferiv
+	  glClearBufferuiv
+	  glClearBufferfv
+	  glClearBufferfi
+	  glGetStringi
+	  glIsRenderbuffer
+	  glBindRenderbuffer
+	  glDeleteRenderbuffers
+	  glGenRenderbuffers
+	  glRenderbufferStorage
+	  glGetRenderbufferParameteriv
+	  glIsFramebuffer
+	  glBindFramebuffer
+	  glDeleteFramebuffers
+	  glGenFramebuffers
+	  glCheckFramebufferStatus
+	  glFramebufferTexture1D
+	  glFramebufferTexture2D
+	  glFramebufferTexture3D
+	  glFramebufferRenderbuffer
+	  glGetFramebufferAttachmentParameteriv
+	  glGenerateMipmap
+	  glBlitFramebuffer
+	  glRenderbufferStorageMultisample
+	  glFramebufferTextureLayer
+	  glMapBufferRange
+	  glFlushMappedBufferRange
+	  glBindVertexArray
+	  glDeleteVertexArrays
+	  glGenVertexArrays
+	  glIsVertexArray
+
+	  glDrawArraysInstanced
+	  glDrawElementsInstanced
+	  glTexBuffer
+	  glPrimitiveRestartIndex
+	  glCopyBufferSubData
+	  glGetUniformIndices
+	  glGetActiveUniformsiv
+	  glGetActiveUniformName
+	  glGetUniformBlockIndex
+	  glGetActiveUniformBlockiv
+	  glGetActiveUniformBlockName
+	  glUniformBlockBinding
+
+	  glDrawElementsBaseVertex
+	  glDrawRangeElementsBaseVertex
+	  glDrawElementsInstancedBaseVertex
+	  glMultiDrawElementsBaseVertex
+	  glProvokingVertex
+	  glFenceSync
+	  glIsSync
+	  glDeleteSync
+	  glClientWaitSync
+	  glWaitSync
+	  glGetInteger64v
+	  glGetSynciv
+	  glGetInteger64i_v
+	  glGetBufferParameteri64v
+	  glFramebufferTexture
+	  glTexImage2DMultisample
+	  glTexImage3DMultisample
+	  glGetMultisamplefv
+	  glSampleMaski
+
+	  glBindFragDataLocationIndexed
+	  glGetFragDataIndex
+	  glGenSamplers
+	  glDeleteSamplers
+	  glIsSampler
+	  glBindSampler
+	  glSamplerParameteri
+	  glSamplerParameteriv
+	  glSamplerParameterf
+	  glSamplerParameterfv
+	  glSamplerParameterIiv
+	  glSamplerParameterIuiv
+	  glGetSamplerParameteriv
+	  glGetSamplerParameterIiv
+	  glGetSamplerParameterfv
+	  glGetSamplerParameterIuiv
+	  glQueryCounter
+	  glGetQueryObjecti64v
+	  glGetQueryObjectui64v
+	  glVertexAttribDivisor
+	  glVertexAttribP1ui
+	  glVertexAttribP1uiv
+	  glVertexAttribP2ui
+	  glVertexAttribP2uiv
+	  glVertexAttribP3ui
+	  glVertexAttribP3uiv
+	  glVertexAttribP4ui
+	  glVertexAttribP4uiv
+
+	  glMinSampleShading
+	  glBlendEquationi
+	  glBlendEquationSeparatei
+	  glBlendFunci
+	  glBlendFuncSeparatei
+	  glDrawArraysIndirect
+	  glDrawElementsIndirect
+	  glUniform1d
+	  glUniform2d
+	  glUniform3d
+	  glUniform4d
+	  glUniform1dv
+	  glUniform2dv
+	  glUniform3dv
+	  glUniform4dv
+	  glUniformMatrix2dv
+	  glUniformMatrix3dv
+	  glUniformMatrix4dv
+	  glUniformMatrix2x3dv
+	  glUniformMatrix2x4dv
+	  glUniformMatrix3x2dv
+	  glUniformMatrix3x4dv
+	  glUniformMatrix4x2dv
+	  glUniformMatrix4x3dv
+	  glGetUniformdv
+	  glGetSubroutineUniformLocation
+	  glGetSubroutineIndex
+	  glGetActiveSubroutineUniformiv
+	  glGetActiveSubroutineUniformName
+	  glGetActiveSubroutineName
+	  glUniformSubroutinesuiv
+	  glGetUniformSubroutineuiv
+	  glGetProgramStageiv
+	  glPatchParameteri
+	  glPatchParameterfv
+	  glBindTransformFeedback
+	  glDeleteTransformFeedbacks
+	  glGenTransformFeedbacks
+	  glIsTransformFeedback
+	  glPauseTransformFeedback
+	  glResumeTransformFeedback
+	  glDrawTransformFeedback
+	  glDrawTransformFeedbackStream
+	  glBeginQueryIndexed
+	  glEndQueryIndexed
+	  glGetQueryIndexediv
+
+	  glReleaseShaderCompiler
+	  glShaderBinary
+	  glGetShaderPrecisionFormat
+	  glDepthRangef
+	  glClearDepthf
+	  glGetProgramBinary
+	  glProgramBinary
+	  glProgramParameteri
+	  glUseProgramStages
+	  glActiveShaderProgram
+	  glCreateShaderProgramv
+	  glBindProgramPipeline
+	  glDeleteProgramPipelines
+	  glGenProgramPipelines
+	  glIsProgramPipeline
+	  glGetProgramPipelineiv
+	  glProgramUniform1i
+	  glProgramUniform1iv
+	  glProgramUniform1f
+	  glProgramUniform1fv
+	  glProgramUniform1d
+	  glProgramUniform1dv
+	  glProgramUniform1ui
+	  glProgramUniform1uiv
+	  glProgramUniform2i
+	  glProgramUniform2iv
+	  glProgramUniform2f
+	  glProgramUniform2fv
+	  glProgramUniform2d
+	  glProgramUniform2dv
+	  glProgramUniform2ui
+	  glProgramUniform2uiv
+	  glProgramUniform3i
+	  glProgramUniform3iv
+	  glProgramUniform3f
+	  glProgramUniform3fv
+	  glProgramUniform3d
+	  glProgramUniform3dv
+	  glProgramUniform3ui
+	  glProgramUniform3uiv
+	  glProgramUniform4i
+	  glProgramUniform4iv
+	  glProgramUniform4f
+	  glProgramUniform4fv
+	  glProgramUniform4d
+	  glProgramUniform4dv
+	  glProgramUniform4ui
+	  glProgramUniform4uiv
+	  glProgramUniformMatrix2fv
+	  glProgramUniformMatrix3fv
+	  glProgramUniformMatrix4fv
+	  glProgramUniformMatrix2dv
+	  glProgramUniformMatrix3dv
+	  glProgramUniformMatrix4dv
+	  glProgramUniformMatrix2x3fv
+	  glProgramUniformMatrix3x2fv
+	  glProgramUniformMatrix2x4fv
+	  glProgramUniformMatrix4x2fv
+	  glProgramUniformMatrix3x4fv
+	  glProgramUniformMatrix4x3fv
+	  glProgramUniformMatrix2x3dv
+	  glProgramUniformMatrix3x2dv
+	  glProgramUniformMatrix2x4dv
+	  glProgramUniformMatrix4x2dv
+	  glProgramUniformMatrix3x4dv
+	  glProgramUniformMatrix4x3dv
+	  glValidateProgramPipeline
+	  glGetProgramPipelineInfoLog
+	  glVertexAttribL1d
+	  glVertexAttribL2d
+	  glVertexAttribL3d
+	  glVertexAttribL4d
+	  glVertexAttribL1dv
+	  glVertexAttribL2dv
+	  glVertexAttribL3dv
+	  glVertexAttribL4dv
+	  glVertexAttribLPointer
+	  glGetVertexAttribLdv
+	  glViewportArrayv
+	  glViewportIndexedf
+	  glViewportIndexedfv
+	  glScissorArrayv
+	  glScissorIndexed
+	  glScissorIndexedv
+	  glDepthRangeArrayv
+	  glDepthRangeIndexed
+	  glGetFloati_v
+	  glGetDoublei_v
+
+	  glDrawArraysInstancedBaseInstance
+	  glDrawElementsInstancedBaseInstance
+	  glDrawElementsInstancedBaseVertexBaseInstance
+	  glGetInternalformativ
+	  glGetActiveAtomicCounterBufferiv
+	  glBindImageTexture
+	  glMemoryBarrier
+	  glTexStorage1D
+	  glTexStorage2D
+	  glTexStorage3D
+	  glDrawTransformFeedbackInstanced
+	  glDrawTransformFeedbackStreamInstanced
+
+	  glClearBufferData
+	  glClearBufferSubData
+	  glDispatchCompute
+	  glDispatchComputeIndirect
+	  glCopyImageSubData
+	  glFramebufferParameteri
+	  glGetFramebufferParameteriv
+	  glGetInternalformati64v
+	  glInvalidateTexSubImage
+	  glInvalidateTexImage
+	  glInvalidateBufferSubData
+	  glInvalidateBufferData
+	  glInvalidateFramebuffer
+	  glInvalidateSubFramebuffer
+	  glMultiDrawArraysIndirect
+	  glMultiDrawElementsIndirect
+	  glGetProgramInterfaceiv
+	  glGetProgramResourceIndex
+	  glGetProgramResourceName
+	  glGetProgramResourceiv
+	  glGetProgramResourceLocation
+	  glGetProgramResourceLocationIndex
+	  glShaderStorageBlockBinding
+	  glTexBufferRange
+	  glTexStorage2DMultisample
+	  glTexStorage3DMultisample
+	  glTextureView
+	  glBindVertexBuffer
+	  glVertexAttribFormat
+	  glVertexAttribIFormat
+	  glVertexAttribLFormat
+	  glVertexAttribBinding
+	  glVertexBindingDivisor
+	  glDebugMessageControl
+	  glDebugMessageInsert
+	  glDebugMessageCallback
+	  glGetDebugMessageLog
+	  glPushDebugGroup
+	  glPopDebugGroup
+	  glObjectLabel
+	  glGetObjectLabel
+	  glObjectPtrLabel
+	  glGetObjectPtrLabel
+
+	  glBufferStorage
+	  glClearTexImage
+	  glClearTexSubImage
+	  glBindBuffersBase
+	  glBindBuffersRange
+	  glBindTextures
+	  glBindSamplers
+	  glBindImageTextures
+	  glBindVertexBuffers
+
+	  glClipControl
+	  glCreateTransformFeedbacks
+	  glTransformFeedbackBufferBase
+	  glTransformFeedbackBufferRange
+	  glGetTransformFeedbackiv
+	  glGetTransformFeedbacki_v
+	  glGetTransformFeedbacki64_v
+	  glCreateBuffers
+	  glNamedBufferStorage
+	  glNamedBufferData
+	  glNamedBufferSubData
+	  glCopyNamedBufferSubData
+	  glClearNamedBufferData
+	  glClearNamedBufferSubData
+	  glMapNamedBuffer
+	  glMapNamedBufferRange
+	  glUnmapNamedBuffer
+	  glFlushMappedNamedBufferRange
+	  glGetNamedBufferParameteriv
+	  glGetNamedBufferParameteri64v
+	  glGetNamedBufferPointerv
+	  glGetNamedBufferSubData
+	  glCreateFramebuffers
+	  glNamedFramebufferRenderbuffer
+	  glNamedFramebufferParameteri
+	  glNamedFramebufferTexture
+	  glNamedFramebufferTextureLayer
+	  glNamedFramebufferDrawBuffer
+	  glNamedFramebufferDrawBuffers
+	  glNamedFramebufferReadBuffer
+	  glInvalidateNamedFramebufferData
+	  glInvalidateNamedFramebufferSubData
+	  glClearNamedFramebufferiv
+	  glClearNamedFramebufferuiv
+	  glClearNamedFramebufferfv
+	  glClearNamedFramebufferfi
+	  glBlitNamedFramebuffer
+	  glCheckNamedFramebufferStatus
+	  glGetNamedFramebufferParameteriv
+	  glGetNamedFramebufferAttachmentParameteriv
+	  glCreateRenderbuffers
+	  glNamedRenderbufferStorage
+	  glNamedRenderbufferStorageMultisample
+	  glGetNamedRenderbufferParameteriv
+	  glCreateTextures
+	  glTextureBuffer
+	  glTextureBufferRange
+	  glTextureStorage1D
+	  glTextureStorage2D
+	  glTextureStorage3D
+	  glTextureStorage2DMultisample
+	  glTextureStorage3DMultisample
+	  glTextureSubImage1D
+	  glTextureSubImage2D
+	  glTextureSubImage3D
+	  glCompressedTextureSubImage1D
+	  glCompressedTextureSubImage2D
+	  glCompressedTextureSubImage3D
+	  glCopyTextureSubImage1D
+	  glCopyTextureSubImage2D
+	  glCopyTextureSubImage3D
+	  glTextureParameterf
+	  glTextureParameterfv
+	  glTextureParameteri
+	  glTextureParameterIiv
+	  glTextureParameterIuiv
+	  glTextureParameteriv
+	  glGenerateTextureMipmap
+	  glBindTextureUnit
+	  glGetTextureImage
+	  glGetCompressedTextureImage
+	  glGetTextureLevelParameterfv
+	  glGetTextureLevelParameteriv
+	  glGetTextureParameterfv
+	  glGetTextureParameterIiv
+	  glGetTextureParameterIuiv
+	  glGetTextureParameteriv
+	  glCreateVertexArrays
+	  glDisableVertexArrayAttrib
+	  glEnableVertexArrayAttrib
+	  glVertexArrayElementBuffer
+	  glVertexArrayVertexBuffer
+	  glVertexArrayVertexBuffers
+	  glVertexArrayAttribBinding
+	  glVertexArrayAttribFormat
+	  glVertexArrayAttribIFormat
+	  glVertexArrayAttribLFormat
+	  glVertexArrayBindingDivisor
+	  glGetVertexArrayiv
+	  glGetVertexArrayIndexediv
+	  glGetVertexArrayIndexed64iv
+	  glCreateSamplers
+	  glCreateProgramPipelines
+	  glCreateQueries
+	  glGetQueryBufferObjecti64v
+	  glGetQueryBufferObjectiv
+	  glGetQueryBufferObjectui64v
+	  glGetQueryBufferObjectuiv
+	  glMemoryBarrierByRegion
+	  glGetTextureSubImage
+	  glGetCompressedTextureSubImage
+	  glGetGraphicsResetStatus
+	  glGetnCompressedTexImage
+	  glGetnTexImage
+	  glGetnUniformdv
+	  glGetnUniformfv
+	  glGetnUniformiv
+	  glGetnUniformuiv
+	  glReadnPixels
+	  glTextureBarrier
+
+	  glSpecializeShader
+	  glMultiDrawArraysIndirectCount
+	  glMultiDrawElementsIndirectCount
+	  glPolygonOffsetClamp
+
+	  GL_DEPTH_BUFFER_BIT
+	  GL_STENCIL_BUFFER_BIT
+	  GL_COLOR_BUFFER_BIT
+	  GL_FALSE
+	  GL_TRUE
+	  GL_POINTS
+	  GL_LINES
+	  GL_LINE_LOOP
+	  GL_LINE_STRIP
+	  GL_TRIANGLES
+	  GL_TRIANGLE_STRIP
+	  GL_TRIANGLE_FAN
+	  GL_QUADS
+	  GL_NEVER
+	  GL_LESS
+	  GL_EQUAL
+	  GL_LEQUAL
+	  GL_GREATER
+	  GL_NOTEQUAL
+	  GL_GEQUAL
+	  GL_ALWAYS
+	  GL_ZERO
+	  GL_ONE
+	  GL_SRC_COLOR
+	  GL_ONE_MINUS_SRC_COLOR
+	  GL_SRC_ALPHA
+	  GL_ONE_MINUS_SRC_ALPHA
+	  GL_DST_ALPHA
+	  GL_ONE_MINUS_DST_ALPHA
+	  GL_DST_COLOR
+	  GL_ONE_MINUS_DST_COLOR
+	  GL_SRC_ALPHA_SATURATE
+	  GL_NONE
+	  GL_FRONT_LEFT
+	  GL_FRONT_RIGHT
+	  GL_BACK_LEFT
+	  GL_BACK_RIGHT
+	  GL_FRONT
+	  GL_BACK
+	  GL_LEFT
+	  GL_RIGHT
+	  GL_FRONT_AND_BACK
+	  GL_NO_ERROR
+	  GL_INVALID_ENUM
+	  GL_INVALID_VALUE
+	  GL_INVALID_OPERATION
+	  GL_OUT_OF_MEMORY
+	  GL_CW
+	  GL_CCW
+	  GL_POINT_SIZE
+	  GL_POINT_SIZE_RANGE
+	  GL_POINT_SIZE_GRANULARITY
+	  GL_LINE_SMOOTH
+	  GL_LINE_WIDTH
+	  GL_LINE_WIDTH_RANGE
+	  GL_LINE_WIDTH_GRANULARITY
+	  GL_POLYGON_MODE
+	  GL_POLYGON_SMOOTH
+	  GL_CULL_FACE
+	  GL_CULL_FACE_MODE
+	  GL_FRONT_FACE
+	  GL_DEPTH_RANGE
+	  GL_DEPTH_TEST
+	  GL_DEPTH_WRITEMASK
+	  GL_DEPTH_CLEAR_VALUE
+	  GL_DEPTH_FUNC
+	  GL_STENCIL_TEST
+	  GL_STENCIL_CLEAR_VALUE
+	  GL_STENCIL_FUNC
+	  GL_STENCIL_VALUE_MASK
+	  GL_STENCIL_FAIL
+	  GL_STENCIL_PASS_DEPTH_FAIL
+	  GL_STENCIL_PASS_DEPTH_PASS
+	  GL_STENCIL_REF
+	  GL_STENCIL_WRITEMASK
+	  GL_VIEWPORT
+	  GL_DITHER
+	  GL_BLEND_DST
+	  GL_BLEND_SRC
+	  GL_BLEND
+	  GL_LOGIC_OP_MODE
+	  GL_DRAW_BUFFER
+	  GL_READ_BUFFER
+	  GL_SCISSOR_BOX
+	  GL_SCISSOR_TEST
+	  GL_COLOR_CLEAR_VALUE
+	  GL_COLOR_WRITEMASK
+	  GL_DOUBLEBUFFER
+	  GL_STEREO
+	  GL_LINE_SMOOTH_HINT
+	  GL_POLYGON_SMOOTH_HINT
+	  GL_UNPACK_SWAP_BYTES
+	  GL_UNPACK_LSB_FIRST
+	  GL_UNPACK_ROW_LENGTH
+	  GL_UNPACK_SKIP_ROWS
+	  GL_UNPACK_SKIP_PIXELS
+	  GL_UNPACK_ALIGNMENT
+	  GL_PACK_SWAP_BYTES
+	  GL_PACK_LSB_FIRST
+	  GL_PACK_ROW_LENGTH
+	  GL_PACK_SKIP_ROWS
+	  GL_PACK_SKIP_PIXELS
+	  GL_PACK_ALIGNMENT
+	  GL_MAX_TEXTURE_SIZE
+	  GL_MAX_VIEWPORT_DIMS
+	  GL_SUBPIXEL_BITS
+	  GL_TEXTURE_1D
+	  GL_TEXTURE_2D
+	  GL_TEXTURE_WIDTH
+	  GL_TEXTURE_HEIGHT
+	  GL_TEXTURE_BORDER_COLOR
+	  GL_DONT_CARE
+	  GL_FASTEST
+	  GL_NICEST
+	  GL_BYTE
+	  GL_UNSIGNED_BYTE
+	  GL_SHORT
+	  GL_UNSIGNED_SHORT
+	  GL_INT
+	  GL_UNSIGNED_INT
+	  GL_FLOAT
+	  GL_STACK_OVERFLOW
+	  GL_STACK_UNDERFLOW
+	  GL_CLEAR
+	  GL_AND
+	  GL_AND_REVERSE
+	  GL_COPY
+	  GL_AND_INVERTED
+	  GL_NOOP
+	  GL_XOR
+	  GL_OR
+	  GL_NOR
+	  GL_EQUIV
+	  GL_INVERT
+	  GL_OR_REVERSE
+	  GL_COPY_INVERTED
+	  GL_OR_INVERTED
+	  GL_NAND
+	  GL_SET
+	  GL_TEXTURE
+	  GL_COLOR
+	  GL_DEPTH
+	  GL_STENCIL
+	  GL_STENCIL_INDEX
+	  GL_DEPTH_COMPONENT
+	  GL_RED
+	  GL_GREEN
+	  GL_BLUE
+	  GL_ALPHA
+	  GL_RGB
+	  GL_RGBA
+	  GL_POINT
+	  GL_LINE
+	  GL_FILL
+	  GL_KEEP
+	  GL_REPLACE
+	  GL_INCR
+	  GL_DECR
+	  GL_VENDOR
+	  GL_RENDERER
+	  GL_VERSION
+	  GL_EXTENSIONS
+	  GL_NEAREST
+	  GL_LINEAR
+	  GL_NEAREST_MIPMAP_NEAREST
+	  GL_LINEAR_MIPMAP_NEAREST
+	  GL_NEAREST_MIPMAP_LINEAR
+	  GL_LINEAR_MIPMAP_LINEAR
+	  GL_TEXTURE_MAG_FILTER
+	  GL_TEXTURE_MIN_FILTER
+	  GL_TEXTURE_WRAP_S
+	  GL_TEXTURE_WRAP_T
+	  GL_REPEAT
+	  GL_COLOR_LOGIC_OP
+	  GL_POLYGON_OFFSET_UNITS
+	  GL_POLYGON_OFFSET_POINT
+	  GL_POLYGON_OFFSET_LINE
+	  GL_POLYGON_OFFSET_FILL
+	  GL_POLYGON_OFFSET_FACTOR
+	  GL_TEXTURE_BINDING_1D
+	  GL_TEXTURE_BINDING_2D
+	  GL_TEXTURE_INTERNAL_FORMAT
+	  GL_TEXTURE_RED_SIZE
+	  GL_TEXTURE_GREEN_SIZE
+	  GL_TEXTURE_BLUE_SIZE
+	  GL_TEXTURE_ALPHA_SIZE
+	  GL_DOUBLE
+	  GL_PROXY_TEXTURE_1D
+	  GL_PROXY_TEXTURE_2D
+	  GL_R3_G3_B2
+	  GL_RGB4
+	  GL_RGB5
+	  GL_RGB8
+	  GL_RGB10
+	  GL_RGB12
+	  GL_RGB16
+	  GL_RGBA2
+	  GL_RGBA4
+	  GL_RGB5_A1
+	  GL_RGBA8
+	  GL_RGB10_A2
+	  GL_RGBA12
+	  GL_RGBA16
+	  GL_VERTEX_ARRAY
+	  GL_UNSIGNED_BYTE_3_3_2
+	  GL_UNSIGNED_SHORT_4_4_4_4
+	  GL_UNSIGNED_SHORT_5_5_5_1
+	  GL_UNSIGNED_INT_8_8_8_8
+	  GL_UNSIGNED_INT_10_10_10_2
+	  GL_TEXTURE_BINDING_3D
+	  GL_PACK_SKIP_IMAGES
+	  GL_PACK_IMAGE_HEIGHT
+	  GL_UNPACK_SKIP_IMAGES
+	  GL_UNPACK_IMAGE_HEIGHT
+	  GL_TEXTURE_3D
+	  GL_PROXY_TEXTURE_3D
+	  GL_TEXTURE_DEPTH
+	  GL_TEXTURE_WRAP_R
+	  GL_MAX_3D_TEXTURE_SIZE
+	  GL_UNSIGNED_BYTE_2_3_3_REV
+	  GL_UNSIGNED_SHORT_5_6_5
+	  GL_UNSIGNED_SHORT_5_6_5_REV
+	  GL_UNSIGNED_SHORT_4_4_4_4_REV
+	  GL_UNSIGNED_SHORT_1_5_5_5_REV
+	  GL_UNSIGNED_INT_8_8_8_8_REV
+	  GL_UNSIGNED_INT_2_10_10_10_REV
+	  GL_BGR
+	  GL_BGRA
+	  GL_MAX_ELEMENTS_VERTICES
+	  GL_MAX_ELEMENTS_INDICES
+	  GL_CLAMP_TO_EDGE
+	  GL_TEXTURE_MIN_LOD
+	  GL_TEXTURE_MAX_LOD
+	  GL_TEXTURE_BASE_LEVEL
+	  GL_TEXTURE_MAX_LEVEL
+	  GL_SMOOTH_POINT_SIZE_RANGE
+	  GL_SMOOTH_POINT_SIZE_GRANULARITY
+	  GL_SMOOTH_LINE_WIDTH_RANGE
+	  GL_SMOOTH_LINE_WIDTH_GRANULARITY
+	  GL_ALIASED_LINE_WIDTH_RANGE
+	  GL_TEXTURE0
+	  GL_TEXTURE1
+	  GL_TEXTURE2
+	  GL_TEXTURE3
+	  GL_TEXTURE4
+	  GL_TEXTURE5
+	  GL_TEXTURE6
+	  GL_TEXTURE7
+	  GL_TEXTURE8
+	  GL_TEXTURE9
+	  GL_TEXTURE10
+	  GL_TEXTURE11
+	  GL_TEXTURE12
+	  GL_TEXTURE13
+	  GL_TEXTURE14
+	  GL_TEXTURE15
+	  GL_TEXTURE16
+	  GL_TEXTURE17
+	  GL_TEXTURE18
+	  GL_TEXTURE19
+	  GL_TEXTURE20
+	  GL_TEXTURE21
+	  GL_TEXTURE22
+	  GL_TEXTURE23
+	  GL_TEXTURE24
+	  GL_TEXTURE25
+	  GL_TEXTURE26
+	  GL_TEXTURE27
+	  GL_TEXTURE28
+	  GL_TEXTURE29
+	  GL_TEXTURE30
+	  GL_TEXTURE31
+	  GL_ACTIVE_TEXTURE
+	  GL_MULTISAMPLE
+	  GL_SAMPLE_ALPHA_TO_COVERAGE
+	  GL_SAMPLE_ALPHA_TO_ONE
+	  GL_SAMPLE_COVERAGE
+	  GL_SAMPLE_BUFFERS
+	  GL_SAMPLES
+	  GL_SAMPLE_COVERAGE_VALUE
+	  GL_SAMPLE_COVERAGE_INVERT
+	  GL_TEXTURE_CUBE_MAP
+	  GL_TEXTURE_BINDING_CUBE_MAP
+	  GL_TEXTURE_CUBE_MAP_POSITIVE_X
+	  GL_TEXTURE_CUBE_MAP_NEGATIVE_X
+	  GL_TEXTURE_CUBE_MAP_POSITIVE_Y
+	  GL_TEXTURE_CUBE_MAP_NEGATIVE_Y
+	  GL_TEXTURE_CUBE_MAP_POSITIVE_Z
+	  GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
+	  GL_PROXY_TEXTURE_CUBE_MAP
+	  GL_MAX_CUBE_MAP_TEXTURE_SIZE
+	  GL_COMPRESSED_RGB
+	  GL_COMPRESSED_RGBA
+	  GL_TEXTURE_COMPRESSION_HINT
+	  GL_TEXTURE_COMPRESSED_IMAGE_SIZE
+	  GL_TEXTURE_COMPRESSED
+	  GL_NUM_COMPRESSED_TEXTURE_FORMATS
+	  GL_COMPRESSED_TEXTURE_FORMATS
+	  GL_CLAMP_TO_BORDER
+	  GL_BLEND_DST_RGB
+	  GL_BLEND_SRC_RGB
+	  GL_BLEND_DST_ALPHA
+	  GL_BLEND_SRC_ALPHA
+	  GL_POINT_FADE_THRESHOLD_SIZE
+	  GL_DEPTH_COMPONENT16
+	  GL_DEPTH_COMPONENT24
+	  GL_DEPTH_COMPONENT32
+	  GL_MIRRORED_REPEAT
+	  GL_MAX_TEXTURE_LOD_BIAS
+	  GL_TEXTURE_LOD_BIAS
+	  GL_INCR_WRAP
+	  GL_DECR_WRAP
+	  GL_TEXTURE_DEPTH_SIZE
+	  GL_TEXTURE_COMPARE_MODE
+	  GL_TEXTURE_COMPARE_FUNC
+	  GL_BLEND_COLOR
+	  GL_BLEND_EQUATION
+	  GL_CONSTANT_COLOR
+	  GL_ONE_MINUS_CONSTANT_COLOR
+	  GL_CONSTANT_ALPHA
+	  GL_ONE_MINUS_CONSTANT_ALPHA
+	  GL_FUNC_ADD
+	  GL_FUNC_REVERSE_SUBTRACT
+	  GL_FUNC_SUBTRACT
+	  GL_MIN
+	  GL_MAX
+	  GL_BUFFER_SIZE
+	  GL_BUFFER_USAGE
+	  GL_QUERY_COUNTER_BITS
+	  GL_CURRENT_QUERY
+	  GL_QUERY_RESULT
+	  GL_QUERY_RESULT_AVAILABLE
+	  GL_ARRAY_BUFFER
+	  GL_ELEMENT_ARRAY_BUFFER
+	  GL_ARRAY_BUFFER_BINDING
+	  GL_ELEMENT_ARRAY_BUFFER_BINDING
+	  GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING
+	  GL_READ_ONLY
+	  GL_WRITE_ONLY
+	  GL_READ_WRITE
+	  GL_BUFFER_ACCESS
+	  GL_BUFFER_MAPPED
+	  GL_BUFFER_MAP_POINTER
+	  GL_STREAM_DRAW
+	  GL_STREAM_READ
+	  GL_STREAM_COPY
+	  GL_STATIC_DRAW
+	  GL_STATIC_READ
+	  GL_STATIC_COPY
+	  GL_DYNAMIC_DRAW
+	  GL_DYNAMIC_READ
+	  GL_DYNAMIC_COPY
+	  GL_SAMPLES_PASSED
+	  GL_SRC1_ALPHA
+	  GL_BLEND_EQUATION_RGB
+	  GL_VERTEX_ATTRIB_ARRAY_ENABLED
+	  GL_VERTEX_ATTRIB_ARRAY_SIZE
+	  GL_VERTEX_ATTRIB_ARRAY_STRIDE
+	  GL_VERTEX_ATTRIB_ARRAY_TYPE
+	  GL_CURRENT_VERTEX_ATTRIB
+	  GL_VERTEX_PROGRAM_POINT_SIZE
+	  GL_VERTEX_ATTRIB_ARRAY_POINTER
+	  GL_STENCIL_BACK_FUNC
+	  GL_STENCIL_BACK_FAIL
+	  GL_STENCIL_BACK_PASS_DEPTH_FAIL
+	  GL_STENCIL_BACK_PASS_DEPTH_PASS
+	  GL_MAX_DRAW_BUFFERS
+	  GL_DRAW_BUFFER0
+	  GL_DRAW_BUFFER1
+	  GL_DRAW_BUFFER2
+	  GL_DRAW_BUFFER3
+	  GL_DRAW_BUFFER4
+	  GL_DRAW_BUFFER5
+	  GL_DRAW_BUFFER6
+	  GL_DRAW_BUFFER7
+	  GL_DRAW_BUFFER8
+	  GL_DRAW_BUFFER9
+	  GL_DRAW_BUFFER10
+	  GL_DRAW_BUFFER11
+	  GL_DRAW_BUFFER12
+	  GL_DRAW_BUFFER13
+	  GL_DRAW_BUFFER14
+	  GL_DRAW_BUFFER15
+	  GL_BLEND_EQUATION_ALPHA
+	  GL_MAX_VERTEX_ATTRIBS
+	  GL_VERTEX_ATTRIB_ARRAY_NORMALIZED
+	  GL_MAX_TEXTURE_IMAGE_UNITS
+	  GL_FRAGMENT_SHADER
+	  GL_VERTEX_SHADER
+	  GL_MAX_FRAGMENT_UNIFORM_COMPONENTS
+	  GL_MAX_VERTEX_UNIFORM_COMPONENTS
+	  GL_MAX_VARYING_FLOATS
+	  GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS
+	  GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS
+	  GL_SHADER_TYPE
+	  GL_FLOAT_VEC2
+	  GL_FLOAT_VEC3
+	  GL_FLOAT_VEC4
+	  GL_INT_VEC2
+	  GL_INT_VEC3
+	  GL_INT_VEC4
+	  GL_BOOL
+	  GL_BOOL_VEC2
+	  GL_BOOL_VEC3
+	  GL_BOOL_VEC4
+	  GL_FLOAT_MAT2
+	  GL_FLOAT_MAT3
+	  GL_FLOAT_MAT4
+	  GL_SAMPLER_1D
+	  GL_SAMPLER_2D
+	  GL_SAMPLER_3D
+	  GL_SAMPLER_CUBE
+	  GL_SAMPLER_1D_SHADOW
+	  GL_SAMPLER_2D_SHADOW
+	  GL_DELETE_STATUS
+	  GL_COMPILE_STATUS
+	  GL_LINK_STATUS
+	  GL_VALIDATE_STATUS
+	  GL_INFO_LOG_LENGTH
+	  GL_ATTACHED_SHADERS
+	  GL_ACTIVE_UNIFORMS
+	  GL_ACTIVE_UNIFORM_MAX_LENGTH
+	  GL_SHADER_SOURCE_LENGTH
+	  GL_ACTIVE_ATTRIBUTES
+	  GL_ACTIVE_ATTRIBUTE_MAX_LENGTH
+	  GL_FRAGMENT_SHADER_DERIVATIVE_HINT
+	  GL_SHADING_LANGUAGE_VERSION
+	  GL_CURRENT_PROGRAM
+	  GL_POINT_SPRITE_COORD_ORIGIN
+	  GL_LOWER_LEFT
+	  GL_UPPER_LEFT
+	  GL_STENCIL_BACK_REF
+	  GL_STENCIL_BACK_VALUE_MASK
+	  GL_STENCIL_BACK_WRITEMASK
+	  GL_PIXEL_PACK_BUFFER
+	  GL_PIXEL_UNPACK_BUFFER
+	  GL_PIXEL_PACK_BUFFER_BINDING
+	  GL_PIXEL_UNPACK_BUFFER_BINDING
+	  GL_FLOAT_MAT2x3
+	  GL_FLOAT_MAT2x4
+	  GL_FLOAT_MAT3x2
+	  GL_FLOAT_MAT3x4
+	  GL_FLOAT_MAT4x2
+	  GL_FLOAT_MAT4x3
+	  GL_SRGB
+	  GL_SRGB8
+	  GL_SRGB_ALPHA
+	  GL_SRGB8_ALPHA8
+	  GL_COMPRESSED_SRGB
+	  GL_COMPRESSED_SRGB_ALPHA
+	  GL_COMPARE_REF_TO_TEXTURE
+	  GL_CLIP_DISTANCE0
+	  GL_CLIP_DISTANCE1
+	  GL_CLIP_DISTANCE2
+	  GL_CLIP_DISTANCE3
+	  GL_CLIP_DISTANCE4
+	  GL_CLIP_DISTANCE5
+	  GL_CLIP_DISTANCE6
+	  GL_CLIP_DISTANCE7
+	  GL_MAX_CLIP_DISTANCES
+	  GL_MAJOR_VERSION
+	  GL_MINOR_VERSION
+	  GL_NUM_EXTENSIONS
+	  GL_CONTEXT_FLAGS
+	  GL_COMPRESSED_RED
+	  GL_COMPRESSED_RG
+	  GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT
+	  GL_RGBA32F
+	  GL_RGB32F
+	  GL_RGBA16F
+	  GL_RGB16F
+	  GL_VERTEX_ATTRIB_ARRAY_INTEGER
+	  GL_MAX_ARRAY_TEXTURE_LAYERS
+	  GL_MIN_PROGRAM_TEXEL_OFFSET
+	  GL_MAX_PROGRAM_TEXEL_OFFSET
+	  GL_CLAMP_READ_COLOR
+	  GL_FIXED_ONLY
+	  GL_MAX_VARYING_COMPONENTS
+	  GL_TEXTURE_1D_ARRAY
+	  GL_PROXY_TEXTURE_1D_ARRAY
+	  GL_TEXTURE_2D_ARRAY
+	  GL_PROXY_TEXTURE_2D_ARRAY
+	  GL_TEXTURE_BINDING_1D_ARRAY
+	  GL_TEXTURE_BINDING_2D_ARRAY
+	  GL_R11F_G11F_B10F
+	  GL_UNSIGNED_INT_10F_11F_11F_REV
+	  GL_RGB9_E5
+	  GL_UNSIGNED_INT_5_9_9_9_REV
+	  GL_TEXTURE_SHARED_SIZE
+	  GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH
+	  GL_TRANSFORM_FEEDBACK_BUFFER_MODE
+	  GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS
+	  GL_TRANSFORM_FEEDBACK_VARYINGS
+	  GL_TRANSFORM_FEEDBACK_BUFFER_START
+	  GL_TRANSFORM_FEEDBACK_BUFFER_SIZE
+	  GL_PRIMITIVES_GENERATED
+	  GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN
+	  GL_RASTERIZER_DISCARD
+	  GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS
+	  GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS
+	  GL_INTERLEAVED_ATTRIBS
+	  GL_SEPARATE_ATTRIBS
+	  GL_TRANSFORM_FEEDBACK_BUFFER
+	  GL_TRANSFORM_FEEDBACK_BUFFER_BINDING
+	  GL_RGBA32UI
+	  GL_RGB32UI
+	  GL_RGBA16UI
+	  GL_RGB16UI
+	  GL_RGBA8UI
+	  GL_RGB8UI
+	  GL_RGBA32I
+	  GL_RGB32I
+	  GL_RGBA16I
+	  GL_RGB16I
+	  GL_RGBA8I
+	  GL_RGB8I
+	  GL_RED_INTEGER
+	  GL_GREEN_INTEGER
+	  GL_BLUE_INTEGER
+	  GL_RGB_INTEGER
+	  GL_RGBA_INTEGER
+	  GL_BGR_INTEGER
+	  GL_BGRA_INTEGER
+	  GL_SAMPLER_1D_ARRAY
+	  GL_SAMPLER_2D_ARRAY
+	  GL_SAMPLER_1D_ARRAY_SHADOW
+	  GL_SAMPLER_2D_ARRAY_SHADOW
+	  GL_SAMPLER_CUBE_SHADOW
+	  GL_UNSIGNED_INT_VEC2
+	  GL_UNSIGNED_INT_VEC3
+	  GL_UNSIGNED_INT_VEC4
+	  GL_INT_SAMPLER_1D
+	  GL_INT_SAMPLER_2D
+	  GL_INT_SAMPLER_3D
+	  GL_INT_SAMPLER_CUBE
+	  GL_INT_SAMPLER_1D_ARRAY
+	  GL_INT_SAMPLER_2D_ARRAY
+	  GL_UNSIGNED_INT_SAMPLER_1D
+	  GL_UNSIGNED_INT_SAMPLER_2D
+	  GL_UNSIGNED_INT_SAMPLER_3D
+	  GL_UNSIGNED_INT_SAMPLER_CUBE
+	  GL_UNSIGNED_INT_SAMPLER_1D_ARRAY
+	  GL_UNSIGNED_INT_SAMPLER_2D_ARRAY
+	  GL_QUERY_WAIT
+	  GL_QUERY_NO_WAIT
+	  GL_QUERY_BY_REGION_WAIT
+	  GL_QUERY_BY_REGION_NO_WAIT
+	  GL_BUFFER_ACCESS_FLAGS
+	  GL_BUFFER_MAP_LENGTH
+	  GL_BUFFER_MAP_OFFSET
+	  GL_DEPTH_COMPONENT32F
+	  GL_DEPTH32F_STENCIL8
+	  GL_FLOAT_32_UNSIGNED_INT_24_8_REV
+	  GL_INVALID_FRAMEBUFFER_OPERATION
+	  GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING
+	  GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE
+	  GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE
+	  GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE
+	  GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE
+	  GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE
+	  GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE
+	  GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE
+	  GL_FRAMEBUFFER_DEFAULT
+	  GL_FRAMEBUFFER_UNDEFINED
+	  GL_DEPTH_STENCIL_ATTACHMENT
+	  GL_MAX_RENDERBUFFER_SIZE
+	  GL_DEPTH_STENCIL
+	  GL_UNSIGNED_INT_24_8
+	  GL_DEPTH24_STENCIL8
+	  GL_TEXTURE_STENCIL_SIZE
+	  GL_TEXTURE_RED_TYPE
+	  GL_TEXTURE_GREEN_TYPE
+	  GL_TEXTURE_BLUE_TYPE
+	  GL_TEXTURE_ALPHA_TYPE
+	  GL_TEXTURE_DEPTH_TYPE
+	  GL_UNSIGNED_NORMALIZED
+	  GL_FRAMEBUFFER_BINDING
+	  GL_DRAW_FRAMEBUFFER_BINDING
+	  GL_RENDERBUFFER_BINDING
+	  GL_READ_FRAMEBUFFER
+	  GL_DRAW_FRAMEBUFFER
+	  GL_READ_FRAMEBUFFER_BINDING
+	  GL_RENDERBUFFER_SAMPLES
+	  GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE
+	  GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME
+	  GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL
+	  GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE
+	  GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER
+	  GL_FRAMEBUFFER_COMPLETE
+	  GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
+	  GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
+	  GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER
+	  GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER
+	  GL_FRAMEBUFFER_UNSUPPORTED
+	  GL_MAX_COLOR_ATTACHMENTS
+	  GL_COLOR_ATTACHMENT0
+	  GL_COLOR_ATTACHMENT1
+	  GL_COLOR_ATTACHMENT2
+	  GL_COLOR_ATTACHMENT3
+	  GL_COLOR_ATTACHMENT4
+	  GL_COLOR_ATTACHMENT5
+	  GL_COLOR_ATTACHMENT6
+	  GL_COLOR_ATTACHMENT7
+	  GL_COLOR_ATTACHMENT8
+	  GL_COLOR_ATTACHMENT9
+	  GL_COLOR_ATTACHMENT10
+	  GL_COLOR_ATTACHMENT11
+	  GL_COLOR_ATTACHMENT12
+	  GL_COLOR_ATTACHMENT13
+	  GL_COLOR_ATTACHMENT14
+	  GL_COLOR_ATTACHMENT15
+	  GL_COLOR_ATTACHMENT16
+	  GL_COLOR_ATTACHMENT17
+	  GL_COLOR_ATTACHMENT18
+	  GL_COLOR_ATTACHMENT19
+	  GL_COLOR_ATTACHMENT20
+	  GL_COLOR_ATTACHMENT21
+	  GL_COLOR_ATTACHMENT22
+	  GL_COLOR_ATTACHMENT23
+	  GL_COLOR_ATTACHMENT24
+	  GL_COLOR_ATTACHMENT25
+	  GL_COLOR_ATTACHMENT26
+	  GL_COLOR_ATTACHMENT27
+	  GL_COLOR_ATTACHMENT28
+	  GL_COLOR_ATTACHMENT29
+	  GL_COLOR_ATTACHMENT30
+	  GL_COLOR_ATTACHMENT31
+	  GL_DEPTH_ATTACHMENT
+	  GL_STENCIL_ATTACHMENT
+	  GL_FRAMEBUFFER
+	  GL_RENDERBUFFER
+	  GL_RENDERBUFFER_WIDTH
+	  GL_RENDERBUFFER_HEIGHT
+	  GL_RENDERBUFFER_INTERNAL_FORMAT
+	  GL_STENCIL_INDEX1
+	  GL_STENCIL_INDEX4
+	  GL_STENCIL_INDEX8
+	  GL_STENCIL_INDEX16
+	  GL_RENDERBUFFER_RED_SIZE
+	  GL_RENDERBUFFER_GREEN_SIZE
+	  GL_RENDERBUFFER_BLUE_SIZE
+	  GL_RENDERBUFFER_ALPHA_SIZE
+	  GL_RENDERBUFFER_DEPTH_SIZE
+	  GL_RENDERBUFFER_STENCIL_SIZE
+	  GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE
+	  GL_MAX_SAMPLES
+	  GL_FRAMEBUFFER_SRGB
+	  GL_HALF_FLOAT
+	  GL_MAP_READ_BIT
+	  GL_MAP_WRITE_BIT
+	  GL_MAP_INVALIDATE_RANGE_BIT
+	  GL_MAP_INVALIDATE_BUFFER_BIT
+	  GL_MAP_FLUSH_EXPLICIT_BIT
+	  GL_MAP_UNSYNCHRONIZED_BIT
+	  GL_COMPRESSED_RED_RGTC1
+	  GL_COMPRESSED_SIGNED_RED_RGTC1
+	  GL_COMPRESSED_RG_RGTC2
+	  GL_COMPRESSED_SIGNED_RG_RGTC2
+	  GL_RG
+	  GL_RG_INTEGER
+	  GL_R8
+	  GL_R16
+	  GL_RG8
+	  GL_RG16
+	  GL_R16F
+	  GL_R32F
+	  GL_RG16F
+	  GL_RG32F
+	  GL_R8I
+	  GL_R8UI
+	  GL_R16I
+	  GL_R16UI
+	  GL_R32I
+	  GL_R32UI
+	  GL_RG8I
+	  GL_RG8UI
+	  GL_RG16I
+	  GL_RG16UI
+	  GL_RG32I
+	  GL_RG32UI
+	  GL_VERTEX_ARRAY_BINDING
+	  GL_SAMPLER_2D_RECT
+	  GL_SAMPLER_2D_RECT_SHADOW
+	  GL_SAMPLER_BUFFER
+	  GL_INT_SAMPLER_2D_RECT
+	  GL_INT_SAMPLER_BUFFER
+	  GL_UNSIGNED_INT_SAMPLER_2D_RECT
+	  GL_UNSIGNED_INT_SAMPLER_BUFFER
+	  GL_TEXTURE_BUFFER
+	  GL_MAX_TEXTURE_BUFFER_SIZE
+	  GL_TEXTURE_BINDING_BUFFER
+	  GL_TEXTURE_BUFFER_DATA_STORE_BINDING
+	  GL_TEXTURE_RECTANGLE
+	  GL_TEXTURE_BINDING_RECTANGLE
+	  GL_PROXY_TEXTURE_RECTANGLE
+	  GL_MAX_RECTANGLE_TEXTURE_SIZE
+	  GL_R8_SNORM
+	  GL_RG8_SNORM
+	  GL_RGB8_SNORM
+	  GL_RGBA8_SNORM
+	  GL_R16_SNORM
+	  GL_RG16_SNORM
+	  GL_RGB16_SNORM
+	  GL_RGBA16_SNORM
+	  GL_SIGNED_NORMALIZED
+	  GL_PRIMITIVE_RESTART
+	  GL_PRIMITIVE_RESTART_INDEX
+	  GL_COPY_READ_BUFFER
+	  GL_COPY_WRITE_BUFFER
+	  GL_UNIFORM_BUFFER
+	  GL_UNIFORM_BUFFER_BINDING
+	  GL_UNIFORM_BUFFER_START
+	  GL_UNIFORM_BUFFER_SIZE
+	  GL_MAX_VERTEX_UNIFORM_BLOCKS
+	  GL_MAX_GEOMETRY_UNIFORM_BLOCKS
+	  GL_MAX_FRAGMENT_UNIFORM_BLOCKS
+	  GL_MAX_COMBINED_UNIFORM_BLOCKS
+	  GL_MAX_UNIFORM_BUFFER_BINDINGS
+	  GL_MAX_UNIFORM_BLOCK_SIZE
+	  GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS
+	  GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS
+	  GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS
+	  GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT
+	  GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH
+	  GL_ACTIVE_UNIFORM_BLOCKS
+	  GL_UNIFORM_TYPE
+	  GL_UNIFORM_SIZE
+	  GL_UNIFORM_NAME_LENGTH
+	  GL_UNIFORM_BLOCK_INDEX
+	  GL_UNIFORM_OFFSET
+	  GL_UNIFORM_ARRAY_STRIDE
+	  GL_UNIFORM_MATRIX_STRIDE
+	  GL_UNIFORM_IS_ROW_MAJOR
+	  GL_UNIFORM_BLOCK_BINDING
+	  GL_UNIFORM_BLOCK_DATA_SIZE
+	  GL_UNIFORM_BLOCK_NAME_LENGTH
+	  GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS
+	  GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES
+	  GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER
+	  GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER
+	  GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER
+	  GL_INVALID_INDEX
+	  GL_CONTEXT_CORE_PROFILE_BIT
+	  GL_CONTEXT_COMPATIBILITY_PROFILE_BIT
+	  GL_LINES_ADJACENCY
+	  GL_LINE_STRIP_ADJACENCY
+	  GL_TRIANGLES_ADJACENCY
+	  GL_TRIANGLE_STRIP_ADJACENCY
+	  GL_PROGRAM_POINT_SIZE
+	  GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS
+	  GL_FRAMEBUFFER_ATTACHMENT_LAYERED
+	  GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS
+	  GL_GEOMETRY_SHADER
+	  GL_GEOMETRY_VERTICES_OUT
+	  GL_GEOMETRY_INPUT_TYPE
+	  GL_GEOMETRY_OUTPUT_TYPE
+	  GL_MAX_GEOMETRY_UNIFORM_COMPONENTS
+	  GL_MAX_GEOMETRY_OUTPUT_VERTICES
+	  GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS
+	  GL_MAX_VERTEX_OUTPUT_COMPONENTS
+	  GL_MAX_GEOMETRY_INPUT_COMPONENTS
+	  GL_MAX_GEOMETRY_OUTPUT_COMPONENTS
+	  GL_MAX_FRAGMENT_INPUT_COMPONENTS
+	  GL_CONTEXT_PROFILE_MASK
+	  GL_DEPTH_CLAMP
+	  GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION
+	  GL_FIRST_VERTEX_CONVENTION
+	  GL_LAST_VERTEX_CONVENTION
+	  GL_PROVOKING_VERTEX
+	  GL_TEXTURE_CUBE_MAP_SEAMLESS
+	  GL_MAX_SERVER_WAIT_TIMEOUT
+	  GL_OBJECT_TYPE
+	  GL_SYNC_CONDITION
+	  GL_SYNC_STATUS
+	  GL_SYNC_FLAGS
+	  GL_SYNC_FENCE
+	  GL_SYNC_GPU_COMMANDS_COMPLETE
+	  GL_UNSIGNALED
+	  GL_SIGNALED
+	  GL_ALREADY_SIGNALED
+	  GL_TIMEOUT_EXPIRED
+	  GL_CONDITION_SATISFIED
+	  GL_WAIT_FAILED
+	  GL_TIMEOUT_IGNORED
+	  GL_SYNC_FLUSH_COMMANDS_BIT
+	  GL_SAMPLE_POSITION
+	  GL_SAMPLE_MASK
+	  GL_SAMPLE_MASK_VALUE
+	  GL_MAX_SAMPLE_MASK_WORDS
+	  GL_TEXTURE_2D_MULTISAMPLE
+	  GL_PROXY_TEXTURE_2D_MULTISAMPLE
+	  GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+	  GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY
+	  GL_TEXTURE_BINDING_2D_MULTISAMPLE
+	  GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY
+	  GL_TEXTURE_SAMPLES
+	  GL_TEXTURE_FIXED_SAMPLE_LOCATIONS
+	  GL_SAMPLER_2D_MULTISAMPLE
+	  GL_INT_SAMPLER_2D_MULTISAMPLE
+	  GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE
+	  GL_SAMPLER_2D_MULTISAMPLE_ARRAY
+	  GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY
+	  GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY
+	  GL_MAX_COLOR_TEXTURE_SAMPLES
+	  GL_MAX_DEPTH_TEXTURE_SAMPLES
+	  GL_MAX_INTEGER_SAMPLES
+	  GL_VERTEX_ATTRIB_ARRAY_DIVISOR
+	  GL_SRC1_COLOR
+	  GL_ONE_MINUS_SRC1_COLOR
+	  GL_ONE_MINUS_SRC1_ALPHA
+	  GL_MAX_DUAL_SOURCE_DRAW_BUFFERS
+	  GL_ANY_SAMPLES_PASSED
+	  GL_SAMPLER_BINDING
+	  GL_RGB10_A2UI
+	  GL_TEXTURE_SWIZZLE_R
+	  GL_TEXTURE_SWIZZLE_G
+	  GL_TEXTURE_SWIZZLE_B
+	  GL_TEXTURE_SWIZZLE_A
+	  GL_TEXTURE_SWIZZLE_RGBA
+	  GL_TIME_ELAPSED
+	  GL_TIMESTAMP
+	  GL_INT_2_10_10_10_REV
+	  GL_SAMPLE_SHADING
+	  GL_MIN_SAMPLE_SHADING_VALUE
+	  GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET
+	  GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET
+	  GL_TEXTURE_CUBE_MAP_ARRAY
+	  GL_TEXTURE_BINDING_CUBE_MAP_ARRAY
+	  GL_PROXY_TEXTURE_CUBE_MAP_ARRAY
+	  GL_SAMPLER_CUBE_MAP_ARRAY
+	  GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW
+	  GL_INT_SAMPLER_CUBE_MAP_ARRAY
+	  GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY
+	  GL_DRAW_INDIRECT_BUFFER
+	  GL_DRAW_INDIRECT_BUFFER_BINDING
+	  GL_GEOMETRY_SHADER_INVOCATIONS
+	  GL_MAX_GEOMETRY_SHADER_INVOCATIONS
+	  GL_MIN_FRAGMENT_INTERPOLATION_OFFSET
+	  GL_MAX_FRAGMENT_INTERPOLATION_OFFSET
+	  GL_FRAGMENT_INTERPOLATION_OFFSET_BITS
+	  GL_MAX_VERTEX_STREAMS
+	  GL_DOUBLE_VEC2
+	  GL_DOUBLE_VEC3
+	  GL_DOUBLE_VEC4
+	  GL_DOUBLE_MAT2
+	  GL_DOUBLE_MAT3
+	  GL_DOUBLE_MAT4
+	  GL_DOUBLE_MAT2x3
+	  GL_DOUBLE_MAT2x4
+	  GL_DOUBLE_MAT3x2
+	  GL_DOUBLE_MAT3x4
+	  GL_DOUBLE_MAT4x2
+	  GL_DOUBLE_MAT4x3
+	  GL_ACTIVE_SUBROUTINES
+	  GL_ACTIVE_SUBROUTINE_UNIFORMS
+	  GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS
+	  GL_ACTIVE_SUBROUTINE_MAX_LENGTH
+	  GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH
+	  GL_MAX_SUBROUTINES
+	  GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS
+	  GL_NUM_COMPATIBLE_SUBROUTINES
+	  GL_COMPATIBLE_SUBROUTINES
+	  GL_PATCHES
+	  GL_PATCH_VERTICES
+	  GL_PATCH_DEFAULT_INNER_LEVEL
+	  GL_PATCH_DEFAULT_OUTER_LEVEL
+	  GL_TESS_CONTROL_OUTPUT_VERTICES
+	  GL_TESS_GEN_MODE
+	  GL_TESS_GEN_SPACING
+	  GL_TESS_GEN_VERTEX_ORDER
+	  GL_TESS_GEN_POINT_MODE
+	  GL_ISOLINES
+	  GL_FRACTIONAL_ODD
+	  GL_FRACTIONAL_EVEN
+	  GL_MAX_PATCH_VERTICES
+	  GL_MAX_TESS_GEN_LEVEL
+	  GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS
+	  GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS
+	  GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS
+	  GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS
+	  GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS
+	  GL_MAX_TESS_PATCH_COMPONENTS
+	  GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS
+	  GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS
+	  GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS
+	  GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS
+	  GL_MAX_TESS_CONTROL_INPUT_COMPONENTS
+	  GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS
+	  GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS
+	  GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS
+	  GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER
+	  GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER
+	  GL_TESS_EVALUATION_SHADER
+	  GL_TESS_CONTROL_SHADER
+	  GL_TRANSFORM_FEEDBACK
+	  GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED
+	  GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE
+	  GL_TRANSFORM_FEEDBACK_BINDING
+	  GL_MAX_TRANSFORM_FEEDBACK_BUFFERS
+	  GL_FIXED
+	  GL_IMPLEMENTATION_COLOR_READ_TYPE
+	  GL_IMPLEMENTATION_COLOR_READ_FORMAT
+	  GL_LOW_FLOAT
+	  GL_MEDIUM_FLOAT
+	  GL_HIGH_FLOAT
+	  GL_LOW_INT
+	  GL_MEDIUM_INT
+	  GL_HIGH_INT
+	  GL_SHADER_COMPILER
+	  GL_SHADER_BINARY_FORMATS
+	  GL_NUM_SHADER_BINARY_FORMATS
+	  GL_MAX_VERTEX_UNIFORM_VECTORS
+	  GL_MAX_VARYING_VECTORS
+	  GL_MAX_FRAGMENT_UNIFORM_VECTORS
+	  GL_RGB565
+	  GL_PROGRAM_BINARY_RETRIEVABLE_HINT
+	  GL_PROGRAM_BINARY_LENGTH
+	  GL_NUM_PROGRAM_BINARY_FORMATS
+	  GL_PROGRAM_BINARY_FORMATS
+	  GL_VERTEX_SHADER_BIT
+	  GL_FRAGMENT_SHADER_BIT
+	  GL_GEOMETRY_SHADER_BIT
+	  GL_TESS_CONTROL_SHADER_BIT
+	  GL_TESS_EVALUATION_SHADER_BIT
+	  GL_ALL_SHADER_BITS
+	  GL_PROGRAM_SEPARABLE
+	  GL_ACTIVE_PROGRAM
+	  GL_PROGRAM_PIPELINE_BINDING
+	  GL_MAX_VIEWPORTS
+	  GL_VIEWPORT_SUBPIXEL_BITS
+	  GL_VIEWPORT_BOUNDS_RANGE
+	  GL_LAYER_PROVOKING_VERTEX
+	  GL_VIEWPORT_INDEX_PROVOKING_VERTEX
+	  GL_UNDEFINED_VERTEX
+	  GL_COPY_READ_BUFFER_BINDING
+	  GL_COPY_WRITE_BUFFER_BINDING
+	  GL_TRANSFORM_FEEDBACK_ACTIVE
+	  GL_TRANSFORM_FEEDBACK_PAUSED
+	  GL_UNPACK_COMPRESSED_BLOCK_WIDTH
+	  GL_UNPACK_COMPRESSED_BLOCK_HEIGHT
+	  GL_UNPACK_COMPRESSED_BLOCK_DEPTH
+	  GL_UNPACK_COMPRESSED_BLOCK_SIZE
+	  GL_PACK_COMPRESSED_BLOCK_WIDTH
+	  GL_PACK_COMPRESSED_BLOCK_HEIGHT
+	  GL_PACK_COMPRESSED_BLOCK_DEPTH
+	  GL_PACK_COMPRESSED_BLOCK_SIZE
+	  GL_NUM_SAMPLE_COUNTS
+	  GL_MIN_MAP_BUFFER_ALIGNMENT
+	  GL_ATOMIC_COUNTER_BUFFER
+	  GL_ATOMIC_COUNTER_BUFFER_BINDING
+	  GL_ATOMIC_COUNTER_BUFFER_START
+	  GL_ATOMIC_COUNTER_BUFFER_SIZE
+	  GL_ATOMIC_COUNTER_BUFFER_DATA_SIZE
+	  GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+	  GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES
+	  GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER
+	  GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER
+	  GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER
+	  GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER
+	  GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER
+	  GL_MAX_VERTEX_ATOMIC_COUNTER_BUFFERS
+	  GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS
+	  GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS
+	  GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS
+	  GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS
+	  GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS
+	  GL_MAX_VERTEX_ATOMIC_COUNTERS
+	  GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS
+	  GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS
+	  GL_MAX_GEOMETRY_ATOMIC_COUNTERS
+	  GL_MAX_FRAGMENT_ATOMIC_COUNTERS
+	  GL_MAX_COMBINED_ATOMIC_COUNTERS
+	  GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE
+	  GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS
+	  GL_ACTIVE_ATOMIC_COUNTER_BUFFERS
+	  GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX
+	  GL_UNSIGNED_INT_ATOMIC_COUNTER
+	  GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT
+	  GL_ELEMENT_ARRAY_BARRIER_BIT
+	  GL_UNIFORM_BARRIER_BIT
+	  GL_TEXTURE_FETCH_BARRIER_BIT
+	  GL_SHADER_IMAGE_ACCESS_BARRIER_BIT
+	  GL_COMMAND_BARRIER_BIT
+	  GL_PIXEL_BUFFER_BARRIER_BIT
+	  GL_TEXTURE_UPDATE_BARRIER_BIT
+	  GL_BUFFER_UPDATE_BARRIER_BIT
+	  GL_FRAMEBUFFER_BARRIER_BIT
+	  GL_TRANSFORM_FEEDBACK_BARRIER_BIT
+	  GL_ATOMIC_COUNTER_BARRIER_BIT
+	  GL_ALL_BARRIER_BITS
+	  GL_MAX_IMAGE_UNITS
+	  GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS
+	  GL_IMAGE_BINDING_NAME
+	  GL_IMAGE_BINDING_LEVEL
+	  GL_IMAGE_BINDING_LAYERED
+	  GL_IMAGE_BINDING_LAYER
+	  GL_IMAGE_BINDING_ACCESS
+	  GL_IMAGE_1D
+	  GL_IMAGE_2D
+	  GL_IMAGE_3D
+	  GL_IMAGE_2D_RECT
+	  GL_IMAGE_CUBE
+	  GL_IMAGE_BUFFER
+	  GL_IMAGE_1D_ARRAY
+	  GL_IMAGE_2D_ARRAY
+	  GL_IMAGE_CUBE_MAP_ARRAY
+	  GL_IMAGE_2D_MULTISAMPLE
+	  GL_IMAGE_2D_MULTISAMPLE_ARRAY
+	  GL_INT_IMAGE_1D
+	  GL_INT_IMAGE_2D
+	  GL_INT_IMAGE_3D
+	  GL_INT_IMAGE_2D_RECT
+	  GL_INT_IMAGE_CUBE
+	  GL_INT_IMAGE_BUFFER
+	  GL_INT_IMAGE_1D_ARRAY
+	  GL_INT_IMAGE_2D_ARRAY
+	  GL_INT_IMAGE_CUBE_MAP_ARRAY
+	  GL_INT_IMAGE_2D_MULTISAMPLE
+	  GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY
+	  GL_UNSIGNED_INT_IMAGE_1D
+	  GL_UNSIGNED_INT_IMAGE_2D
+	  GL_UNSIGNED_INT_IMAGE_3D
+	  GL_UNSIGNED_INT_IMAGE_2D_RECT
+	  GL_UNSIGNED_INT_IMAGE_CUBE
+	  GL_UNSIGNED_INT_IMAGE_BUFFER
+	  GL_UNSIGNED_INT_IMAGE_1D_ARRAY
+	  GL_UNSIGNED_INT_IMAGE_2D_ARRAY
+	  GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY
+	  GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE
+	  GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY
+	  GL_MAX_IMAGE_SAMPLES
+	  GL_IMAGE_BINDING_FORMAT
+	  GL_IMAGE_FORMAT_COMPATIBILITY_TYPE
+	  GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE
+	  GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS
+	  GL_MAX_VERTEX_IMAGE_UNIFORMS
+	  GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS
+	  GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS
+	  GL_MAX_GEOMETRY_IMAGE_UNIFORMS
+	  GL_MAX_FRAGMENT_IMAGE_UNIFORMS
+	  GL_MAX_COMBINED_IMAGE_UNIFORMS
+	  GL_COMPRESSED_RGBA_BPTC_UNORM
+	  GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM
+	  GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT
+	  GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT
+	  GL_TEXTURE_IMMUTABLE_FORMAT
+	  GL_NUM_SHADING_LANGUAGE_VERSIONS
+	  GL_VERTEX_ATTRIB_ARRAY_LONG
+	  GL_COMPRESSED_RGB8_ETC2
+	  GL_COMPRESSED_SRGB8_ETC2
+	  GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2
+	  GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2
+	  GL_COMPRESSED_RGBA8_ETC2_EAC
+	  GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC
+	  GL_COMPRESSED_R11_EAC
+	  GL_COMPRESSED_SIGNED_R11_EAC
+	  GL_COMPRESSED_RG11_EAC
+	  GL_COMPRESSED_SIGNED_RG11_EAC
+	  GL_PRIMITIVE_RESTART_FIXED_INDEX
+	  GL_ANY_SAMPLES_PASSED_CONSERVATIVE
+	  GL_MAX_ELEMENT_INDEX
+	  GL_COMPUTE_SHADER
+	  GL_MAX_COMPUTE_UNIFORM_BLOCKS
+	  GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS
+	  GL_MAX_COMPUTE_IMAGE_UNIFORMS
+	  GL_MAX_COMPUTE_SHARED_MEMORY_SIZE
+	  GL_MAX_COMPUTE_UNIFORM_COMPONENTS
+	  GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS
+	  GL_MAX_COMPUTE_ATOMIC_COUNTERS
+	  GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS
+	  GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS
+	  GL_MAX_COMPUTE_WORK_GROUP_COUNT
+	  GL_MAX_COMPUTE_WORK_GROUP_SIZE
+	  GL_COMPUTE_WORK_GROUP_SIZE
+	  GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER
+	  GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER
+	  GL_DISPATCH_INDIRECT_BUFFER
+	  GL_DISPATCH_INDIRECT_BUFFER_BINDING
+	  GL_COMPUTE_SHADER_BIT
+	  GL_DEBUG_OUTPUT_SYNCHRONOUS
+	  GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH
+	  GL_DEBUG_CALLBACK_FUNCTION
+	  GL_DEBUG_CALLBACK_USER_PARAM
+	  GL_DEBUG_SOURCE_API
+	  GL_DEBUG_SOURCE_WINDOW_SYSTEM
+	  GL_DEBUG_SOURCE_SHADER_COMPILER
+	  GL_DEBUG_SOURCE_THIRD_PARTY
+	  GL_DEBUG_SOURCE_APPLICATION
+	  GL_DEBUG_SOURCE_OTHER
+	  GL_DEBUG_TYPE_ERROR
+	  GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR
+	  GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR
+	  GL_DEBUG_TYPE_PORTABILITY
+	  GL_DEBUG_TYPE_PERFORMANCE
+	  GL_DEBUG_TYPE_OTHER
+	  GL_MAX_DEBUG_MESSAGE_LENGTH
+	  GL_MAX_DEBUG_LOGGED_MESSAGES
+	  GL_DEBUG_LOGGED_MESSAGES
+	  GL_DEBUG_SEVERITY_HIGH
+	  GL_DEBUG_SEVERITY_MEDIUM
+	  GL_DEBUG_SEVERITY_LOW
+	  GL_DEBUG_TYPE_MARKER
+	  GL_DEBUG_TYPE_PUSH_GROUP
+	  GL_DEBUG_TYPE_POP_GROUP
+	  GL_DEBUG_SEVERITY_NOTIFICATION
+	  GL_MAX_DEBUG_GROUP_STACK_DEPTH
+	  GL_DEBUG_GROUP_STACK_DEPTH
+	  GL_BUFFER
+	  GL_SHADER
+	  GL_PROGRAM
+	  GL_QUERY
+	  GL_PROGRAM_PIPELINE
+	  GL_SAMPLER
+	  GL_MAX_LABEL_LENGTH
+	  GL_DEBUG_OUTPUT
+	  GL_CONTEXT_FLAG_DEBUG_BIT
+	  GL_MAX_UNIFORM_LOCATIONS
+	  GL_FRAMEBUFFER_DEFAULT_WIDTH
+	  GL_FRAMEBUFFER_DEFAULT_HEIGHT
+	  GL_FRAMEBUFFER_DEFAULT_LAYERS
+	  GL_FRAMEBUFFER_DEFAULT_SAMPLES
+	  GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS
+	  GL_MAX_FRAMEBUFFER_WIDTH
+	  GL_MAX_FRAMEBUFFER_HEIGHT
+	  GL_MAX_FRAMEBUFFER_LAYERS
+	  GL_MAX_FRAMEBUFFER_SAMPLES
+	  GL_INTERNALFORMAT_SUPPORTED
+	  GL_INTERNALFORMAT_PREFERRED
+	  GL_INTERNALFORMAT_RED_SIZE
+	  GL_INTERNALFORMAT_GREEN_SIZE
+	  GL_INTERNALFORMAT_BLUE_SIZE
+	  GL_INTERNALFORMAT_ALPHA_SIZE
+	  GL_INTERNALFORMAT_DEPTH_SIZE
+	  GL_INTERNALFORMAT_STENCIL_SIZE
+	  GL_INTERNALFORMAT_SHARED_SIZE
+	  GL_INTERNALFORMAT_RED_TYPE
+	  GL_INTERNALFORMAT_GREEN_TYPE
+	  GL_INTERNALFORMAT_BLUE_TYPE
+	  GL_INTERNALFORMAT_ALPHA_TYPE
+	  GL_INTERNALFORMAT_DEPTH_TYPE
+	  GL_INTERNALFORMAT_STENCIL_TYPE
+	  GL_MAX_WIDTH
+	  GL_MAX_HEIGHT
+	  GL_MAX_DEPTH
+	  GL_MAX_LAYERS
+	  GL_MAX_COMBINED_DIMENSIONS
+	  GL_COLOR_COMPONENTS
+	  GL_DEPTH_COMPONENTS
+	  GL_STENCIL_COMPONENTS
+	  GL_COLOR_RENDERABLE
+	  GL_DEPTH_RENDERABLE
+	  GL_STENCIL_RENDERABLE
+	  GL_FRAMEBUFFER_RENDERABLE
+	  GL_FRAMEBUFFER_RENDERABLE_LAYERED
+	  GL_FRAMEBUFFER_BLEND
+	  GL_READ_PIXELS
+	  GL_READ_PIXELS_FORMAT
+	  GL_READ_PIXELS_TYPE
+	  GL_TEXTURE_IMAGE_FORMAT
+	  GL_TEXTURE_IMAGE_TYPE
+	  GL_GET_TEXTURE_IMAGE_FORMAT
+	  GL_GET_TEXTURE_IMAGE_TYPE
+	  GL_MIPMAP
+	  GL_MANUAL_GENERATE_MIPMAP
+	  GL_AUTO_GENERATE_MIPMAP
+	  GL_COLOR_ENCODING
+	  GL_SRGB_READ
+	  GL_SRGB_WRITE
+	  GL_FILTER
+	  GL_VERTEX_TEXTURE
+	  GL_TESS_CONTROL_TEXTURE
+	  GL_TESS_EVALUATION_TEXTURE
+	  GL_GEOMETRY_TEXTURE
+	  GL_FRAGMENT_TEXTURE
+	  GL_COMPUTE_TEXTURE
+	  GL_TEXTURE_SHADOW
+	  GL_TEXTURE_GATHER
+	  GL_TEXTURE_GATHER_SHADOW
+	  GL_SHADER_IMAGE_LOAD
+	  GL_SHADER_IMAGE_STORE
+	  GL_SHADER_IMAGE_ATOMIC
+	  GL_IMAGE_TEXEL_SIZE
+	  GL_IMAGE_COMPATIBILITY_CLASS
+	  GL_IMAGE_PIXEL_FORMAT
+	  GL_IMAGE_PIXEL_TYPE
+	  GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_TEST
+	  GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST
+	  GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE
+	  GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE
+	  GL_TEXTURE_COMPRESSED_BLOCK_WIDTH
+	  GL_TEXTURE_COMPRESSED_BLOCK_HEIGHT
+	  GL_TEXTURE_COMPRESSED_BLOCK_SIZE
+	  GL_CLEAR_BUFFER
+	  GL_TEXTURE_VIEW
+	  GL_VIEW_COMPATIBILITY_CLASS
+	  GL_FULL_SUPPORT
+	  GL_CAVEAT_SUPPORT
+	  GL_IMAGE_CLASS_4_X_32
+	  GL_IMAGE_CLASS_2_X_32
+	  GL_IMAGE_CLASS_1_X_32
+	  GL_IMAGE_CLASS_4_X_16
+	  GL_IMAGE_CLASS_2_X_16
+	  GL_IMAGE_CLASS_1_X_16
+	  GL_IMAGE_CLASS_4_X_8
+	  GL_IMAGE_CLASS_2_X_8
+	  GL_IMAGE_CLASS_1_X_8
+	  GL_IMAGE_CLASS_11_11_10
+	  GL_IMAGE_CLASS_10_10_10_2
+	  GL_VIEW_CLASS_128_BITS
+	  GL_VIEW_CLASS_96_BITS
+	  GL_VIEW_CLASS_64_BITS
+	  GL_VIEW_CLASS_48_BITS
+	  GL_VIEW_CLASS_32_BITS
+	  GL_VIEW_CLASS_24_BITS
+	  GL_VIEW_CLASS_16_BITS
+	  GL_VIEW_CLASS_8_BITS
+	  GL_VIEW_CLASS_S3TC_DXT1_RGB
+	  GL_VIEW_CLASS_S3TC_DXT1_RGBA
+	  GL_VIEW_CLASS_S3TC_DXT3_RGBA
+	  GL_VIEW_CLASS_S3TC_DXT5_RGBA
+	  GL_VIEW_CLASS_RGTC1_RED
+	  GL_VIEW_CLASS_RGTC2_RG
+	  GL_VIEW_CLASS_BPTC_UNORM
+	  GL_VIEW_CLASS_BPTC_FLOAT
+	  GL_UNIFORM
+	  GL_UNIFORM_BLOCK
+	  GL_PROGRAM_INPUT
+	  GL_PROGRAM_OUTPUT
+	  GL_BUFFER_VARIABLE
+	  GL_SHADER_STORAGE_BLOCK
+	  GL_VERTEX_SUBROUTINE
+	  GL_TESS_CONTROL_SUBROUTINE
+	  GL_TESS_EVALUATION_SUBROUTINE
+	  GL_GEOMETRY_SUBROUTINE
+	  GL_FRAGMENT_SUBROUTINE
+	  GL_COMPUTE_SUBROUTINE
+	  GL_VERTEX_SUBROUTINE_UNIFORM
+	  GL_TESS_CONTROL_SUBROUTINE_UNIFORM
+	  GL_TESS_EVALUATION_SUBROUTINE_UNIFORM
+	  GL_GEOMETRY_SUBROUTINE_UNIFORM
+	  GL_FRAGMENT_SUBROUTINE_UNIFORM
+	  GL_COMPUTE_SUBROUTINE_UNIFORM
+	  GL_TRANSFORM_FEEDBACK_VARYING
+	  GL_ACTIVE_RESOURCES
+	  GL_MAX_NAME_LENGTH
+	  GL_MAX_NUM_ACTIVE_VARIABLES
+	  GL_MAX_NUM_COMPATIBLE_SUBROUTINES
+	  GL_NAME_LENGTH
+	  GL_TYPE
+	  GL_ARRAY_SIZE
+	  GL_OFFSET
+	  GL_BLOCK_INDEX
+	  GL_ARRAY_STRIDE
+	  GL_MATRIX_STRIDE
+	  GL_IS_ROW_MAJOR
+	  GL_ATOMIC_COUNTER_BUFFER_INDEX
+	  GL_BUFFER_BINDING
+	  GL_BUFFER_DATA_SIZE
+	  GL_NUM_ACTIVE_VARIABLES
+	  GL_ACTIVE_VARIABLES
+	  GL_REFERENCED_BY_VERTEX_SHADER
+	  GL_REFERENCED_BY_TESS_CONTROL_SHADER
+	  GL_REFERENCED_BY_TESS_EVALUATION_SHADER
+	  GL_REFERENCED_BY_GEOMETRY_SHADER
+	  GL_REFERENCED_BY_FRAGMENT_SHADER
+	  GL_REFERENCED_BY_COMPUTE_SHADER
+	  GL_TOP_LEVEL_ARRAY_SIZE
+	  GL_TOP_LEVEL_ARRAY_STRIDE
+	  GL_LOCATION
+	  GL_LOCATION_INDEX
+	  GL_IS_PER_PATCH
+	  GL_SHADER_STORAGE_BUFFER
+	  GL_SHADER_STORAGE_BUFFER_BINDING
+	  GL_SHADER_STORAGE_BUFFER_START
+	  GL_SHADER_STORAGE_BUFFER_SIZE
+	  GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS
+	  GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS
+	  GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS
+	  GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS
+	  GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS
+	  GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS
+	  GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS
+	  GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS
+	  GL_MAX_SHADER_STORAGE_BLOCK_SIZE
+	  GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT
+	  GL_SHADER_STORAGE_BARRIER_BIT
+	  GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES
+	  GL_DEPTH_STENCIL_TEXTURE_MODE
+	  GL_TEXTURE_BUFFER_OFFSET
+	  GL_TEXTURE_BUFFER_SIZE
+	  GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT
+	  GL_TEXTURE_VIEW_MIN_LEVEL
+	  GL_TEXTURE_VIEW_NUM_LEVELS
+	  GL_TEXTURE_VIEW_MIN_LAYER
+	  GL_TEXTURE_VIEW_NUM_LAYERS
+	  GL_TEXTURE_IMMUTABLE_LEVELS
+	  GL_VERTEX_ATTRIB_BINDING
+	  GL_VERTEX_ATTRIB_RELATIVE_OFFSET
+	  GL_VERTEX_BINDING_DIVISOR
+	  GL_VERTEX_BINDING_OFFSET
+	  GL_VERTEX_BINDING_STRIDE
+	  GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET
+	  GL_MAX_VERTEX_ATTRIB_BINDINGS
+	  GL_VERTEX_BINDING_BUFFER
+	  GL_MAX_VERTEX_ATTRIB_STRIDE
+	  GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED
+	  GL_TEXTURE_BUFFER_BINDING
+	  GL_MAP_PERSISTENT_BIT
+	  GL_MAP_COHERENT_BIT
+	  GL_DYNAMIC_STORAGE_BIT
+	  GL_CLIENT_STORAGE_BIT
+	  GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT
+	  GL_BUFFER_IMMUTABLE_STORAGE
+	  GL_BUFFER_STORAGE_FLAGS
+	  GL_CLEAR_TEXTURE
+	  GL_LOCATION_COMPONENT
+	  GL_TRANSFORM_FEEDBACK_BUFFER_INDEX
+	  GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE
+	  GL_QUERY_BUFFER
+	  GL_QUERY_BUFFER_BARRIER_BIT
+	  GL_QUERY_BUFFER_BINDING
+	  GL_QUERY_RESULT_NO_WAIT
+	  GL_MIRROR_CLAMP_TO_EDGE
+	  GL_CONTEXT_LOST
+	  GL_NEGATIVE_ONE_TO_ONE
+	  GL_ZERO_TO_ONE
+	  GL_CLIP_ORIGIN
+	  GL_CLIP_DEPTH_MODE
+	  GL_QUERY_WAIT_INVERTED
+	  GL_QUERY_NO_WAIT_INVERTED
+	  GL_QUERY_BY_REGION_WAIT_INVERTED
+	  GL_QUERY_BY_REGION_NO_WAIT_INVERTED
+	  GL_MAX_CULL_DISTANCES
+	  GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES
+	  GL_TEXTURE_TARGET
+	  GL_QUERY_TARGET
+	  GL_GUILTY_CONTEXT_RESET
+	  GL_INNOCENT_CONTEXT_RESET
+	  GL_UNKNOWN_CONTEXT_RESET
+	  GL_RESET_NOTIFICATION_STRATEGY
+	  GL_LOSE_CONTEXT_ON_RESET
+	  GL_NO_RESET_NOTIFICATION
+	  GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT
+	  GL_CONTEXT_RELEASE_BEHAVIOR
+	  GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH
+	  GL_SHADER_BINARY_FORMAT_SPIR_V
+	  GL_SPIR_V_BINARY
+	  GL_PARAMETER_BUFFER
+	  GL_PARAMETER_BUFFER_BINDING
+	  GL_CONTEXT_FLAG_NO_ERROR_BIT
+	  GL_VERTICES_SUBMITTED
+	  GL_PRIMITIVES_SUBMITTED
+	  GL_VERTEX_SHADER_INVOCATIONS
+	  GL_TESS_CONTROL_SHADER_PATCHES
+	  GL_TESS_EVALUATION_SHADER_INVOCATIONS
+	  GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED
+	  GL_FRAGMENT_SHADER_INVOCATIONS
+	  GL_COMPUTE_SHADER_INVOCATIONS
+	  GL_CLIPPING_INPUT_PRIMITIVES
+	  GL_CLIPPING_OUTPUT_PRIMITIVES
+	  GL_POLYGON_OFFSET_CLAMP
+	  GL_SPIR_V_EXTENSIONS
+	  GL_NUM_SPIR_V_EXTENSIONS
+	  GL_TEXTURE_MAX_ANISOTROPY
+	  GL_MAX_TEXTURE_MAX_ANISOTROPY
+	  GL_TRANSFORM_FEEDBACK_OVERFLOW
+	  GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW)
+
+  (import (chezscheme))
+
+  (define GL_DEPTH_BUFFER_BIT               #x00000100)
+  (define GL_STENCIL_BUFFER_BIT             #x00000400)
+  (define GL_COLOR_BUFFER_BIT               #x00004000)
+  (define GL_FALSE                          0)
+  (define GL_TRUE                           1)
+  (define GL_POINTS                         #x0000)
+  (define GL_LINES                          #x0001)
+  (define GL_LINE_LOOP                      #x0002)
+  (define GL_LINE_STRIP                     #x0003)
+  (define GL_TRIANGLES                      #x0004)
+  (define GL_TRIANGLE_STRIP                 #x0005)
+  (define GL_TRIANGLE_FAN                   #x0006)
+  (define GL_QUADS                          #x0007)
+  (define GL_NEVER                          #x0200)
+  (define GL_LESS                           #x0201)
+  (define GL_EQUAL                          #x0202)
+  (define GL_LEQUAL                         #x0203)
+  (define GL_GREATER                        #x0204)
+  (define GL_NOTEQUAL                       #x0205)
+  (define GL_GEQUAL                         #x0206)
+  (define GL_ALWAYS                         #x0207)
+  (define GL_ZERO                           0)
+  (define GL_ONE                            1)
+  (define GL_SRC_COLOR                      #x0300)
+  (define GL_ONE_MINUS_SRC_COLOR            #x0301)
+  (define GL_SRC_ALPHA                      #x0302)
+  (define GL_ONE_MINUS_SRC_ALPHA            #x0303)
+  (define GL_DST_ALPHA                      #x0304)
+  (define GL_ONE_MINUS_DST_ALPHA            #x0305)
+  (define GL_DST_COLOR                      #x0306)
+  (define GL_ONE_MINUS_DST_COLOR            #x0307)
+  (define GL_SRC_ALPHA_SATURATE             #x0308)
+  (define GL_NONE                           0)
+  (define GL_FRONT_LEFT                     #x0400)
+  (define GL_FRONT_RIGHT                    #x0401)
+  (define GL_BACK_LEFT                      #x0402)
+  (define GL_BACK_RIGHT                     #x0403)
+  (define GL_FRONT                          #x0404)
+  (define GL_BACK                           #x0405)
+  (define GL_LEFT                           #x0406)
+  (define GL_RIGHT                          #x0407)
+  (define GL_FRONT_AND_BACK                 #x0408)
+  (define GL_NO_ERROR                       0)
+  (define GL_INVALID_ENUM                   #x0500)
+  (define GL_INVALID_VALUE                  #x0501)
+  (define GL_INVALID_OPERATION              #x0502)
+  (define GL_OUT_OF_MEMORY                  #x0505)
+  (define GL_CW                             #x0900)
+  (define GL_CCW                            #x0901)
+  (define GL_POINT_SIZE                     #x0B11)
+  (define GL_POINT_SIZE_RANGE               #x0B12)
+  (define GL_POINT_SIZE_GRANULARITY         #x0B13)
+  (define GL_LINE_SMOOTH                    #x0B20)
+  (define GL_LINE_WIDTH                     #x0B21)
+  (define GL_LINE_WIDTH_RANGE               #x0B22)
+  (define GL_LINE_WIDTH_GRANULARITY         #x0B23)
+  (define GL_POLYGON_MODE                   #x0B40)
+  (define GL_POLYGON_SMOOTH                 #x0B41)
+  (define GL_CULL_FACE                      #x0B44)
+  (define GL_CULL_FACE_MODE                 #x0B45)
+  (define GL_FRONT_FACE                     #x0B46)
+  (define GL_DEPTH_RANGE                    #x0B70)
+  (define GL_DEPTH_TEST                     #x0B71)
+  (define GL_DEPTH_WRITEMASK                #x0B72)
+  (define GL_DEPTH_CLEAR_VALUE              #x0B73)
+  (define GL_DEPTH_FUNC                     #x0B74)
+  (define GL_STENCIL_TEST                   #x0B90)
+  (define GL_STENCIL_CLEAR_VALUE            #x0B91)
+  (define GL_STENCIL_FUNC                   #x0B92)
+  (define GL_STENCIL_VALUE_MASK             #x0B93)
+  (define GL_STENCIL_FAIL                   #x0B94)
+  (define GL_STENCIL_PASS_DEPTH_FAIL        #x0B95)
+  (define GL_STENCIL_PASS_DEPTH_PASS        #x0B96)
+  (define GL_STENCIL_REF                    #x0B97)
+  (define GL_STENCIL_WRITEMASK              #x0B98)
+  (define GL_VIEWPORT                       #x0BA2)
+  (define GL_DITHER                         #x0BD0)
+  (define GL_BLEND_DST                      #x0BE0)
+  (define GL_BLEND_SRC                      #x0BE1)
+  (define GL_BLEND                          #x0BE2)
+  (define GL_LOGIC_OP_MODE                  #x0BF0)
+  (define GL_DRAW_BUFFER                    #x0C01)
+  (define GL_READ_BUFFER                    #x0C02)
+  (define GL_SCISSOR_BOX                    #x0C10)
+  (define GL_SCISSOR_TEST                   #x0C11)
+  (define GL_COLOR_CLEAR_VALUE              #x0C22)
+  (define GL_COLOR_WRITEMASK                #x0C23)
+  (define GL_DOUBLEBUFFER                   #x0C32)
+  (define GL_STEREO                         #x0C33)
+  (define GL_LINE_SMOOTH_HINT               #x0C52)
+  (define GL_POLYGON_SMOOTH_HINT            #x0C53)
+  (define GL_UNPACK_SWAP_BYTES              #x0CF0)
+  (define GL_UNPACK_LSB_FIRST               #x0CF1)
+  (define GL_UNPACK_ROW_LENGTH              #x0CF2)
+  (define GL_UNPACK_SKIP_ROWS               #x0CF3)
+  (define GL_UNPACK_SKIP_PIXELS             #x0CF4)
+  (define GL_UNPACK_ALIGNMENT               #x0CF5)
+  (define GL_PACK_SWAP_BYTES                #x0D00)
+  (define GL_PACK_LSB_FIRST                 #x0D01)
+  (define GL_PACK_ROW_LENGTH                #x0D02)
+  (define GL_PACK_SKIP_ROWS                 #x0D03)
+  (define GL_PACK_SKIP_PIXELS               #x0D04)
+  (define GL_PACK_ALIGNMENT                 #x0D05)
+  (define GL_MAX_TEXTURE_SIZE               #x0D33)
+  (define GL_MAX_VIEWPORT_DIMS              #x0D3A)
+  (define GL_SUBPIXEL_BITS                  #x0D50)
+  (define GL_TEXTURE_1D                     #x0DE0)
+  (define GL_TEXTURE_2D                     #x0DE1)
+  (define GL_TEXTURE_WIDTH                  #x1000)
+  (define GL_TEXTURE_HEIGHT                 #x1001)
+  (define GL_TEXTURE_BORDER_COLOR           #x1004)
+  (define GL_DONT_CARE                      #x1100)
+  (define GL_FASTEST                        #x1101)
+  (define GL_NICEST                         #x1102)
+  (define GL_BYTE                           #x1400)
+  (define GL_UNSIGNED_BYTE                  #x1401)
+  (define GL_SHORT                          #x1402)
+  (define GL_UNSIGNED_SHORT                 #x1403)
+  (define GL_INT                            #x1404)
+  (define GL_UNSIGNED_INT                   #x1405)
+  (define GL_FLOAT                          #x1406)
+  (define GL_STACK_OVERFLOW                 #x0503)
+  (define GL_STACK_UNDERFLOW                #x0504)
+  (define GL_CLEAR                          #x1500)
+  (define GL_AND                            #x1501)
+  (define GL_AND_REVERSE                    #x1502)
+  (define GL_COPY                           #x1503)
+  (define GL_AND_INVERTED                   #x1504)
+  (define GL_NOOP                           #x1505)
+  (define GL_XOR                            #x1506)
+  (define GL_OR                             #x1507)
+  (define GL_NOR                            #x1508)
+  (define GL_EQUIV                          #x1509)
+  (define GL_INVERT                         #x150A)
+  (define GL_OR_REVERSE                     #x150B)
+  (define GL_COPY_INVERTED                  #x150C)
+  (define GL_OR_INVERTED                    #x150D)
+  (define GL_NAND                           #x150E)
+  (define GL_SET                            #x150F)
+  (define GL_TEXTURE                        #x1702)
+  (define GL_COLOR                          #x1800)
+  (define GL_DEPTH                          #x1801)
+  (define GL_STENCIL                        #x1802)
+  (define GL_STENCIL_INDEX                  #x1901)
+  (define GL_DEPTH_COMPONENT                #x1902)
+  (define GL_RED                            #x1903)
+  (define GL_GREEN                          #x1904)
+  (define GL_BLUE                           #x1905)
+  (define GL_ALPHA                          #x1906)
+  (define GL_RGB                            #x1907)
+  (define GL_RGBA                           #x1908)
+  (define GL_POINT                          #x1B00)
+  (define GL_LINE                           #x1B01)
+  (define GL_FILL                           #x1B02)
+  (define GL_KEEP                           #x1E00)
+  (define GL_REPLACE                        #x1E01)
+  (define GL_INCR                           #x1E02)
+  (define GL_DECR                           #x1E03)
+  (define GL_VENDOR                         #x1F00)
+  (define GL_RENDERER                       #x1F01)
+  (define GL_VERSION                        #x1F02)
+  (define GL_EXTENSIONS                     #x1F03)
+  (define GL_NEAREST                        #x2600)
+  (define GL_LINEAR                         #x2601)
+  (define GL_NEAREST_MIPMAP_NEAREST         #x2700)
+  (define GL_LINEAR_MIPMAP_NEAREST          #x2701)
+  (define GL_NEAREST_MIPMAP_LINEAR          #x2702)
+  (define GL_LINEAR_MIPMAP_LINEAR           #x2703)
+  (define GL_TEXTURE_MAG_FILTER             #x2800)
+  (define GL_TEXTURE_MIN_FILTER             #x2801)
+  (define GL_TEXTURE_WRAP_S                 #x2802)
+  (define GL_TEXTURE_WRAP_T                 #x2803)
+  (define GL_REPEAT                         #x2901)
+
+  (define GL_COLOR_LOGIC_OP                 #x0BF2)
+  (define GL_POLYGON_OFFSET_UNITS           #x2A00)
+  (define GL_POLYGON_OFFSET_POINT           #x2A01)
+  (define GL_POLYGON_OFFSET_LINE            #x2A02)
+  (define GL_POLYGON_OFFSET_FILL            #x8037)
+  (define GL_POLYGON_OFFSET_FACTOR          #x8038)
+  (define GL_TEXTURE_BINDING_1D             #x8068)
+  (define GL_TEXTURE_BINDING_2D             #x8069)
+  (define GL_TEXTURE_INTERNAL_FORMAT        #x1003)
+  (define GL_TEXTURE_RED_SIZE               #x805C)
+  (define GL_TEXTURE_GREEN_SIZE             #x805D)
+  (define GL_TEXTURE_BLUE_SIZE              #x805E)
+  (define GL_TEXTURE_ALPHA_SIZE             #x805F)
+  (define GL_DOUBLE                         #x140A)
+  (define GL_PROXY_TEXTURE_1D               #x8063)
+  (define GL_PROXY_TEXTURE_2D               #x8064)
+  (define GL_R3_G3_B2                       #x2A10)
+  (define GL_RGB4                           #x804F)
+  (define GL_RGB5                           #x8050)
+  (define GL_RGB8                           #x8051)
+  (define GL_RGB10                          #x8052)
+  (define GL_RGB12                          #x8053)
+  (define GL_RGB16                          #x8054)
+  (define GL_RGBA2                          #x8055)
+  (define GL_RGBA4                          #x8056)
+  (define GL_RGB5_A1                        #x8057)
+  (define GL_RGBA8                          #x8058)
+  (define GL_RGB10_A2                       #x8059)
+  (define GL_RGBA12                         #x805A)
+  (define GL_RGBA16                         #x805B)
+  (define GL_VERTEX_ARRAY                   #x8074)
+
+  (define GL_UNSIGNED_BYTE_3_3_2            #x8032)
+  (define GL_UNSIGNED_SHORT_4_4_4_4         #x8033)
+  (define GL_UNSIGNED_SHORT_5_5_5_1         #x8034)
+  (define GL_UNSIGNED_INT_8_8_8_8           #x8035)
+  (define GL_UNSIGNED_INT_10_10_10_2        #x8036)
+  (define GL_TEXTURE_BINDING_3D             #x806A)
+  (define GL_PACK_SKIP_IMAGES               #x806B)
+  (define GL_PACK_IMAGE_HEIGHT              #x806C)
+  (define GL_UNPACK_SKIP_IMAGES             #x806D)
+  (define GL_UNPACK_IMAGE_HEIGHT            #x806E)
+  (define GL_TEXTURE_3D                     #x806F)
+  (define GL_PROXY_TEXTURE_3D               #x8070)
+  (define GL_TEXTURE_DEPTH                  #x8071)
+  (define GL_TEXTURE_WRAP_R                 #x8072)
+  (define GL_MAX_3D_TEXTURE_SIZE            #x8073)
+  (define GL_UNSIGNED_BYTE_2_3_3_REV        #x8362)
+  (define GL_UNSIGNED_SHORT_5_6_5           #x8363)
+  (define GL_UNSIGNED_SHORT_5_6_5_REV       #x8364)
+  (define GL_UNSIGNED_SHORT_4_4_4_4_REV     #x8365)
+  (define GL_UNSIGNED_SHORT_1_5_5_5_REV     #x8366)
+  (define GL_UNSIGNED_INT_8_8_8_8_REV       #x8367)
+  (define GL_UNSIGNED_INT_2_10_10_10_REV    #x8368)
+  (define GL_BGR                            #x80E0)
+  (define GL_BGRA                           #x80E1)
+  (define GL_MAX_ELEMENTS_VERTICES          #x80E8)
+  (define GL_MAX_ELEMENTS_INDICES           #x80E9)
+  (define GL_CLAMP_TO_EDGE                  #x812F)
+  (define GL_TEXTURE_MIN_LOD                #x813A)
+  (define GL_TEXTURE_MAX_LOD                #x813B)
+  (define GL_TEXTURE_BASE_LEVEL             #x813C)
+  (define GL_TEXTURE_MAX_LEVEL              #x813D)
+  (define GL_SMOOTH_POINT_SIZE_RANGE        #x0B12)
+  (define GL_SMOOTH_POINT_SIZE_GRANULARITY  #x0B13)
+  (define GL_SMOOTH_LINE_WIDTH_RANGE        #x0B22)
+  (define GL_SMOOTH_LINE_WIDTH_GRANULARITY  #x0B23)
+  (define GL_ALIASED_LINE_WIDTH_RANGE       #x846E)
+
+  (define GL_TEXTURE0                       #x84C0)
+  (define GL_TEXTURE1                       #x84C1)
+  (define GL_TEXTURE2                       #x84C2)
+  (define GL_TEXTURE3                       #x84C3)
+  (define GL_TEXTURE4                       #x84C4)
+  (define GL_TEXTURE5                       #x84C5)
+  (define GL_TEXTURE6                       #x84C6)
+  (define GL_TEXTURE7                       #x84C7)
+  (define GL_TEXTURE8                       #x84C8)
+  (define GL_TEXTURE9                       #x84C9)
+  (define GL_TEXTURE10                      #x84CA)
+  (define GL_TEXTURE11                      #x84CB)
+  (define GL_TEXTURE12                      #x84CC)
+  (define GL_TEXTURE13                      #x84CD)
+  (define GL_TEXTURE14                      #x84CE)
+  (define GL_TEXTURE15                      #x84CF)
+  (define GL_TEXTURE16                      #x84D0)
+  (define GL_TEXTURE17                      #x84D1)
+  (define GL_TEXTURE18                      #x84D2)
+  (define GL_TEXTURE19                      #x84D3)
+  (define GL_TEXTURE20                      #x84D4)
+  (define GL_TEXTURE21                      #x84D5)
+  (define GL_TEXTURE22                      #x84D6)
+  (define GL_TEXTURE23                      #x84D7)
+  (define GL_TEXTURE24                      #x84D8)
+  (define GL_TEXTURE25                      #x84D9)
+  (define GL_TEXTURE26                      #x84DA)
+  (define GL_TEXTURE27                      #x84DB)
+  (define GL_TEXTURE28                      #x84DC)
+  (define GL_TEXTURE29                      #x84DD)
+  (define GL_TEXTURE30                      #x84DE)
+  (define GL_TEXTURE31                      #x84DF)
+  (define GL_ACTIVE_TEXTURE                 #x84E0)
+  (define GL_MULTISAMPLE                    #x809D)
+  (define GL_SAMPLE_ALPHA_TO_COVERAGE       #x809E)
+  (define GL_SAMPLE_ALPHA_TO_ONE            #x809F)
+  (define GL_SAMPLE_COVERAGE                #x80A0)
+  (define GL_SAMPLE_BUFFERS                 #x80A8)
+  (define GL_SAMPLES                        #x80A9)
+  (define GL_SAMPLE_COVERAGE_VALUE          #x80AA)
+  (define GL_SAMPLE_COVERAGE_INVERT         #x80AB)
+  (define GL_TEXTURE_CUBE_MAP               #x8513)
+  (define GL_TEXTURE_BINDING_CUBE_MAP       #x8514)
+  (define GL_TEXTURE_CUBE_MAP_POSITIVE_X    #x8515)
+  (define GL_TEXTURE_CUBE_MAP_NEGATIVE_X    #x8516)
+  (define GL_TEXTURE_CUBE_MAP_POSITIVE_Y    #x8517)
+  (define GL_TEXTURE_CUBE_MAP_NEGATIVE_Y    #x8518)
+  (define GL_TEXTURE_CUBE_MAP_POSITIVE_Z    #x8519)
+  (define GL_TEXTURE_CUBE_MAP_NEGATIVE_Z    #x851A)
+  (define GL_PROXY_TEXTURE_CUBE_MAP         #x851B)
+  (define GL_MAX_CUBE_MAP_TEXTURE_SIZE      #x851C)
+  (define GL_COMPRESSED_RGB                 #x84ED)
+  (define GL_COMPRESSED_RGBA                #x84EE)
+  (define GL_TEXTURE_COMPRESSION_HINT       #x84EF)
+  (define GL_TEXTURE_COMPRESSED_IMAGE_SIZE  #x86A0)
+  (define GL_TEXTURE_COMPRESSED             #x86A1)
+  (define GL_NUM_COMPRESSED_TEXTURE_FORMATS #x86A2)
+  (define GL_COMPRESSED_TEXTURE_FORMATS     #x86A3)
+  (define GL_CLAMP_TO_BORDER                #x812D)
+
+  (define GL_BLEND_DST_RGB                  #x80C8)
+  (define GL_BLEND_SRC_RGB                  #x80C9)
+  (define GL_BLEND_DST_ALPHA                #x80CA)
+  (define GL_BLEND_SRC_ALPHA                #x80CB)
+  (define GL_POINT_FADE_THRESHOLD_SIZE      #x8128)
+  (define GL_DEPTH_COMPONENT16              #x81A5)
+  (define GL_DEPTH_COMPONENT24              #x81A6)
+  (define GL_DEPTH_COMPONENT32              #x81A7)
+  (define GL_MIRRORED_REPEAT                #x8370)
+  (define GL_MAX_TEXTURE_LOD_BIAS           #x84FD)
+  (define GL_TEXTURE_LOD_BIAS               #x8501)
+  (define GL_INCR_WRAP                      #x8507)
+  (define GL_DECR_WRAP                      #x8508)
+  (define GL_TEXTURE_DEPTH_SIZE             #x884A)
+  (define GL_TEXTURE_COMPARE_MODE           #x884C)
+  (define GL_TEXTURE_COMPARE_FUNC           #x884D)
+  (define GL_BLEND_COLOR                    #x8005)
+  (define GL_BLEND_EQUATION                 #x8009)
+  (define GL_CONSTANT_COLOR                 #x8001)
+  (define GL_ONE_MINUS_CONSTANT_COLOR       #x8002)
+  (define GL_CONSTANT_ALPHA                 #x8003)
+  (define GL_ONE_MINUS_CONSTANT_ALPHA       #x8004)
+  (define GL_FUNC_ADD                       #x8006)
+  (define GL_FUNC_REVERSE_SUBTRACT          #x800B)
+  (define GL_FUNC_SUBTRACT                  #x800A)
+  (define GL_MIN                            #x8007)
+  (define GL_MAX                            #x8008)
+
+  (define GL_BUFFER_SIZE                    #x8764)
+  (define GL_BUFFER_USAGE                   #x8765)
+  (define GL_QUERY_COUNTER_BITS             #x8864)
+  (define GL_CURRENT_QUERY                  #x8865)
+  (define GL_QUERY_RESULT                   #x8866)
+  (define GL_QUERY_RESULT_AVAILABLE         #x8867)
+  (define GL_ARRAY_BUFFER                   #x8892)
+  (define GL_ELEMENT_ARRAY_BUFFER           #x8893)
+  (define GL_ARRAY_BUFFER_BINDING           #x8894)
+  (define GL_ELEMENT_ARRAY_BUFFER_BINDING   #x8895)
+  (define GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING #x889F)
+  (define GL_READ_ONLY                      #x88B8)
+  (define GL_WRITE_ONLY                     #x88B9)
+  (define GL_READ_WRITE                     #x88BA)
+  (define GL_BUFFER_ACCESS                  #x88BB)
+  (define GL_BUFFER_MAPPED                  #x88BC)
+  (define GL_BUFFER_MAP_POINTER             #x88BD)
+  (define GL_STREAM_DRAW                    #x88E0)
+  (define GL_STREAM_READ                    #x88E1)
+  (define GL_STREAM_COPY                    #x88E2)
+  (define GL_STATIC_DRAW                    #x88E4)
+  (define GL_STATIC_READ                    #x88E5)
+  (define GL_STATIC_COPY                    #x88E6)
+  (define GL_DYNAMIC_DRAW                   #x88E8)
+  (define GL_DYNAMIC_READ                   #x88E9)
+  (define GL_DYNAMIC_COPY                   #x88EA)
+  (define GL_SAMPLES_PASSED                 #x8914)
+  (define GL_SRC1_ALPHA                     #x8589)
+
+  (define GL_BLEND_EQUATION_RGB             #x8009)
+  (define GL_VERTEX_ATTRIB_ARRAY_ENABLED    #x8622)
+  (define GL_VERTEX_ATTRIB_ARRAY_SIZE       #x8623)
+  (define GL_VERTEX_ATTRIB_ARRAY_STRIDE     #x8624)
+  (define GL_VERTEX_ATTRIB_ARRAY_TYPE       #x8625)
+  (define GL_CURRENT_VERTEX_ATTRIB          #x8626)
+  (define GL_VERTEX_PROGRAM_POINT_SIZE      #x8642)
+  (define GL_VERTEX_ATTRIB_ARRAY_POINTER    #x8645)
+  (define GL_STENCIL_BACK_FUNC              #x8800)
+  (define GL_STENCIL_BACK_FAIL              #x8801)
+  (define GL_STENCIL_BACK_PASS_DEPTH_FAIL   #x8802)
+  (define GL_STENCIL_BACK_PASS_DEPTH_PASS   #x8803)
+  (define GL_MAX_DRAW_BUFFERS               #x8824)
+  (define GL_DRAW_BUFFER0                   #x8825)
+  (define GL_DRAW_BUFFER1                   #x8826)
+  (define GL_DRAW_BUFFER2                   #x8827)
+  (define GL_DRAW_BUFFER3                   #x8828)
+  (define GL_DRAW_BUFFER4                   #x8829)
+  (define GL_DRAW_BUFFER5                   #x882A)
+  (define GL_DRAW_BUFFER6                   #x882B)
+  (define GL_DRAW_BUFFER7                   #x882C)
+  (define GL_DRAW_BUFFER8                   #x882D)
+  (define GL_DRAW_BUFFER9                   #x882E)
+  (define GL_DRAW_BUFFER10                  #x882F)
+  (define GL_DRAW_BUFFER11                  #x8830)
+  (define GL_DRAW_BUFFER12                  #x8831)
+  (define GL_DRAW_BUFFER13                  #x8832)
+  (define GL_DRAW_BUFFER14                  #x8833)
+  (define GL_DRAW_BUFFER15                  #x8834)
+  (define GL_BLEND_EQUATION_ALPHA           #x883D)
+  (define GL_MAX_VERTEX_ATTRIBS             #x8869)
+  (define GL_VERTEX_ATTRIB_ARRAY_NORMALIZED #x886A)
+  (define GL_MAX_TEXTURE_IMAGE_UNITS        #x8872)
+  (define GL_FRAGMENT_SHADER                #x8B30)
+  (define GL_VERTEX_SHADER                  #x8B31)
+  (define GL_MAX_FRAGMENT_UNIFORM_COMPONENTS #x8B49)
+  (define GL_MAX_VERTEX_UNIFORM_COMPONENTS  #x8B4A)
+  (define GL_MAX_VARYING_FLOATS             #x8B4B)
+  (define GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS #x8B4C)
+  (define GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS #x8B4D)
+  (define GL_SHADER_TYPE                    #x8B4F)
+  (define GL_FLOAT_VEC2                     #x8B50)
+  (define GL_FLOAT_VEC3                     #x8B51)
+  (define GL_FLOAT_VEC4                     #x8B52)
+  (define GL_INT_VEC2                       #x8B53)
+  (define GL_INT_VEC3                       #x8B54)
+  (define GL_INT_VEC4                       #x8B55)
+  (define GL_BOOL                           #x8B56)
+  (define GL_BOOL_VEC2                      #x8B57)
+  (define GL_BOOL_VEC3                      #x8B58)
+  (define GL_BOOL_VEC4                      #x8B59)
+  (define GL_FLOAT_MAT2                     #x8B5A)
+  (define GL_FLOAT_MAT3                     #x8B5B)
+  (define GL_FLOAT_MAT4                     #x8B5C)
+  (define GL_SAMPLER_1D                     #x8B5D)
+  (define GL_SAMPLER_2D                     #x8B5E)
+  (define GL_SAMPLER_3D                     #x8B5F)
+  (define GL_SAMPLER_CUBE                   #x8B60)
+  (define GL_SAMPLER_1D_SHADOW              #x8B61)
+  (define GL_SAMPLER_2D_SHADOW              #x8B62)
+  (define GL_DELETE_STATUS                  #x8B80)
+  (define GL_COMPILE_STATUS                 #x8B81)
+  (define GL_LINK_STATUS                    #x8B82)
+  (define GL_VALIDATE_STATUS                #x8B83)
+  (define GL_INFO_LOG_LENGTH                #x8B84)
+  (define GL_ATTACHED_SHADERS               #x8B85)
+  (define GL_ACTIVE_UNIFORMS                #x8B86)
+  (define GL_ACTIVE_UNIFORM_MAX_LENGTH      #x8B87)
+  (define GL_SHADER_SOURCE_LENGTH           #x8B88)
+  (define GL_ACTIVE_ATTRIBUTES              #x8B89)
+  (define GL_ACTIVE_ATTRIBUTE_MAX_LENGTH    #x8B8A)
+  (define GL_FRAGMENT_SHADER_DERIVATIVE_HINT #x8B8B)
+  (define GL_SHADING_LANGUAGE_VERSION       #x8B8C)
+  (define GL_CURRENT_PROGRAM                #x8B8D)
+  (define GL_POINT_SPRITE_COORD_ORIGIN      #x8CA0)
+  (define GL_LOWER_LEFT                     #x8CA1)
+  (define GL_UPPER_LEFT                     #x8CA2)
+  (define GL_STENCIL_BACK_REF               #x8CA3)
+  (define GL_STENCIL_BACK_VALUE_MASK        #x8CA4)
+  (define GL_STENCIL_BACK_WRITEMASK         #x8CA5)
+
+  (define GL_PIXEL_PACK_BUFFER              #x88EB)
+  (define GL_PIXEL_UNPACK_BUFFER            #x88EC)
+  (define GL_PIXEL_PACK_BUFFER_BINDING      #x88ED)
+  (define GL_PIXEL_UNPACK_BUFFER_BINDING    #x88EF)
+  (define GL_FLOAT_MAT2x3                   #x8B65)
+  (define GL_FLOAT_MAT2x4                   #x8B66)
+  (define GL_FLOAT_MAT3x2                   #x8B67)
+  (define GL_FLOAT_MAT3x4                   #x8B68)
+  (define GL_FLOAT_MAT4x2                   #x8B69)
+  (define GL_FLOAT_MAT4x3                   #x8B6A)
+  (define GL_SRGB                           #x8C40)
+  (define GL_SRGB8                          #x8C41)
+  (define GL_SRGB_ALPHA                     #x8C42)
+  (define GL_SRGB8_ALPHA8                   #x8C43)
+  (define GL_COMPRESSED_SRGB                #x8C48)
+  (define GL_COMPRESSED_SRGB_ALPHA          #x8C49)
+
+  (define GL_COMPARE_REF_TO_TEXTURE         #x884E)
+  (define GL_CLIP_DISTANCE0                 #x3000)
+  (define GL_CLIP_DISTANCE1                 #x3001)
+  (define GL_CLIP_DISTANCE2                 #x3002)
+  (define GL_CLIP_DISTANCE3                 #x3003)
+  (define GL_CLIP_DISTANCE4                 #x3004)
+  (define GL_CLIP_DISTANCE5                 #x3005)
+  (define GL_CLIP_DISTANCE6                 #x3006)
+  (define GL_CLIP_DISTANCE7                 #x3007)
+  (define GL_MAX_CLIP_DISTANCES             #x0D32)
+  (define GL_MAJOR_VERSION                  #x821B)
+  (define GL_MINOR_VERSION                  #x821C)
+  (define GL_NUM_EXTENSIONS                 #x821D)
+  (define GL_CONTEXT_FLAGS                  #x821E)
+  (define GL_COMPRESSED_RED                 #x8225)
+  (define GL_COMPRESSED_RG                  #x8226)
+  (define GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT #x00000001)
+  (define GL_RGBA32F                        #x8814)
+  (define GL_RGB32F                         #x8815)
+  (define GL_RGBA16F                        #x881A)
+  (define GL_RGB16F                         #x881B)
+  (define GL_VERTEX_ATTRIB_ARRAY_INTEGER    #x88FD)
+  (define GL_MAX_ARRAY_TEXTURE_LAYERS       #x88FF)
+  (define GL_MIN_PROGRAM_TEXEL_OFFSET       #x8904)
+  (define GL_MAX_PROGRAM_TEXEL_OFFSET       #x8905)
+  (define GL_CLAMP_READ_COLOR               #x891C)
+  (define GL_FIXED_ONLY                     #x891D)
+  (define GL_MAX_VARYING_COMPONENTS         #x8B4B)
+  (define GL_TEXTURE_1D_ARRAY               #x8C18)
+  (define GL_PROXY_TEXTURE_1D_ARRAY         #x8C19)
+  (define GL_TEXTURE_2D_ARRAY               #x8C1A)
+  (define GL_PROXY_TEXTURE_2D_ARRAY         #x8C1B)
+  (define GL_TEXTURE_BINDING_1D_ARRAY       #x8C1C)
+  (define GL_TEXTURE_BINDING_2D_ARRAY       #x8C1D)
+  (define GL_R11F_G11F_B10F                 #x8C3A)
+  (define GL_UNSIGNED_INT_10F_11F_11F_REV   #x8C3B)
+  (define GL_RGB9_E5                        #x8C3D)
+  (define GL_UNSIGNED_INT_5_9_9_9_REV       #x8C3E)
+  (define GL_TEXTURE_SHARED_SIZE            #x8C3F)
+  (define GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH #x8C76)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER_MODE #x8C7F)
+  (define GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS #x8C80)
+  (define GL_TRANSFORM_FEEDBACK_VARYINGS    #x8C83)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER_START #x8C84)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER_SIZE #x8C85)
+  (define GL_PRIMITIVES_GENERATED           #x8C87)
+  (define GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN #x8C88)
+  (define GL_RASTERIZER_DISCARD             #x8C89)
+  (define GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS #x8C8A)
+  (define GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS #x8C8B)
+  (define GL_INTERLEAVED_ATTRIBS            #x8C8C)
+  (define GL_SEPARATE_ATTRIBS               #x8C8D)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER      #x8C8E)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER_BINDING #x8C8F)
+  (define GL_RGBA32UI                       #x8D70)
+  (define GL_RGB32UI                        #x8D71)
+  (define GL_RGBA16UI                       #x8D76)
+  (define GL_RGB16UI                        #x8D77)
+  (define GL_RGBA8UI                        #x8D7C)
+  (define GL_RGB8UI                         #x8D7D)
+  (define GL_RGBA32I                        #x8D82)
+  (define GL_RGB32I                         #x8D83)
+  (define GL_RGBA16I                        #x8D88)
+  (define GL_RGB16I                         #x8D89)
+  (define GL_RGBA8I                         #x8D8E)
+  (define GL_RGB8I                          #x8D8F)
+  (define GL_RED_INTEGER                    #x8D94)
+  (define GL_GREEN_INTEGER                  #x8D95)
+  (define GL_BLUE_INTEGER                   #x8D96)
+  (define GL_RGB_INTEGER                    #x8D98)
+  (define GL_RGBA_INTEGER                   #x8D99)
+  (define GL_BGR_INTEGER                    #x8D9A)
+  (define GL_BGRA_INTEGER                   #x8D9B)
+  (define GL_SAMPLER_1D_ARRAY               #x8DC0)
+  (define GL_SAMPLER_2D_ARRAY               #x8DC1)
+  (define GL_SAMPLER_1D_ARRAY_SHADOW        #x8DC3)
+  (define GL_SAMPLER_2D_ARRAY_SHADOW        #x8DC4)
+  (define GL_SAMPLER_CUBE_SHADOW            #x8DC5)
+  (define GL_UNSIGNED_INT_VEC2              #x8DC6)
+  (define GL_UNSIGNED_INT_VEC3              #x8DC7)
+  (define GL_UNSIGNED_INT_VEC4              #x8DC8)
+  (define GL_INT_SAMPLER_1D                 #x8DC9)
+  (define GL_INT_SAMPLER_2D                 #x8DCA)
+  (define GL_INT_SAMPLER_3D                 #x8DCB)
+  (define GL_INT_SAMPLER_CUBE               #x8DCC)
+  (define GL_INT_SAMPLER_1D_ARRAY           #x8DCE)
+  (define GL_INT_SAMPLER_2D_ARRAY           #x8DCF)
+  (define GL_UNSIGNED_INT_SAMPLER_1D        #x8DD1)
+  (define GL_UNSIGNED_INT_SAMPLER_2D        #x8DD2)
+  (define GL_UNSIGNED_INT_SAMPLER_3D        #x8DD3)
+  (define GL_UNSIGNED_INT_SAMPLER_CUBE      #x8DD4)
+  (define GL_UNSIGNED_INT_SAMPLER_1D_ARRAY  #x8DD6)
+  (define GL_UNSIGNED_INT_SAMPLER_2D_ARRAY  #x8DD7)
+  (define GL_QUERY_WAIT                     #x8E13)
+  (define GL_QUERY_NO_WAIT                  #x8E14)
+  (define GL_QUERY_BY_REGION_WAIT           #x8E15)
+  (define GL_QUERY_BY_REGION_NO_WAIT        #x8E16)
+  (define GL_BUFFER_ACCESS_FLAGS            #x911F)
+  (define GL_BUFFER_MAP_LENGTH              #x9120)
+  (define GL_BUFFER_MAP_OFFSET              #x9121)
+  (define GL_DEPTH_COMPONENT32F             #x8CAC)
+  (define GL_DEPTH32F_STENCIL8              #x8CAD)
+  (define GL_FLOAT_32_UNSIGNED_INT_24_8_REV #x8DAD)
+  (define GL_INVALID_FRAMEBUFFER_OPERATION  #x0506)
+  (define GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING #x8210)
+  (define GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE #x8211)
+  (define GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE #x8212)
+  (define GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE #x8213)
+  (define GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE #x8214)
+  (define GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE #x8215)
+  (define GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE #x8216)
+  (define GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE #x8217)
+  (define GL_FRAMEBUFFER_DEFAULT            #x8218)
+  (define GL_FRAMEBUFFER_UNDEFINED          #x8219)
+  (define GL_DEPTH_STENCIL_ATTACHMENT       #x821A)
+  (define GL_MAX_RENDERBUFFER_SIZE          #x84E8)
+  (define GL_DEPTH_STENCIL                  #x84F9)
+  (define GL_UNSIGNED_INT_24_8              #x84FA)
+  (define GL_DEPTH24_STENCIL8               #x88F0)
+  (define GL_TEXTURE_STENCIL_SIZE           #x88F1)
+  (define GL_TEXTURE_RED_TYPE               #x8C10)
+  (define GL_TEXTURE_GREEN_TYPE             #x8C11)
+  (define GL_TEXTURE_BLUE_TYPE              #x8C12)
+  (define GL_TEXTURE_ALPHA_TYPE             #x8C13)
+  (define GL_TEXTURE_DEPTH_TYPE             #x8C16)
+  (define GL_UNSIGNED_NORMALIZED            #x8C17)
+  (define GL_FRAMEBUFFER_BINDING            #x8CA6)
+  (define GL_DRAW_FRAMEBUFFER_BINDING       #x8CA6)
+  (define GL_RENDERBUFFER_BINDING           #x8CA7)
+  (define GL_READ_FRAMEBUFFER               #x8CA8)
+  (define GL_DRAW_FRAMEBUFFER               #x8CA9)
+  (define GL_READ_FRAMEBUFFER_BINDING       #x8CAA)
+  (define GL_RENDERBUFFER_SAMPLES           #x8CAB)
+  (define GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE #x8CD0)
+  (define GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME #x8CD1)
+  (define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL #x8CD2)
+  (define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE #x8CD3)
+  (define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER #x8CD4)
+  (define GL_FRAMEBUFFER_COMPLETE           #x8CD5)
+  (define GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT #x8CD6)
+  (define GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT #x8CD7)
+  (define GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER #x8CDB)
+  (define GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER #x8CDC)
+  (define GL_FRAMEBUFFER_UNSUPPORTED        #x8CDD)
+  (define GL_MAX_COLOR_ATTACHMENTS          #x8CDF)
+  (define GL_COLOR_ATTACHMENT0              #x8CE0)
+  (define GL_COLOR_ATTACHMENT1              #x8CE1)
+  (define GL_COLOR_ATTACHMENT2              #x8CE2)
+  (define GL_COLOR_ATTACHMENT3              #x8CE3)
+  (define GL_COLOR_ATTACHMENT4              #x8CE4)
+  (define GL_COLOR_ATTACHMENT5              #x8CE5)
+  (define GL_COLOR_ATTACHMENT6              #x8CE6)
+  (define GL_COLOR_ATTACHMENT7              #x8CE7)
+  (define GL_COLOR_ATTACHMENT8              #x8CE8)
+  (define GL_COLOR_ATTACHMENT9              #x8CE9)
+  (define GL_COLOR_ATTACHMENT10             #x8CEA)
+  (define GL_COLOR_ATTACHMENT11             #x8CEB)
+  (define GL_COLOR_ATTACHMENT12             #x8CEC)
+  (define GL_COLOR_ATTACHMENT13             #x8CED)
+  (define GL_COLOR_ATTACHMENT14             #x8CEE)
+  (define GL_COLOR_ATTACHMENT15             #x8CEF)
+  (define GL_COLOR_ATTACHMENT16             #x8CF0)
+  (define GL_COLOR_ATTACHMENT17             #x8CF1)
+  (define GL_COLOR_ATTACHMENT18             #x8CF2)
+  (define GL_COLOR_ATTACHMENT19             #x8CF3)
+  (define GL_COLOR_ATTACHMENT20             #x8CF4)
+  (define GL_COLOR_ATTACHMENT21             #x8CF5)
+  (define GL_COLOR_ATTACHMENT22             #x8CF6)
+  (define GL_COLOR_ATTACHMENT23             #x8CF7)
+  (define GL_COLOR_ATTACHMENT24             #x8CF8)
+  (define GL_COLOR_ATTACHMENT25             #x8CF9)
+  (define GL_COLOR_ATTACHMENT26             #x8CFA)
+  (define GL_COLOR_ATTACHMENT27             #x8CFB)
+  (define GL_COLOR_ATTACHMENT28             #x8CFC)
+  (define GL_COLOR_ATTACHMENT29             #x8CFD)
+  (define GL_COLOR_ATTACHMENT30             #x8CFE)
+  (define GL_COLOR_ATTACHMENT31             #x8CFF)
+  (define GL_DEPTH_ATTACHMENT               #x8D00)
+  (define GL_STENCIL_ATTACHMENT             #x8D20)
+  (define GL_FRAMEBUFFER                    #x8D40)
+  (define GL_RENDERBUFFER                   #x8D41)
+  (define GL_RENDERBUFFER_WIDTH             #x8D42)
+  (define GL_RENDERBUFFER_HEIGHT            #x8D43)
+  (define GL_RENDERBUFFER_INTERNAL_FORMAT   #x8D44)
+  (define GL_STENCIL_INDEX1                 #x8D46)
+  (define GL_STENCIL_INDEX4                 #x8D47)
+  (define GL_STENCIL_INDEX8                 #x8D48)
+  (define GL_STENCIL_INDEX16                #x8D49)
+  (define GL_RENDERBUFFER_RED_SIZE          #x8D50)
+  (define GL_RENDERBUFFER_GREEN_SIZE        #x8D51)
+  (define GL_RENDERBUFFER_BLUE_SIZE         #x8D52)
+  (define GL_RENDERBUFFER_ALPHA_SIZE        #x8D53)
+  (define GL_RENDERBUFFER_DEPTH_SIZE        #x8D54)
+  (define GL_RENDERBUFFER_STENCIL_SIZE      #x8D55)
+  (define GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE #x8D56)
+  (define GL_MAX_SAMPLES                    #x8D57)
+  (define GL_FRAMEBUFFER_SRGB               #x8DB9)
+  (define GL_HALF_FLOAT                     #x140B)
+  (define GL_MAP_READ_BIT                   #x0001)
+  (define GL_MAP_WRITE_BIT                  #x0002)
+  (define GL_MAP_INVALIDATE_RANGE_BIT       #x0004)
+  (define GL_MAP_INVALIDATE_BUFFER_BIT      #x0008)
+  (define GL_MAP_FLUSH_EXPLICIT_BIT         #x0010)
+  (define GL_MAP_UNSYNCHRONIZED_BIT         #x0020)
+  (define GL_COMPRESSED_RED_RGTC1           #x8DBB)
+  (define GL_COMPRESSED_SIGNED_RED_RGTC1    #x8DBC)
+  (define GL_COMPRESSED_RG_RGTC2            #x8DBD)
+  (define GL_COMPRESSED_SIGNED_RG_RGTC2     #x8DBE)
+  (define GL_RG                             #x8227)
+  (define GL_RG_INTEGER                     #x8228)
+  (define GL_R8                             #x8229)
+  (define GL_R16                            #x822A)
+  (define GL_RG8                            #x822B)
+  (define GL_RG16                           #x822C)
+  (define GL_R16F                           #x822D)
+  (define GL_R32F                           #x822E)
+  (define GL_RG16F                          #x822F)
+  (define GL_RG32F                          #x8230)
+  (define GL_R8I                            #x8231)
+  (define GL_R8UI                           #x8232)
+  (define GL_R16I                           #x8233)
+  (define GL_R16UI                          #x8234)
+  (define GL_R32I                           #x8235)
+  (define GL_R32UI                          #x8236)
+  (define GL_RG8I                           #x8237)
+  (define GL_RG8UI                          #x8238)
+  (define GL_RG16I                          #x8239)
+  (define GL_RG16UI                         #x823A)
+  (define GL_RG32I                          #x823B)
+  (define GL_RG32UI                         #x823C)
+  (define GL_VERTEX_ARRAY_BINDING           #x85B5)
+
+  (define GL_SAMPLER_2D_RECT                #x8B63)
+  (define GL_SAMPLER_2D_RECT_SHADOW         #x8B64)
+  (define GL_SAMPLER_BUFFER                 #x8DC2)
+  (define GL_INT_SAMPLER_2D_RECT            #x8DCD)
+  (define GL_INT_SAMPLER_BUFFER             #x8DD0)
+  (define GL_UNSIGNED_INT_SAMPLER_2D_RECT   #x8DD5)
+  (define GL_UNSIGNED_INT_SAMPLER_BUFFER    #x8DD8)
+  (define GL_TEXTURE_BUFFER                 #x8C2A)
+  (define GL_MAX_TEXTURE_BUFFER_SIZE        #x8C2B)
+  (define GL_TEXTURE_BINDING_BUFFER         #x8C2C)
+  (define GL_TEXTURE_BUFFER_DATA_STORE_BINDING #x8C2D)
+  (define GL_TEXTURE_RECTANGLE              #x84F5)
+  (define GL_TEXTURE_BINDING_RECTANGLE      #x84F6)
+  (define GL_PROXY_TEXTURE_RECTANGLE        #x84F7)
+  (define GL_MAX_RECTANGLE_TEXTURE_SIZE     #x84F8)
+  (define GL_R8_SNORM                       #x8F94)
+  (define GL_RG8_SNORM                      #x8F95)
+  (define GL_RGB8_SNORM                     #x8F96)
+  (define GL_RGBA8_SNORM                    #x8F97)
+  (define GL_R16_SNORM                      #x8F98)
+  (define GL_RG16_SNORM                     #x8F99)
+  (define GL_RGB16_SNORM                    #x8F9A)
+  (define GL_RGBA16_SNORM                   #x8F9B)
+  (define GL_SIGNED_NORMALIZED              #x8F9C)
+  (define GL_PRIMITIVE_RESTART              #x8F9D)
+  (define GL_PRIMITIVE_RESTART_INDEX        #x8F9E)
+  (define GL_COPY_READ_BUFFER               #x8F36)
+  (define GL_COPY_WRITE_BUFFER              #x8F37)
+  (define GL_UNIFORM_BUFFER                 #x8A11)
+  (define GL_UNIFORM_BUFFER_BINDING         #x8A28)
+  (define GL_UNIFORM_BUFFER_START           #x8A29)
+  (define GL_UNIFORM_BUFFER_SIZE            #x8A2A)
+  (define GL_MAX_VERTEX_UNIFORM_BLOCKS      #x8A2B)
+  (define GL_MAX_GEOMETRY_UNIFORM_BLOCKS    #x8A2C)
+  (define GL_MAX_FRAGMENT_UNIFORM_BLOCKS    #x8A2D)
+  (define GL_MAX_COMBINED_UNIFORM_BLOCKS    #x8A2E)
+  (define GL_MAX_UNIFORM_BUFFER_BINDINGS    #x8A2F)
+  (define GL_MAX_UNIFORM_BLOCK_SIZE         #x8A30)
+  (define GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS #x8A31)
+  (define GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS #x8A32)
+  (define GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS #x8A33)
+  (define GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT #x8A34)
+  (define GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH #x8A35)
+  (define GL_ACTIVE_UNIFORM_BLOCKS          #x8A36)
+  (define GL_UNIFORM_TYPE                   #x8A37)
+  (define GL_UNIFORM_SIZE                   #x8A38)
+  (define GL_UNIFORM_NAME_LENGTH            #x8A39)
+  (define GL_UNIFORM_BLOCK_INDEX            #x8A3A)
+  (define GL_UNIFORM_OFFSET                 #x8A3B)
+  (define GL_UNIFORM_ARRAY_STRIDE           #x8A3C)
+  (define GL_UNIFORM_MATRIX_STRIDE          #x8A3D)
+  (define GL_UNIFORM_IS_ROW_MAJOR           #x8A3E)
+  (define GL_UNIFORM_BLOCK_BINDING          #x8A3F)
+  (define GL_UNIFORM_BLOCK_DATA_SIZE        #x8A40)
+  (define GL_UNIFORM_BLOCK_NAME_LENGTH      #x8A41)
+  (define GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS  #x8A42)
+  (define GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES #x8A43)
+  (define GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER #x8A44)
+  (define GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER #x8A45)
+  (define GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER #x8A46)
+  (define GL_INVALID_INDEX                  #xFFFFFFFF)
+
+  (define GL_CONTEXT_CORE_PROFILE_BIT       #x00000001)
+  (define GL_CONTEXT_COMPATIBILITY_PROFILE_BIT #x00000002)
+  (define GL_LINES_ADJACENCY                #x000A)
+  (define GL_LINE_STRIP_ADJACENCY           #x000B)
+  (define GL_TRIANGLES_ADJACENCY            #x000C)
+  (define GL_TRIANGLE_STRIP_ADJACENCY       #x000D)
+  (define GL_PROGRAM_POINT_SIZE             #x8642)
+  (define GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS #x8C29)
+  (define GL_FRAMEBUFFER_ATTACHMENT_LAYERED #x8DA7)
+  (define GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS #x8DA8)
+  (define GL_GEOMETRY_SHADER                #x8DD9)
+  (define GL_GEOMETRY_VERTICES_OUT          #x8916)
+  (define GL_GEOMETRY_INPUT_TYPE            #x8917)
+  (define GL_GEOMETRY_OUTPUT_TYPE           #x8918)
+  (define GL_MAX_GEOMETRY_UNIFORM_COMPONENTS #x8DDF)
+  (define GL_MAX_GEOMETRY_OUTPUT_VERTICES   #x8DE0)
+  (define GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS #x8DE1)
+  (define GL_MAX_VERTEX_OUTPUT_COMPONENTS   #x9122)
+  (define GL_MAX_GEOMETRY_INPUT_COMPONENTS  #x9123)
+  (define GL_MAX_GEOMETRY_OUTPUT_COMPONENTS #x9124)
+  (define GL_MAX_FRAGMENT_INPUT_COMPONENTS  #x9125)
+  (define GL_CONTEXT_PROFILE_MASK           #x9126)
+  (define GL_DEPTH_CLAMP                    #x864F)
+  (define GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION #x8E4C)
+  (define GL_FIRST_VERTEX_CONVENTION        #x8E4D)
+  (define GL_LAST_VERTEX_CONVENTION         #x8E4E)
+  (define GL_PROVOKING_VERTEX               #x8E4F)
+  (define GL_TEXTURE_CUBE_MAP_SEAMLESS      #x884F)
+  (define GL_MAX_SERVER_WAIT_TIMEOUT        #x9111)
+  (define GL_OBJECT_TYPE                    #x9112)
+  (define GL_SYNC_CONDITION                 #x9113)
+  (define GL_SYNC_STATUS                    #x9114)
+  (define GL_SYNC_FLAGS                     #x9115)
+  (define GL_SYNC_FENCE                     #x9116)
+  (define GL_SYNC_GPU_COMMANDS_COMPLETE     #x9117)
+  (define GL_UNSIGNALED                     #x9118)
+  (define GL_SIGNALED                       #x9119)
+  (define GL_ALREADY_SIGNALED               #x911A)
+  (define GL_TIMEOUT_EXPIRED                #x911B)
+  (define GL_CONDITION_SATISFIED            #x911C)
+  (define GL_WAIT_FAILED                    #x911D)
+  (define GL_TIMEOUT_IGNORED                #xFFFFFFFFFFFFFFFF)
+  (define GL_SYNC_FLUSH_COMMANDS_BIT        #x00000001)
+  (define GL_SAMPLE_POSITION                #x8E50)
+  (define GL_SAMPLE_MASK                    #x8E51)
+  (define GL_SAMPLE_MASK_VALUE              #x8E52)
+  (define GL_MAX_SAMPLE_MASK_WORDS          #x8E59)
+  (define GL_TEXTURE_2D_MULTISAMPLE         #x9100)
+  (define GL_PROXY_TEXTURE_2D_MULTISAMPLE   #x9101)
+  (define GL_TEXTURE_2D_MULTISAMPLE_ARRAY   #x9102)
+  (define GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY #x9103)
+  (define GL_TEXTURE_BINDING_2D_MULTISAMPLE #x9104)
+  (define GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY #x9105)
+  (define GL_TEXTURE_SAMPLES                #x9106)
+  (define GL_TEXTURE_FIXED_SAMPLE_LOCATIONS #x9107)
+  (define GL_SAMPLER_2D_MULTISAMPLE         #x9108)
+  (define GL_INT_SAMPLER_2D_MULTISAMPLE     #x9109)
+  (define GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE #x910A)
+  (define GL_SAMPLER_2D_MULTISAMPLE_ARRAY   #x910B)
+  (define GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY #x910C)
+  (define GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY #x910D)
+  (define GL_MAX_COLOR_TEXTURE_SAMPLES      #x910E)
+  (define GL_MAX_DEPTH_TEXTURE_SAMPLES      #x910F)
+  (define GL_MAX_INTEGER_SAMPLES            #x9110)
+
+  (define GL_VERTEX_ATTRIB_ARRAY_DIVISOR    #x88FE)
+  (define GL_SRC1_COLOR                     #x88F9)
+  (define GL_ONE_MINUS_SRC1_COLOR           #x88FA)
+  (define GL_ONE_MINUS_SRC1_ALPHA           #x88FB)
+  (define GL_MAX_DUAL_SOURCE_DRAW_BUFFERS   #x88FC)
+  (define GL_ANY_SAMPLES_PASSED             #x8C2F)
+  (define GL_SAMPLER_BINDING                #x8919)
+  (define GL_RGB10_A2UI                     #x906F)
+  (define GL_TEXTURE_SWIZZLE_R              #x8E42)
+  (define GL_TEXTURE_SWIZZLE_G              #x8E43)
+  (define GL_TEXTURE_SWIZZLE_B              #x8E44)
+  (define GL_TEXTURE_SWIZZLE_A              #x8E45)
+  (define GL_TEXTURE_SWIZZLE_RGBA           #x8E46)
+  (define GL_TIME_ELAPSED                   #x88BF)
+  (define GL_TIMESTAMP                      #x8E28)
+  (define GL_INT_2_10_10_10_REV             #x8D9F)
+
+  (define GL_SAMPLE_SHADING                 #x8C36)
+  (define GL_MIN_SAMPLE_SHADING_VALUE       #x8C37)
+  (define GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET #x8E5E)
+  (define GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET #x8E5F)
+  (define GL_TEXTURE_CUBE_MAP_ARRAY         #x9009)
+  (define GL_TEXTURE_BINDING_CUBE_MAP_ARRAY #x900A)
+  (define GL_PROXY_TEXTURE_CUBE_MAP_ARRAY   #x900B)
+  (define GL_SAMPLER_CUBE_MAP_ARRAY         #x900C)
+  (define GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW  #x900D)
+  (define GL_INT_SAMPLER_CUBE_MAP_ARRAY     #x900E)
+  (define GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY #x900F)
+  (define GL_DRAW_INDIRECT_BUFFER           #x8F3F)
+  (define GL_DRAW_INDIRECT_BUFFER_BINDING   #x8F43)
+  (define GL_GEOMETRY_SHADER_INVOCATIONS    #x887F)
+  (define GL_MAX_GEOMETRY_SHADER_INVOCATIONS #x8E5A)
+  (define GL_MIN_FRAGMENT_INTERPOLATION_OFFSET #x8E5B)
+  (define GL_MAX_FRAGMENT_INTERPOLATION_OFFSET #x8E5C)
+  (define GL_FRAGMENT_INTERPOLATION_OFFSET_BITS #x8E5D)
+  (define GL_MAX_VERTEX_STREAMS             #x8E71)
+  (define GL_DOUBLE_VEC2                    #x8FFC)
+  (define GL_DOUBLE_VEC3                    #x8FFD)
+  (define GL_DOUBLE_VEC4                    #x8FFE)
+  (define GL_DOUBLE_MAT2                    #x8F46)
+  (define GL_DOUBLE_MAT3                    #x8F47)
+  (define GL_DOUBLE_MAT4                    #x8F48)
+  (define GL_DOUBLE_MAT2x3                  #x8F49)
+  (define GL_DOUBLE_MAT2x4                  #x8F4A)
+  (define GL_DOUBLE_MAT3x2                  #x8F4B)
+  (define GL_DOUBLE_MAT3x4                  #x8F4C)
+  (define GL_DOUBLE_MAT4x2                  #x8F4D)
+  (define GL_DOUBLE_MAT4x3                  #x8F4E)
+  (define GL_ACTIVE_SUBROUTINES             #x8DE5)
+  (define GL_ACTIVE_SUBROUTINE_UNIFORMS     #x8DE6)
+  (define GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS #x8E47)
+  (define GL_ACTIVE_SUBROUTINE_MAX_LENGTH   #x8E48)
+  (define GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH #x8E49)
+  (define GL_MAX_SUBROUTINES                #x8DE7)
+  (define GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS #x8DE8)
+  (define GL_NUM_COMPATIBLE_SUBROUTINES     #x8E4A)
+  (define GL_COMPATIBLE_SUBROUTINES         #x8E4B)
+  (define GL_PATCHES                        #x000E)
+  (define GL_PATCH_VERTICES                 #x8E72)
+  (define GL_PATCH_DEFAULT_INNER_LEVEL      #x8E73)
+  (define GL_PATCH_DEFAULT_OUTER_LEVEL      #x8E74)
+  (define GL_TESS_CONTROL_OUTPUT_VERTICES   #x8E75)
+  (define GL_TESS_GEN_MODE                  #x8E76)
+  (define GL_TESS_GEN_SPACING               #x8E77)
+  (define GL_TESS_GEN_VERTEX_ORDER          #x8E78)
+  (define GL_TESS_GEN_POINT_MODE            #x8E79)
+  (define GL_ISOLINES                       #x8E7A)
+  (define GL_FRACTIONAL_ODD                 #x8E7B)
+  (define GL_FRACTIONAL_EVEN                #x8E7C)
+  (define GL_MAX_PATCH_VERTICES             #x8E7D)
+  (define GL_MAX_TESS_GEN_LEVEL             #x8E7E)
+  (define GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS #x8E7F)
+  (define GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS #x8E80)
+  (define GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS #x8E81)
+  (define GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS #x8E82)
+  (define GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS #x8E83)
+  (define GL_MAX_TESS_PATCH_COMPONENTS      #x8E84)
+  (define GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS #x8E85)
+  (define GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS #x8E86)
+  (define GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS #x8E89)
+  (define GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS #x8E8A)
+  (define GL_MAX_TESS_CONTROL_INPUT_COMPONENTS #x886C)
+  (define GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS #x886D)
+  (define GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS #x8E1E)
+  (define GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS #x8E1F)
+  (define GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER #x84F0)
+  (define GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER #x84F1)
+  (define GL_TESS_EVALUATION_SHADER         #x8E87)
+  (define GL_TESS_CONTROL_SHADER            #x8E88)
+  (define GL_TRANSFORM_FEEDBACK             #x8E22)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED #x8E23)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE #x8E24)
+  (define GL_TRANSFORM_FEEDBACK_BINDING     #x8E25)
+  (define GL_MAX_TRANSFORM_FEEDBACK_BUFFERS #x8E70)
+
+  (define GL_FIXED                          #x140C)
+  (define GL_IMPLEMENTATION_COLOR_READ_TYPE #x8B9A)
+  (define GL_IMPLEMENTATION_COLOR_READ_FORMAT #x8B9B)
+  (define GL_LOW_FLOAT                      #x8DF0)
+  (define GL_MEDIUM_FLOAT                   #x8DF1)
+  (define GL_HIGH_FLOAT                     #x8DF2)
+  (define GL_LOW_INT                        #x8DF3)
+  (define GL_MEDIUM_INT                     #x8DF4)
+  (define GL_HIGH_INT                       #x8DF5)
+  (define GL_SHADER_COMPILER                #x8DFA)
+  (define GL_SHADER_BINARY_FORMATS          #x8DF8)
+  (define GL_NUM_SHADER_BINARY_FORMATS      #x8DF9)
+  (define GL_MAX_VERTEX_UNIFORM_VECTORS     #x8DFB)
+  (define GL_MAX_VARYING_VECTORS            #x8DFC)
+  (define GL_MAX_FRAGMENT_UNIFORM_VECTORS   #x8DFD)
+  (define GL_RGB565                         #x8D62)
+  (define GL_PROGRAM_BINARY_RETRIEVABLE_HINT #x8257)
+  (define GL_PROGRAM_BINARY_LENGTH          #x8741)
+  (define GL_NUM_PROGRAM_BINARY_FORMATS     #x87FE)
+  (define GL_PROGRAM_BINARY_FORMATS         #x87FF)
+  (define GL_VERTEX_SHADER_BIT              #x00000001)
+  (define GL_FRAGMENT_SHADER_BIT            #x00000002)
+  (define GL_GEOMETRY_SHADER_BIT            #x00000004)
+  (define GL_TESS_CONTROL_SHADER_BIT        #x00000008)
+  (define GL_TESS_EVALUATION_SHADER_BIT     #x00000010)
+  (define GL_ALL_SHADER_BITS                #xFFFFFFFF)
+  (define GL_PROGRAM_SEPARABLE              #x8258)
+  (define GL_ACTIVE_PROGRAM                 #x8259)
+  (define GL_PROGRAM_PIPELINE_BINDING       #x825A)
+  (define GL_MAX_VIEWPORTS                  #x825B)
+  (define GL_VIEWPORT_SUBPIXEL_BITS         #x825C)
+  (define GL_VIEWPORT_BOUNDS_RANGE          #x825D)
+  (define GL_LAYER_PROVOKING_VERTEX         #x825E)
+  (define GL_VIEWPORT_INDEX_PROVOKING_VERTEX #x825F)
+  (define GL_UNDEFINED_VERTEX               #x8260)
+
+  (define GL_COPY_READ_BUFFER_BINDING       #x8F36)
+  (define GL_COPY_WRITE_BUFFER_BINDING      #x8F37)
+  (define GL_TRANSFORM_FEEDBACK_ACTIVE      #x8E24)
+  (define GL_TRANSFORM_FEEDBACK_PAUSED      #x8E23)
+  (define GL_UNPACK_COMPRESSED_BLOCK_WIDTH  #x9127)
+  (define GL_UNPACK_COMPRESSED_BLOCK_HEIGHT #x9128)
+  (define GL_UNPACK_COMPRESSED_BLOCK_DEPTH  #x9129)
+  (define GL_UNPACK_COMPRESSED_BLOCK_SIZE   #x912A)
+  (define GL_PACK_COMPRESSED_BLOCK_WIDTH    #x912B)
+  (define GL_PACK_COMPRESSED_BLOCK_HEIGHT   #x912C)
+  (define GL_PACK_COMPRESSED_BLOCK_DEPTH    #x912D)
+  (define GL_PACK_COMPRESSED_BLOCK_SIZE     #x912E)
+  (define GL_NUM_SAMPLE_COUNTS              #x9380)
+  (define GL_MIN_MAP_BUFFER_ALIGNMENT       #x90BC)
+  (define GL_ATOMIC_COUNTER_BUFFER          #x92C0)
+  (define GL_ATOMIC_COUNTER_BUFFER_BINDING  #x92C1)
+  (define GL_ATOMIC_COUNTER_BUFFER_START    #x92C2)
+  (define GL_ATOMIC_COUNTER_BUFFER_SIZE     #x92C3)
+  (define GL_ATOMIC_COUNTER_BUFFER_DATA_SIZE #x92C4)
+  (define GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS #x92C5)
+  (define GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES #x92C6)
+  (define GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER #x92C7)
+  (define GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER #x92C8)
+  (define GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER #x92C9)
+  (define GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER #x92CA)
+  (define GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER #x92CB)
+  (define GL_MAX_VERTEX_ATOMIC_COUNTER_BUFFERS #x92CC)
+  (define GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS #x92CD)
+  (define GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS #x92CE)
+  (define GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS #x92CF)
+  (define GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS #x92D0)
+  (define GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS #x92D1)
+  (define GL_MAX_VERTEX_ATOMIC_COUNTERS     #x92D2)
+  (define GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS #x92D3)
+  (define GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS #x92D4)
+  (define GL_MAX_GEOMETRY_ATOMIC_COUNTERS   #x92D5)
+  (define GL_MAX_FRAGMENT_ATOMIC_COUNTERS   #x92D6)
+  (define GL_MAX_COMBINED_ATOMIC_COUNTERS   #x92D7)
+  (define GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE #x92D8)
+  (define GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS #x92DC)
+  (define GL_ACTIVE_ATOMIC_COUNTER_BUFFERS  #x92D9)
+  (define GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX #x92DA)
+  (define GL_UNSIGNED_INT_ATOMIC_COUNTER    #x92DB)
+  (define GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT #x00000001)
+  (define GL_ELEMENT_ARRAY_BARRIER_BIT      #x00000002)
+  (define GL_UNIFORM_BARRIER_BIT            #x00000004)
+  (define GL_TEXTURE_FETCH_BARRIER_BIT      #x00000008)
+  (define GL_SHADER_IMAGE_ACCESS_BARRIER_BIT #x00000020)
+  (define GL_COMMAND_BARRIER_BIT            #x00000040)
+  (define GL_PIXEL_BUFFER_BARRIER_BIT       #x00000080)
+  (define GL_TEXTURE_UPDATE_BARRIER_BIT     #x00000100)
+  (define GL_BUFFER_UPDATE_BARRIER_BIT      #x00000200)
+  (define GL_FRAMEBUFFER_BARRIER_BIT        #x00000400)
+  (define GL_TRANSFORM_FEEDBACK_BARRIER_BIT #x00000800)
+  (define GL_ATOMIC_COUNTER_BARRIER_BIT     #x00001000)
+  (define GL_ALL_BARRIER_BITS               #xFFFFFFFF)
+  (define GL_MAX_IMAGE_UNITS                #x8F38)
+  (define GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS #x8F39)
+  (define GL_IMAGE_BINDING_NAME             #x8F3A)
+  (define GL_IMAGE_BINDING_LEVEL            #x8F3B)
+  (define GL_IMAGE_BINDING_LAYERED          #x8F3C)
+  (define GL_IMAGE_BINDING_LAYER            #x8F3D)
+  (define GL_IMAGE_BINDING_ACCESS           #x8F3E)
+  (define GL_IMAGE_1D                       #x904C)
+  (define GL_IMAGE_2D                       #x904D)
+  (define GL_IMAGE_3D                       #x904E)
+  (define GL_IMAGE_2D_RECT                  #x904F)
+  (define GL_IMAGE_CUBE                     #x9050)
+  (define GL_IMAGE_BUFFER                   #x9051)
+  (define GL_IMAGE_1D_ARRAY                 #x9052)
+  (define GL_IMAGE_2D_ARRAY                 #x9053)
+  (define GL_IMAGE_CUBE_MAP_ARRAY           #x9054)
+  (define GL_IMAGE_2D_MULTISAMPLE           #x9055)
+  (define GL_IMAGE_2D_MULTISAMPLE_ARRAY     #x9056)
+  (define GL_INT_IMAGE_1D                   #x9057)
+  (define GL_INT_IMAGE_2D                   #x9058)
+  (define GL_INT_IMAGE_3D                   #x9059)
+  (define GL_INT_IMAGE_2D_RECT              #x905A)
+  (define GL_INT_IMAGE_CUBE                 #x905B)
+  (define GL_INT_IMAGE_BUFFER               #x905C)
+  (define GL_INT_IMAGE_1D_ARRAY             #x905D)
+  (define GL_INT_IMAGE_2D_ARRAY             #x905E)
+  (define GL_INT_IMAGE_CUBE_MAP_ARRAY       #x905F)
+  (define GL_INT_IMAGE_2D_MULTISAMPLE       #x9060)
+  (define GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY #x9061)
+  (define GL_UNSIGNED_INT_IMAGE_1D          #x9062)
+  (define GL_UNSIGNED_INT_IMAGE_2D          #x9063)
+  (define GL_UNSIGNED_INT_IMAGE_3D          #x9064)
+  (define GL_UNSIGNED_INT_IMAGE_2D_RECT     #x9065)
+  (define GL_UNSIGNED_INT_IMAGE_CUBE        #x9066)
+  (define GL_UNSIGNED_INT_IMAGE_BUFFER      #x9067)
+  (define GL_UNSIGNED_INT_IMAGE_1D_ARRAY    #x9068)
+  (define GL_UNSIGNED_INT_IMAGE_2D_ARRAY    #x9069)
+  (define GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY #x906A)
+  (define GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE #x906B)
+  (define GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY #x906C)
+  (define GL_MAX_IMAGE_SAMPLES              #x906D)
+  (define GL_IMAGE_BINDING_FORMAT           #x906E)
+  (define GL_IMAGE_FORMAT_COMPATIBILITY_TYPE #x90C7)
+  (define GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE #x90C8)
+  (define GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS #x90C9)
+  (define GL_MAX_VERTEX_IMAGE_UNIFORMS      #x90CA)
+  (define GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS #x90CB)
+  (define GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS #x90CC)
+  (define GL_MAX_GEOMETRY_IMAGE_UNIFORMS    #x90CD)
+  (define GL_MAX_FRAGMENT_IMAGE_UNIFORMS    #x90CE)
+  (define GL_MAX_COMBINED_IMAGE_UNIFORMS    #x90CF)
+  (define GL_COMPRESSED_RGBA_BPTC_UNORM     #x8E8C)
+  (define GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM #x8E8D)
+  (define GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT #x8E8E)
+  (define GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT #x8E8F)
+  (define GL_TEXTURE_IMMUTABLE_FORMAT       #x912F)
+
+  (define GL_NUM_SHADING_LANGUAGE_VERSIONS  #x82E9)
+  (define GL_VERTEX_ATTRIB_ARRAY_LONG       #x874E)
+  (define GL_COMPRESSED_RGB8_ETC2           #x9274)
+  (define GL_COMPRESSED_SRGB8_ETC2          #x9275)
+  (define GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 #x9276)
+  (define GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 #x9277)
+  (define GL_COMPRESSED_RGBA8_ETC2_EAC      #x9278)
+  (define GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC #x9279)
+  (define GL_COMPRESSED_R11_EAC             #x9270)
+  (define GL_COMPRESSED_SIGNED_R11_EAC      #x9271)
+  (define GL_COMPRESSED_RG11_EAC            #x9272)
+  (define GL_COMPRESSED_SIGNED_RG11_EAC     #x9273)
+  (define GL_PRIMITIVE_RESTART_FIXED_INDEX  #x8D69)
+  (define GL_ANY_SAMPLES_PASSED_CONSERVATIVE #x8D6A)
+  (define GL_MAX_ELEMENT_INDEX              #x8D6B)
+  (define GL_COMPUTE_SHADER                 #x91B9)
+  (define GL_MAX_COMPUTE_UNIFORM_BLOCKS     #x91BB)
+  (define GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS #x91BC)
+  (define GL_MAX_COMPUTE_IMAGE_UNIFORMS     #x91BD)
+  (define GL_MAX_COMPUTE_SHARED_MEMORY_SIZE #x8262)
+  (define GL_MAX_COMPUTE_UNIFORM_COMPONENTS #x8263)
+  (define GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS #x8264)
+  (define GL_MAX_COMPUTE_ATOMIC_COUNTERS    #x8265)
+  (define GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS #x8266)
+  (define GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS #x90EB)
+  (define GL_MAX_COMPUTE_WORK_GROUP_COUNT   #x91BE)
+  (define GL_MAX_COMPUTE_WORK_GROUP_SIZE    #x91BF)
+  (define GL_COMPUTE_WORK_GROUP_SIZE        #x8267)
+  (define GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER #x90EC)
+  (define GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER #x90ED)
+  (define GL_DISPATCH_INDIRECT_BUFFER       #x90EE)
+  (define GL_DISPATCH_INDIRECT_BUFFER_BINDING #x90EF)
+  (define GL_COMPUTE_SHADER_BIT             #x00000020)
+  (define GL_DEBUG_OUTPUT_SYNCHRONOUS       #x8242)
+  (define GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH #x8243)
+  (define GL_DEBUG_CALLBACK_FUNCTION        #x8244)
+  (define GL_DEBUG_CALLBACK_USER_PARAM      #x8245)
+  (define GL_DEBUG_SOURCE_API               #x8246)
+  (define GL_DEBUG_SOURCE_WINDOW_SYSTEM     #x8247)
+  (define GL_DEBUG_SOURCE_SHADER_COMPILER   #x8248)
+  (define GL_DEBUG_SOURCE_THIRD_PARTY       #x8249)
+  (define GL_DEBUG_SOURCE_APPLICATION       #x824A)
+  (define GL_DEBUG_SOURCE_OTHER             #x824B)
+  (define GL_DEBUG_TYPE_ERROR               #x824C)
+  (define GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR #x824D)
+  (define GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR  #x824E)
+  (define GL_DEBUG_TYPE_PORTABILITY         #x824F)
+  (define GL_DEBUG_TYPE_PERFORMANCE         #x8250)
+  (define GL_DEBUG_TYPE_OTHER               #x8251)
+  (define GL_MAX_DEBUG_MESSAGE_LENGTH       #x9143)
+  (define GL_MAX_DEBUG_LOGGED_MESSAGES      #x9144)
+  (define GL_DEBUG_LOGGED_MESSAGES          #x9145)
+  (define GL_DEBUG_SEVERITY_HIGH            #x9146)
+  (define GL_DEBUG_SEVERITY_MEDIUM          #x9147)
+  (define GL_DEBUG_SEVERITY_LOW             #x9148)
+  (define GL_DEBUG_TYPE_MARKER              #x8268)
+  (define GL_DEBUG_TYPE_PUSH_GROUP          #x8269)
+  (define GL_DEBUG_TYPE_POP_GROUP           #x826A)
+  (define GL_DEBUG_SEVERITY_NOTIFICATION    #x826B)
+  (define GL_MAX_DEBUG_GROUP_STACK_DEPTH    #x826C)
+  (define GL_DEBUG_GROUP_STACK_DEPTH        #x826D)
+  (define GL_BUFFER                         #x82E0)
+  (define GL_SHADER                         #x82E1)
+  (define GL_PROGRAM                        #x82E2)
+  (define GL_QUERY                          #x82E3)
+  (define GL_PROGRAM_PIPELINE               #x82E4)
+  (define GL_SAMPLER                        #x82E6)
+  (define GL_MAX_LABEL_LENGTH               #x82E8)
+  (define GL_DEBUG_OUTPUT                   #x92E0)
+  (define GL_CONTEXT_FLAG_DEBUG_BIT         #x00000002)
+  (define GL_MAX_UNIFORM_LOCATIONS          #x826E)
+  (define GL_FRAMEBUFFER_DEFAULT_WIDTH      #x9310)
+  (define GL_FRAMEBUFFER_DEFAULT_HEIGHT     #x9311)
+  (define GL_FRAMEBUFFER_DEFAULT_LAYERS     #x9312)
+  (define GL_FRAMEBUFFER_DEFAULT_SAMPLES    #x9313)
+  (define GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS #x9314)
+  (define GL_MAX_FRAMEBUFFER_WIDTH          #x9315)
+  (define GL_MAX_FRAMEBUFFER_HEIGHT         #x9316)
+  (define GL_MAX_FRAMEBUFFER_LAYERS         #x9317)
+  (define GL_MAX_FRAMEBUFFER_SAMPLES        #x9318)
+  (define GL_INTERNALFORMAT_SUPPORTED       #x826F)
+  (define GL_INTERNALFORMAT_PREFERRED       #x8270)
+  (define GL_INTERNALFORMAT_RED_SIZE        #x8271)
+  (define GL_INTERNALFORMAT_GREEN_SIZE      #x8272)
+  (define GL_INTERNALFORMAT_BLUE_SIZE       #x8273)
+  (define GL_INTERNALFORMAT_ALPHA_SIZE      #x8274)
+  (define GL_INTERNALFORMAT_DEPTH_SIZE      #x8275)
+  (define GL_INTERNALFORMAT_STENCIL_SIZE    #x8276)
+  (define GL_INTERNALFORMAT_SHARED_SIZE     #x8277)
+  (define GL_INTERNALFORMAT_RED_TYPE        #x8278)
+  (define GL_INTERNALFORMAT_GREEN_TYPE      #x8279)
+  (define GL_INTERNALFORMAT_BLUE_TYPE       #x827A)
+  (define GL_INTERNALFORMAT_ALPHA_TYPE      #x827B)
+  (define GL_INTERNALFORMAT_DEPTH_TYPE      #x827C)
+  (define GL_INTERNALFORMAT_STENCIL_TYPE    #x827D)
+  (define GL_MAX_WIDTH                      #x827E)
+  (define GL_MAX_HEIGHT                     #x827F)
+  (define GL_MAX_DEPTH                      #x8280)
+  (define GL_MAX_LAYERS                     #x8281)
+  (define GL_MAX_COMBINED_DIMENSIONS        #x8282)
+  (define GL_COLOR_COMPONENTS               #x8283)
+  (define GL_DEPTH_COMPONENTS               #x8284)
+  (define GL_STENCIL_COMPONENTS             #x8285)
+  (define GL_COLOR_RENDERABLE               #x8286)
+  (define GL_DEPTH_RENDERABLE               #x8287)
+  (define GL_STENCIL_RENDERABLE             #x8288)
+  (define GL_FRAMEBUFFER_RENDERABLE         #x8289)
+  (define GL_FRAMEBUFFER_RENDERABLE_LAYERED #x828A)
+  (define GL_FRAMEBUFFER_BLEND              #x828B)
+  (define GL_READ_PIXELS                    #x828C)
+  (define GL_READ_PIXELS_FORMAT             #x828D)
+  (define GL_READ_PIXELS_TYPE               #x828E)
+  (define GL_TEXTURE_IMAGE_FORMAT           #x828F)
+  (define GL_TEXTURE_IMAGE_TYPE             #x8290)
+  (define GL_GET_TEXTURE_IMAGE_FORMAT       #x8291)
+  (define GL_GET_TEXTURE_IMAGE_TYPE         #x8292)
+  (define GL_MIPMAP                         #x8293)
+  (define GL_MANUAL_GENERATE_MIPMAP         #x8294)
+  (define GL_AUTO_GENERATE_MIPMAP           #x8295)
+  (define GL_COLOR_ENCODING                 #x8296)
+  (define GL_SRGB_READ                      #x8297)
+  (define GL_SRGB_WRITE                     #x8298)
+  (define GL_FILTER                         #x829A)
+  (define GL_VERTEX_TEXTURE                 #x829B)
+  (define GL_TESS_CONTROL_TEXTURE           #x829C)
+  (define GL_TESS_EVALUATION_TEXTURE        #x829D)
+  (define GL_GEOMETRY_TEXTURE               #x829E)
+  (define GL_FRAGMENT_TEXTURE               #x829F)
+  (define GL_COMPUTE_TEXTURE                #x82A0)
+  (define GL_TEXTURE_SHADOW                 #x82A1)
+  (define GL_TEXTURE_GATHER                 #x82A2)
+  (define GL_TEXTURE_GATHER_SHADOW          #x82A3)
+  (define GL_SHADER_IMAGE_LOAD              #x82A4)
+  (define GL_SHADER_IMAGE_STORE             #x82A5)
+  (define GL_SHADER_IMAGE_ATOMIC            #x82A6)
+  (define GL_IMAGE_TEXEL_SIZE               #x82A7)
+  (define GL_IMAGE_COMPATIBILITY_CLASS      #x82A8)
+  (define GL_IMAGE_PIXEL_FORMAT             #x82A9)
+  (define GL_IMAGE_PIXEL_TYPE               #x82AA)
+  (define GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_TEST #x82AC)
+  (define GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST #x82AD)
+  (define GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE #x82AE)
+  (define GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE #x82AF)
+  (define GL_TEXTURE_COMPRESSED_BLOCK_WIDTH #x82B1)
+  (define GL_TEXTURE_COMPRESSED_BLOCK_HEIGHT #x82B2)
+  (define GL_TEXTURE_COMPRESSED_BLOCK_SIZE  #x82B3)
+  (define GL_CLEAR_BUFFER                   #x82B4)
+  (define GL_TEXTURE_VIEW                   #x82B5)
+  (define GL_VIEW_COMPATIBILITY_CLASS       #x82B6)
+  (define GL_FULL_SUPPORT                   #x82B7)
+  (define GL_CAVEAT_SUPPORT                 #x82B8)
+  (define GL_IMAGE_CLASS_4_X_32             #x82B9)
+  (define GL_IMAGE_CLASS_2_X_32             #x82BA)
+  (define GL_IMAGE_CLASS_1_X_32             #x82BB)
+  (define GL_IMAGE_CLASS_4_X_16             #x82BC)
+  (define GL_IMAGE_CLASS_2_X_16             #x82BD)
+  (define GL_IMAGE_CLASS_1_X_16             #x82BE)
+  (define GL_IMAGE_CLASS_4_X_8              #x82BF)
+  (define GL_IMAGE_CLASS_2_X_8              #x82C0)
+  (define GL_IMAGE_CLASS_1_X_8              #x82C1)
+  (define GL_IMAGE_CLASS_11_11_10           #x82C2)
+  (define GL_IMAGE_CLASS_10_10_10_2         #x82C3)
+  (define GL_VIEW_CLASS_128_BITS            #x82C4)
+  (define GL_VIEW_CLASS_96_BITS             #x82C5)
+  (define GL_VIEW_CLASS_64_BITS             #x82C6)
+  (define GL_VIEW_CLASS_48_BITS             #x82C7)
+  (define GL_VIEW_CLASS_32_BITS             #x82C8)
+  (define GL_VIEW_CLASS_24_BITS             #x82C9)
+  (define GL_VIEW_CLASS_16_BITS             #x82CA)
+  (define GL_VIEW_CLASS_8_BITS              #x82CB)
+  (define GL_VIEW_CLASS_S3TC_DXT1_RGB       #x82CC)
+  (define GL_VIEW_CLASS_S3TC_DXT1_RGBA      #x82CD)
+  (define GL_VIEW_CLASS_S3TC_DXT3_RGBA      #x82CE)
+  (define GL_VIEW_CLASS_S3TC_DXT5_RGBA      #x82CF)
+  (define GL_VIEW_CLASS_RGTC1_RED           #x82D0)
+  (define GL_VIEW_CLASS_RGTC2_RG            #x82D1)
+  (define GL_VIEW_CLASS_BPTC_UNORM          #x82D2)
+  (define GL_VIEW_CLASS_BPTC_FLOAT          #x82D3)
+  (define GL_UNIFORM                        #x92E1)
+  (define GL_UNIFORM_BLOCK                  #x92E2)
+  (define GL_PROGRAM_INPUT                  #x92E3)
+  (define GL_PROGRAM_OUTPUT                 #x92E4)
+  (define GL_BUFFER_VARIABLE                #x92E5)
+  (define GL_SHADER_STORAGE_BLOCK           #x92E6)
+  (define GL_VERTEX_SUBROUTINE              #x92E8)
+  (define GL_TESS_CONTROL_SUBROUTINE        #x92E9)
+  (define GL_TESS_EVALUATION_SUBROUTINE     #x92EA)
+  (define GL_GEOMETRY_SUBROUTINE            #x92EB)
+  (define GL_FRAGMENT_SUBROUTINE            #x92EC)
+  (define GL_COMPUTE_SUBROUTINE             #x92ED)
+  (define GL_VERTEX_SUBROUTINE_UNIFORM      #x92EE)
+  (define GL_TESS_CONTROL_SUBROUTINE_UNIFORM #x92EF)
+  (define GL_TESS_EVALUATION_SUBROUTINE_UNIFORM #x92F0)
+  (define GL_GEOMETRY_SUBROUTINE_UNIFORM    #x92F1)
+  (define GL_FRAGMENT_SUBROUTINE_UNIFORM    #x92F2)
+  (define GL_COMPUTE_SUBROUTINE_UNIFORM     #x92F3)
+  (define GL_TRANSFORM_FEEDBACK_VARYING     #x92F4)
+  (define GL_ACTIVE_RESOURCES               #x92F5)
+  (define GL_MAX_NAME_LENGTH                #x92F6)
+  (define GL_MAX_NUM_ACTIVE_VARIABLES       #x92F7)
+  (define GL_MAX_NUM_COMPATIBLE_SUBROUTINES #x92F8)
+  (define GL_NAME_LENGTH                    #x92F9)
+  (define GL_TYPE                           #x92FA)
+  (define GL_ARRAY_SIZE                     #x92FB)
+  (define GL_OFFSET                         #x92FC)
+  (define GL_BLOCK_INDEX                    #x92FD)
+  (define GL_ARRAY_STRIDE                   #x92FE)
+  (define GL_MATRIX_STRIDE                  #x92FF)
+  (define GL_IS_ROW_MAJOR                   #x9300)
+  (define GL_ATOMIC_COUNTER_BUFFER_INDEX    #x9301)
+  (define GL_BUFFER_BINDING                 #x9302)
+  (define GL_BUFFER_DATA_SIZE               #x9303)
+  (define GL_NUM_ACTIVE_VARIABLES           #x9304)
+  (define GL_ACTIVE_VARIABLES               #x9305)
+  (define GL_REFERENCED_BY_VERTEX_SHADER    #x9306)
+  (define GL_REFERENCED_BY_TESS_CONTROL_SHADER #x9307)
+  (define GL_REFERENCED_BY_TESS_EVALUATION_SHADER #x9308)
+  (define GL_REFERENCED_BY_GEOMETRY_SHADER  #x9309)
+  (define GL_REFERENCED_BY_FRAGMENT_SHADER  #x930A)
+  (define GL_REFERENCED_BY_COMPUTE_SHADER   #x930B)
+  (define GL_TOP_LEVEL_ARRAY_SIZE           #x930C)
+  (define GL_TOP_LEVEL_ARRAY_STRIDE         #x930D)
+  (define GL_LOCATION                       #x930E)
+  (define GL_LOCATION_INDEX                 #x930F)
+  (define GL_IS_PER_PATCH                   #x92E7)
+  (define GL_SHADER_STORAGE_BUFFER          #x90D2)
+  (define GL_SHADER_STORAGE_BUFFER_BINDING  #x90D3)
+  (define GL_SHADER_STORAGE_BUFFER_START    #x90D4)
+  (define GL_SHADER_STORAGE_BUFFER_SIZE     #x90D5)
+  (define GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS #x90D6)
+  (define GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS #x90D7)
+  (define GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS #x90D8)
+  (define GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS #x90D9)
+  (define GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS #x90DA)
+  (define GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS #x90DB)
+  (define GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS #x90DC)
+  (define GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS #x90DD)
+  (define GL_MAX_SHADER_STORAGE_BLOCK_SIZE  #x90DE)
+  (define GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT #x90DF)
+  (define GL_SHADER_STORAGE_BARRIER_BIT     #x00002000)
+  (define GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES #x8F39)
+  (define GL_DEPTH_STENCIL_TEXTURE_MODE     #x90EA)
+  (define GL_TEXTURE_BUFFER_OFFSET          #x919D)
+  (define GL_TEXTURE_BUFFER_SIZE            #x919E)
+  (define GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT #x919F)
+  (define GL_TEXTURE_VIEW_MIN_LEVEL         #x82DB)
+  (define GL_TEXTURE_VIEW_NUM_LEVELS        #x82DC)
+  (define GL_TEXTURE_VIEW_MIN_LAYER         #x82DD)
+  (define GL_TEXTURE_VIEW_NUM_LAYERS        #x82DE)
+  (define GL_TEXTURE_IMMUTABLE_LEVELS       #x82DF)
+  (define GL_VERTEX_ATTRIB_BINDING          #x82D4)
+  (define GL_VERTEX_ATTRIB_RELATIVE_OFFSET  #x82D5)
+  (define GL_VERTEX_BINDING_DIVISOR         #x82D6)
+  (define GL_VERTEX_BINDING_OFFSET          #x82D7)
+  (define GL_VERTEX_BINDING_STRIDE          #x82D8)
+  (define GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET #x82D9)
+  (define GL_MAX_VERTEX_ATTRIB_BINDINGS     #x82DA)
+  (define GL_VERTEX_BINDING_BUFFER          #x8F4F)
+
+  (define GL_MAX_VERTEX_ATTRIB_STRIDE       #x82E5)
+  (define GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED #x8221)
+  (define GL_TEXTURE_BUFFER_BINDING         #x8C2A)
+  (define GL_MAP_PERSISTENT_BIT             #x0040)
+  (define GL_MAP_COHERENT_BIT               #x0080)
+  (define GL_DYNAMIC_STORAGE_BIT            #x0100)
+  (define GL_CLIENT_STORAGE_BIT             #x0200)
+  (define GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT #x00004000)
+  (define GL_BUFFER_IMMUTABLE_STORAGE       #x821F)
+  (define GL_BUFFER_STORAGE_FLAGS           #x8220)
+  (define GL_CLEAR_TEXTURE                  #x9365)
+  (define GL_LOCATION_COMPONENT             #x934A)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER_INDEX #x934B)
+  (define GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE #x934C)
+  (define GL_QUERY_BUFFER                   #x9192)
+  (define GL_QUERY_BUFFER_BARRIER_BIT       #x00008000)
+  (define GL_QUERY_BUFFER_BINDING           #x9193)
+  (define GL_QUERY_RESULT_NO_WAIT           #x9194)
+  (define GL_MIRROR_CLAMP_TO_EDGE           #x8743)
+
+  (define GL_CONTEXT_LOST                   #x0507)
+  (define GL_NEGATIVE_ONE_TO_ONE            #x935E)
+  (define GL_ZERO_TO_ONE                    #x935F)
+  (define GL_CLIP_ORIGIN                    #x935C)
+  (define GL_CLIP_DEPTH_MODE                #x935D)
+  (define GL_QUERY_WAIT_INVERTED            #x8E17)
+  (define GL_QUERY_NO_WAIT_INVERTED         #x8E18)
+  (define GL_QUERY_BY_REGION_WAIT_INVERTED  #x8E19)
+  (define GL_QUERY_BY_REGION_NO_WAIT_INVERTED #x8E1A)
+  (define GL_MAX_CULL_DISTANCES             #x82F9)
+  (define GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES #x82FA)
+  (define GL_TEXTURE_TARGET                 #x1006)
+  (define GL_QUERY_TARGET                   #x82EA)
+  (define GL_GUILTY_CONTEXT_RESET           #x8253)
+  (define GL_INNOCENT_CONTEXT_RESET         #x8254)
+  (define GL_UNKNOWN_CONTEXT_RESET          #x8255)
+  (define GL_RESET_NOTIFICATION_STRATEGY    #x8256)
+  (define GL_LOSE_CONTEXT_ON_RESET          #x8252)
+  (define GL_NO_RESET_NOTIFICATION          #x8261)
+  (define GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT #x00000004)
+  (define GL_CONTEXT_RELEASE_BEHAVIOR       #x82FB)
+  (define GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH #x82FC)
+
+  (define GL_SHADER_BINARY_FORMAT_SPIR_V        #x9551)
+  (define GL_SPIR_V_BINARY                      #x9552)
+  (define GL_PARAMETER_BUFFER                   #x80EE)
+  (define GL_PARAMETER_BUFFER_BINDING           #x80EF)
+  (define GL_CONTEXT_FLAG_NO_ERROR_BIT          #x00000008)
+  (define GL_VERTICES_SUBMITTED                 #x82EE)
+  (define GL_PRIMITIVES_SUBMITTED               #x82EF)
+  (define GL_VERTEX_SHADER_INVOCATIONS          #x82F0)
+  (define GL_TESS_CONTROL_SHADER_PATCHES        #x82F1)
+  (define GL_TESS_EVALUATION_SHADER_INVOCATIONS #x82F2)
+  (define GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED #x82F3)
+  (define GL_FRAGMENT_SHADER_INVOCATIONS        #x82F4)
+  (define GL_COMPUTE_SHADER_INVOCATIONS         #x82F5)
+  (define GL_CLIPPING_INPUT_PRIMITIVES          #x82F6)
+  (define GL_CLIPPING_OUTPUT_PRIMITIVES         #x82F7)
+  (define GL_POLYGON_OFFSET_CLAMP               #x8E1B)
+  (define GL_SPIR_V_EXTENSIONS                  #x9553)
+  (define GL_NUM_SPIR_V_EXTENSIONS              #x9554)
+  (define GL_TEXTURE_MAX_ANISOTROPY             #x84FE)
+  (define GL_MAX_TEXTURE_MAX_ANISOTROPY         #x84FF)
+  (define GL_TRANSFORM_FEEDBACK_OVERFLOW        #x82EC)
+  (define GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW #x82ED)
+
+
+  (define *glCullFace*)
+  (define *glFrontFace*)
+  (define *glHint*)
+  (define *glLineWidth*)
+  (define *glPointSize*)
+  (define *glPolygonMode*)
+  (define *glScissor*)
+  (define *glTexParameterf*)
+  (define *glTexParameterfv*)
+  (define *glTexParameteri*)
+  (define *glTexParameteriv*)
+  (define *glTexImage1D*)
+  (define *glTexImage2D*)
+  (define *glDrawBuffer*)
+  (define *glClear*)
+  (define *glClearColor*)
+  (define *glClearStencil*)
+  (define *glClearDepth*)
+  (define *glStencilMask*)
+  (define *glColorMask*)
+  (define *glDepthMask*)
+  (define *glDisable*)
+  (define *glEnable*)
+  (define *glFinish*)
+  (define *glFlush*)
+  (define *glBlendFunc*)
+  (define *glLogicOp*)
+  (define *glStencilFunc*)
+  (define *glStencilOp*)
+  (define *glDepthFunc*)
+  (define *glPixelStoref*)
+  (define *glPixelStorei*)
+  (define *glReadBuffer*)
+  (define *glReadPixels*)
+  (define *glGetBooleanv*)
+  (define *glGetDoublev*)
+  (define *glGetError*)
+  (define *glGetFloatv*)
+  (define *glGetIntegerv*)
+  (define *glGetString*)
+  (define *glGetTexImage*)
+  (define *glGetTexParameterfv*)
+  (define *glGetTexParameteriv*)
+  (define *glGetTexLevelParameterfv*)
+  (define *glGetTexLevelParameteriv*)
+  (define *glIsEnabled*)
+  (define *glDepthRange*)
+  (define *glViewport*)
+
+  (define *glDrawArrays*)
+  (define *glDrawElements*)
+  (define *glGetPointerv*)
+  (define *glPolygonOffset*)
+  (define *glCopyTexImage1D*)
+  (define *glCopyTexImage2D*)
+  (define *glCopyTexSubImage1D*)
+  (define *glCopyTexSubImage2D*)
+  (define *glTexSubImage1D*)
+  (define *glTexSubImage2D*)
+  (define *glBindTexture*)
+  (define *glDeleteTextures*)
+  (define *glGenTextures*)
+  (define *glIsTexture*)
+
+  (define *glDrawRangeElements*)
+  (define *glTexImage3D*)
+  (define *glTexSubImage3D*)
+  (define *glCopyTexSubImage3D*)
+
+  (define *glActiveTexture*)
+  (define *glSampleCoverage*)
+  (define *glCompressedTexImage3D*)
+  (define *glCompressedTexImage2D*)
+  (define *glCompressedTexImage1D*)
+  (define *glCompressedTexSubImage3D*)
+  (define *glCompressedTexSubImage2D*)
+  (define *glCompressedTexSubImage1D*)
+  (define *glGetCompressedTexImage*)
+
+  (define *glBlendFuncSeparate*)
+  (define *glMultiDrawArrays*)
+  (define *glMultiDrawElements*)
+  (define *glPointParameterf*)
+  (define *glPointParameterfv*)
+  (define *glPointParameteri*)
+  (define *glPointParameteriv*)
+  (define *glBlendColor*)
+  (define *glBlendEquation*)
+
+  (define *glGenQueries*)
+  (define *glDeleteQueries*)
+  (define *glIsQuery*)
+  (define *glBeginQuery*)
+  (define *glEndQuery*)
+  (define *glGetQueryiv*)
+  (define *glGetQueryObjectiv*)
+  (define *glGetQueryObjectuiv*)
+  (define *glBindBuffer*)
+  (define *glDeleteBuffers*)
+  (define *glGenBuffers*)
+  (define *glIsBuffer*)
+  (define *glBufferData*)
+  (define *glBufferSubData*)
+  (define *glGetBufferSubData*)
+  (define *glMapBuffer*)
+  (define *glUnmapBuffer*)
+  (define *glGetBufferParameteriv*)
+  (define *glGetBufferPointerv*)
+
+  (define *glBlendEquationSeparate*)
+  (define *glDrawBuffers*)
+  (define *glStencilOpSeparate*)
+  (define *glStencilFuncSeparate*)
+  (define *glStencilMaskSeparate*)
+  (define *glAttachShader*)
+  (define *glBindAttribLocation*)
+  (define *glCompileShader*)
+  (define *glCreateProgram*)
+  (define *glCreateShader*)
+  (define *glDeleteProgram*)
+  (define *glDeleteShader*)
+  (define *glDetachShader*)
+  (define *glDisableVertexAttribArray*)
+  (define *glEnableVertexAttribArray*)
+  (define *glGetActiveAttrib*)
+  (define *glGetActiveUniform*)
+  (define *glGetAttachedShaders*)
+  (define *glGetAttribLocation*)
+  (define *glGetProgramiv*)
+  (define *glGetProgramInfoLog*)
+  (define *glGetShaderiv*)
+  (define *glGetShaderInfoLog*)
+  (define *glGetShaderSource*)
+  (define *glGetUniformLocation*)
+  (define *glGetUniformfv*)
+  (define *glGetUniformiv*)
+  (define *glGetVertexAttribdv*)
+  (define *glGetVertexAttribfv*)
+  (define *glGetVertexAttribiv*)
+  (define *glGetVertexAttribPointerv*)
+  (define *glIsProgram*)
+  (define *glIsShader*)
+  (define *glLinkProgram*)
+  (define *glShaderSource*)
+  (define *glUseProgram*)
+  (define *glUniform1f*)
+  (define *glUniform2f*)
+  (define *glUniform3f*)
+  (define *glUniform4f*)
+  (define *glUniform1i*)
+  (define *glUniform2i*)
+  (define *glUniform3i*)
+  (define *glUniform4i*)
+  (define *glUniform1fv*)
+  (define *glUniform2fv*)
+  (define *glUniform3fv*)
+  (define *glUniform4fv*)
+  (define *glUniform1iv*)
+  (define *glUniform2iv*)
+  (define *glUniform3iv*)
+  (define *glUniform4iv*)
+  (define *glUniformMatrix2fv*)
+  (define *glUniformMatrix3fv*)
+  (define *glUniformMatrix4fv*)
+  (define *glValidateProgram*)
+  (define *glVertexAttrib1d*)
+  (define *glVertexAttrib1dv*)
+  (define *glVertexAttrib1f*)
+  (define *glVertexAttrib1fv*)
+  (define *glVertexAttrib1s*)
+  (define *glVertexAttrib1sv*)
+  (define *glVertexAttrib2d*)
+  (define *glVertexAttrib2dv*)
+  (define *glVertexAttrib2f*)
+  (define *glVertexAttrib2fv*)
+  (define *glVertexAttrib2s*)
+  (define *glVertexAttrib2sv*)
+  (define *glVertexAttrib3d*)
+  (define *glVertexAttrib3dv*)
+  (define *glVertexAttrib3f*)
+  (define *glVertexAttrib3fv*)
+  (define *glVertexAttrib3s*)
+  (define *glVertexAttrib3sv*)
+  (define *glVertexAttrib4Nbv*)
+  (define *glVertexAttrib4Niv*)
+  (define *glVertexAttrib4Nsv*)
+  (define *glVertexAttrib4Nub*)
+  (define *glVertexAttrib4Nubv*)
+  (define *glVertexAttrib4Nuiv*)
+  (define *glVertexAttrib4Nusv*)
+  (define *glVertexAttrib4bv*)
+  (define *glVertexAttrib4d*)
+  (define *glVertexAttrib4dv*)
+  (define *glVertexAttrib4f*)
+  (define *glVertexAttrib4fv*)
+  (define *glVertexAttrib4iv*)
+  (define *glVertexAttrib4s*)
+  (define *glVertexAttrib4sv*)
+  (define *glVertexAttrib4ubv*)
+  (define *glVertexAttrib4uiv*)
+  (define *glVertexAttrib4usv*)
+  (define *glVertexAttribPointer*)
+
+  (define *glUniformMatrix2x3fv*)
+  (define *glUniformMatrix3x2fv*)
+  (define *glUniformMatrix2x4fv*)
+  (define *glUniformMatrix4x2fv*)
+  (define *glUniformMatrix3x4fv*)
+  (define *glUniformMatrix4x3fv*)
+
+  (define *glColorMaski*)
+  (define *glGetBooleani_v*)
+  (define *glGetIntegeri_v*)
+  (define *glEnablei*)
+  (define *glDisablei*)
+  (define *glIsEnabledi*)
+  (define *glBeginTransformFeedback*)
+  (define *glEndTransformFeedback*)
+  (define *glBindBufferRange*)
+  (define *glBindBufferBase*)
+  (define *glTransformFeedbackVaryings*)
+  (define *glGetTransformFeedbackVarying*)
+  (define *glClampColor*)
+  (define *glBeginConditionalRender*)
+  (define *glEndConditionalRender*)
+  (define *glVertexAttribIPointer*)
+  (define *glGetVertexAttribIiv*)
+  (define *glGetVertexAttribIuiv*)
+  (define *glVertexAttribI1i*)
+  (define *glVertexAttribI2i*)
+  (define *glVertexAttribI3i*)
+  (define *glVertexAttribI4i*)
+  (define *glVertexAttribI1ui*)
+  (define *glVertexAttribI2ui*)
+  (define *glVertexAttribI3ui*)
+  (define *glVertexAttribI4ui*)
+  (define *glVertexAttribI1iv*)
+  (define *glVertexAttribI2iv*)
+  (define *glVertexAttribI3iv*)
+  (define *glVertexAttribI4iv*)
+  (define *glVertexAttribI1uiv*)
+  (define *glVertexAttribI2uiv*)
+  (define *glVertexAttribI3uiv*)
+  (define *glVertexAttribI4uiv*)
+  (define *glVertexAttribI4bv*)
+  (define *glVertexAttribI4sv*)
+  (define *glVertexAttribI4ubv*)
+  (define *glVertexAttribI4usv*)
+  (define *glGetUniformuiv*)
+  (define *glBindFragDataLocation*)
+  (define *glGetFragDataLocation*)
+  (define *glUniform1ui*)
+  (define *glUniform2ui*)
+  (define *glUniform3ui*)
+  (define *glUniform4ui*)
+  (define *glUniform1uiv*)
+  (define *glUniform2uiv*)
+  (define *glUniform3uiv*)
+  (define *glUniform4uiv*)
+  (define *glTexParameterIiv*)
+  (define *glTexParameterIuiv*)
+  (define *glGetTexParameterIiv*)
+  (define *glGetTexParameterIuiv*)
+  (define *glClearBufferiv*)
+  (define *glClearBufferuiv*)
+  (define *glClearBufferfv*)
+  (define *glClearBufferfi*)
+  (define *glGetStringi*)
+  (define *glIsRenderbuffer*)
+  (define *glBindRenderbuffer*)
+  (define *glDeleteRenderbuffers*)
+  (define *glGenRenderbuffers*)
+  (define *glRenderbufferStorage*)
+  (define *glGetRenderbufferParameteriv*)
+  (define *glIsFramebuffer*)
+  (define *glBindFramebuffer*)
+  (define *glDeleteFramebuffers*)
+  (define *glGenFramebuffers*)
+  (define *glCheckFramebufferStatus*)
+  (define *glFramebufferTexture1D*)
+  (define *glFramebufferTexture2D*)
+  (define *glFramebufferTexture3D*)
+  (define *glFramebufferRenderbuffer*)
+  (define *glGetFramebufferAttachmentParameteriv*)
+  (define *glGenerateMipmap*)
+  (define *glBlitFramebuffer*)
+  (define *glRenderbufferStorageMultisample*)
+  (define *glFramebufferTextureLayer*)
+  (define *glMapBufferRange*)
+  (define *glFlushMappedBufferRange*)
+  (define *glBindVertexArray*)
+  (define *glDeleteVertexArrays*)
+  (define *glGenVertexArrays*)
+  (define *glIsVertexArray*)
+
+  (define *glDrawArraysInstanced*)
+  (define *glDrawElementsInstanced*)
+  (define *glTexBuffer*)
+  (define *glPrimitiveRestartIndex*)
+  (define *glCopyBufferSubData*)
+  (define *glGetUniformIndices*)
+  (define *glGetActiveUniformsiv*)
+  (define *glGetActiveUniformName*)
+  (define *glGetUniformBlockIndex*)
+  (define *glGetActiveUniformBlockiv*)
+  (define *glGetActiveUniformBlockName*)
+  (define *glUniformBlockBinding*)
+
+  (define *glDrawElementsBaseVertex*)
+  (define *glDrawRangeElementsBaseVertex*)
+  (define *glDrawElementsInstancedBaseVertex*)
+  (define *glMultiDrawElementsBaseVertex*)
+  (define *glProvokingVertex*)
+  (define *glFenceSync*)
+  (define *glIsSync*)
+  (define *glDeleteSync*)
+  (define *glClientWaitSync*)
+  (define *glWaitSync*)
+  (define *glGetInteger64v*)
+  (define *glGetSynciv*)
+  (define *glGetInteger64i_v*)
+  (define *glGetBufferParameteri64v*)
+  (define *glFramebufferTexture*)
+  (define *glTexImage2DMultisample*)
+  (define *glTexImage3DMultisample*)
+  (define *glGetMultisamplefv*)
+  (define *glSampleMaski*)
+
+  (define *glBindFragDataLocationIndexed*)
+  (define *glGetFragDataIndex*)
+  (define *glGenSamplers*)
+  (define *glDeleteSamplers*)
+  (define *glIsSampler*)
+  (define *glBindSampler*)
+  (define *glSamplerParameteri*)
+  (define *glSamplerParameteriv*)
+  (define *glSamplerParameterf*)
+  (define *glSamplerParameterfv*)
+  (define *glSamplerParameterIiv*)
+  (define *glSamplerParameterIuiv*)
+  (define *glGetSamplerParameteriv*)
+  (define *glGetSamplerParameterIiv*)
+  (define *glGetSamplerParameterfv*)
+  (define *glGetSamplerParameterIuiv*)
+  (define *glQueryCounter*)
+  (define *glGetQueryObjecti64v*)
+  (define *glGetQueryObjectui64v*)
+  (define *glVertexAttribDivisor*)
+  (define *glVertexAttribP1ui*)
+  (define *glVertexAttribP1uiv*)
+  (define *glVertexAttribP2ui*)
+  (define *glVertexAttribP2uiv*)
+  (define *glVertexAttribP3ui*)
+  (define *glVertexAttribP3uiv*)
+  (define *glVertexAttribP4ui*)
+  (define *glVertexAttribP4uiv*)
+
+  (define *glMinSampleShading*)
+  (define *glBlendEquationi*)
+  (define *glBlendEquationSeparatei*)
+  (define *glBlendFunci*)
+  (define *glBlendFuncSeparatei*)
+  (define *glDrawArraysIndirect*)
+  (define *glDrawElementsIndirect*)
+  (define *glUniform1d*)
+  (define *glUniform2d*)
+  (define *glUniform3d*)
+  (define *glUniform4d*)
+  (define *glUniform1dv*)
+  (define *glUniform2dv*)
+  (define *glUniform3dv*)
+  (define *glUniform4dv*)
+  (define *glUniformMatrix2dv*)
+  (define *glUniformMatrix3dv*)
+  (define *glUniformMatrix4dv*)
+  (define *glUniformMatrix2x3dv*)
+  (define *glUniformMatrix2x4dv*)
+  (define *glUniformMatrix3x2dv*)
+  (define *glUniformMatrix3x4dv*)
+  (define *glUniformMatrix4x2dv*)
+  (define *glUniformMatrix4x3dv*)
+  (define *glGetUniformdv*)
+  (define *glGetSubroutineUniformLocation*)
+  (define *glGetSubroutineIndex*)
+  (define *glGetActiveSubroutineUniformiv*)
+  (define *glGetActiveSubroutineUniformName*)
+  (define *glGetActiveSubroutineName*)
+  (define *glUniformSubroutinesuiv*)
+  (define *glGetUniformSubroutineuiv*)
+  (define *glGetProgramStageiv*)
+  (define *glPatchParameteri*)
+  (define *glPatchParameterfv*)
+  (define *glBindTransformFeedback*)
+  (define *glDeleteTransformFeedbacks*)
+  (define *glGenTransformFeedbacks*)
+  (define *glIsTransformFeedback*)
+  (define *glPauseTransformFeedback*)
+  (define *glResumeTransformFeedback*)
+  (define *glDrawTransformFeedback*)
+  (define *glDrawTransformFeedbackStream*)
+  (define *glBeginQueryIndexed*)
+  (define *glEndQueryIndexed*)
+  (define *glGetQueryIndexediv*)
+
+  (define *glReleaseShaderCompiler*)
+  (define *glShaderBinary*)
+  (define *glGetShaderPrecisionFormat*)
+  (define *glDepthRangef*)
+  (define *glClearDepthf*)
+  (define *glGetProgramBinary*)
+  (define *glProgramBinary*)
+  (define *glProgramParameteri*)
+  (define *glUseProgramStages*)
+  (define *glActiveShaderProgram*)
+  (define *glCreateShaderProgramv*)
+  (define *glBindProgramPipeline*)
+  (define *glDeleteProgramPipelines*)
+  (define *glGenProgramPipelines*)
+  (define *glIsProgramPipeline*)
+  (define *glGetProgramPipelineiv*)
+  (define *glProgramUniform1i*)
+  (define *glProgramUniform1iv*)
+  (define *glProgramUniform1f*)
+  (define *glProgramUniform1fv*)
+  (define *glProgramUniform1d*)
+  (define *glProgramUniform1dv*)
+  (define *glProgramUniform1ui*)
+  (define *glProgramUniform1uiv*)
+  (define *glProgramUniform2i*)
+  (define *glProgramUniform2iv*)
+  (define *glProgramUniform2f*)
+  (define *glProgramUniform2fv*)
+  (define *glProgramUniform2d*)
+  (define *glProgramUniform2dv*)
+  (define *glProgramUniform2ui*)
+  (define *glProgramUniform2uiv*)
+  (define *glProgramUniform3i*)
+  (define *glProgramUniform3iv*)
+  (define *glProgramUniform3f*)
+  (define *glProgramUniform3fv*)
+  (define *glProgramUniform3d*)
+  (define *glProgramUniform3dv*)
+  (define *glProgramUniform3ui*)
+  (define *glProgramUniform3uiv*)
+  (define *glProgramUniform4i*)
+  (define *glProgramUniform4iv*)
+  (define *glProgramUniform4f*)
+  (define *glProgramUniform4fv*)
+  (define *glProgramUniform4d*)
+  (define *glProgramUniform4dv*)
+  (define *glProgramUniform4ui*)
+  (define *glProgramUniform4uiv*)
+  (define *glProgramUniformMatrix2fv*)
+  (define *glProgramUniformMatrix3fv*)
+  (define *glProgramUniformMatrix4fv*)
+  (define *glProgramUniformMatrix2dv*)
+  (define *glProgramUniformMatrix3dv*)
+  (define *glProgramUniformMatrix4dv*)
+  (define *glProgramUniformMatrix2x3fv*)
+  (define *glProgramUniformMatrix3x2fv*)
+  (define *glProgramUniformMatrix2x4fv*)
+  (define *glProgramUniformMatrix4x2fv*)
+  (define *glProgramUniformMatrix3x4fv*)
+  (define *glProgramUniformMatrix4x3fv*)
+  (define *glProgramUniformMatrix2x3dv*)
+  (define *glProgramUniformMatrix3x2dv*)
+  (define *glProgramUniformMatrix2x4dv*)
+  (define *glProgramUniformMatrix4x2dv*)
+  (define *glProgramUniformMatrix3x4dv*)
+  (define *glProgramUniformMatrix4x3dv*)
+  (define *glValidateProgramPipeline*)
+  (define *glGetProgramPipelineInfoLog*)
+  (define *glVertexAttribL1d*)
+  (define *glVertexAttribL2d*)
+  (define *glVertexAttribL3d*)
+  (define *glVertexAttribL4d*)
+  (define *glVertexAttribL1dv*)
+  (define *glVertexAttribL2dv*)
+  (define *glVertexAttribL3dv*)
+  (define *glVertexAttribL4dv*)
+  (define *glVertexAttribLPointer*)
+  (define *glGetVertexAttribLdv*)
+  (define *glViewportArrayv*)
+  (define *glViewportIndexedf*)
+  (define *glViewportIndexedfv*)
+  (define *glScissorArrayv*)
+  (define *glScissorIndexed*)
+  (define *glScissorIndexedv*)
+  (define *glDepthRangeArrayv*)
+  (define *glDepthRangeIndexed*)
+  (define *glGetFloati_v*)
+  (define *glGetDoublei_v*)
+
+  (define *glDrawArraysInstancedBaseInstance*)
+  (define *glDrawElementsInstancedBaseInstance*)
+  (define *glDrawElementsInstancedBaseVertexBaseInstance*)
+  (define *glGetInternalformativ*)
+  (define *glGetActiveAtomicCounterBufferiv*)
+  (define *glBindImageTexture*)
+  (define *glMemoryBarrier*)
+  (define *glTexStorage1D*)
+  (define *glTexStorage2D*)
+  (define *glTexStorage3D*)
+  (define *glDrawTransformFeedbackInstanced*)
+  (define *glDrawTransformFeedbackStreamInstanced*)
+
+  (define *glClearBufferData*)
+  (define *glClearBufferSubData*)
+  (define *glDispatchCompute*)
+  (define *glDispatchComputeIndirect*)
+  (define *glCopyImageSubData*)
+  (define *glFramebufferParameteri*)
+  (define *glGetFramebufferParameteriv*)
+  (define *glGetInternalformati64v*)
+  (define *glInvalidateTexSubImage*)
+  (define *glInvalidateTexImage*)
+  (define *glInvalidateBufferSubData*)
+  (define *glInvalidateBufferData*)
+  (define *glInvalidateFramebuffer*)
+  (define *glInvalidateSubFramebuffer*)
+  (define *glMultiDrawArraysIndirect*)
+  (define *glMultiDrawElementsIndirect*)
+  (define *glGetProgramInterfaceiv*)
+  (define *glGetProgramResourceIndex*)
+  (define *glGetProgramResourceName*)
+  (define *glGetProgramResourceiv*)
+  (define *glGetProgramResourceLocation*)
+  (define *glGetProgramResourceLocationIndex*)
+  (define *glShaderStorageBlockBinding*)
+  (define *glTexBufferRange*)
+  (define *glTexStorage2DMultisample*)
+  (define *glTexStorage3DMultisample*)
+  (define *glTextureView*)
+  (define *glBindVertexBuffer*)
+  (define *glVertexAttribFormat*)
+  (define *glVertexAttribIFormat*)
+  (define *glVertexAttribLFormat*)
+  (define *glVertexAttribBinding*)
+  (define *glVertexBindingDivisor*)
+  (define *glDebugMessageControl*)
+  (define *glDebugMessageInsert*)
+  (define *glDebugMessageCallback*)
+  (define *glGetDebugMessageLog*)
+  (define *glPushDebugGroup*)
+  (define *glPopDebugGroup*)
+  (define *glObjectLabel*)
+  (define *glGetObjectLabel*)
+  (define *glObjectPtrLabel*)
+  (define *glGetObjectPtrLabel*)
+
+  (define *glBufferStorage*)
+  (define *glClearTexImage*)
+  (define *glClearTexSubImage*)
+  (define *glBindBuffersBase*)
+  (define *glBindBuffersRange*)
+  (define *glBindTextures*)
+  (define *glBindSamplers*)
+  (define *glBindImageTextures*)
+  (define *glBindVertexBuffers*)
+
+  (define *glClipControl*)
+  (define *glCreateTransformFeedbacks*)
+  (define *glTransformFeedbackBufferBase*)
+  (define *glTransformFeedbackBufferRange*)
+  (define *glGetTransformFeedbackiv*)
+  (define *glGetTransformFeedbacki_v*)
+  (define *glGetTransformFeedbacki64_v*)
+  (define *glCreateBuffers*)
+  (define *glNamedBufferStorage*)
+  (define *glNamedBufferData*)
+  (define *glNamedBufferSubData*)
+  (define *glCopyNamedBufferSubData*)
+  (define *glClearNamedBufferData*)
+  (define *glClearNamedBufferSubData*)
+  (define *glMapNamedBuffer*)
+  (define *glMapNamedBufferRange*)
+  (define *glUnmapNamedBuffer*)
+  (define *glFlushMappedNamedBufferRange*)
+  (define *glGetNamedBufferParameteriv*)
+  (define *glGetNamedBufferParameteri64v*)
+  (define *glGetNamedBufferPointerv*)
+  (define *glGetNamedBufferSubData*)
+  (define *glCreateFramebuffers*)
+  (define *glNamedFramebufferRenderbuffer*)
+  (define *glNamedFramebufferParameteri*)
+  (define *glNamedFramebufferTexture*)
+  (define *glNamedFramebufferTextureLayer*)
+  (define *glNamedFramebufferDrawBuffer*)
+  (define *glNamedFramebufferDrawBuffers*)
+  (define *glNamedFramebufferReadBuffer*)
+  (define *glInvalidateNamedFramebufferData*)
+  (define *glInvalidateNamedFramebufferSubData*)
+  (define *glClearNamedFramebufferiv*)
+  (define *glClearNamedFramebufferuiv*)
+  (define *glClearNamedFramebufferfv*)
+  (define *glClearNamedFramebufferfi*)
+  (define *glBlitNamedFramebuffer*)
+  (define *glCheckNamedFramebufferStatus*)
+  (define *glGetNamedFramebufferParameteriv*)
+  (define *glGetNamedFramebufferAttachmentParameteriv*)
+  (define *glCreateRenderbuffers*)
+  (define *glNamedRenderbufferStorage*)
+  (define *glNamedRenderbufferStorageMultisample*)
+  (define *glGetNamedRenderbufferParameteriv*)
+  (define *glCreateTextures*)
+  (define *glTextureBuffer*)
+  (define *glTextureBufferRange*)
+  (define *glTextureStorage1D*)
+  (define *glTextureStorage2D*)
+  (define *glTextureStorage3D*)
+  (define *glTextureStorage2DMultisample*)
+  (define *glTextureStorage3DMultisample*)
+  (define *glTextureSubImage1D*)
+  (define *glTextureSubImage2D*)
+  (define *glTextureSubImage3D*)
+  (define *glCompressedTextureSubImage1D*)
+  (define *glCompressedTextureSubImage2D*)
+  (define *glCompressedTextureSubImage3D*)
+  (define *glCopyTextureSubImage1D*)
+  (define *glCopyTextureSubImage2D*)
+  (define *glCopyTextureSubImage3D*)
+  (define *glTextureParameterf*)
+  (define *glTextureParameterfv*)
+  (define *glTextureParameteri*)
+  (define *glTextureParameterIiv*)
+  (define *glTextureParameterIuiv*)
+  (define *glTextureParameteriv*)
+  (define *glGenerateTextureMipmap*)
+  (define *glBindTextureUnit*)
+  (define *glGetTextureImage*)
+  (define *glGetCompressedTextureImage*)
+  (define *glGetTextureLevelParameterfv*)
+  (define *glGetTextureLevelParameteriv*)
+  (define *glGetTextureParameterfv*)
+  (define *glGetTextureParameterIiv*)
+  (define *glGetTextureParameterIuiv*)
+  (define *glGetTextureParameteriv*)
+  (define *glCreateVertexArrays*)
+  (define *glDisableVertexArrayAttrib*)
+  (define *glEnableVertexArrayAttrib*)
+  (define *glVertexArrayElementBuffer*)
+  (define *glVertexArrayVertexBuffer*)
+  (define *glVertexArrayVertexBuffers*)
+  (define *glVertexArrayAttribBinding*)
+  (define *glVertexArrayAttribFormat*)
+  (define *glVertexArrayAttribIFormat*)
+  (define *glVertexArrayAttribLFormat*)
+  (define *glVertexArrayBindingDivisor*)
+  (define *glGetVertexArrayiv*)
+  (define *glGetVertexArrayIndexediv*)
+  (define *glGetVertexArrayIndexed64iv*)
+  (define *glCreateSamplers*)
+  (define *glCreateProgramPipelines*)
+  (define *glCreateQueries*)
+  (define *glGetQueryBufferObjecti64v*)
+  (define *glGetQueryBufferObjectiv*)
+  (define *glGetQueryBufferObjectui64v*)
+  (define *glGetQueryBufferObjectuiv*)
+  (define *glMemoryBarrierByRegion*)
+  (define *glGetTextureSubImage*)
+  (define *glGetCompressedTextureSubImage*)
+  (define *glGetGraphicsResetStatus*)
+  (define *glGetnCompressedTexImage*)
+  (define *glGetnTexImage*)
+  (define *glGetnUniformdv*)
+  (define *glGetnUniformfv*)
+  (define *glGetnUniformiv*)
+  (define *glGetnUniformuiv*)
+  (define *glReadnPixels*)
+  (define *glTextureBarrier*)
+
+  (define *glSpecializeShader*)
+  (define *glMultiDrawArraysIndirectCount*)
+  (define *glMultiDrawElementsIndirectCount*)
+  (define *glPolygonOffsetClamp*)
+
+
+  (define (glCullFace mode)(*glCullFace* mode))
+  (define (glFrontFace mode)(*glFrontFace* mode))
+  (define (glHint target mode)(*glHint* target mode))
+  (define (glLineWidth width)(*glLineWidth* width))
+  (define (glPointSize size)(*glPointSize* size))
+  (define (glPolygonMode face mode)(*glPolygonMode* face mode))
+  (define (glScissor x y width height)(*glScissor* x y width height))
+  (define (glTexParameterf target pname param)(*glTexParameterf* target pname param))
+  (define (glTexParameterfv target pname params)(*glTexParameterfv* target pname params))
+  (define (glTexParameteri target pname param)(*glTexParameteri* target pname param))
+  (define (glTexParameteriv target pname params)(*glTexParameteriv* target pname params))
+  (define (glTexImage1D target level internalformat width border format type pixels)(*glTexImage1D* target level internalformat width border format type pixels))
+  (define (glTexImage2D target level internalformat width height border format type pixels)(*glTexImage2D* target level internalformat width height border format type pixels))
+  (define (glDrawBuffer buf)(*glDrawBuffer* buf))
+  (define (glClear mask)(*glClear* mask))
+  (define (glClearColor red green blue alpha)(*glClearColor* red green blue alpha))
+  (define (glClearStencil s)(*glClearStencil* s))
+  (define (glClearDepth depth)(*glClearDepth* depth))
+  (define (glStencilMask mask)(*glStencilMask* mask))
+  (define (glColorMask red  green blue alpha)(*glColorMask* red  green blue alpha))
+  (define (glDepthMask flag)(*glDepthMask* flag))
+  (define (glDisable cap)(*glDisable* cap))
+  (define (glEnable cap)(*glEnable* cap))
+  (define (glFinish)(*glFinish*))
+  (define (glFlush)(*glFlush*))
+  (define (glBlendFunc sfactor dfactor)(*glBlendFunc* sfactor dfactor))
+  (define (glLogicOp opcode)(*glLogicOp* opcode))
+  (define (glStencilFunc func ref mask)(*glStencilFunc* func ref mask))
+  (define (glStencilOp fail  zfail zpass)(*glStencilOp* fail  zfail zpass))
+  (define (glDepthFunc func)(*glDepthFunc* func))
+  (define (glPixelStoref pname param)(*glPixelStoref* pname param))
+  (define (glPixelStorei pname param)(*glPixelStorei* pname param))
+  (define (glReadBuffer src)(*glReadBuffer* src))
+  (define (glReadPixels x y width height format type pixels)(*glReadPixels* x y width height format type pixels))
+  (define (glGetBooleanv pname data)(*glGetBooleanv* pname data))
+  (define (glGetDoublev pname data)(*glGetDoublev* pname data))
+  (define (glGetError)(*glGetError*))
+  (define (glGetFloatv pname data)(*glGetFloatv* pname data))
+  (define (glGetIntegerv pname data)(*glGetIntegerv* pname data))
+  (define (glGetString name)(*glGetString* name))
+  (define (glGetTexImage target level format type pixels)(*glGetTexImage* target level format type pixels))
+  (define (glGetTexParameterfv target pname params)(*glGetTexParameterfv* target pname params))
+  (define (glGetTexParameteriv target pname params)(*glGetTexParameteriv* target pname params))
+  (define (glGetTexLevelParameterfv target level pname params)(*glGetTexLevelParameterfv* target level pname params))
+  (define (glGetTexLevelParameteriv target level pname params)(*glGetTexLevelParameteriv* target level pname params))
+  (define (glIsEnabled cap)(*glIsEnabled* cap))
+  (define (glDepthRange n f)(*glDepthRange* n f))
+  (define (glViewport x y width height)(*glViewport* x y width height))
+
+  (define (glDrawArrays mode first count)(*glDrawArrays* mode first count))
+  (define (glDrawElements mode count type indices)(*glDrawElements* mode count type indices))
+  (define (glGetPointerv pname params)(*glGetPointerv* pname params))
+  (define (glPolygonOffset factor units)(*glPolygonOffset* factor units))
+  (define (glCopyTexImage1D target level internalformat x y width border)(*glCopyTexImage1D* target level internalformat x y width border))
+  (define (glCopyTexImage2D target level internalformat x y width height border)(*glCopyTexImage2D* target level internalformat x y width height border))
+  (define (glCopyTexSubImage1D target level xoffset x y width)(*glCopyTexSubImage1D* target level xoffset x y width))
+  (define (glCopyTexSubImage2D target level xoffset yoffset x y width height)(*glCopyTexSubImage2D* target level xoffset yoffset x y width height))
+  (define (glTexSubImage1D target level xoffset width format type pixels)(*glTexSubImage1D* target level xoffset width format type pixels))
+  (define (glTexSubImage2D target level xoffset yoffset width height format type pixels)(*glTexSubImage2D* target level xoffset yoffset width height format type pixels))
+  (define (glBindTexture target texture)(*glBindTexture* target texture))
+  (define (glDeleteTextures n textures)(*glDeleteTextures* n textures))
+  (define (glGenTextures n textures)(*glGenTextures* n textures))
+  (define (glIsTexture texture)(*glIsTexture* texture))
+
+  (define (glDrawRangeElements mode start end count type indices)(*glDrawRangeElements* mode start end count type indices))
+  (define (glTexImage3D target level internalformat width height depth border format type pixels)(*glTexImage3D* target level internalformat width height depth border format type pixels))
+  (define (glTexSubImage3D target level xoffset yoffset zoffset width height depth format type pixels)(*glTexSubImage3D* target level xoffset yoffset zoffset width height depth format type pixels))
+  (define (glCopyTexSubImage3D target level xoffset yoffset zoffset x y width height)(*glCopyTexSubImage3D* target level xoffset yoffset zoffset x y width height))
+
+  (define (glActiveTexture texture)(*glActiveTexture* texture))
+  (define (glSampleCoverage value invert)(*glSampleCoverage* value invert))
+  (define (glCompressedTexImage3D target level internalformat width height depth border imageSize data)(*glCompressedTexImage3D* target level internalformat width height depth border imageSize data))
+  (define (glCompressedTexImage2D target level internalformat width height border imageSize data)(*glCompressedTexImage2D* target level internalformat width height border imageSize data))
+  (define (glCompressedTexImage1D target level internalformat width border imageSize data)(*glCompressedTexImage1D* target level internalformat width border imageSize data))
+  (define (glCompressedTexSubImage3D target level xoffset yoffset zoffset width height depth format imageSize data)(*glCompressedTexSubImage3D* target level xoffset yoffset zoffset width height depth format imageSize data))
+  (define (glCompressedTexSubImage2D target level xoffset yoffset width height format imageSize data)(*glCompressedTexSubImage2D* target level xoffset yoffset width height format imageSize data))
+  (define (glCompressedTexSubImage1D target level xoffset width format imageSize data)(*glCompressedTexSubImage1D* target level xoffset width format imageSize data))
+  (define (glGetCompressedTexImage target level img)(*glGetCompressedTexImage* target level img))
+
+  (define (glBlendFuncSeparate sfactorRGB dfactorRGB sfactorAlpha dfactorAlpha)(*glBlendFuncSeparate* sfactorRGB dfactorRGB sfactorAlpha dfactorAlpha))
+  (define (glMultiDrawArrays mode first count drawcount)(*glMultiDrawArrays* mode first count drawcount))
+  (define (glMultiDrawElements mode count type indices drawcount)(*glMultiDrawElements* mode count type indices drawcount))
+  (define (glPointParameterf pname param)(*glPointParameterf* pname param))
+  (define (glPointParameterfv pname params)(*glPointParameterfv* pname params))
+  (define (glPointParameteri pname param)(*glPointParameteri* pname param))
+  (define (glPointParameteriv pname params)(*glPointParameteriv* pname params))
+  (define (glBlendColor red green blue alpha)(*glBlendColor* red green blue alpha))
+  (define (glBlendEquation mode)(*glBlendEquation* mode))
+
+  (define (glGenQueries n ids)(*glGenQueries* n ids))
+  (define (glDeleteQueries n ids)(*glDeleteQueries* n ids))
+  (define (glIsQuery id)(*glIsQuery* id))
+  (define (glBeginQuery target id)(*glBeginQuery* target id))
+  (define (glEndQuery target)(*glEndQuery* target))
+  (define (glGetQueryiv target pname params)(*glGetQueryiv* target pname params))
+  (define (glGetQueryObjectiv id pname params)(*glGetQueryObjectiv* id pname params))
+  (define (glGetQueryObjectuiv id pname params)(*glGetQueryObjectuiv* id pname params))
+  (define (glBindBuffer target buffer)(*glBindBuffer* target buffer))
+  (define (glDeleteBuffers n buffers)(*glDeleteBuffers* n buffers))
+  (define (glGenBuffers n buffers)(*glGenBuffers* n buffers))
+  (define (glIsBuffer buffer)(*glIsBuffer* buffer))
+  (define (glBufferData target size data usage)(*glBufferData* target size data usage))
+  (define (glBufferSubData target offset size data)(*glBufferSubData* target offset size data))
+  (define (glGetBufferSubData target offset size data)(*glGetBufferSubData* target offset size data))
+  (define (glMapBuffer target access)(*glMapBuffer* target access))
+  (define (glUnmapBuffer target)(*glUnmapBuffer* target))
+  (define (glGetBufferParameteriv target pname params)(*glGetBufferParameteriv* target pname params))
+  (define (glGetBufferPointerv target pname params)(*glGetBufferPointerv* target pname params))
+
+  (define (glBlendEquationSeparate modeRGB modeAlpha)(*glBlendEquationSeparate* modeRGB modeAlpha))
+  (define (glDrawBuffers n bufs)(*glDrawBuffers* n bufs))
+  (define (glStencilOpSeparate face sfail dpfail dppass)(*glStencilOpSeparate* face sfail dpfail dppass))
+  (define (glStencilFuncSeparate face func ref mask)(*glStencilFuncSeparate* face func ref mask))
+  (define (glStencilMaskSeparate face mask)(*glStencilMaskSeparate* face mask))
+  (define (glAttachShader program shader)(*glAttachShader* program shader))
+  (define (glBindAttribLocation program index name)(*glBindAttribLocation* program index name))
+  (define (glCompileShader shader)(*glCompileShader* shader))
+  (define (glCreateProgram)(*glCreateProgram*))
+  (define (glCreateShader type)(*glCreateShader* type))
+  (define (glDeleteProgram program)(*glDeleteProgram* program))
+  (define (glDeleteShader shader)(*glDeleteShader* shader))
+  (define (glDetachShader program shader)(*glDetachShader* program shader))
+  (define (glDisableVertexAttribArray index)(*glDisableVertexAttribArray* index))
+  (define (glEnableVertexAttribArray index)(*glEnableVertexAttribArray* index))
+  (define (glGetActiveAttrib program index bufSize length size type name)(*glGetActiveAttrib* program index bufSize length size type name))
+  (define (glGetActiveUniform program index bufSize length size type name)(*glGetActiveUniform* program index bufSize length size type name))
+  (define (glGetAttachedShaders program maxCount count shaders)(*glGetAttachedShaders* program maxCount count shaders))
+  (define (glGetAttribLocation program name)(*glGetAttribLocation* program name))
+  (define (glGetProgramiv program pname params)(*glGetProgramiv* program pname params))
+  (define (glGetProgramInfoLog program bufSize length infoLog)(*glGetProgramInfoLog* program bufSize length infoLog))
+  (define (glGetShaderiv shader pname params)(*glGetShaderiv* shader pname params))
+  (define (glGetShaderInfoLog shader bufSize length infoLog)(*glGetShaderInfoLog* shader bufSize length infoLog))
+  (define (glGetShaderSource shader bufSize length source)(*glGetShaderSource* shader bufSize length source))
+  (define (glGetUniformLocation program name)(*glGetUniformLocation* program name))
+  (define (glGetUniformfv program location params)(*glGetUniformfv* program location params))
+  (define (glGetUniformiv program location params)(*glGetUniformiv* program location params))
+  (define (glGetVertexAttribdv index pname params)(*glGetVertexAttribdv* index pname params))
+  (define (glGetVertexAttribfv index pname params)(*glGetVertexAttribfv* index pname params))
+  (define (glGetVertexAttribiv index pname params)(*glGetVertexAttribiv* index pname params))
+  (define (glGetVertexAttribPointerv index pname pointer)(*glGetVertexAttribPointerv* index pname pointer))
+  (define (glIsProgram program)(*glIsProgram* program))
+  (define (glIsShader shader)(*glIsShader* shader))
+  (define (glLinkProgram program)(*glLinkProgram* program))
+  (define (glShaderSource shader count string length)(*glShaderSource* shader count string length))
+  (define (glUseProgram program)(*glUseProgram* program))
+  (define (glUniform1f location v0)(*glUniform1f* location v0))
+  (define (glUniform2f location v0 v1)(*glUniform2f* location v0 v1))
+  (define (glUniform3f location v0 v1 v2)(*glUniform3f* location v0 v1 v2))
+  (define (glUniform4f location v0 v1 v2 v3)(*glUniform4f* location v0 v1 v2 v3))
+  (define (glUniform1i location v0)(*glUniform1i* location v0))
+  (define (glUniform2i location v0 v1)(*glUniform2i* location v0 v1))
+  (define (glUniform3i location v0 v1 v2)(*glUniform3i* location v0 v1 v2))
+  (define (glUniform4i location v0 v1 v2 v3)(*glUniform4i* location v0 v1 v2 v3))
+  (define (glUniform1fv location count value)(*glUniform1fv* location count value))
+  (define (glUniform2fv location count value)(*glUniform2fv* location count value))
+  (define (glUniform3fv location count value)(*glUniform3fv* location count value))
+  (define (glUniform4fv location count value)(*glUniform4fv* location count value))
+  (define (glUniform1iv location count value)(*glUniform1iv* location count value))
+  (define (glUniform2iv location count value)(*glUniform2iv* location count value))
+  (define (glUniform3iv location count value)(*glUniform3iv* location count value))
+  (define (glUniform4iv location count value)(*glUniform4iv* location count value))
+  (define (glUniformMatrix2fv location count transpose value)(*glUniformMatrix2fv* location count transpose value))
+  (define (glUniformMatrix3fv location count transpose value)(*glUniformMatrix3fv* location count transpose value))
+  (define (glUniformMatrix4fv location count transpose value)(*glUniformMatrix4fv* location count transpose value))
+  (define (glValidateProgram program)(*glValidateProgram* program))
+  (define (glVertexAttrib1d index x)(*glVertexAttrib1d* index x))
+  (define (glVertexAttrib1dv index v)(*glVertexAttrib1dv* index v))
+  (define (glVertexAttrib1f index x)(*glVertexAttrib1f* index x))
+  (define (glVertexAttrib1fv index v)(*glVertexAttrib1fv* index v))
+  (define (glVertexAttrib1s index x)(*glVertexAttrib1s* index x))
+  (define (glVertexAttrib1sv index v)(*glVertexAttrib1sv* index v))
+  (define (glVertexAttrib2d index x y)(*glVertexAttrib2d* index x y))
+  (define (glVertexAttrib2dv index v)(*glVertexAttrib2dv* index v))
+  (define (glVertexAttrib2f index x y)(*glVertexAttrib2f* index x y))
+  (define (glVertexAttrib2fv index v)(*glVertexAttrib2fv* index v))
+  (define (glVertexAttrib2s index x y)(*glVertexAttrib2s* index x y))
+  (define (glVertexAttrib2sv index v)(*glVertexAttrib2sv* index v))
+  (define (glVertexAttrib3d index x y z)(*glVertexAttrib3d* index x y z))
+  (define (glVertexAttrib3dv index v)(*glVertexAttrib3dv* index v))
+  (define (glVertexAttrib3f index x y z)(*glVertexAttrib3f* index x y z))
+  (define (glVertexAttrib3fv index v)(*glVertexAttrib3fv* index v))
+  (define (glVertexAttrib3s index x y z)(*glVertexAttrib3s* index x y z))
+  (define (glVertexAttrib3sv index v)(*glVertexAttrib3sv* index v))
+  (define (glVertexAttrib4Nbv index v)(*glVertexAttrib4Nbv* index v))
+  (define (glVertexAttrib4Niv index v)(*glVertexAttrib4Niv* index v))
+  (define (glVertexAttrib4Nsv index v)(*glVertexAttrib4Nsv* index v))
+  (define (glVertexAttrib4Nub index x y z w)(*glVertexAttrib4Nub* index x y z w))
+  (define (glVertexAttrib4Nubv index v)(*glVertexAttrib4Nubv* index v))
+  (define (glVertexAttrib4Nuiv index v)(*glVertexAttrib4Nuiv* index v))
+  (define (glVertexAttrib4Nusv index v)(*glVertexAttrib4Nusv* index v))
+  (define (glVertexAttrib4bv index v)(*glVertexAttrib4bv* index v))
+  (define (glVertexAttrib4d index x y z w)(*glVertexAttrib4d* index x y z w))
+  (define (glVertexAttrib4dv index v)(*glVertexAttrib4dv* index v))
+  (define (glVertexAttrib4f index x y z w)(*glVertexAttrib4f* index x y z w))
+  (define (glVertexAttrib4fv index v)(*glVertexAttrib4fv* index v))
+  (define (glVertexAttrib4iv index v)(*glVertexAttrib4iv* index v))
+  (define (glVertexAttrib4s index x y z w)(*glVertexAttrib4s* index x y z w))
+  (define (glVertexAttrib4sv index v)(*glVertexAttrib4sv* index v))
+  (define (glVertexAttrib4ubv index v)(*glVertexAttrib4ubv* index v))
+  (define (glVertexAttrib4uiv index v)(*glVertexAttrib4uiv* index v))
+  (define (glVertexAttrib4usv index v)(*glVertexAttrib4usv* index v))
+  (define (glVertexAttribPointer index size type normalized stride pointer)(*glVertexAttribPointer* index size type normalized stride pointer))
+
+  (define (glUniformMatrix2x3fv location count transpose value)(*glUniformMatrix2x3fv* location count transpose value))
+  (define (glUniformMatrix3x2fv location count transpose value)(*glUniformMatrix3x2fv* location count transpose value))
+  (define (glUniformMatrix2x4fv location count transpose value)(*glUniformMatrix2x4fv* location count transpose value))
+  (define (glUniformMatrix4x2fv location count transpose value)(*glUniformMatrix4x2fv* location count transpose value))
+  (define (glUniformMatrix3x4fv location count transpose value)(*glUniformMatrix3x4fv* location count transpose value))
+  (define (glUniformMatrix4x3fv location count transpose value)(*glUniformMatrix4x3fv* location count transpose value))
+
+  (define (glColorMaski index r g b a)(*glColorMaski* index r g b a))
+  (define (glGetBooleani_v target index data)(*glGetBooleani_v* target index data))
+  (define (glGetIntegeri_v target index data)(*glGetIntegeri_v* target index data))
+  (define (glEnablei target index)(*glEnablei* target index))
+  (define (glDisablei target index)(*glDisablei* target index))
+  (define (glIsEnabledi target index)(*glIsEnabledi* target index))
+  (define (glBeginTransformFeedback primitiveMode)(*glBeginTransformFeedback* primitiveMode))
+  (define (glEndTransformFeedback)(*glEndTransformFeedback*))
+  (define (glBindBufferRange target index buffer offset size)(*glBindBufferRange* target index buffer offset size))
+  (define (glBindBufferBase target index buffer)(*glBindBufferBase* target index buffer))
+  (define (glTransformFeedbackVaryings program count varyings bufferMode)(*glTransformFeedbackVaryings* program count varyings bufferMode))
+  (define (glGetTransformFeedbackVarying program index bufSize length size type name)(*glGetTransformFeedbackVarying* program index bufSize length size type name))
+  (define (glClampColor target clamp)(*glClampColor* target clamp))
+  (define (glBeginConditionalRender id mode)(*glBeginConditionalRender* id mode))
+  (define (glEndConditionalRender)(*glEndConditionalRender*))
+  (define (glVertexAttribIPointer index size type stride pointer)(*glVertexAttribIPointer* index size type stride pointer))
+  (define (glGetVertexAttribIiv index pname params)(*glGetVertexAttribIiv* index pname params))
+  (define (glGetVertexAttribIuiv index pname params)(*glGetVertexAttribIuiv* index pname params))
+  (define (glVertexAttribI1i index x)(*glVertexAttribI1i* index x))
+  (define (glVertexAttribI2i index x y)(*glVertexAttribI2i* index x y))
+  (define (glVertexAttribI3i index x y z)(*glVertexAttribI3i* index x y z))
+  (define (glVertexAttribI4i index x y z w)(*glVertexAttribI4i* index x y z w))
+  (define (glVertexAttribI1ui index x)(*glVertexAttribI1ui* index x))
+  (define (glVertexAttribI2ui index x y)(*glVertexAttribI2ui* index x y))
+  (define (glVertexAttribI3ui index x y z)(*glVertexAttribI3ui* index x y z))
+  (define (glVertexAttribI4ui index x y z w)(*glVertexAttribI4ui* index x y z w))
+  (define (glVertexAttribI1iv index v)(*glVertexAttribI1iv* index v))
+  (define (glVertexAttribI2iv index v)(*glVertexAttribI2iv* index v))
+  (define (glVertexAttribI3iv index v)(*glVertexAttribI3iv* index v))
+  (define (glVertexAttribI4iv index v)(*glVertexAttribI4iv* index v))
+  (define (glVertexAttribI1uiv index v)(*glVertexAttribI1uiv* index v))
+  (define (glVertexAttribI2uiv index v)(*glVertexAttribI2uiv* index v))
+  (define (glVertexAttribI3uiv index v)(*glVertexAttribI3uiv* index v))
+  (define (glVertexAttribI4uiv index v)(*glVertexAttribI4uiv* index v))
+  (define (glVertexAttribI4bv index v)(*glVertexAttribI4bv* index v))
+  (define (glVertexAttribI4sv index v)(*glVertexAttribI4sv* index v))
+  (define (glVertexAttribI4ubv index v)(*glVertexAttribI4ubv* index v))
+  (define (glVertexAttribI4usv index v)(*glVertexAttribI4usv* index v))
+  (define (glGetUniformuiv program location params)(*glGetUniformuiv* program location params))
+  (define (glBindFragDataLocation program color name)(*glBindFragDataLocation* program color name))
+  (define (glGetFragDataLocation program name)(*glGetFragDataLocation* program name))
+  (define (glUniform1ui location v0)(*glUniform1ui* location v0))
+  (define (glUniform2ui location v0 v1)(*glUniform2ui* location v0 v1))
+  (define (glUniform3ui location v0 v1 v2)(*glUniform3ui* location v0 v1 v2))
+  (define (glUniform4ui location v0 v1 v2 v3)(*glUniform4ui* location v0 v1 v2 v3))
+  (define (glUniform1uiv location count value)(*glUniform1uiv* location count value))
+  (define (glUniform2uiv location count value)(*glUniform2uiv* location count value))
+  (define (glUniform3uiv location count value)(*glUniform3uiv* location count value))
+  (define (glUniform4uiv location count value)(*glUniform4uiv* location count value))
+  (define (glTexParameterIiv target pname params)(*glTexParameterIiv* target pname params))
+  (define (glTexParameterIuiv target pname params)(*glTexParameterIuiv* target pname params))
+  (define (glGetTexParameterIiv target pname params)(*glGetTexParameterIiv* target pname params))
+  (define (glGetTexParameterIuiv target pname params)(*glGetTexParameterIuiv* target pname params))
+  (define (glClearBufferiv buffer drawbuffer value)(*glClearBufferiv* buffer drawbuffer value))
+  (define (glClearBufferuiv buffer drawbuffer value)(*glClearBufferuiv* buffer drawbuffer value))
+  (define (glClearBufferfv buffer drawbuffer value)(*glClearBufferfv* buffer drawbuffer value))
+  (define (glClearBufferfi buffer drawbuffer depth stencil)(*glClearBufferfi* buffer drawbuffer depth stencil))
+  (define (glGetStringi name index)(*glGetStringi* name index))
+  (define (glIsRenderbuffer renderbuffer)(*glIsRenderbuffer* renderbuffer))
+  (define (glBindRenderbuffer target renderbuffer)(*glBindRenderbuffer* target renderbuffer))
+  (define (glDeleteRenderbuffers n renderbuffers)(*glDeleteRenderbuffers* n renderbuffers))
+  (define (glGenRenderbuffers n renderbuffers)(*glGenRenderbuffers* n renderbuffers))
+  (define (glRenderbufferStorage target internalformat width height)(*glRenderbufferStorage* target internalformat width height))
+  (define (glGetRenderbufferParameteriv target pname params)(*glGetRenderbufferParameteriv* target pname params))
+  (define (glIsFramebuffer framebuffer)(*glIsFramebuffer* framebuffer))
+  (define (glBindFramebuffer target framebuffer)(*glBindFramebuffer* target framebuffer))
+  (define (glDeleteFramebuffers n framebuffers)(*glDeleteFramebuffers* n framebuffers))
+  (define (glGenFramebuffers n framebuffers)(*glGenFramebuffers* n framebuffers))
+  (define (glCheckFramebufferStatus target)(*glCheckFramebufferStatus* target))
+  (define (glFramebufferTexture1D target attachment textarget texture level)(*glFramebufferTexture1D* target attachment textarget texture level))
+  (define (glFramebufferTexture2D target attachment textarget texture level)(*glFramebufferTexture2D* target attachment textarget texture level))
+  (define (glFramebufferTexture3D target attachment textarget texture level zoffset)(*glFramebufferTexture3D* target attachment textarget texture level zoffset))
+  (define (glFramebufferRenderbuffer target attachment renderbuffertarget renderbuffer)(*glFramebufferRenderbuffer* target attachment renderbuffertarget renderbuffer))
+  (define (glGetFramebufferAttachmentParameteriv target attachment pname params)(*glGetFramebufferAttachmentParameteriv* target attachment pname params))
+  (define (glGenerateMipmap target)(*glGenerateMipmap* target))
+  (define (glBlitFramebuffer srcX0 srcY0 srcX1 srcY1 dstX0 dstY0 dstX1 dstY1 mask filter)(*glBlitFramebuffer* srcX0 srcY0 srcX1 srcY1 dstX0 dstY0 dstX1 dstY1 mask filter))
+  (define (glRenderbufferStorageMultisample target samples internalformat width height)(*glRenderbufferStorageMultisample* target samples internalformat width height))
+  (define (glFramebufferTextureLayer target attachment texture level layer)(*glFramebufferTextureLayer* target attachment texture level layer))
+  (define (glMapBufferRange target offset length access)(*glMapBufferRange* target offset length access))
+  (define (glFlushMappedBufferRange target offset length)(*glFlushMappedBufferRange* target offset length))
+  (define (glBindVertexArray array)(*glBindVertexArray* array))
+  (define (glDeleteVertexArrays n arrays)(*glDeleteVertexArrays* n arrays))
+  (define (glGenVertexArrays n arrays)(*glGenVertexArrays* n arrays))
+  (define (glIsVertexArray array)(*glIsVertexArray* array))
+
+  (define (glDrawArraysInstanced mode first count instancecount)(*glDrawArraysInstanced* mode first count instancecount))
+  (define (glDrawElementsInstanced mode count type indices instancecount)(*glDrawElementsInstanced* mode count type indices instancecount))
+  (define (glTexBuffer target internalformat buffer)(*glTexBuffer* target internalformat buffer))
+  (define (glPrimitiveRestartIndex index)(*glPrimitiveRestartIndex* index))
+  (define (glCopyBufferSubData readTarget writeTarget readOffset writeOffset size)(*glCopyBufferSubData* readTarget writeTarget readOffset writeOffset size))
+  (define (glGetUniformIndices program uniformCount uniformNames uniformIndices)(*glGetUniformIndices* program uniformCount uniformNames uniformIndices))
+  (define (glGetActiveUniformsiv program uniformCount uniformIndices pname params)(*glGetActiveUniformsiv* program uniformCount uniformIndices pname params))
+  (define (glGetActiveUniformName program uniformIndex bufSize length uniformName)(*glGetActiveUniformName* program uniformIndex bufSize length uniformName))
+  (define (glGetUniformBlockIndex program uniformBlockName)(*glGetUniformBlockIndex* program uniformBlockName))
+  (define (glGetActiveUniformBlockiv program uniformBlockIndex pname params)(*glGetActiveUniformBlockiv* program uniformBlockIndex pname params))
+  (define (glGetActiveUniformBlockName program uniformBlockIndex bufSize length uniformBlockName)(*glGetActiveUniformBlockName* program uniformBlockIndex bufSize length uniformBlockName))
+  (define (glUniformBlockBinding program uniformBlockIndex uniformBlockBinding)(*glUniformBlockBinding* program uniformBlockIndex uniformBlockBinding))
+
+  (define (glDrawElementsBaseVertex mode count type indices basevertex)(*glDrawElementsBaseVertex* mode count type indices basevertex))
+  (define (glDrawRangeElementsBaseVertex mode start end count type indices basevertex)(*glDrawRangeElementsBaseVertex* mode start end count type indices basevertex))
+  (define (glDrawElementsInstancedBaseVertex mode count type indices instancecount basevertex)(*glDrawElementsInstancedBaseVertex* mode count type indices instancecount basevertex))
+  (define (glMultiDrawElementsBaseVertex mode count type indices drawcount basevertex)(*glMultiDrawElementsBaseVertex* mode count type indices drawcount basevertex))
+  (define (glProvokingVertex mode)(*glProvokingVertex* mode))
+  (define (glFenceSync condition flags)(*glFenceSync* condition flags))
+  (define (glIsSync sync)(*glIsSync* sync))
+  (define (glDeleteSync sync)(*glDeleteSync* sync))
+  (define (glClientWaitSync sync flags timeout)(*glClientWaitSync* sync flags timeout))
+  (define (glWaitSync sync flags timeout)(*glWaitSync* sync flags timeout))
+  (define (glGetInteger64v pname data)(*glGetInteger64v* pname data))
+  (define (glGetSynciv sync pname bufSize length values)(*glGetSynciv* sync pname bufSize length values))
+  (define (glGetInteger64i_v target index data)(*glGetInteger64i_v* target index data))
+  (define (glGetBufferParameteri64v target pname params)(*glGetBufferParameteri64v* target pname params))
+  (define (glFramebufferTexture target attachment texture level)(*glFramebufferTexture* target attachment texture level))
+  (define (glTexImage2DMultisample target samples internalformat width height fixedsamplelocations)(*glTexImage2DMultisample* target samples internalformat width height fixedsamplelocations))
+  (define (glTexImage3DMultisample target samples internalformat width height depth fixedsamplelocations)(*glTexImage3DMultisample* target samples internalformat width height depth fixedsamplelocations))
+  (define (glGetMultisamplefv pname index val)(*glGetMultisamplefv* pname index val))
+  (define (glSampleMaski maskNumber mask)(*glSampleMaski* maskNumber mask))
+
+  (define (glBindFragDataLocationIndexed program colorNumber index name)(*glBindFragDataLocationIndexed* program colorNumber index name))
+  (define (glGetFragDataIndex program name)(*glGetFragDataIndex* program name))
+  (define (glGenSamplers count samplers)(*glGenSamplers* count samplers))
+  (define (glDeleteSamplers count samplers)(*glDeleteSamplers* count samplers))
+  (define (glIsSampler sampler)(*glIsSampler* sampler))
+  (define (glBindSampler unit sampler)(*glBindSampler* unit sampler))
+  (define (glSamplerParameteri sampler pname param)(*glSamplerParameteri* sampler pname param))
+  (define (glSamplerParameteriv sampler pname param)(*glSamplerParameteriv* sampler pname param))
+  (define (glSamplerParameterf sampler pname param)(*glSamplerParameterf* sampler pname param))
+  (define (glSamplerParameterfv sampler pname param)(*glSamplerParameterfv* sampler pname param))
+  (define (glSamplerParameterIiv sampler pname param)(*glSamplerParameterIiv* sampler pname param))
+  (define (glSamplerParameterIuiv sampler pname param)(*glSamplerParameterIuiv* sampler pname param))
+  (define (glGetSamplerParameteriv sampler pname param)(*glGetSamplerParameteriv* sampler pname param))
+  (define (glGetSamplerParameterIiv sampler pname param)(*glGetSamplerParameterIiv* sampler pname param))
+  (define (glGetSamplerParameterfv sampler pname param)(*glGetSamplerParameterfv* sampler pname param))
+  (define (glGetSamplerParameterIuiv sampler pname param)(*glGetSamplerParameterIuiv* sampler pname param))
+  (define (glQueryCounter id target)(*glQueryCounter* id target))
+  (define (glGetQueryObjecti64v id pname params)(*glGetQueryObjecti64v* id pname params))
+  (define (glGetQueryObjectui64v id pname params)(*glGetQueryObjectui64v* id pname params))
+  (define (glVertexAttribDivisor index divisor)(*glVertexAttribDivisor* index divisor))
+  (define (glVertexAttribP1ui index type normalized value)(*glVertexAttribP1ui* index type normalized value))
+  (define (glVertexAttribP1uiv index type normalized value)(*glVertexAttribP1uiv* index type normalized value))
+  (define (glVertexAttribP2ui index type normalized value)(*glVertexAttribP2ui* index type normalized value))
+  (define (glVertexAttribP2uiv index type normalized value)(*glVertexAttribP2uiv* index type normalized value))
+  (define (glVertexAttribP3ui index type normalized value)(*glVertexAttribP3ui* index type normalized value))
+  (define (glVertexAttribP3uiv index type normalized value)(*glVertexAttribP3uiv* index type normalized value))
+  (define (glVertexAttribP4ui index type normalized value)(*glVertexAttribP4ui* index type normalized value))
+  (define (glVertexAttribP4uiv index type normalized value)(*glVertexAttribP4uiv* index type normalized value))
+
+  (define (glMinSampleShading value)(*glMinSampleShading* value))
+  (define (glBlendEquationi buf mode)(*glBlendEquationi* buf mode))
+  (define (glBlendEquationSeparatei buf modeRGB modeAlpha)(*glBlendEquationSeparatei* buf modeRGB modeAlpha))
+  (define (glBlendFunci buf src dst)(*glBlendFunci* buf src dst))
+  (define (glBlendFuncSeparatei buf srcRGB dstRGB srcAlpha dstAlpha)(*glBlendFuncSeparatei* buf srcRGB dstRGB srcAlpha dstAlpha))
+  (define (glDrawArraysIndirect mode indirect)(*glDrawArraysIndirect* mode indirect))
+  (define (glDrawElementsIndirect mode type indirect)(*glDrawElementsIndirect* mode type indirect))
+  (define (glUniform1d location x)(*glUniform1d* location x))
+  (define (glUniform2d location x y)(*glUniform2d* location x y))
+  (define (glUniform3d location x y z)(*glUniform3d* location x y z))
+  (define (glUniform4d location x y z w)(*glUniform4d* location x y z w))
+  (define (glUniform1dv location count value)(*glUniform1dv* location count value))
+  (define (glUniform2dv location count value)(*glUniform2dv* location count value))
+  (define (glUniform3dv location count value)(*glUniform3dv* location count value))
+  (define (glUniform4dv location count value)(*glUniform4dv* location count value))
+  (define (glUniformMatrix2dv location count transpose value)(*glUniformMatrix2dv* location count transpose value))
+  (define (glUniformMatrix3dv location count transpose value)(*glUniformMatrix3dv* location count transpose value))
+  (define (glUniformMatrix4dv location count transpose value)(*glUniformMatrix4dv* location count transpose value))
+  (define (glUniformMatrix2x3dv location count transpose value)(*glUniformMatrix2x3dv* location count transpose value))
+  (define (glUniformMatrix2x4dv location count transpose value)(*glUniformMatrix2x4dv* location count transpose value))
+  (define (glUniformMatrix3x2dv location count transpose value)(*glUniformMatrix3x2dv* location count transpose value))
+  (define (glUniformMatrix3x4dv location count transpose value)(*glUniformMatrix3x4dv* location count transpose value))
+  (define (glUniformMatrix4x2dv location count transpose value)(*glUniformMatrix4x2dv* location count transpose value))
+  (define (glUniformMatrix4x3dv location count transpose value)(*glUniformMatrix4x3dv* location count transpose value))
+  (define (glGetUniformdv program location params)(*glGetUniformdv* program location params))
+  (define (glGetSubroutineUniformLocation program shadertype name)(*glGetSubroutineUniformLocation* program shadertype name))
+  (define (glGetSubroutineIndex program shadertype name)(*glGetSubroutineIndex* program shadertype name))
+  (define (glGetActiveSubroutineUniformiv program shadertype index pname values)(*glGetActiveSubroutineUniformiv* program shadertype index pname values))
+  (define (glGetActiveSubroutineUniformName program shadertype index bufsize length name)(*glGetActiveSubroutineUniformName* program shadertype index bufsize length name))
+  (define (glGetActiveSubroutineName program shadertype index bufsize length name)(*glGetActiveSubroutineName* program shadertype index bufsize length name))
+  (define (glUniformSubroutinesuiv shadertype count indices)(*glUniformSubroutinesuiv* shadertype count indices))
+  (define (glGetUniformSubroutineuiv shadertype location params)(*glGetUniformSubroutineuiv* shadertype location params))
+  (define (glGetProgramStageiv program shadertype pname values)(*glGetProgramStageiv* program shadertype pname values))
+  (define (glPatchParameteri pname value)(*glPatchParameteri* pname value))
+  (define (glPatchParameterfv pname values)(*glPatchParameterfv* pname values))
+  (define (glBindTransformFeedback target id)(*glBindTransformFeedback* target id))
+  (define (glDeleteTransformFeedbacks n ids)(*glDeleteTransformFeedbacks* n ids))
+  (define (glGenTransformFeedbacks n ids)(*glGenTransformFeedbacks* n ids))
+  (define (glIsTransformFeedback id)(*glIsTransformFeedback* id))
+  (define (glPauseTransformFeedback)(*glPauseTransformFeedback*))
+  (define (glResumeTransformFeedback)(*glResumeTransformFeedback*))
+  (define (glDrawTransformFeedback mode id)(*glDrawTransformFeedback* mode id))
+  (define (glDrawTransformFeedbackStream mode id stream)(*glDrawTransformFeedbackStream* mode id stream))
+  (define (glBeginQueryIndexed target index id)(*glBeginQueryIndexed* target index id))
+  (define (glEndQueryIndexed target index)(*glEndQueryIndexed* target index))
+  (define (glGetQueryIndexediv target index pname params)(*glGetQueryIndexediv* target index pname params))
+
+  (define (glReleaseShaderCompiler)(*glReleaseShaderCompiler*))
+  (define (glShaderBinary count shaders binaryformat binary length)(*glShaderBinary* count shaders binaryformat binary length))
+  (define (glGetShaderPrecisionFormat shadertype precisiontype range precision)(*glGetShaderPrecisionFormat* shadertype precisiontype range precision))
+  (define (glDepthRangef n f)(*glDepthRangef* n f))
+  (define (glClearDepthf d)(*glClearDepthf* d))
+  (define (glGetProgramBinary program bufSize length binaryFormat binary)(*glGetProgramBinary* program bufSize length binaryFormat binary))
+  (define (glProgramBinary program binaryFormat binary length)(*glProgramBinary* program binaryFormat binary length))
+  (define (glProgramParameteri program pname value)(*glProgramParameteri* program pname value))
+  (define (glUseProgramStages pipeline stages program)(*glUseProgramStages* pipeline stages program))
+  (define (glActiveShaderProgram pipeline program)(*glActiveShaderProgram* pipeline program))
+  (define (glCreateShaderProgramv type count strings)(*glCreateShaderProgramv* type count strings))
+  (define (glBindProgramPipeline pipeline)(*glBindProgramPipeline* pipeline))
+  (define (glDeleteProgramPipelines n pipelines)(*glDeleteProgramPipelines* n pipelines))
+  (define (glGenProgramPipelines n pipelines)(*glGenProgramPipelines* n pipelines))
+  (define (glIsProgramPipeline pipeline)(*glIsProgramPipeline* pipeline))
+  (define (glGetProgramPipelineiv pipeline pname params)(*glGetProgramPipelineiv* pipeline pname params))
+  (define (glProgramUniform1i program location v0)(*glProgramUniform1i* program location v0))
+  (define (glProgramUniform1iv program location count value)(*glProgramUniform1iv* program location count value))
+  (define (glProgramUniform1f program location v0)(*glProgramUniform1f* program location v0))
+  (define (glProgramUniform1fv program location count value)(*glProgramUniform1fv* program location count value))
+  (define (glProgramUniform1d program location v0)(*glProgramUniform1d* program location v0))
+  (define (glProgramUniform1dv program location count value)(*glProgramUniform1dv* program location count value))
+  (define (glProgramUniform1ui program location v0)(*glProgramUniform1ui* program location v0))
+  (define (glProgramUniform1uiv program location count value)(*glProgramUniform1uiv* program location count value))
+  (define (glProgramUniform2i program location v0 v1)(*glProgramUniform2i* program location v0 v1))
+  (define (glProgramUniform2iv program location count value)(*glProgramUniform2iv* program location count value))
+  (define (glProgramUniform2f program location v0 v1)(*glProgramUniform2f* program location v0 v1))
+  (define (glProgramUniform2fv program location count value)(*glProgramUniform2fv* program location count value))
+  (define (glProgramUniform2d program location v0 v1)(*glProgramUniform2d* program location v0 v1))
+  (define (glProgramUniform2dv program location count value)(*glProgramUniform2dv* program location count value))
+  (define (glProgramUniform2ui program location v0 v1)(*glProgramUniform2ui* program location v0 v1))
+  (define (glProgramUniform2uiv program location count value)(*glProgramUniform2uiv* program location count value))
+  (define (glProgramUniform3i program location v0 v1 v2)(*glProgramUniform3i* program location v0 v1 v2))
+  (define (glProgramUniform3iv program location count value)(*glProgramUniform3iv* program location count value))
+  (define (glProgramUniform3f program location v0 v1 v2)(*glProgramUniform3f* program location v0 v1 v2))
+  (define (glProgramUniform3fv program location count value)(*glProgramUniform3fv* program location count value))
+  (define (glProgramUniform3d program location v0 v1 v2)(*glProgramUniform3d* program location v0 v1 v2))
+  (define (glProgramUniform3dv program location count value)(*glProgramUniform3dv* program location count value))
+  (define (glProgramUniform3ui program location v0 v1 v2)(*glProgramUniform3ui* program location v0 v1 v2))
+  (define (glProgramUniform3uiv program location count value)(*glProgramUniform3uiv* program location count value))
+  (define (glProgramUniform4i program location v0 v1 v2 v3)(*glProgramUniform4i* program location v0 v1 v2 v3))
+  (define (glProgramUniform4iv program location count value)(*glProgramUniform4iv* program location count value))
+  (define (glProgramUniform4f program location v0 v1 v2 v3)(*glProgramUniform4f* program location v0 v1 v2 v3))
+  (define (glProgramUniform4fv program location count value)(*glProgramUniform4fv* program location count value))
+  (define (glProgramUniform4d program location v0 v1 v2 v3)(*glProgramUniform4d* program location v0 v1 v2 v3))
+  (define (glProgramUniform4dv program location count value)(*glProgramUniform4dv* program location count value))
+  (define (glProgramUniform4ui program location v0 v1 v2 v3)(*glProgramUniform4ui* program location v0 v1 v2 v3))
+  (define (glProgramUniform4uiv program location count value)(*glProgramUniform4uiv* program location count value))
+  (define (glProgramUniformMatrix2fv program location count transpose value)(*glProgramUniformMatrix2fv* program location count transpose value))
+  (define (glProgramUniformMatrix3fv program location count transpose value)(*glProgramUniformMatrix3fv* program location count transpose value))
+  (define (glProgramUniformMatrix4fv program location count transpose value)(*glProgramUniformMatrix4fv* program location count transpose value))
+  (define (glProgramUniformMatrix2dv program location count transpose value)(*glProgramUniformMatrix2dv* program location count transpose value))
+  (define (glProgramUniformMatrix3dv program location count transpose value)(*glProgramUniformMatrix3dv* program location count transpose value))
+  (define (glProgramUniformMatrix4dv program location count transpose value)(*glProgramUniformMatrix4dv* program location count transpose value))
+  (define (glProgramUniformMatrix2x3fv program location count transpose value)(*glProgramUniformMatrix2x3fv* program location count transpose value))
+  (define (glProgramUniformMatrix3x2fv program location count transpose value)(*glProgramUniformMatrix3x2fv* program location count transpose value))
+  (define (glProgramUniformMatrix2x4fv program location count transpose value)(*glProgramUniformMatrix2x4fv* program location count transpose value))
+  (define (glProgramUniformMatrix4x2fv program location count transpose value)(*glProgramUniformMatrix4x2fv* program location count transpose value))
+  (define (glProgramUniformMatrix3x4fv program location count transpose value)(*glProgramUniformMatrix3x4fv* program location count transpose value))
+  (define (glProgramUniformMatrix4x3fv program location count transpose value)(*glProgramUniformMatrix4x3fv* program location count transpose value))
+  (define (glProgramUniformMatrix2x3dv program location count transpose value)(*glProgramUniformMatrix2x3dv* program location count transpose value))
+  (define (glProgramUniformMatrix3x2dv program location count transpose value)(*glProgramUniformMatrix3x2dv* program location count transpose value))
+  (define (glProgramUniformMatrix2x4dv program location count transpose value)(*glProgramUniformMatrix2x4dv* program location count transpose value))
+  (define (glProgramUniformMatrix4x2dv program location count transpose value)(*glProgramUniformMatrix4x2dv* program location count transpose value))
+  (define (glProgramUniformMatrix3x4dv program location count transpose value)(*glProgramUniformMatrix3x4dv* program location count transpose value))
+  (define (glProgramUniformMatrix4x3dv program location count transpose value)(*glProgramUniformMatrix4x3dv* program location count transpose value))
+  (define (glValidateProgramPipeline pipeline)(*glValidateProgramPipeline* pipeline))
+  (define (glGetProgramPipelineInfoLog pipeline bufSize length infoLog)(*glGetProgramPipelineInfoLog* pipeline bufSize length infoLog))
+  (define (glVertexAttribL1d index x)(*glVertexAttribL1d* index x))
+  (define (glVertexAttribL2d index x y)(*glVertexAttribL2d* index x y))
+  (define (glVertexAttribL3d index x y z)(*glVertexAttribL3d* index x y z))
+  (define (glVertexAttribL4d index x y z w)(*glVertexAttribL4d* index x y z w))
+  (define (glVertexAttribL1dv index v)(*glVertexAttribL1dv* index v))
+  (define (glVertexAttribL2dv index v)(*glVertexAttribL2dv* index v))
+  (define (glVertexAttribL3dv index v)(*glVertexAttribL3dv* index v))
+  (define (glVertexAttribL4dv index v)(*glVertexAttribL4dv* index v))
+  (define (glVertexAttribLPointer index size type stride pointer)(*glVertexAttribLPointer* index size type stride pointer))
+  (define (glGetVertexAttribLdv index pname params)(*glGetVertexAttribLdv* index pname params))
+  (define (glViewportArrayv first count v)(*glViewportArrayv* first count v))
+  (define (glViewportIndexedf index x y w h)(*glViewportIndexedf* index x y w h))
+  (define (glViewportIndexedfv index v)(*glViewportIndexedfv* index v))
+  (define (glScissorArrayv first count v)(*glScissorArrayv* first count v))
+  (define (glScissorIndexed index left bottom width height)(*glScissorIndexed* index left bottom width height))
+  (define (glScissorIndexedv index v)(*glScissorIndexedv* index v))
+  (define (glDepthRangeArrayv first count v)(*glDepthRangeArrayv* first count v))
+  (define (glDepthRangeIndexed index n f)(*glDepthRangeIndexed* index n f))
+  (define (glGetFloati_v target index data)(*glGetFloati_v* target index data))
+  (define (glGetDoublei_v target index data)(*glGetDoublei_v* target index data))
+
+  (define (glDrawArraysInstancedBaseInstance mode first count instancecount baseinstance)(*glDrawArraysInstancedBaseInstance* mode first count instancecount baseinstance))
+  (define (glDrawElementsInstancedBaseInstance mode count type indices instancecount baseinstance)(*glDrawElementsInstancedBaseInstance* mode count type indices instancecount baseinstance))
+  (define (glDrawElementsInstancedBaseVertexBaseInstance mode count type indices instancecount basevertex baseinstance)(*glDrawElementsInstancedBaseVertexBaseInstance* mode count type indices instancecount basevertex baseinstance))
+  (define (glGetInternalformativ target internalformat pname bufSize params)(*glGetInternalformativ* target internalformat pname bufSize params))
+  (define (glGetActiveAtomicCounterBufferiv program bufferIndex pname params)(*glGetActiveAtomicCounterBufferiv* program bufferIndex pname params))
+  (define (glBindImageTexture unit texture level layered layer access format)(*glBindImageTexture* unit texture level layered layer access format))
+  (define (glMemoryBarrier barriers)(*glMemoryBarrier* barriers))
+  (define (glTexStorage1D target levels internalformat width)(*glTexStorage1D* target levels internalformat width))
+  (define (glTexStorage2D target levels internalformat width height)(*glTexStorage2D* target levels internalformat width height))
+  (define (glTexStorage3D target levels internalformat width height depth)(*glTexStorage3D* target levels internalformat width height depth))
+  (define (glDrawTransformFeedbackInstanced mode id instancecount)(*glDrawTransformFeedbackInstanced* mode id instancecount))
+  (define (glDrawTransformFeedbackStreamInstanced mode id stream instancecount)(*glDrawTransformFeedbackStreamInstanced* mode id stream instancecount))
+
+  (define (glClearBufferData target internalformat format type data)(*glClearBufferData* target internalformat format type data))
+  (define (glClearBufferSubData target internalformat offset size format type data)(*glClearBufferSubData* target internalformat offset size format type data))
+  (define (glDispatchCompute num_groups_x num_groups_y num_groups_z)(*glDispatchCompute* num_groups_x num_groups_y num_groups_z))
+  (define (glDispatchComputeIndirect indirect)(*glDispatchComputeIndirect* indirect))
+  (define (glCopyImageSubData srcName srcTarget srcLevel srcX srcY srcZ dstName dstTarget dstLevel dstX dstY dstZ srcWidth srcHeight srcDepth)(*glCopyImageSubData* srcName srcTarget srcLevel srcX srcY srcZ dstName dstTarget dstLevel dstX dstY dstZ srcWidth srcHeight srcDepth))
+  (define (glFramebufferParameteri target pname param)(*glFramebufferParameteri* target pname param))
+  (define (glGetFramebufferParameteriv target pname params)(*glGetFramebufferParameteriv* target pname params))
+  (define (glGetInternalformati64v target internalformat pname bufSize params)(*glGetInternalformati64v* target internalformat pname bufSize params))
+  (define (glInvalidateTexSubImage texture level xoffset yoffset zoffset width height depth)(*glInvalidateTexSubImage* texture level xoffset yoffset zoffset width height depth))
+  (define (glInvalidateTexImage texture level)(*glInvalidateTexImage* texture level))
+  (define (glInvalidateBufferSubData buffer offset length)(*glInvalidateBufferSubData* buffer offset length))
+  (define (glInvalidateBufferData buffer)(*glInvalidateBufferData* buffer))
+  (define (glInvalidateFramebuffer target numAttachments attachments)(*glInvalidateFramebuffer* target numAttachments attachments))
+  (define (glInvalidateSubFramebuffer target numAttachments attachments x y width height)(*glInvalidateSubFramebuffer* target numAttachments attachments x y width height))
+  (define (glMultiDrawArraysIndirect mode indirect drawcount stride)(*glMultiDrawArraysIndirect* mode indirect drawcount stride))
+  (define (glMultiDrawElementsIndirect mode type indirect drawcount stride)(*glMultiDrawElementsIndirect* mode type indirect drawcount stride))
+  (define (glGetProgramInterfaceiv program programInterface pname params)(*glGetProgramInterfaceiv* program programInterface pname params))
+  (define (glGetProgramResourceIndex program programInterface name)(*glGetProgramResourceIndex* program programInterface name))
+  (define (glGetProgramResourceName program programInterface index bufSize length name)(*glGetProgramResourceName* program programInterface index bufSize length name))
+  (define (glGetProgramResourceiv program programInterface index propCount props bufSize length params)(*glGetProgramResourceiv* program programInterface index propCount props bufSize length params))
+  (define (glGetProgramResourceLocation program programInterface name)(*glGetProgramResourceLocation* program programInterface name))
+  (define (glGetProgramResourceLocationIndex program programInterface name)(*glGetProgramResourceLocationIndex* program programInterface name))
+  (define (glShaderStorageBlockBinding program storageBlockIndex storageBlockBinding)(*glShaderStorageBlockBinding* program storageBlockIndex storageBlockBinding))
+  (define (glTexBufferRange target internalformat buffer offset size)(*glTexBufferRange* target internalformat buffer offset size))
+  (define (glTexStorage2DMultisample target samples internalformat width height fixedsamplelocations)(*glTexStorage2DMultisample* target samples internalformat width height fixedsamplelocations))
+  (define (glTexStorage3DMultisample target samples internalformat width height depth fixedsamplelocations)(*glTexStorage3DMultisample* target samples internalformat width height depth fixedsamplelocations))
+  (define (glTextureView texture target origtexture internalformat minlevel numlevels minlayer numlayers)(*glTextureView* texture target origtexture internalformat minlevel numlevels minlayer numlayers))
+  (define (glBindVertexBuffer bindingindex buffer offset stride)(*glBindVertexBuffer* bindingindex buffer offset stride))
+  (define (glVertexAttribFormat attribindex size type normalized relativeoffset)(*glVertexAttribFormat* attribindex size type normalized relativeoffset))
+  (define (glVertexAttribIFormat attribindex size type relativeoffset)(*glVertexAttribIFormat* attribindex size type relativeoffset))
+  (define (glVertexAttribLFormat attribindex size type relativeoffset)(*glVertexAttribLFormat* attribindex size type relativeoffset))
+  (define (glVertexAttribBinding attribindex bindingindex)(*glVertexAttribBinding* attribindex bindingindex))
+  (define (glVertexBindingDivisor bindingindex divisor)(*glVertexBindingDivisor* bindingindex divisor))
+  (define (glDebugMessageControl source type severity count ids enabled)(*glDebugMessageControl* source type severity count ids enabled))
+  (define (glDebugMessageInsert source type id severity length buf)(*glDebugMessageInsert* source type id severity length buf))
+  (define (glDebugMessageCallback callback userParam)(*glDebugMessageCallback* callback userParam))
+  (define (glGetDebugMessageLog count bufSize sources types ids severities lengths messageLog)(*glGetDebugMessageLog* count bufSize sources types ids severities lengths messageLog))
+  (define (glPushDebugGroup source id length message)(*glPushDebugGroup* source id length message))
+  (define (glPopDebugGroup)(*glPopDebugGroup*))
+  (define (glObjectLabel identifier name length label)(*glObjectLabel* identifier name length label))
+  (define (glGetObjectLabel identifier name bufSize length label)(*glGetObjectLabel* identifier name bufSize length label))
+  (define (glObjectPtrLabel ptr length label)(*glObjectPtrLabel* ptr length label))
+  (define (glGetObjectPtrLabel ptr bufSize length label)(*glGetObjectPtrLabel* ptr bufSize length label))
+
+  (define (glBufferStorage target size data flags)(*glBufferStorage* target size data flags))
+  (define (glClearTexImage texture level format type data)(*glClearTexImage* texture level format type data))
+  (define (glClearTexSubImage texture level xoffset yoffset zoffset width height depth format type data)(*glClearTexSubImage* texture level xoffset yoffset zoffset width height depth format type data))
+  (define (glBindBuffersBase target first count buffers)(*glBindBuffersBase* target first count buffers))
+  (define (glBindBuffersRange target first count buffers offsets sizes)(*glBindBuffersRange* target first count buffers offsets sizes))
+  (define (glBindTextures first count textures)(*glBindTextures* first count textures))
+  (define (glBindSamplers first count samplers)(*glBindSamplers* first count samplers))
+  (define (glBindImageTextures first count textures)(*glBindImageTextures* first count textures))
+  (define (glBindVertexBuffers first count buffers offsets strides)(*glBindVertexBuffers* first count buffers offsets strides))
+
+  (define (glClipControl origin depth)(*glClipControl* origin depth))
+  (define (glCreateTransformFeedbacks n ids)(*glCreateTransformFeedbacks* n ids))
+  (define (glTransformFeedbackBufferBase xfb index buffer)(*glTransformFeedbackBufferBase* xfb index buffer))
+  (define (glTransformFeedbackBufferRange xfb index buffer offset size)(*glTransformFeedbackBufferRange* xfb index buffer offset size))
+  (define (glGetTransformFeedbackiv xfb pname param)(*glGetTransformFeedbackiv* xfb pname param))
+  (define (glGetTransformFeedbacki_v xfb pname index param)(*glGetTransformFeedbacki_v* xfb pname index param))
+  (define (glGetTransformFeedbacki64_v xfb pname index param)(*glGetTransformFeedbacki64_v* xfb pname index param))
+  (define (glCreateBuffers n buffers)(*glCreateBuffers* n buffers))
+  (define (glNamedBufferStorage buffer size data flags)(*glNamedBufferStorage* buffer size data flags))
+  (define (glNamedBufferData buffer size data usage)(*glNamedBufferData* buffer size data usage))
+  (define (glNamedBufferSubData buffer offset size data)(*glNamedBufferSubData* buffer offset size data))
+  (define (glCopyNamedBufferSubData readBuffer writeBuffer readOffset writeOffset size)(*glCopyNamedBufferSubData* readBuffer writeBuffer readOffset writeOffset size))
+  (define (glClearNamedBufferData buffer internalformat format type data)(*glClearNamedBufferData* buffer internalformat format type data))
+  (define (glClearNamedBufferSubData buffer internalformat offset size format type data)(*glClearNamedBufferSubData* buffer internalformat offset size format type data))
+  (define (glMapNamedBuffer buffer access)(*glMapNamedBuffer* buffer access))
+  (define (glMapNamedBufferRange buffer offset length access)(*glMapNamedBufferRange* buffer offset length access))
+  (define (glUnmapNamedBuffer buffer)(*glUnmapNamedBuffer* buffer))
+  (define (glFlushMappedNamedBufferRange buffer offset length)(*glFlushMappedNamedBufferRange* buffer offset length))
+  (define (glGetNamedBufferParameteriv buffer pname params)(*glGetNamedBufferParameteriv* buffer pname params))
+  (define (glGetNamedBufferParameteri64v buffer pname params)(*glGetNamedBufferParameteri64v* buffer pname params))
+  (define (glGetNamedBufferPointerv buffer pname params)(*glGetNamedBufferPointerv* buffer pname params))
+  (define (glGetNamedBufferSubData buffer offset size data)(*glGetNamedBufferSubData* buffer offset size data))
+  (define (glCreateFramebuffers n framebuffers)(*glCreateFramebuffers* n framebuffers))
+  (define (glNamedFramebufferRenderbuffer framebuffer attachment renderbuffertarget renderbuffer)(*glNamedFramebufferRenderbuffer* framebuffer attachment renderbuffertarget renderbuffer))
+  (define (glNamedFramebufferParameteri framebuffer pname param)(*glNamedFramebufferParameteri* framebuffer pname param))
+  (define (glNamedFramebufferTexture framebuffer attachment texture level)(*glNamedFramebufferTexture* framebuffer attachment texture level))
+  (define (glNamedFramebufferTextureLayer framebuffer attachment texture level layer)(*glNamedFramebufferTextureLayer* framebuffer attachment texture level layer))
+  (define (glNamedFramebufferDrawBuffer framebuffer buf)(*glNamedFramebufferDrawBuffer* framebuffer buf))
+  (define (glNamedFramebufferDrawBuffers framebuffer n bufs)(*glNamedFramebufferDrawBuffers* framebuffer n bufs))
+  (define (glNamedFramebufferReadBuffer framebuffer src)(*glNamedFramebufferReadBuffer* framebuffer src))
+  (define (glInvalidateNamedFramebufferData framebuffer numAttachments attachments)(*glInvalidateNamedFramebufferData* framebuffer numAttachments attachments))
+  (define (glInvalidateNamedFramebufferSubData framebuffer numAttachments attachments x y width height)(*glInvalidateNamedFramebufferSubData* framebuffer numAttachments attachments x y width height))
+  (define (glClearNamedFramebufferiv framebuffer buffer drawbuffer value)(*glClearNamedFramebufferiv* framebuffer buffer drawbuffer value))
+  (define (glClearNamedFramebufferuiv framebuffer buffer drawbuffer value)(*glClearNamedFramebufferuiv* framebuffer buffer drawbuffer value))
+  (define (glClearNamedFramebufferfv framebuffer buffer drawbuffer value)(*glClearNamedFramebufferfv* framebuffer buffer drawbuffer value))
+  (define (glClearNamedFramebufferfi framebuffer buffer drawbuffer depth stencil)(*glClearNamedFramebufferfi* framebuffer buffer drawbuffer depth stencil))
+  (define (glBlitNamedFramebuffer readFramebuffer drawFramebuffer srcX0 srcY0 srcX1 srcY1 dstX0 dstY0 dstX1 dstY1 mask filter)(*glBlitNamedFramebuffer* readFramebuffer drawFramebuffer srcX0 srcY0 srcX1 srcY1 dstX0 dstY0 dstX1 dstY1 mask filter))
+  (define (glCheckNamedFramebufferStatus framebuffer target)(*glCheckNamedFramebufferStatus* framebuffer target))
+  (define (glGetNamedFramebufferParameteriv framebuffer pname param)(*glGetNamedFramebufferParameteriv* framebuffer pname param))
+  (define (glGetNamedFramebufferAttachmentParameteriv framebuffer attachment pname params)(*glGetNamedFramebufferAttachmentParameteriv* framebuffer attachment pname params))
+  (define (glCreateRenderbuffers n renderbuffers)(*glCreateRenderbuffers* n renderbuffers))
+  (define (glNamedRenderbufferStorage renderbuffer internalformat width height)(*glNamedRenderbufferStorage* renderbuffer internalformat width height))
+  (define (glNamedRenderbufferStorageMultisample renderbuffer samples internalformat width height)(*glNamedRenderbufferStorageMultisample* renderbuffer samples internalformat width height))
+  (define (glGetNamedRenderbufferParameteriv renderbuffer pname params)(*glGetNamedRenderbufferParameteriv* renderbuffer pname params))
+  (define (glCreateTextures target n textures)(*glCreateTextures* target n textures))
+  (define (glTextureBuffer texture internalformat buffer)(*glTextureBuffer* texture internalformat buffer))
+  (define (glTextureBufferRange texture internalformat buffer offset size)(*glTextureBufferRange* texture internalformat buffer offset size))
+  (define (glTextureStorage1D texture levels internalformat width)(*glTextureStorage1D* texture levels internalformat width))
+  (define (glTextureStorage2D texture levels internalformat width height)(*glTextureStorage2D* texture levels internalformat width height))
+  (define (glTextureStorage3D texture levels internalformat width height depth)(*glTextureStorage3D* texture levels internalformat width height depth))
+  (define (glTextureStorage2DMultisample texture samples internalformat width height fixedsamplelocations)(*glTextureStorage2DMultisample* texture samples internalformat width height fixedsamplelocations))
+  (define (glTextureStorage3DMultisample texture samples internalformat width height depth fixedsamplelocations)(*glTextureStorage3DMultisample* texture samples internalformat width height depth fixedsamplelocations))
+  (define (glTextureSubImage1D texture level xoffset width format type pixels)(*glTextureSubImage1D* texture level xoffset width format type pixels))
+  (define (glTextureSubImage2D texture level xoffset yoffset width height format type pixels)(*glTextureSubImage2D* texture level xoffset yoffset width height format type pixels))
+  (define (glTextureSubImage3D texture level xoffset yoffset zoffset width height depth format type pixels)(*glTextureSubImage3D* texture level xoffset yoffset zoffset width height depth format type pixels))
+  (define (glCompressedTextureSubImage1D texture level xoffset width format imageSize data)(*glCompressedTextureSubImage1D* texture level xoffset width format imageSize data))
+  (define (glCompressedTextureSubImage2D texture level xoffset yoffset width height format imageSize data)(*glCompressedTextureSubImage2D* texture level xoffset yoffset width height format imageSize data))
+  (define (glCompressedTextureSubImage3D texture level xoffset yoffset zoffset width height depth format imageSize data)(*glCompressedTextureSubImage3D* texture level xoffset yoffset zoffset width height depth format imageSize data))
+  (define (glCopyTextureSubImage1D texture level xoffset x y width)(*glCopyTextureSubImage1D* texture level xoffset x y width))
+  (define (glCopyTextureSubImage2D texture level xoffset yoffset x y width height)(*glCopyTextureSubImage2D* texture level xoffset yoffset x y width height))
+  (define (glCopyTextureSubImage3D texture level xoffset yoffset zoffset x y width height)(*glCopyTextureSubImage3D* texture level xoffset yoffset zoffset x y width height))
+  (define (glTextureParameterf texture pname param)(*glTextureParameterf* texture pname param))
+  (define (glTextureParameterfv texture pname param)(*glTextureParameterfv* texture pname param))
+  (define (glTextureParameteri texture pname param)(*glTextureParameteri* texture pname param))
+  (define (glTextureParameterIiv texture pname param)(*glTextureParameterIiv* texture pname param))
+  (define (glTextureParameterIuiv texture pname param)(*glTextureParameterIuiv* texture pname param))
+  (define (glTextureParameteriv texture pname param)(*glTextureParameteriv* texture pname param))
+  (define (glGenerateTextureMipmap texture)(*glGenerateTextureMipmap* texture))
+  (define (glBindTextureUnit unit texture)(*glBindTextureUnit* unit texture))
+  (define (glGetTextureImage texture level format type bufSize pixels)(*glGetTextureImage* texture level format type bufSize pixels))
+  (define (glGetCompressedTextureImage texture level bufSize pixels)(*glGetCompressedTextureImage* texture level bufSize pixels))
+  (define (glGetTextureLevelParameterfv texture level pname params)(*glGetTextureLevelParameterfv* texture level pname params))
+  (define (glGetTextureLevelParameteriv texture level pname params)(*glGetTextureLevelParameteriv* texture level pname params))
+  (define (glGetTextureParameterfv texture pname params)(*glGetTextureParameterfv* texture pname params))
+  (define (glGetTextureParameterIiv texture pname params)(*glGetTextureParameterIiv* texture pname params))
+  (define (glGetTextureParameterIuiv texture pname params)(*glGetTextureParameterIuiv* texture pname params))
+  (define (glGetTextureParameteriv texture pname params)(*glGetTextureParameteriv* texture pname params))
+  (define (glCreateVertexArrays n arrays)(*glCreateVertexArrays* n arrays))
+  (define (glDisableVertexArrayAttrib vaobj index)(*glDisableVertexArrayAttrib* vaobj index))
+  (define (glEnableVertexArrayAttrib vaobj index)(*glEnableVertexArrayAttrib* vaobj index))
+  (define (glVertexArrayElementBuffer vaobj buffer)(*glVertexArrayElementBuffer* vaobj buffer))
+  (define (glVertexArrayVertexBuffer vaobj bindingindex buffer offset stride)(*glVertexArrayVertexBuffer* vaobj bindingindex buffer offset stride))
+  (define (glVertexArrayVertexBuffers vaobj first count buffers offsets strides)(*glVertexArrayVertexBuffers* vaobj first count buffers offsets strides))
+  (define (glVertexArrayAttribBinding vaobj attribindex bindingindex)(*glVertexArrayAttribBinding* vaobj attribindex bindingindex))
+  (define (glVertexArrayAttribFormat vaobj attribindex size type normalized relativeoffset)(*glVertexArrayAttribFormat* vaobj attribindex size type normalized relativeoffset))
+  (define (glVertexArrayAttribIFormat vaobj attribindex size type relativeoffset)(*glVertexArrayAttribIFormat* vaobj attribindex size type relativeoffset))
+  (define (glVertexArrayAttribLFormat vaobj attribindex size type relativeoffset)(*glVertexArrayAttribLFormat* vaobj attribindex size type relativeoffset))
+  (define (glVertexArrayBindingDivisor vaobj bindingindex divisor)(*glVertexArrayBindingDivisor* vaobj bindingindex divisor))
+  (define (glGetVertexArrayiv vaobj pname param)(*glGetVertexArrayiv* vaobj pname param))
+  (define (glGetVertexArrayIndexediv vaobj index pname param)(*glGetVertexArrayIndexediv* vaobj index pname param))
+  (define (glGetVertexArrayIndexed64iv vaobj index pname param)(*glGetVertexArrayIndexed64iv* vaobj index pname param))
+  (define (glCreateSamplers n samplers)(*glCreateSamplers* n samplers))
+  (define (glCreateProgramPipelines n pipelines)(*glCreateProgramPipelines* n pipelines))
+  (define (glCreateQueries target n ids)(*glCreateQueries* target n ids))
+  (define (glGetQueryBufferObjecti64v id buffer pname offset)(*glGetQueryBufferObjecti64v* id buffer pname offset))
+  (define (glGetQueryBufferObjectiv id buffer pname offset)(*glGetQueryBufferObjectiv* id buffer pname offset))
+  (define (glGetQueryBufferObjectui64v id buffer pname offset)(*glGetQueryBufferObjectui64v* id buffer pname offset))
+  (define (glGetQueryBufferObjectuiv id buffer pname offset)(*glGetQueryBufferObjectuiv* id buffer pname offset))
+  (define (glMemoryBarrierByRegion barriers)(*glMemoryBarrierByRegion* barriers))
+  (define (glGetTextureSubImage texture level xoffset yoffset zoffset width height depth format type bufSize pixels)(*glGetTextureSubImage* texture level xoffset yoffset zoffset width height depth format type bufSize pixels))
+  (define (glGetCompressedTextureSubImage texture level xoffset yoffset zoffset width height depth bufSize pixels)(*glGetCompressedTextureSubImage* texture level xoffset yoffset zoffset width height depth bufSize pixels))
+  (define (glGetGraphicsResetStatus)(*glGetGraphicsResetStatus*))
+  (define (glGetnCompressedTexImage target lod bufSize pixels)(*glGetnCompressedTexImage* target lod bufSize pixels))
+  (define (glGetnTexImage target level format type bufSize pixels)(*glGetnTexImage* target level format type bufSize pixels))
+  (define (glGetnUniformdv program location bufSize params)(*glGetnUniformdv*))
+  (define (glGetnUniformfv program location bufSize params)(*glGetnUniformfv*))
+  (define (glGetnUniformiv program location bufSize params)(*glGetnUniformiv*))
+  (define (glGetnUniformuiv program location bufSize params)(*glGetnUniformuiv*))
+  (define (glReadnPixels x y width height format type bufSize data)(*glReadnPixels* x y width height format type bufSize data))
+  (define (glTextureBarrier)(*glTextureBarrier*))
+
+  (define (glSpecializeShader shader pEntryPoint numSpecializationants pantIndex pantValue)(*glSpecializeShader* shader pEntryPoint numSpecializationants pantIndex pantValue))
+  (define (glMultiDrawArraysIndirectCount mode indirect drawcount maxdrawcount stride)(*glMultiDrawArraysIndirectCount* mode indirect drawcount maxdrawcount stride))
+  (define (glMultiDrawElementsIndirectCount mode type indirect drawcount maxdrawcount stride)(*glMultiDrawElementsIndirectCount* mode type indirect drawcount maxdrawcount stride))
+  (define (glPolygonOffsetClamp factor units clamp)(*glPolygonOffsetClamp* factor units clamp))
+
+
+  (define (gl-load-library . library-path)
+    (define-ftype GLenum      unsigned)
+    (define-ftype GLfloat     float)
+    (define-ftype GLint       int)
+    (define-ftype GLsizei     int)
+    (define-ftype GLbitfield  unsigned)
+    (define-ftype GLdouble    double)
+    (define-ftype GLuint      unsigned)
+    (define-ftype GLboolean   unsigned-8)
+    (define-ftype GLubyte     unsigned-8)
+    (define-ftype GLclampf    float)
+    (define-ftype GLclampd    double)
+    (define-ftype GLsizeiptr  ssize_t)
+    (define-ftype GLintptr    ssize_t)
+    (define-ftype GLchar      char)
+    (define-ftype GLshort     integer-16)
+    (define-ftype GLbyte      integer-8)
+    (define-ftype GLushort    unsigned-16)
+    (define-ftype GLhalf      unsigned-16)
+    (define-ftype GLsync      void*)
+    (define-ftype GLuint64    unsigned-64)
+    (define-ftype GLint64     integer-64)
+    (define-ftype GLDEBUGPROC void*)
+
+    (define-syntax wgl-procedure
+      (syntax-rules ()
+	((wgl-procedure name params return)
+	 (let ((wgl-address ((foreign-procedure "wglGetProcAddress" (string) void*) name)))
+	   (define-ftype wgl-ftype (function params return))
+	   (if (or (= wgl-address  0)
+		   (= wgl-address  1)
+		   (= wgl-address  2)
+		   (= wgl-address  3)
+		   (= wgl-address -1))
+	       (lambda args
+		 (error 'GL "OpenGL function unavailable." name))
+	       (ftype-ref wgl-ftype () (make-ftype-pointer wgl-ftype wgl-address)))))))
+
+    (define-syntax glx-procedure
+      (syntax-rules ()
+	((glx-procedure name params return)
+	 (let ((glx-address ((foreign-procedure "glXGetProcAddressARB" (string) void*) name)))
+	   (define-ftype glx-ftype (function params return))
+	   (if (= glx-address 0)
+	       (lambda args
+		 (error 'GL "OpenGL function unavailable." name))
+	       (ftype-ref glx-ftype () (make-ftype-pointer glx-ftype glx-address)))))))
+
+    (define-syntax ngl-procedure
+      (syntax-rules ()
+	((ngl-procedure name params return)
+	 (if (foreign-entry? name)
+	     (foreign-procedure name params return)
+	     (lambda args
+	       (error 'GL "OpenGL function unavailable." name))))))
+
+    (define-syntax gl-procedure
+      (syntax-rules ()
+	((gl-procedure name params return)
+	 (case (machine-type)
+	   ((i3nt  ti3nt  a6nt  ta6nt)  (wgl-procedure name params return))
+	   ((i3le  ti3le  a6le  ta6le)  (glx-procedure name params return))
+	   ((i3osx ti3osx a6osx ta6osx) (ngl-procedure name params return))))))
+
+    (if (null? library-path)
+	(let
+	    ((win-path "opengl32.dll")
+	     (lin-path "libGL.so")
+	     (mac-path "/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL"))
+	  (case (machine-type)
+	    ((i3nt  ti3nt  a6nt  ta6nt)  (load-shared-object win-path))
+	    ((i3le  ti3le  a6le  ta6le)  (load-shared-object lin-path))
+	    ((i3osx ti3osx a6osx ta6osx) (load-shared-object mac-path))))
+	(load-shared-object (car library-path)))
+
+    ;; On Windows, OpenGL 1.1 is statically exported and, must be
+    ;; looked up in the general address space. On Linux, OpenGL 1.2 is
+    ;; guaranteed to be statically exported according to clause 3.4
+    ;; of the OpenGL ABI for Linux. On macOS, OpenGL is weakly
+    ;; linked and, can just looked up in the general address space.
+
+    (set! *glCullFace*
+	  (foreign-procedure "glCullFace" (GLenum) void))
+    (set! *glFrontFace*
+	  (foreign-procedure "glFrontFace" (GLenum) void))
+    (set! *glHint*
+	  (foreign-procedure "glHint" (GLenum GLenum) void))
+    (set! *glLineWidth*
+	  (foreign-procedure "glLineWidth" (GLfloat) void))
+    (set! *glPointSize*
+	  (foreign-procedure "glPointSize" (GLfloat) void))
+    (set! *glPolygonMode*
+	  (foreign-procedure "glPolygonMode" (GLenum GLenum) void))
+    (set! *glScissor*
+	  (foreign-procedure "glScissor" (GLint GLint GLsizei GLsizei) void))
+    (set! *glTexParameterf*
+	  (foreign-procedure "glTexParameterf" (GLenum GLenum GLfloat) void))
+    (set! *glTexParameterfv*
+	  (foreign-procedure "glTexParameterfv" (GLenum GLenum (* GLfloat)) void))
+    (set! *glTexParameteri*
+	  (foreign-procedure "glTexParameteri" (GLenum GLenum GLint) void))
+    (set! *glTexParameteriv*
+	  (foreign-procedure "glTexParameteriv" (GLenum GLenum (* GLint)) void))
+    (set! *glTexImage1D*
+	  (foreign-procedure "glTexImage1D" (GLenum GLint GLint GLsizei GLint GLenum GLenum void*) void))
+    (set! *glTexImage2D*
+	  (foreign-procedure "glTexImage2D" (GLenum GLint GLint GLsizei GLsizei GLint GLenum GLenum void*) void))
+    (set! *glDrawBuffer*
+	  (foreign-procedure "glDrawBuffer" (GLenum) void))
+    (set! *glClear*
+	  (foreign-procedure "glClear" (GLbitfield) void))
+    (set! *glClearColor*
+	  (foreign-procedure "glClearColor" (GLfloat GLfloat GLfloat GLfloat) void))
+    (set! *glClearStencil*
+	  (foreign-procedure "glClearStencil" (GLint) void))
+    (set! *glClearDepth*
+	  (foreign-procedure "glClearDepth" (GLdouble) void))
+    (set! *glStencilMask*
+	  (foreign-procedure "glStencilMask" (GLuint) void))
+    (set! *glColorMask*
+	  (foreign-procedure "glColorMask" (GLboolean GLboolean GLboolean GLboolean) void))
+    (set! *glDepthMask*
+	  (foreign-procedure "glDepthMask" (GLboolean) void))
+    (set! *glDisable*
+	  (foreign-procedure "glDisable" (GLenum) void))
+    (set! *glEnable*
+	  (foreign-procedure "glEnable" (GLenum) void))
+    (set! *glFinish*
+	  (foreign-procedure "glFinish" () void))
+    (set! *glFlush*
+	  (foreign-procedure "glFlush" () void))
+    (set! *glBlendFunc*
+	  (foreign-procedure "glBlendFunc" (GLenum GLenum) void))
+    (set! *glLogicOp*
+	  (foreign-procedure "glLogicOp" (GLenum) void))
+    (set! *glStencilFunc*
+	  (foreign-procedure "glStencilFunc" (GLenum GLint GLuint) void))
+    (set! *glStencilOp*
+	  (foreign-procedure "glStencilOp" (GLenum GLenum GLenum) void))
+    (set! *glDepthFunc*
+	  (foreign-procedure "glDepthFunc" (GLenum) void))
+    (set! *glPixelStoref*
+	  (foreign-procedure "glPixelStoref" (GLenum GLfloat) void))
+    (set! *glPixelStorei*
+	  (foreign-procedure "glPixelStorei" (GLenum GLint) void))
+    (set! *glReadBuffer*
+	  (foreign-procedure "glReadBuffer" (GLenum) void))
+    (set! *glReadPixels*
+	  (foreign-procedure "glReadPixels" (GLint GLint GLsizei GLsizei GLenum GLenum void*) void))
+    (set! *glGetBooleanv*
+	  (foreign-procedure "glGetBooleanv" (GLenum (* GLboolean)) void))
+    (set! *glGetDoublev*
+	  (foreign-procedure "glGetDoublev" (GLenum (* GLdouble)) void))
+    (set! *glGetError*
+	  (foreign-procedure "glGetError" () GLenum))
+    (set! *glGetFloatv*
+	  (foreign-procedure "glGetFloatv" (GLenum (* GLfloat)) void))
+    (set! *glGetIntegerv*
+	  (foreign-procedure "glGetIntegerv" (GLenum (* GLint)) void))
+    (set! *glGetString*
+	  (foreign-procedure "glGetString" (GLenum) string))
+    (set! *glGetTexImage*
+	  (foreign-procedure "glGetTexImage" (GLenum GLint GLenum GLenum void*) void))
+    (set! *glGetTexParameterfv*
+	  (foreign-procedure "glGetTexParameterfv" (GLenum GLenum (* GLfloat)) void))
+    (set! *glGetTexParameteriv*
+	  (foreign-procedure "glGetTexParameteriv" (GLenum GLenum (* GLint)) void))
+    (set! *glGetTexLevelParameterfv*
+	  (foreign-procedure "glGetTexLevelParameterfv" (GLenum GLint GLenum (* GLfloat)) void))
+    (set! *glGetTexLevelParameteriv*
+	  (foreign-procedure "glGetTexLevelParameteriv" (GLenum GLint GLenum (* GLint)) void))
+    (set! *glIsEnabled*
+	  (foreign-procedure "glIsEnabled" (GLenum) GLboolean))
+    (set! *glDepthRange*
+	  (foreign-procedure "glDepthRange" (GLdouble GLdouble) void))
+    (set! *glViewport*
+	  (foreign-procedure "glViewport" (GLint GLint GLsizei GLsizei) void))
+
+    (set! *glDrawArrays*
+	  (foreign-procedure "glDrawArrays" (GLenum GLint GLsizei) void))
+    (set! *glDrawElements*
+	  (foreign-procedure "glDrawElements" (GLenum GLsizei GLenum void*) void))
+    (set! *glGetPointerv*
+	  (foreign-procedure "glGetPointerv" (GLenum void*) void))
+    (set! *glPolygonOffset*
+	  (foreign-procedure "glPolygonOffset" (GLfloat GLfloat) void))
+    (set! *glCopyTexImage1D*
+	  (foreign-procedure "glCopyTexImage1D" (GLenum GLint GLenum GLint GLint GLsizei GLint) void))
+    (set! *glCopyTexImage2D*
+	  (foreign-procedure "glCopyTexImage2D" (GLenum GLint GLenum GLint GLint GLsizei GLsizei GLint) void))
+    (set! *glCopyTexSubImage1D*
+	  (foreign-procedure "glCopyTexSubImage1D" (GLenum GLint GLint GLint GLint GLsizei) void))
+    (set! *glCopyTexSubImage2D*
+	  (foreign-procedure "glCopyTexSubImage2D" (GLenum GLint GLint GLint GLint GLint GLsizei GLsizei) void))
+    (set! *glTexSubImage1D*
+	  (foreign-procedure "glTexSubImage1D" (GLenum GLint GLint GLsizei GLenum GLenum void*) void))
+    (set! *glTexSubImage2D*
+	  (foreign-procedure "glTexSubImage2D" (GLenum GLint GLint GLint GLsizei GLsizei GLenum GLenum void*) void))
+    (set! *glBindTexture*
+	  (foreign-procedure "glBindTexture" (GLenum GLuint) void))
+    (set! *glDeleteTextures*
+	  (foreign-procedure "glDeleteTextures" (GLsizei (* GLuint)) void))
+    (set! *glGenTextures*
+	  (foreign-procedure "glGenTextures" (GLsizei GLuint) void))
+    (set! *glIsTexture*
+	  (foreign-procedure "glIsTexture" (GLuint) GLboolean))
+
+    (set! *glDrawRangeElements*
+	  (gl-procedure "glDrawRangeElements" (GLenum GLuint GLuint GLsizei GLenum void*) void))
+    (set! *glTexImage3D*
+	  (gl-procedure "glTexImage3D" (GLenum GLint GLint GLsizei GLsizei GLsizei GLint GLenum GLenum void*) void))
+    (set! *glTexSubImage3D*
+	  (gl-procedure "glTexSubImage3D" (GLenum GLint GLint GLint GLint GLsizei GLsizei GLsizei GLenum GLenum void*) void))
+    (set! *glCopyTexSubImage3D*
+	  (gl-procedure "glCopyTexSubImage3D" (GLenum GLint GLint GLint GLint GLint GLint GLsizei GLsizei) void))
+
+    (set! *glActiveTexture*
+	  (gl-procedure "glActiveTexture" (GLenum) void))
+    (set! *glSampleCoverage*
+	  (gl-procedure "glSampleCoverage" (GLfloat GLboolean) void))
+    (set! *glCompressedTexImage3D*
+	  (gl-procedure "glCompressedTexImage3D" (GLenum GLint GLenum GLsizei GLsizei GLsizei GLint GLsizei void*) void))
+    (set! *glCompressedTexImage2D*
+	  (gl-procedure "glCompressedTexImage2D" (GLenum GLint GLenum GLsizei GLsizei GLint GLsizei void*) void))
+    (set! *glCompressedTexImage1D*
+	  (gl-procedure "glCompressedTexImage1D" (GLenum GLint GLenum GLsizei GLint GLsizei void*) void))
+    (set! *glCompressedTexSubImage3D*
+	  (gl-procedure "glCompressedTexSubImage3D" (GLenum GLint GLint GLint GLint GLsizei GLsizei GLsizei GLenum GLsizei void*) void))
+    (set! *glCompressedTexSubImage2D*
+	  (gl-procedure "glCompressedTexSubImage2D" (GLenum GLint GLint GLint GLsizei GLsizei GLenum GLsizei void*) void))
+    (set! *glCompressedTexSubImage1D*
+	  (gl-procedure "glCompressedTexSubImage1D" (GLenum GLint GLint GLsizei GLenum GLsizei void*) void))
+    (set! *glGetCompressedTexImage*
+	  (gl-procedure "glGetCompressedTexImage" (GLenum GLint void*) void))
+
+    (set! *glBlendFuncSeparate*
+	  (gl-procedure "glBlendFuncSeparate" (GLenum GLenum GLenum GLenum) void))
+    (set! *glMultiDrawArrays*
+	  (gl-procedure "glMultiDrawArrays" (GLenum (* GLint) (* GLsizei) GLsizei) void))
+    (set! *glMultiDrawElements*
+	  (gl-procedure "glMultiDrawElements" (GLenum (* GLsizei) GLenum void* GLsizei) void))
+    (set! *glPointParameterf*
+	  (gl-procedure "glPointParameterf" (GLenum GLfloat) void))
+    (set! *glPointParameterfv*
+	  (gl-procedure "glPointParameterfv" (GLenum (* GLfloat)) void))
+    (set! *glPointParameteri*
+	  (gl-procedure "glPointParameteri" (GLenum GLint) void))
+    (set! *glPointParameteriv*
+	  (gl-procedure "glPointParameteriv" (GLenum (* GLint)) void))
+    (set! *glBlendColor*
+	  (gl-procedure "glBlendColor" (GLfloat GLfloat GLfloat GLfloat) void))
+    (set! *glBlendEquation*
+	  (gl-procedure "glBlendEquation" (GLenum) void))
+
+    (set! *glGenQueries*
+	  (gl-procedure "glGenQueries" (GLsizei (* GLuint)) void))
+    (set! *glDeleteQueries*
+	  (gl-procedure "glDeleteQueries" (GLsizei (* GLuint)) void))
+    (set! *glIsQuery*
+	  (gl-procedure "glIsQuery" (GLuint) GLboolean))
+    (set! *glBeginQuery*
+	  (gl-procedure "glBeginQuery" (GLenum GLuint) void))
+    (set! *glEndQuery*
+	  (gl-procedure "glEndQuery" (GLenum) void))
+    (set! *glGetQueryiv*
+	  (gl-procedure "glGetQueryiv" (GLenum GLenum (* GLint)) void))
+    (set! *glGetQueryObjectiv*
+	  (gl-procedure "glGetQueryObjectiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetQueryObjectuiv*
+	  (gl-procedure "glGetQueryObjectuiv" (GLuint GLenum (* GLuint)) void))
+    (set! *glBindBuffer*
+	  (gl-procedure "glBindBuffer" (GLenum GLuint) void))
+    (set! *glDeleteBuffers*
+	  (gl-procedure "glDeleteBuffers" (GLsizei (* GLuint)) void))
+    (set! *glGenBuffers*
+	  (gl-procedure "glGenBuffers" (GLsizei (* GLuint)) void))
+    (set! *glIsBuffer*
+	  (gl-procedure "glIsBuffer" (GLuint) GLboolean))
+    (set! *glBufferData*
+	  (gl-procedure "glBufferData" (GLenum GLsizeiptr void* GLenum) void))
+    (set! *glBufferSubData*
+	  (gl-procedure "glBufferSubData" (GLenum GLintptr GLsizeiptr void*) void))
+    (set! *glGetBufferSubData*
+	  (gl-procedure "glGetBufferSubData" (GLenum GLintptr GLsizeiptr void*) void))
+    (set! *glMapBuffer*
+	  (gl-procedure "glMapBuffer" (GLenum GLenum) void*))
+    (set! *glUnmapBuffer*
+	  (gl-procedure "glUnmapBuffer" (GLenum) GLboolean))
+    (set! *glGetBufferParameteriv*
+	  (gl-procedure "glGetBufferParameteriv" (GLenum GLenum (* GLint)) void))
+    (set! *glGetBufferPointerv*
+	  (gl-procedure "glGetBufferPointerv" (GLenum GLenum void*) void))
+
+    (set! *glBlendEquationSeparate*
+	  (gl-procedure "glBlendEquationSeparate" (GLenum GLenum) void))
+    (set! *glDrawBuffers*
+	  (gl-procedure "glDrawBuffers" (GLsizei (* GLenum)) void))
+    (set! *glStencilOpSeparate*
+	  (gl-procedure "glStencilOpSeparate" (GLenum GLenum GLenum GLenum) void))
+    (set! *glStencilFuncSeparate*
+	  (gl-procedure "glStencilFuncSeparate" (GLenum GLenum GLint GLuint) void))
+    (set! *glStencilMaskSeparate*
+	  (gl-procedure "glStencilMaskSeparate" (GLenum GLuint) void))
+    (set! *glAttachShader*
+	  (gl-procedure "glAttachShader" (GLuint GLuint) void))
+    (set! *glBindAttribLocation*
+	  (gl-procedure "glBindAttribLocation" (GLuint GLuint string) void))
+    (set! *glCompileShader*
+	  (gl-procedure "glCompileShader" (GLuint) void))
+    (set! *glCreateProgram*
+	  (gl-procedure "glCreateProgram" () GLuint))
+    (set! *glCreateShader*
+	  (gl-procedure "glCreateShader" (GLenum) GLuint))
+    (set! *glDeleteProgram*
+	  (gl-procedure "glDeleteProgram" (GLuint) void))
+    (set! *glDeleteShader*
+	  (gl-procedure "glDeleteShader" (GLuint) void))
+    (set! *glDetachShader*
+	  (gl-procedure "glDetachShader" (GLuint GLuint) void))
+    (set! *glDisableVertexAttribArray*
+	  (gl-procedure "glDisableVertexAttribArray" (GLuint) void))
+    (set! *glEnableVertexAttribArray*
+	  (gl-procedure "glEnableVertexAttribArray" (GLuint) void))
+    (set! *glGetActiveAttrib*
+	  (gl-procedure "glGetActiveAttrib" (GLuint GLuint GLsizei (* GLsizei) (* GLint) (* GLenum) string) void))
+    (set! *glGetActiveUniform*
+	  (gl-procedure "glGetActiveUniform" (GLuint GLuint GLsizei (* GLsizei) (* GLint) (* GLenum) string) void))
+    (set! *glGetAttachedShaders*
+	  (gl-procedure "glGetAttachedShaders" (GLuint GLsizei (* GLsizei) (* GLuint)) void))
+    (set! *glGetAttribLocation*
+	  (gl-procedure "glGetAttribLocation" (GLuint string) GLint))
+    (set! *glGetProgramiv*
+	  (gl-procedure "glGetProgramiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetProgramInfoLog*
+	  (gl-procedure "glGetProgramInfoLog" (GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glGetShaderiv*
+	  (gl-procedure "glGetShaderiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetShaderInfoLog*
+	  (gl-procedure "glGetShaderInfoLog" (GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glGetShaderSource*
+	  (gl-procedure "glGetShaderSource" (GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glGetUniformLocation*
+	  (gl-procedure "glGetUniformLocation" (GLuint string) GLint))
+    (set! *glGetUniformfv*
+	  (gl-procedure "glGetUniformfv" (GLuint GLint (* GLfloat)) void))
+    (set! *glGetUniformiv*
+	  (gl-procedure "glGetUniformiv" (GLuint GLint (* GLint)) void))
+    (set! *glGetVertexAttribdv*
+	  (gl-procedure "glGetVertexAttribdv" (GLuint GLenum (* GLdouble)) void))
+    (set! *glGetVertexAttribfv*
+	  (gl-procedure "glGetVertexAttribfv" (GLuint GLenum (* GLfloat)) void))
+    (set! *glGetVertexAttribiv*
+	  (gl-procedure "glGetVertexAttribiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetVertexAttribPointerv*
+	  (gl-procedure "glGetVertexAttribPointerv" (GLuint GLenum void*) void))
+    (set! *glIsProgram*
+	  (gl-procedure "glIsProgram" (GLuint) GLboolean))
+    (set! *glIsShader*
+	  (gl-procedure "glIsShader" (GLuint) GLboolean))
+    (set! *glLinkProgram*
+	  (gl-procedure "glLinkProgram" (GLuint) void))
+    (set! *glShaderSource*
+	  (gl-procedure "glShaderSource" (GLuint GLsizei (* GLchar) (* GLint)) void))
+    (set! *glUseProgram*
+	  (gl-procedure "glUseProgram" (GLuint) void))
+    (set! *glUniform1f*
+	  (gl-procedure "glUniform1f" (GLint GLfloat) void))
+    (set! *glUniform2f*
+	  (gl-procedure "glUniform2f" (GLint GLfloat GLfloat) void))
+    (set! *glUniform3f*
+	  (gl-procedure "glUniform3f" (GLint GLfloat GLfloat GLfloat) void))
+    (set! *glUniform4f*
+	  (gl-procedure "glUniform4f" (GLint GLfloat GLfloat GLfloat GLfloat) void))
+    (set! *glUniform1i*
+	  (gl-procedure "glUniform1i" (GLint GLint) void))
+    (set! *glUniform2i*
+	  (gl-procedure "glUniform2i" (GLint GLint GLint) void))
+    (set! *glUniform3i*
+	  (gl-procedure "glUniform3i" (GLint GLint GLint GLint) void))
+    (set! *glUniform4i*
+	  (gl-procedure "glUniform4i" (GLint GLint GLint GLint GLint) void))
+    (set! *glUniform1fv*
+	  (gl-procedure "glUniform1fv" (GLint GLsizei (* GLfloat)) void))
+    (set! *glUniform2fv*
+	  (gl-procedure "glUniform2fv" (GLint GLsizei (* GLfloat)) void))
+    (set! *glUniform3fv*
+	  (gl-procedure "glUniform3fv" (GLint GLsizei (* GLfloat)) void))
+    (set! *glUniform4fv*
+	  (gl-procedure "glUniform4fv" (GLint GLsizei (* GLfloat)) void))
+    (set! *glUniform1iv*
+	  (gl-procedure "glUniform1iv" (GLint GLsizei (* GLint)) void))
+    (set! *glUniform2iv*
+	  (gl-procedure "glUniform2iv" (GLint GLsizei (* GLint)) void))
+    (set! *glUniform3iv*
+	  (gl-procedure "glUniform3iv" (GLint GLsizei (* GLint)) void))
+    (set! *glUniform4iv*
+	  (gl-procedure "glUniform4iv" (GLint GLsizei (* GLint)) void))
+    (set! *glUniformMatrix2fv*
+	  (gl-procedure "glUniformMatrix2fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glUniformMatrix3fv*
+	  (gl-procedure "glUniformMatrix3fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glUniformMatrix4fv*
+	  (gl-procedure "glUniformMatrix4fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glValidateProgram*
+	  (gl-procedure "glValidateProgram" (GLuint) void))
+    (set! *glVertexAttrib1d*
+	  (gl-procedure "glVertexAttrib1d" (GLuint GLdouble) void))
+    (set! *glVertexAttrib1dv*
+	  (gl-procedure "glVertexAttrib1dv" (GLuint (* GLdouble)) void))
+    (set! *glVertexAttrib1f*
+	  (gl-procedure "glVertexAttrib1f" (GLuint GLfloat) void))
+    (set! *glVertexAttrib1fv*
+	  (gl-procedure "glVertexAttrib1fv" (GLuint (* GLfloat)) void))
+    (set! *glVertexAttrib1s*
+	  (gl-procedure "glVertexAttrib1s" (GLuint GLshort) void))
+    (set! *glVertexAttrib1sv*
+	  (gl-procedure "glVertexAttrib1sv" (GLuint (* GLshort)) void))
+    (set! *glVertexAttrib2d*
+	  (gl-procedure "glVertexAttrib2d" (GLuint GLdouble GLdouble) void))
+    (set! *glVertexAttrib2dv*
+	  (gl-procedure "glVertexAttrib2dv" (GLuint (* GLdouble)) void))
+    (set! *glVertexAttrib2f*
+	  (gl-procedure "glVertexAttrib2f" (GLuint GLfloat GLfloat) void))
+    (set! *glVertexAttrib2fv*
+	  (gl-procedure "glVertexAttrib2fv" (GLuint (* GLfloat)) void))
+    (set! *glVertexAttrib2s*
+	  (gl-procedure "glVertexAttrib2s" (GLuint GLshort GLshort) void))
+    (set! *glVertexAttrib2sv*
+	  (gl-procedure "glVertexAttrib2sv" (GLuint (* GLshort)) void))
+    (set! *glVertexAttrib3d*
+	  (gl-procedure "glVertexAttrib3d" (GLuint GLdouble GLdouble GLdouble) void))
+    (set! *glVertexAttrib3dv*
+	  (gl-procedure "glVertexAttrib3dv" (GLuint (* GLdouble)) void))
+    (set! *glVertexAttrib3f*
+	  (gl-procedure "glVertexAttrib3f" (GLuint GLfloat GLfloat GLfloat) void))
+    (set! *glVertexAttrib3fv*
+	  (gl-procedure "glVertexAttrib3fv" (GLuint (* GLfloat)) void))
+    (set! *glVertexAttrib3s*
+	  (gl-procedure "glVertexAttrib3s" (GLuint GLshort GLshort GLshort) void))
+    (set! *glVertexAttrib3sv*
+	  (gl-procedure "glVertexAttrib3sv" (GLuint (* GLshort)) void))
+    (set! *glVertexAttrib4Nbv*
+	  (gl-procedure "glVertexAttrib4Nbv" (GLuint (* GLbyte)) void))
+    (set! *glVertexAttrib4Niv*
+	  (gl-procedure "glVertexAttrib4Niv" (GLuint (* GLint)) void))
+    (set! *glVertexAttrib4Nsv*
+	  (gl-procedure "glVertexAttrib4Nsv" (GLuint (* GLshort)) void))
+    (set! *glVertexAttrib4Nub*
+	  (gl-procedure "glVertexAttrib4Nub" (GLuint GLubyte GLubyte GLubyte GLubyte) void))
+    (set! *glVertexAttrib4Nubv*
+	  (gl-procedure "glVertexAttrib4Nubv" (GLuint (* GLubyte)) void))
+    (set! *glVertexAttrib4Nuiv*
+	  (gl-procedure "glVertexAttrib4Nuiv" (GLuint (* GLuint)) void))
+    (set! *glVertexAttrib4Nusv*
+	  (gl-procedure "glVertexAttrib4Nusv" (GLuint (* GLushort)) void))
+    (set! *glVertexAttrib4bv*
+	  (gl-procedure "glVertexAttrib4bv" (GLuint (* GLbyte)) void))
+    (set! *glVertexAttrib4d*
+	  (gl-procedure "glVertexAttrib4d" (GLuint GLdouble GLdouble GLdouble GLdouble) void))
+    (set! *glVertexAttrib4dv*
+	  (gl-procedure "glVertexAttrib4dv" (GLuint (* GLdouble)) void))
+    (set! *glVertexAttrib4f*
+	  (gl-procedure "glVertexAttrib4f" (GLuint GLfloat GLfloat GLfloat GLfloat) void))
+    (set! *glVertexAttrib4fv*
+	  (gl-procedure "glVertexAttrib4fv" (GLuint (* GLfloat)) void))
+    (set! *glVertexAttrib4iv*
+	  (gl-procedure "glVertexAttrib4iv" (GLuint (* GLint)) void))
+    (set! *glVertexAttrib4s*
+	  (gl-procedure "glVertexAttrib4s" (GLuint GLshort GLshort GLshort GLshort) void))
+    (set! *glVertexAttrib4sv*
+	  (gl-procedure "glVertexAttrib4sv" (GLuint (* GLshort)) void))
+    (set! *glVertexAttrib4ubv*
+	  (gl-procedure "glVertexAttrib4ubv" (GLuint (* GLubyte)) void))
+    (set! *glVertexAttrib4uiv*
+	  (gl-procedure "glVertexAttrib4uiv" (GLuint (* GLuint)) void))
+    (set! *glVertexAttrib4usv*
+	  (gl-procedure "glVertexAttrib4usv" (GLuint (* GLushort)) void))
+    (set! *glVertexAttribPointer*
+	  (gl-procedure "glVertexAttribPointer" (GLuint GLint GLenum GLboolean GLsizei void*) void))
+
+    (set! *glUniformMatrix2x3fv*
+	  (gl-procedure "glUniformMatrix2x3fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glUniformMatrix3x2fv*
+	  (gl-procedure "glUniformMatrix3x2fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glUniformMatrix2x4fv*
+	  (gl-procedure "glUniformMatrix2x4fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glUniformMatrix4x2fv*
+	  (gl-procedure "glUniformMatrix4x2fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glUniformMatrix3x4fv*
+	  (gl-procedure "glUniformMatrix3x4fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glUniformMatrix4x3fv*
+	  (gl-procedure "glUniformMatrix4x3fv" (GLint GLsizei GLboolean (* GLfloat)) void))
+
+    (set! *glColorMaski*
+	  (gl-procedure "glColorMaski" (GLuint GLboolean GLboolean GLboolean GLboolean) void))
+    (set! *glGetBooleani_v*
+	  (gl-procedure "glGetBooleani_v" (GLenum GLuint (* GLboolean)) void))
+    (set! *glGetIntegeri_v*
+	  (gl-procedure "glGetIntegeri_v" (GLenum GLuint (* GLint)) void))
+    (set! *glEnablei*
+	  (gl-procedure "glEnablei" (GLenum GLuint) void))
+    (set! *glDisablei*
+	  (gl-procedure "glDisablei" (GLenum GLuint) void))
+    (set! *glIsEnabledi*
+	  (gl-procedure "glIsEnabledi" (GLenum GLuint) GLboolean))
+    (set! *glBeginTransformFeedback*
+	  (gl-procedure "glBeginTransformFeedback" (GLenum) void))
+    (set! *glEndTransformFeedback*
+	  (gl-procedure "glEndTransformFeedback" () void))
+    (set! *glBindBufferRange*
+	  (gl-procedure "glBindBufferRange" (GLenum GLuint GLuint GLintptr GLsizeiptr) void))
+    (set! *glBindBufferBase*
+	  (gl-procedure "glBindBufferBase" (GLenum GLuint GLuint) void))
+    (set! *glTransformFeedbackVaryings*
+	  (gl-procedure "glTransformFeedbackVaryings" (GLuint GLsizei (* GLchar) GLenum) void))
+    (set! *glGetTransformFeedbackVarying*
+	  (gl-procedure "glGetTransformFeedbackVarying" (GLuint GLuint GLsizei (* GLsizei) (* GLsizei) (* GLenum) string) void))
+    (set! *glClampColor*
+	  (gl-procedure "glClampColor" (GLenum GLenum) void))
+    (set! *glBeginConditionalRender*
+	  (gl-procedure "glBeginConditionalRender" (GLuint GLenum) void))
+    (set! *glEndConditionalRender*
+	  (gl-procedure "glEndConditionalRender" () void))
+    (set! *glVertexAttribIPointer*
+	  (gl-procedure "glVertexAttribIPointer" (GLuint GLint GLenum GLsizei void*) void))
+    (set! *glGetVertexAttribIiv*
+	  (gl-procedure "glGetVertexAttribIiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetVertexAttribIuiv*
+	  (gl-procedure "glGetVertexAttribIuiv" (GLuint GLenum (* GLuint)) void))
+    (set! *glVertexAttribI1i*
+	  (gl-procedure "glVertexAttribI1i" (GLuint GLint) void))
+    (set! *glVertexAttribI2i*
+	  (gl-procedure "glVertexAttribI2i" (GLuint GLint GLint) void))
+    (set! *glVertexAttribI3i*
+	  (gl-procedure "glVertexAttribI3i" (GLuint GLint GLint GLint) void))
+    (set! *glVertexAttribI4i*
+	  (gl-procedure "glVertexAttribI4i" (GLuint GLint GLint GLint GLint) void))
+    (set! *glVertexAttribI1ui*
+	  (gl-procedure "glVertexAttribI1ui" (GLuint GLuint) void))
+    (set! *glVertexAttribI2ui*
+	  (gl-procedure "glVertexAttribI2ui" (GLuint GLuint GLuint) void))
+    (set! *glVertexAttribI3ui*
+	  (gl-procedure "glVertexAttribI3ui" (GLuint GLuint GLuint GLuint) void))
+    (set! *glVertexAttribI4ui*
+	  (gl-procedure "glVertexAttribI4ui" (GLuint GLuint GLuint GLuint GLuint) void))
+    (set! *glVertexAttribI1iv*
+	  (gl-procedure "glVertexAttribI1iv" (GLuint (* GLint)) void))
+    (set! *glVertexAttribI2iv*
+	  (gl-procedure "glVertexAttribI2iv" (GLuint (* GLint)) void))
+    (set! *glVertexAttribI3iv*
+	  (gl-procedure "glVertexAttribI3iv" (GLuint (* GLint)) void))
+    (set! *glVertexAttribI4iv*
+	  (gl-procedure "glVertexAttribI4iv" (GLuint (* GLint)) void))
+    (set! *glVertexAttribI1uiv*
+	  (gl-procedure "glVertexAttribI1uiv" (GLuint (* GLuint)) void))
+    (set! *glVertexAttribI2uiv*
+	  (gl-procedure "glVertexAttribI2uiv" (GLuint (* GLuint)) void))
+    (set! *glVertexAttribI3uiv*
+	  (gl-procedure "glVertexAttribI3uiv" (GLuint (* GLuint)) void))
+    (set! *glVertexAttribI4uiv*
+	  (gl-procedure "glVertexAttribI4uiv" (GLuint (* GLuint)) void))
+    (set! *glVertexAttribI4bv*
+	  (gl-procedure "glVertexAttribI4bv" (GLuint (* GLbyte)) void))
+    (set! *glVertexAttribI4sv*
+	  (gl-procedure "glVertexAttribI4sv" (GLuint (* GLshort)) void))
+    (set! *glVertexAttribI4ubv*
+	  (gl-procedure "glVertexAttribI4ubv" (GLuint (* GLubyte)) void))
+    (set! *glVertexAttribI4usv*
+	  (gl-procedure "glVertexAttribI4usv" (GLuint (* GLushort)) void))
+    (set! *glGetUniformuiv*
+	  (gl-procedure "glGetUniformuiv" (GLuint GLint (* GLuint)) void))
+    (set! *glBindFragDataLocation*
+	  (gl-procedure "glBindFragDataLocation" (GLuint GLuint string) void))
+    (set! *glGetFragDataLocation*
+	  (gl-procedure "glGetFragDataLocation" (GLuint string) GLint))
+    (set! *glUniform1ui*
+	  (gl-procedure "glUniform1ui" (GLint GLuint) void))
+    (set! *glUniform2ui*
+	  (gl-procedure "glUniform2ui" (GLint GLuint GLuint) void))
+    (set! *glUniform3ui*
+	  (gl-procedure "glUniform3ui" (GLint GLuint GLuint GLuint) void))
+    (set! *glUniform4ui*
+	  (gl-procedure "glUniform4ui" (GLint GLuint GLuint GLuint GLuint) void))
+    (set! *glUniform1uiv*
+	  (gl-procedure "glUniform1uiv" (GLint GLsizei (* GLuint)) void))
+    (set! *glUniform2uiv*
+	  (gl-procedure "glUniform2uiv" (GLint GLsizei (* GLuint)) void))
+    (set! *glUniform3uiv*
+	  (gl-procedure "glUniform3uiv" (GLint GLsizei (* GLuint)) void))
+    (set! *glUniform4uiv*
+	  (gl-procedure "glUniform4uiv" (GLint GLsizei (* GLuint)) void))
+    (set! *glTexParameterIiv*
+	  (gl-procedure "glTexParameterIiv" (GLenum GLenum (* GLint)) void))
+    (set! *glTexParameterIuiv*
+	  (gl-procedure "glTexParameterIuiv" (GLenum GLenum (* GLuint)) void))
+    (set! *glGetTexParameterIiv*
+	  (gl-procedure "glGetTexParameterIiv" (GLenum GLenum (* GLint)) void))
+    (set! *glGetTexParameterIuiv*
+	  (gl-procedure "glGetTexParameterIuiv" (GLenum GLenum (* GLuint)) void))
+    (set! *glClearBufferiv*
+	  (gl-procedure "glClearBufferiv" (GLenum GLint (* GLint)) void))
+    (set! *glClearBufferuiv*
+	  (gl-procedure "glClearBufferuiv" (GLenum GLint (* GLuint)) void))
+    (set! *glClearBufferfv*
+	  (gl-procedure "glClearBufferfv" (GLenum GLint (* GLfloat)) void))
+    (set! *glClearBufferfi*
+	  (gl-procedure "glClearBufferfi" (GLenum GLint GLfloat GLint) void))
+    (set! *glGetStringi*
+	  (gl-procedure "glGetStringi" (GLenum GLuint) string))
+    (set! *glIsRenderbuffer*
+	  (gl-procedure "glIsRenderbuffer" (GLuint) GLboolean))
+    (set! *glBindRenderbuffer*
+	  (gl-procedure "glBindRenderbuffer" (GLenum GLuint) void))
+    (set! *glDeleteRenderbuffers*
+	  (gl-procedure "glDeleteRenderbuffers" (GLsizei (* GLuint)) void))
+    (set! *glGenRenderbuffers*
+	  (gl-procedure "glGenRenderbuffers" (GLsizei (* GLuint)) void))
+    (set! *glRenderbufferStorage*
+	  (gl-procedure "glRenderbufferStorage" (GLenum GLenum GLsizei GLsizei) void))
+    (set! *glGetRenderbufferParameteriv*
+	  (gl-procedure "glGetRenderbufferParameteriv" (GLenum GLenum (* GLint)) void))
+    (set! *glIsFramebuffer*
+	  (gl-procedure "glIsFramebuffer" (GLuint) GLboolean))
+    (set! *glBindFramebuffer*
+	  (gl-procedure "glBindFramebuffer" (GLenum GLuint) void))
+    (set! *glDeleteFramebuffers*
+	  (gl-procedure "glDeleteFramebuffers" (GLsizei (* GLuint)) void))
+    (set! *glGenFramebuffers*
+	  (gl-procedure "glGenFramebuffers" (GLsizei (* GLuint)) void))
+    (set! *glCheckFramebufferStatus*
+	  (gl-procedure "glCheckFramebufferStatus" (GLenum) GLenum))
+    (set! *glFramebufferTexture1D*
+	  (gl-procedure "glFramebufferTexture1D" (GLenum GLenum GLenum GLuint GLint) void))
+    (set! *glFramebufferTexture2D*
+	  (gl-procedure "glFramebufferTexture2D" (GLenum GLenum GLenum GLuint GLint) void))
+    (set! *glFramebufferTexture3D*
+	  (gl-procedure "glFramebufferTexture3D" (GLenum GLenum GLenum GLuint GLint GLint) void))
+    (set! *glFramebufferRenderbuffer*
+	  (gl-procedure "glFramebufferRenderbuffer" (GLenum GLenum GLenum GLuint) void))
+    (set! *glGetFramebufferAttachmentParameteriv*
+	  (gl-procedure "glGetFramebufferAttachmentParameteriv" (GLenum GLenum GLenum (* GLint)) void))
+    (set! *glGenerateMipmap*
+	  (gl-procedure "glGenerateMipmap" (GLenum) void))
+    (set! *glBlitFramebuffer*
+	  (gl-procedure "glBlitFramebuffer" (GLint GLint GLint GLint GLint GLint GLint GLint GLbitfield GLenum) void))
+    (set! *glRenderbufferStorageMultisample*
+	  (gl-procedure "glRenderbufferStorageMultisample" (GLenum GLsizei GLenum GLsizei GLsizei) void))
+    (set! *glFramebufferTextureLayer*
+	  (gl-procedure "glFramebufferTextureLayer" (GLenum GLenum GLuint GLint GLint) void))
+    (set! *glMapBufferRange*
+	  (gl-procedure "glMapBufferRange" (GLenum GLintptr GLsizeiptr GLbitfield) void))
+    (set! *glFlushMappedBufferRange*
+	  (gl-procedure "glFlushMappedBufferRange" (GLenum GLintptr GLsizeiptr) void))
+    (set! *glBindVertexArray*
+	  (gl-procedure "glBindVertexArray" (GLuint) void))
+    (set! *glDeleteVertexArrays*
+	  (gl-procedure "glDeleteVertexArrays" (GLsizei (* GLuint)) void))
+    (set! *glGenVertexArrays*
+	  (gl-procedure "glGenVertexArrays" (GLsizei (* GLuint)) void))
+    (set! *glIsVertexArray*
+	  (gl-procedure "glIsVertexArray" (GLuint) GLboolean))
+
+    (set! *glDrawArraysInstanced*
+	  (gl-procedure "glDrawArraysInstanced" (GLenum GLint GLsizei GLsizei) void))
+    (set! *glDrawElementsInstanced*
+	  (gl-procedure "glDrawElementsInstanced" (GLenum GLsizei GLenum void* GLsizei) void))
+    (set! *glTexBuffer*
+	  (gl-procedure "glTexBuffer" (GLenum GLenum GLuint) void))
+    (set! *glPrimitiveRestartIndex*
+	  (gl-procedure "glPrimitiveRestartIndex" (GLuint) void))
+    (set! *glCopyBufferSubData*
+	  (gl-procedure "glCopyBufferSubData" (GLenum GLenum GLintptr GLintptr GLsizeiptr) void))
+    (set! *glGetUniformIndices*
+	  (gl-procedure "glGetUniformIndices" (GLuint GLsizei (* GLchar) (* GLuint)) void))
+    (set! *glGetActiveUniformsiv*
+	  (gl-procedure "glGetActiveUniformsiv" (GLuint GLsizei (* GLuint) GLenum (* GLint)) void))
+    (set! *glGetActiveUniformName*
+	  (gl-procedure "glGetActiveUniformName" (GLuint GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glGetUniformBlockIndex*
+	  (gl-procedure "glGetUniformBlockIndex" (GLuint string) GLuint))
+    (set! *glGetActiveUniformBlockiv*
+	  (gl-procedure "glGetActiveUniformBlockiv" (GLuint GLuint GLenum (* GLint)) void))
+    (set! *glGetActiveUniformBlockName*
+	  (gl-procedure "glGetActiveUniformBlockName" (GLuint GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glUniformBlockBinding*
+	  (gl-procedure "glUniformBlockBinding" (GLuint GLuint GLuint) void))
+
+    (set! *glDrawElementsBaseVertex*
+	  (gl-procedure "glDrawElementsBaseVertex" (GLenum GLsizei GLenum void* GLint) void))
+    (set! *glDrawRangeElementsBaseVertex*
+	  (gl-procedure "glDrawRangeElementsBaseVertex" (GLenum GLuint GLuint GLsizei GLenum void* GLint) void))
+    (set! *glDrawElementsInstancedBaseVertex*
+	  (gl-procedure "glDrawElementsInstancedBaseVertex" (GLenum GLsizei GLenum void* GLsizei GLint) void))
+    (set! *glMultiDrawElementsBaseVertex*
+	  (gl-procedure "glMultiDrawElementsBaseVertex" (GLenum (* GLsizei) GLenum void* GLsizei (* GLint)) void))
+    (set! *glProvokingVertex*
+	  (gl-procedure "glProvokingVertex" (GLenum) void))
+    (set! *glFenceSync*
+	  (gl-procedure "glFenceSync" (GLenum GLbitfield) GLsync))
+    (set! *glIsSync*
+	  (gl-procedure "glIsSync" (GLsync) GLboolean))
+    (set! *glDeleteSync*
+	  (gl-procedure "glDeleteSync" (GLsync) void))
+    (set! *glClientWaitSync*
+	  (gl-procedure "glClientWaitSync" (GLsync GLbitfield GLuint64) void))
+    (set! *glWaitSync*
+	  (gl-procedure "glWaitSync" (GLsync GLbitfield GLuint64) GLenum))
+    (set! *glGetInteger64v*
+	  (gl-procedure "glGetInteger64v" (GLenum (* GLint64)) void))
+    (set! *glGetSynciv*
+	  (gl-procedure "glGetSynciv" (GLsync GLenum GLsizei (* GLsizei) (* GLint)) void))
+    (set! *glGetInteger64i_v*
+	  (gl-procedure "glGetInteger64i_v" (GLenum GLuint (* GLint64)) void))
+    (set! *glGetBufferParameteri64v*
+	  (gl-procedure "glGetBufferParameteri64v" (GLenum GLenum (* GLint64)) void))
+    (set! *glFramebufferTexture*
+	  (gl-procedure "glFramebufferTexture" (GLenum GLenum GLuint GLint) void))
+    (set! *glTexImage2DMultisample*
+	  (gl-procedure "glTexImage2DMultisample" (GLenum GLsizei GLenum GLsizei GLsizei GLboolean) void))
+    (set! *glTexImage3DMultisample*
+	  (gl-procedure "glTexImage3DMultisample" (GLenum GLsizei GLenum GLsizei GLsizei GLsizei GLboolean) void))
+    (set! *glGetMultisamplefv*
+	  (gl-procedure "glGetMultisamplefv" (GLenum GLuint (* GLfloat)) void))
+    (set! *glSampleMaski*
+	  (gl-procedure "glSampleMaski" (GLuint GLbitfield) void))
+
+    (set! *glBindFragDataLocationIndexed*
+	  (gl-procedure "glBindFragDataLocationIndexed" (GLuint GLuint GLuint string) void))
+    (set! *glGetFragDataIndex*
+	  (gl-procedure "glGetFragDataIndex" (GLuint string) GLint))
+    (set! *glGenSamplers*
+	  (gl-procedure "glGenSamplers" (GLsizei (* GLuint)) void))
+    (set! *glDeleteSamplers*
+	  (gl-procedure "glDeleteSamplers" (GLsizei (* GLuint)) void))
+    (set! *glIsSampler*
+	  (gl-procedure "glIsSampler" (GLuint) GLboolean))
+    (set! *glBindSampler*
+	  (gl-procedure "glBindSampler" (GLuint GLuint) void))
+    (set! *glSamplerParameteri*
+	  (gl-procedure "glSamplerParameteri" (GLuint GLenum GLint) void))
+    (set! *glSamplerParameteriv*
+	  (gl-procedure "glSamplerParameteriv" (GLuint GLenum (* GLint)) void))
+    (set! *glSamplerParameterf*
+	  (gl-procedure "glSamplerParameterf" (GLuint GLenum GLfloat) void))
+    (set! *glSamplerParameterfv*
+	  (gl-procedure "glSamplerParameterfv" (GLuint GLenum (* GLfloat)) void))
+    (set! *glSamplerParameterIiv*
+	  (gl-procedure "glSamplerParameterIiv" (GLuint GLenum (* GLint)) void))
+    (set! *glSamplerParameterIuiv*
+	  (gl-procedure "glSamplerParameterIuiv" (GLuint GLenum (* GLuint)) void))
+    (set! *glGetSamplerParameteriv*
+	  (gl-procedure "glGetSamplerParameteriv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetSamplerParameterIiv*
+	  (gl-procedure "glGetSamplerParameterIiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetSamplerParameterfv*
+	  (gl-procedure "glGetSamplerParameterfv" (GLuint GLenum (* GLfloat)) void))
+    (set! *glGetSamplerParameterIuiv*
+	  (gl-procedure "glGetSamplerParameterIuiv" (GLuint GLenum (* GLuint)) void))
+    (set! *glQueryCounter*
+	  (gl-procedure "glQueryCounter" (GLuint GLenum) void))
+    (set! *glGetQueryObjecti64v*
+	  (gl-procedure "glGetQueryObjecti64v" (GLuint GLenum (* GLuint64)) void))
+    (set! *glGetQueryObjectui64v*
+	  (gl-procedure "glGetQueryObjectui64v" (GLuint GLenum (* GLuint64)) void))
+    (set! *glVertexAttribDivisor*
+	  (gl-procedure "glVertexAttribDivisor" (GLuint GLuint) void))
+    (set! *glVertexAttribP1ui*
+	  (gl-procedure "glVertexAttribP1ui" (GLuint GLenum GLboolean GLuint) void))
+    (set! *glVertexAttribP1uiv*
+	  (gl-procedure "glVertexAttribP1uiv" (GLuint GLenum GLboolean (* GLuint)) void))
+    (set! *glVertexAttribP2ui*
+	  (gl-procedure "glVertexAttribP2ui" (GLuint GLenum GLboolean GLuint) void))
+    (set! *glVertexAttribP2uiv*
+	  (gl-procedure "glVertexAttribP2uiv" (GLuint GLenum GLboolean (* GLuint)) void))
+    (set! *glVertexAttribP3ui*
+	  (gl-procedure "glVertexAttribP3ui" (GLuint GLenum GLboolean GLuint) void))
+    (set! *glVertexAttribP3uiv*
+	  (gl-procedure "glVertexAttribP3uiv" (GLuint GLenum GLboolean (* GLuint)) void))
+    (set! *glVertexAttribP4ui*
+	  (gl-procedure "glVertexAttribP4ui" (GLuint GLenum GLboolean GLuint) void))
+    (set! *glVertexAttribP4uiv*
+	  (gl-procedure "glVertexAttribP4uiv" (GLuint GLenum GLboolean (* GLuint)) void))
+
+    (set! *glMinSampleShading*
+	  (gl-procedure "glMinSampleShading" (GLfloat) void))
+    (set! *glBlendEquationi*
+	  (gl-procedure "glBlendEquationi" (GLuint GLenum) void))
+    (set! *glBlendEquationSeparatei*
+	  (gl-procedure "glBlendEquationSeparatei" (GLuint GLenum GLenum) void))
+    (set! *glBlendFunci*
+	  (gl-procedure "glBlendFunci" (GLuint GLenum GLenum) void))
+    (set! *glBlendFuncSeparatei*
+	  (gl-procedure "glBlendFuncSeparatei" (GLuint GLenum GLenum GLenum GLenum) void))
+    (set! *glDrawArraysIndirect*
+	  (gl-procedure "glDrawArraysIndirect" (GLenum void*) void))
+    (set! *glDrawElementsIndirect*
+	  (gl-procedure "glDrawElementsIndirect" (GLenum GLenum void*) void))
+    (set! *glUniform1d*
+	  (gl-procedure "glUniform1d" (GLint GLdouble) void))
+    (set! *glUniform2d*
+	  (gl-procedure "glUniform2d" (GLint GLdouble GLdouble) void))
+    (set! *glUniform3d*
+	  (gl-procedure "glUniform3d" (GLint GLdouble GLdouble GLdouble) void))
+    (set! *glUniform4d*
+	  (gl-procedure "glUniform4d" (GLint GLdouble GLdouble GLdouble GLdouble) void))
+    (set! *glUniform1dv*
+	  (gl-procedure "glUniform1dv" (GLint GLsizei (* GLdouble)) void))
+    (set! *glUniform2dv*
+	  (gl-procedure "glUniform2dv" (GLint GLsizei (* GLdouble)) void))
+    (set! *glUniform3dv*
+	  (gl-procedure "glUniform3dv" (GLint GLsizei (* GLdouble)) void))
+    (set! *glUniform4dv*
+	  (gl-procedure "glUniform4dv" (GLint GLsizei (* GLdouble)) void))
+    (set! *glUniformMatrix2dv*
+	  (gl-procedure "glUniformMatrix2dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glUniformMatrix3dv*
+	  (gl-procedure "glUniformMatrix3dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glUniformMatrix4dv*
+	  (gl-procedure "glUniformMatrix4dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glUniformMatrix2x3dv*
+	  (gl-procedure "glUniformMatrix2x3dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glUniformMatrix2x4dv*
+	  (gl-procedure "glUniformMatrix2x4dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glUniformMatrix3x2dv*
+	  (gl-procedure "glUniformMatrix3x2dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glUniformMatrix3x4dv*
+	  (gl-procedure "glUniformMatrix3x4dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glUniformMatrix4x2dv*
+	  (gl-procedure "glUniformMatrix4x2dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glUniformMatrix4x3dv*
+	  (gl-procedure "glUniformMatrix4x3dv" (GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glGetUniformdv*
+	  (gl-procedure "glGetUniformdv" (GLuint GLint (* GLdouble)) void))
+    (set! *glGetSubroutineUniformLocation*
+	  (gl-procedure "glGetSubroutineUniformLocation" (GLuint GLenum string) GLint))
+    (set! *glGetSubroutineIndex*
+	  (gl-procedure "glGetSubroutineIndex" (GLuint GLenum string) GLuint))
+    (set! *glGetActiveSubroutineUniformiv*
+	  (gl-procedure "glGetActiveSubroutineUniformiv" (GLuint GLenum GLuint GLenum (* GLint)) void))
+    (set! *glGetActiveSubroutineUniformName*
+	  (gl-procedure "glGetActiveSubroutineUniformName" (GLuint GLenum GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glGetActiveSubroutineName*
+	  (gl-procedure "glGetActiveSubroutineName" (GLuint GLenum GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glUniformSubroutinesuiv*
+	  (gl-procedure "glUniformSubroutinesuiv" (GLenum GLsizei (* GLuint)) void))
+    (set! *glGetUniformSubroutineuiv*
+	  (gl-procedure "glGetUniformSubroutineuiv" (GLenum GLint (* GLuint)) void))
+    (set! *glGetProgramStageiv*
+	  (gl-procedure "glGetProgramStageiv" (GLuint GLenum GLenum (* GLint)) void))
+    (set! *glPatchParameteri*
+	  (gl-procedure "glPatchParameteri" (GLenum GLint) void))
+    (set! *glPatchParameterfv*
+	  (gl-procedure "glPatchParameterfv" (GLenum (* GLfloat)) void))
+    (set! *glBindTransformFeedback*
+	  (gl-procedure "glBindTransformFeedback" (GLenum GLuint) void))
+    (set! *glDeleteTransformFeedbacks*
+	  (gl-procedure "glDeleteTransformFeedbacks" (GLsizei (* GLuint)) void))
+    (set! *glGenTransformFeedbacks*
+	  (gl-procedure "glGenTransformFeedbacks" (GLsizei (* GLuint)) void))
+    (set! *glIsTransformFeedback*
+	  (gl-procedure "glIsTransformFeedback" (GLuint) GLboolean))
+    (set! *glPauseTransformFeedback*
+	  (gl-procedure "glPauseTransformFeedback" () void))
+    (set! *glResumeTransformFeedback*
+	  (gl-procedure "glResumeTransformFeedback" () void))
+    (set! *glDrawTransformFeedback*
+	  (gl-procedure "glDrawTransformFeedback" (GLenum GLuint) void))
+    (set! *glDrawTransformFeedbackStream*
+	  (gl-procedure "glDrawTransformFeedbackStream" (GLenum GLuint GLuint) void))
+    (set! *glBeginQueryIndexed*
+	  (gl-procedure "glBeginQueryIndexed" (GLenum GLuint GLuint) void))
+    (set! *glEndQueryIndexed*
+	  (gl-procedure "glEndQueryIndexed" (GLenum GLuint) void))
+    (set! *glGetQueryIndexediv*
+	  (gl-procedure "glGetQueryIndexediv" (GLenum GLuint GLenum (* GLint)) void))
+
+    (set! *glReleaseShaderCompiler*
+	  (gl-procedure "glReleaseShaderCompiler" () void))
+    (set! *glShaderBinary*
+	  (gl-procedure "glShaderBinary" (GLsizei (* GLuint) GLenum void* GLsizei) void))
+    (set! *glGetShaderPrecisionFormat*
+	  (gl-procedure "glGetShaderPrecisionFormat" (GLenum GLenum (* GLint) (* GLint)) void))
+    (set! *glDepthRangef*
+	  (gl-procedure "glDepthRangef" (GLfloat GLfloat) void))
+    (set! *glClearDepthf*
+	  (gl-procedure "glClearDepthf" (GLfloat) void))
+    (set! *glGetProgramBinary*
+	  (gl-procedure "glGetProgramBinary" (GLuint GLsizei (* GLsizei) (* GLenum) void*) void))
+    (set! *glProgramBinary*
+	  (gl-procedure "glProgramBinary" (GLuint GLenum void* GLsizei) void))
+    (set! *glProgramParameteri*
+	  (gl-procedure "glProgramParameteri" (GLuint GLenum GLint) void))
+    (set! *glUseProgramStages*
+	  (gl-procedure "glUseProgramStages" (GLuint GLbitfield GLuint) void))
+    (set! *glActiveShaderProgram*
+	  (gl-procedure "glActiveShaderProgram" (GLuint GLuint) void))
+    (set! *glCreateShaderProgramv*
+	  (gl-procedure "glCreateShaderProgramv" (GLenum GLsizei (* GLchar)) GLuint))
+    (set! *glBindProgramPipeline*
+	  (gl-procedure "glBindProgramPipeline" (GLuint) void))
+    (set! *glDeleteProgramPipelines*
+	  (gl-procedure "glDeleteProgramPipelines" (GLsizei (* GLuint)) void))
+    (set! *glGenProgramPipelines*
+	  (gl-procedure "glGenProgramPipelines" (GLsizei (* GLuint)) void))
+    (set! *glIsProgramPipeline*
+	  (gl-procedure "glIsProgramPipeline" (GLuint) GLboolean))
+    (set! *glGetProgramPipelineiv*
+	  (gl-procedure "glGetProgramPipelineiv" (GLuint GLenum (* GLint)) void))
+    (set! *glProgramUniform1i*
+	  (gl-procedure "glProgramUniform1i" (GLuint GLint GLint) void))
+    (set! *glProgramUniform1iv*
+	  (gl-procedure "glProgramUniform1iv" (GLuint GLint GLsizei (* GLint)) void))
+    (set! *glProgramUniform1f*
+	  (gl-procedure "glProgramUniform1f" (GLuint GLint GLfloat) void))
+    (set! *glProgramUniform1fv*
+	  (gl-procedure "glProgramUniform1fv" (GLuint GLint GLsizei (* GLfloat)) void))
+    (set! *glProgramUniform1d*
+	  (gl-procedure "glProgramUniform1d" (GLuint GLint GLdouble) void))
+    (set! *glProgramUniform1dv*
+	  (gl-procedure "glProgramUniform1dv" (GLuint GLint GLsizei (* GLdouble)) void))
+    (set! *glProgramUniform1ui*
+	  (gl-procedure "glProgramUniform1ui" (GLuint GLint GLuint) void))
+    (set! *glProgramUniform1uiv*
+	  (gl-procedure "glProgramUniform1uiv" (GLuint GLint GLsizei (* GLuint)) void))
+    (set! *glProgramUniform2i*
+	  (gl-procedure "glProgramUniform2i" (GLuint GLint GLint GLint) void))
+    (set! *glProgramUniform2iv*
+	  (gl-procedure "glProgramUniform2iv" (GLuint GLint GLsizei (* GLint)) void))
+    (set! *glProgramUniform2f*
+	  (gl-procedure "glProgramUniform2f" (GLuint GLint GLfloat GLfloat) void))
+    (set! *glProgramUniform2fv*
+	  (gl-procedure "glProgramUniform2fv" (GLuint GLint GLsizei (* GLfloat)) void))
+    (set! *glProgramUniform2d*
+	  (gl-procedure "glProgramUniform2d" (GLuint GLint GLdouble GLdouble) void))
+    (set! *glProgramUniform2dv*
+	  (gl-procedure "glProgramUniform2dv" (GLuint GLint GLsizei (* GLdouble)) void))
+    (set! *glProgramUniform2ui*
+	  (gl-procedure "glProgramUniform2ui" (GLuint GLint GLuint GLuint) void))
+    (set! *glProgramUniform2uiv*
+	  (gl-procedure "glProgramUniform2uiv" (GLuint GLint GLsizei (* GLuint)) void))
+    (set! *glProgramUniform3i*
+	  (gl-procedure "glProgramUniform3i" (GLuint GLint GLint GLint GLint) void))
+    (set! *glProgramUniform3iv*
+	  (gl-procedure "glProgramUniform3iv" (GLuint GLint GLsizei (* GLint)) void))
+    (set! *glProgramUniform3f*
+	  (gl-procedure "glProgramUniform3f" (GLuint GLint GLfloat GLfloat GLfloat) void))
+    (set! *glProgramUniform3fv*
+	  (gl-procedure "glProgramUniform3fv" (GLuint GLint GLsizei (* GLfloat)) void))
+    (set! *glProgramUniform3d*
+	  (gl-procedure "glProgramUniform3d" (GLuint GLint GLdouble GLdouble GLdouble) void))
+    (set! *glProgramUniform3dv*
+	  (gl-procedure "glProgramUniform3dv" (GLuint GLint GLsizei (* GLdouble)) void))
+    (set! *glProgramUniform3ui*
+	  (gl-procedure "glProgramUniform3ui" (GLuint GLint GLuint GLuint GLuint) void))
+    (set! *glProgramUniform3uiv*
+	  (gl-procedure "glProgramUniform3uiv" (GLuint GLint GLsizei (* GLuint)) void))
+    (set! *glProgramUniform4i*
+	  (gl-procedure "glProgramUniform4i" (GLuint GLint GLint GLint GLint GLint) void))
+    (set! *glProgramUniform4iv*
+	  (gl-procedure "glProgramUniform4iv" (GLuint GLint GLsizei (* GLint)) void))
+    (set! *glProgramUniform4f*
+	  (gl-procedure "glProgramUniform4f" (GLuint GLint GLfloat GLfloat GLfloat GLfloat) void))
+    (set! *glProgramUniform4fv*
+	  (gl-procedure "glProgramUniform4fv" (GLuint GLint GLsizei (* GLfloat)) void))
+    (set! *glProgramUniform4d*
+	  (gl-procedure "glProgramUniform4d" (GLuint GLint GLdouble GLdouble GLdouble GLdouble) void))
+    (set! *glProgramUniform4dv*
+	  (gl-procedure "glProgramUniform4dv" (GLuint GLint GLsizei (* GLdouble)) void))
+    (set! *glProgramUniform4ui*
+	  (gl-procedure "glProgramUniform4ui" (GLuint GLint GLuint GLuint GLuint GLuint) void))
+    (set! *glProgramUniform4uiv*
+	  (gl-procedure "glProgramUniform4uiv" (GLuint GLint GLsizei (* GLuint)) void))
+    (set! *glProgramUniformMatrix2fv*
+	  (gl-procedure "glProgramUniformMatrix2fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix3fv*
+	  (gl-procedure "glProgramUniformMatrix3fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix4fv*
+	  (gl-procedure "glProgramUniformMatrix4fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix2dv*
+	  (gl-procedure "glProgramUniformMatrix2dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glProgramUniformMatrix3dv*
+	  (gl-procedure "glProgramUniformMatrix3dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glProgramUniformMatrix4dv*
+	  (gl-procedure "glProgramUniformMatrix4dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glProgramUniformMatrix2x3fv*
+	  (gl-procedure "glProgramUniformMatrix2x3fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix3x2fv*
+	  (gl-procedure "glProgramUniformMatrix3x2fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix2x4fv*
+	  (gl-procedure "glProgramUniformMatrix2x4fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix4x2fv*
+	  (gl-procedure "glProgramUniformMatrix4x2fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix3x4fv*
+	  (gl-procedure "glProgramUniformMatrix3x4fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix4x3fv*
+	  (gl-procedure "glProgramUniformMatrix4x3fv" (GLuint GLint GLsizei GLboolean (* GLfloat)) void))
+    (set! *glProgramUniformMatrix2x3dv*
+	  (gl-procedure "glProgramUniformMatrix2x3dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glProgramUniformMatrix3x2dv*
+	  (gl-procedure "glProgramUniformMatrix3x2dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glProgramUniformMatrix2x4dv*
+	  (gl-procedure "glProgramUniformMatrix2x4dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glProgramUniformMatrix4x2dv*
+	  (gl-procedure "glProgramUniformMatrix4x2dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glProgramUniformMatrix3x4dv*
+	  (gl-procedure "glProgramUniformMatrix3x4dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glProgramUniformMatrix4x3dv*
+	  (gl-procedure "glProgramUniformMatrix4x3dv" (GLuint GLint GLsizei GLboolean (* GLdouble)) void))
+    (set! *glValidateProgramPipeline*
+	  (gl-procedure "glValidateProgramPipeline" (GLuint) void))
+    (set! *glGetProgramPipelineInfoLog*
+	  (gl-procedure "glGetProgramPipelineInfoLog" (GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glVertexAttribL1d*
+	  (gl-procedure "glVertexAttribL1d" (GLuint GLdouble) void))
+    (set! *glVertexAttribL2d*
+	  (gl-procedure "glVertexAttribL2d" (GLuint GLdouble GLdouble) void))
+    (set! *glVertexAttribL3d*
+	  (gl-procedure "glVertexAttribL3d" (GLuint GLdouble GLdouble GLdouble) void))
+    (set! *glVertexAttribL4d*
+	  (gl-procedure "glVertexAttribL4d" (GLuint GLdouble GLdouble GLdouble GLdouble) void))
+    (set! *glVertexAttribL1dv*
+	  (gl-procedure "glVertexAttribL1dv" (GLuint (* GLdouble)) void))
+    (set! *glVertexAttribL2dv*
+	  (gl-procedure "glVertexAttribL2dv" (GLuint (* GLdouble)) void))
+    (set! *glVertexAttribL3dv*
+	  (gl-procedure "glVertexAttribL3dv" (GLuint (* GLdouble)) void))
+    (set! *glVertexAttribL4dv*
+	  (gl-procedure "glVertexAttribL4dv" (GLuint (* GLdouble)) void))
+    (set! *glVertexAttribLPointer*
+	  (gl-procedure "glVertexAttribLPointer" (GLuint GLint GLenum GLsizei void*) void))
+    (set! *glGetVertexAttribLdv*
+	  (gl-procedure "glGetVertexAttribLdv" (GLuint GLenum (* GLdouble)) void))
+    (set! *glViewportArrayv*
+	  (gl-procedure "glViewportArrayv" (GLuint GLsizei (* GLfloat)) void))
+    (set! *glViewportIndexedf*
+	  (gl-procedure "glViewportIndexedf" (GLuint GLfloat GLfloat GLfloat GLfloat) void))
+    (set! *glViewportIndexedfv*
+	  (gl-procedure "glViewportIndexedfv" (GLuint (* GLfloat)) void))
+    (set! *glScissorArrayv*
+	  (gl-procedure "glScissorArrayv" (GLuint GLsizei (* GLint)) void))
+    (set! *glScissorIndexed*
+	  (gl-procedure "glScissorIndexed" (GLuint GLint GLint GLsizei GLsizei) void))
+    (set! *glScissorIndexedv*
+	  (gl-procedure "glScissorIndexedv" (GLuint (* GLint)) void))
+    (set! *glDepthRangeArrayv*
+	  (gl-procedure "glDepthRangeArrayv" (GLuint GLsizei (* GLdouble)) void))
+    (set! *glDepthRangeIndexed*
+	  (gl-procedure "glDepthRangeIndexed" (GLuint GLdouble GLdouble) void))
+    (set! *glGetFloati_v*
+	  (gl-procedure "glGetFloati_v" (GLenum GLuint (* GLfloat)) void))
+    (set! *glGetDoublei_v*
+	  (gl-procedure "glGetDoublei_v" (GLenum  GLuint (* GLdouble)) void))
+
+    (set! *glDrawArraysInstancedBaseInstance*
+	  (gl-procedure "glDrawArraysInstancedBaseInstance" (GLenum GLint GLsizei GLsizei GLuint) void))
+    (set! *glDrawElementsInstancedBaseInstance*
+	  (gl-procedure "glDrawElementsInstancedBaseInstance" (GLenum GLsizei GLenum void* GLsizei GLuint) void))
+    (set! *glDrawElementsInstancedBaseVertexBaseInstance*
+	  (gl-procedure "glDrawElementsInstancedBaseVertexBaseInstance" (GLenum GLsizei GLenum void* GLsizei GLint GLuint) void))
+    (set! *glGetInternalformativ*
+	  (gl-procedure "glGetInternalformativ" (GLenum GLenum GLenum GLsizei (* GLint)) void))
+    (set! *glGetActiveAtomicCounterBufferiv*
+	  (gl-procedure "glGetActiveAtomicCounterBufferiv" (GLuint GLuint GLenum (* GLint)) void))
+    (set! *glBindImageTexture*
+	  (gl-procedure "glBindImageTexture" (GLuint GLuint GLint GLboolean GLint GLenum GLenum) void))
+    (set! *glMemoryBarrier*
+	  (gl-procedure "glMemoryBarrier" (GLbitfield) void))
+    (set! *glTexStorage1D*
+	  (gl-procedure "glTexStorage1D" (GLenum GLsizei GLenum GLsizei) void))
+    (set! *glTexStorage2D*
+	  (gl-procedure "glTexStorage2D" (GLenum GLsizei GLenum GLsizei GLsizei) void))
+    (set! *glTexStorage3D*
+	  (gl-procedure "glTexStorage3D" (GLenum GLsizei GLenum GLsizei GLsizei GLsizei) void))
+    (set! *glDrawTransformFeedbackInstanced*
+	  (gl-procedure "glDrawTransformFeedbackInstanced" (GLenum GLuint GLsizei) void))
+    (set! *glDrawTransformFeedbackStreamInstanced*
+	  (gl-procedure "glDrawTransformFeedbackStreamInstanced" (GLenum GLuint GLuint GLsizei) void))
+
+    (set! *glClearBufferData*
+	  (gl-procedure "glClearBufferData" (GLenum GLenum GLenum GLenum void*) void))
+    (set! *glClearBufferSubData*
+	  (gl-procedure "glClearBufferSubData" (GLenum GLenum GLintptr GLsizeiptr GLenum GLenum void*) void))
+    (set! *glDispatchCompute*
+	  (gl-procedure "glDispatchCompute" (GLuint GLuint GLuint) void))
+    (set! *glDispatchComputeIndirect*
+	  (gl-procedure "glDispatchComputeIndirect" (GLintptr) void))
+    (set! *glCopyImageSubData*
+	  (gl-procedure "glCopyImageSubData" (GLuint GLenum GLint GLint GLint GLint GLuint GLenum GLint GLint GLint GLint GLsizei GLsizei GLsizei) void))
+    (set! *glFramebufferParameteri*
+	  (gl-procedure "glFramebufferParameteri" (GLenum GLenum GLint) void))
+    (set! *glGetFramebufferParameteriv*
+	  (gl-procedure "glGetFramebufferParameteriv" (GLenum GLenum (* GLint)) void))
+    (set! *glGetInternalformati64v*
+	  (gl-procedure "glGetInternalformati64v" (GLenum GLenum GLenum GLsizei (* GLint64)) void))
+    (set! *glInvalidateTexSubImage*
+	  (gl-procedure "glInvalidateTexSubImage" (GLuint GLint GLint GLint GLint GLsizei GLsizei GLsizei) void))
+    (set! *glInvalidateTexImage*
+	  (gl-procedure "glInvalidateTexImage" (GLuint GLint) void))
+    (set! *glInvalidateBufferSubData*
+	  (gl-procedure "glInvalidateBufferSubData" (GLuint GLintptr GLsizeiptr) void))
+    (set! *glInvalidateBufferData*
+	  (gl-procedure "glInvalidateBufferData" (GLuint) void))
+    (set! *glInvalidateFramebuffer*
+	  (gl-procedure "glInvalidateFramebuffer" (GLenum GLsizei (* GLenum)) void))
+    (set! *glInvalidateSubFramebuffer*
+	  (gl-procedure "glInvalidateSubFramebuffer" (GLenum GLsizei (* GLenum) GLint GLint GLsizei GLsizei) void))
+    (set! *glMultiDrawArraysIndirect*
+	  (gl-procedure "glMultiDrawArraysIndirect" (GLenum void* GLsizei GLsizei) void))
+    (set! *glMultiDrawElementsIndirect*
+	  (gl-procedure "glMultiDrawElementsIndirect" (GLenum GLenum void* GLsizei GLsizei) void))
+    (set! *glGetProgramInterfaceiv*
+	  (gl-procedure "glGetProgramInterfaceiv" (GLuint GLenum GLenum (* GLint)) void))
+    (set! *glGetProgramResourceIndex*
+	  (gl-procedure "glGetProgramResourceIndex" (GLuint GLenum string) GLuint))
+    (set! *glGetProgramResourceName*
+	  (gl-procedure "glGetProgramResourceName" (GLuint GLenum GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glGetProgramResourceiv*
+	  (gl-procedure "glGetProgramResourceiv" (GLuint GLenum GLuint GLsizei (* GLenum) GLsizei (* GLsizei) (* GLint)) void))
+    (set! *glGetProgramResourceLocation*
+	  (gl-procedure "glGetProgramResourceLocation" (GLuint GLenum string) GLint))
+    (set! *glGetProgramResourceLocationIndex*
+	  (gl-procedure "glGetProgramResourceLocationIndex" (GLuint GLenum string) GLint))
+    (set! *glShaderStorageBlockBinding*
+	  (gl-procedure "glShaderStorageBlockBinding" (GLuint GLuint GLuint) void))
+    (set! *glTexBufferRange*
+	  (gl-procedure "glTexBufferRange" (GLenum GLenum GLuint GLintptr GLsizeiptr) void))
+    (set! *glTexStorage2DMultisample*
+	  (gl-procedure "glTexStorage2DMultisample" (GLenum GLsizei GLenum GLsizei GLsizei GLboolean) void))
+    (set! *glTexStorage3DMultisample*
+	  (gl-procedure "glTexStorage3DMultisample" (GLenum GLsizei GLenum GLsizei GLsizei GLsizei GLboolean) void))
+    (set! *glTextureView*
+	  (gl-procedure "glTextureView" (GLuint GLenum GLuint GLenum GLuint GLuint GLuint GLuint) void))
+    (set! *glBindVertexBuffer*
+	  (gl-procedure "glBindVertexBuffer" (GLuint GLuint GLintptr GLsizei) void))
+    (set! *glVertexAttribFormat*
+	  (gl-procedure "glVertexAttribFormat" (GLuint GLint GLenum GLboolean GLuint) void))
+    (set! *glVertexAttribIFormat*
+	  (gl-procedure "glVertexAttribIFormat" (GLuint GLint GLenum GLuint) void))
+    (set! *glVertexAttribLFormat*
+	  (gl-procedure "glVertexAttribLFormat" (GLuint GLint GLenum GLuint) void))
+    (set! *glVertexAttribBinding*
+	  (gl-procedure "glVertexAttribBinding" (GLuint  GLuint) void))
+    (set! *glVertexBindingDivisor*
+	  (gl-procedure "glVertexBindingDivisor" (GLuint GLuint) void))
+    (set! *glDebugMessageControl*
+	  (gl-procedure "glDebugMessageControl" (GLenum GLenum GLenum GLsizei (* GLuint) GLboolean) void))
+    (set! *glDebugMessageInsert*
+	  (gl-procedure "glDebugMessageInsert" (GLenum GLenum GLuint GLenum GLsizei string) void))
+    (set! *glDebugMessageCallback*
+	  (gl-procedure "glDebugMessageCallback" (GLDEBUGPROC void*) void))
+    (set! *glGetDebugMessageLog*
+	  (gl-procedure "glGetDebugMessageLog" (GLuint GLsizei (* GLenum) (* GLenum) (* GLuint) (* GLenum) (* GLsizei) (* GLchar)) GLuint))
+    (set! *glPushDebugGroup*
+	  (gl-procedure "glPushDebugGroup" (GLenum GLuint GLsizei string) void))
+    (set! *glPopDebugGroup*
+	  (gl-procedure "glPopDebugGroup" () void))
+    (set! *glObjectLabel*
+	  (gl-procedure "glObjectLabel" (GLenum GLuint GLsizei string) void))
+    (set! *glGetObjectLabel*
+	  (gl-procedure "glGetObjectLabel" (GLenum GLuint GLsizei (* GLsizei) (* GLchar)) void))
+    (set! *glObjectPtrLabel*
+	  (gl-procedure "glObjectPtrLabel" (void* GLsizei (* GLchar)) void))
+    (set! *glGetObjectPtrLabel*
+	  (gl-procedure "glGetObjectPtrLabel" (void* GLsizei (* GLsizei) (* GLchar)) void))
+
+    (set! *glBufferStorage*
+	  (gl-procedure "glBufferStorage" (GLenum GLsizeiptr void* GLbitfield) void))
+    (set! *glClearTexImage*
+	  (gl-procedure "glClearTexImage" (GLuint GLint GLenum GLenum void*) void))
+    (set! *glClearTexSubImage*
+	  (gl-procedure "glClearTexSubImage" (GLuint GLint GLint GLint GLint GLsizei GLsizei GLsizei GLenum GLenum void*) void))
+    (set! *glBindBuffersBase*
+	  (gl-procedure "glBindBuffersBase" (GLenum GLuint  GLsizei (* GLuint)) void))
+    (set! *glBindBuffersRange*
+	  (gl-procedure "glBindBuffersRange" (GLenum GLuint GLsizei (* GLuint) (* GLintptr) (* GLsizeiptr)) void))
+    (set! *glBindTextures*
+	  (gl-procedure "glBindTextures" (GLuint GLsizei (* GLuint)) void))
+    (set! *glBindSamplers*
+	  (gl-procedure "glBindSamplers" (GLuint GLsizei (* GLuint)) void))
+    (set! *glBindImageTextures*
+	  (gl-procedure "glBindImageTextures" (GLuint GLsizei (* GLuint)) void))
+    (set! *glBindVertexBuffers*
+	  (gl-procedure "glBindVertexBuffers" (GLuint GLsizei (* GLuint) (* GLintptr) (* GLsizei)) void))
+
+    (set! *glClipControl*
+	  (gl-procedure "glClipControl" (GLenum GLenum) void))
+    (set! *glCreateTransformFeedbacks*
+	  (gl-procedure "glCreateTransformFeedbacks" (GLsizei (* GLuint)) void))
+    (set! *glTransformFeedbackBufferBase*
+	  (gl-procedure "glTransformFeedbackBufferBase" (GLuint GLuint GLuint) void))
+    (set! *glTransformFeedbackBufferRange*
+	  (gl-procedure "glTransformFeedbackBufferRange" (GLuint GLuint GLuint GLintptr GLsizeiptr) void))
+    (set! *glGetTransformFeedbackiv*
+	  (gl-procedure "glGetTransformFeedbackiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetTransformFeedbacki_v*
+	  (gl-procedure "glGetTransformFeedbacki_v" (GLuint GLenum GLuint (* GLint)) void))
+    (set! *glGetTransformFeedbacki64_v*
+	  (gl-procedure "glGetTransformFeedbacki64_v" (GLuint GLenum GLuint (* GLint64)) void))
+    (set! *glCreateBuffers*
+	  (gl-procedure "glCreateBuffers" (GLsizei (* GLuint)) void))
+    (set! *glNamedBufferStorage*
+	  (gl-procedure "glNamedBufferStorage" (GLuint GLsizeiptr void* GLbitfield) void))
+    (set! *glNamedBufferData*
+	  (gl-procedure "glNamedBufferData" (GLuint GLsizeiptr void* GLenum) void))
+    (set! *glNamedBufferSubData*
+	  (gl-procedure "glNamedBufferSubData" (GLuint GLintptr GLsizeiptr void*) void))
+    (set! *glCopyNamedBufferSubData*
+	  (gl-procedure "glCopyNamedBufferSubData" (GLuint GLuint GLintptr GLintptr GLsizeiptr) void))
+    (set! *glClearNamedBufferData*
+	  (gl-procedure "glClearNamedBufferData" (GLuint GLenum GLenum GLenum void*) void))
+    (set! *glClearNamedBufferSubData*
+	  (gl-procedure "glClearNamedBufferSubData" (GLuint GLenum GLintptr GLsizeiptr GLenum GLenum void*) void))
+    (set! *glMapNamedBuffer*
+	  (gl-procedure "glMapNamedBuffer" (GLuint GLenum) void))
+    (set! *glMapNamedBufferRange*
+	  (gl-procedure "glMapNamedBufferRange" (GLuint GLintptr GLsizeiptr GLbitfield) void))
+    (set! *glUnmapNamedBuffer*
+	  (gl-procedure "glUnmapNamedBuffer" (GLuint) GLboolean))
+    (set! *glFlushMappedNamedBufferRange*
+	  (gl-procedure "glFlushMappedNamedBufferRange" (GLuint GLintptr GLsizeiptr) void))
+    (set! *glGetNamedBufferParameteriv*
+	  (gl-procedure "glGetNamedBufferParameteriv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetNamedBufferParameteri64v*
+	  (gl-procedure "glGetNamedBufferParameteri64v" (GLuint GLenum (* GLint64)) void))
+    (set! *glGetNamedBufferPointerv*
+	  (gl-procedure "glGetNamedBufferPointerv" (GLuint GLenum void*) void))
+    (set! *glGetNamedBufferSubData*
+	  (gl-procedure "glGetNamedBufferSubData" (GLuint GLintptr GLsizeiptr void*) void))
+    (set! *glCreateFramebuffers*
+	  (gl-procedure "glCreateFramebuffers" (GLsizei (* GLuint)) void))
+    (set! *glNamedFramebufferRenderbuffer*
+	  (gl-procedure "glNamedFramebufferRenderbuffer" (GLuint GLenum GLenum GLuint) void))
+    (set! *glNamedFramebufferParameteri*
+	  (gl-procedure "glNamedFramebufferParameteri" (GLuint GLenum GLint) void))
+    (set! *glNamedFramebufferTexture*
+	  (gl-procedure "glNamedFramebufferTexture" (GLuint GLenum GLuint GLint) void))
+    (set! *glNamedFramebufferTextureLayer*
+	  (gl-procedure "glNamedFramebufferTextureLayer" (GLuint GLenum GLuint GLint GLint) void))
+    (set! *glNamedFramebufferDrawBuffer*
+	  (gl-procedure "glNamedFramebufferDrawBuffer" (GLuint GLenum) void))
+    (set! *glNamedFramebufferDrawBuffers*
+	  (gl-procedure "glNamedFramebufferDrawBuffers" (GLuint GLsizei (* GLenum)) void))
+    (set! *glNamedFramebufferReadBuffer*
+	  (gl-procedure "glNamedFramebufferReadBuffer" (GLuint GLenum) void))
+    (set! *glInvalidateNamedFramebufferData*
+	  (gl-procedure "glInvalidateNamedFramebufferData" (GLuint GLsizei (* GLenum)) void))
+    (set! *glInvalidateNamedFramebufferSubData*
+	  (gl-procedure "glInvalidateNamedFramebufferSubData" (GLuint GLsizei (* GLenum) GLint GLint GLsizei GLsizei) void))
+    (set! *glClearNamedFramebufferiv*
+	  (gl-procedure "glClearNamedFramebufferiv" (GLuint GLenum GLint (* GLint)) void))
+    (set! *glClearNamedFramebufferuiv*
+	  (gl-procedure "glClearNamedFramebufferuiv" (GLuint GLenum GLint (* GLuint)) void))
+    (set! *glClearNamedFramebufferfv*
+	  (gl-procedure "glClearNamedFramebufferfv" (GLuint GLenum GLint (* GLfloat)) void))
+    (set! *glClearNamedFramebufferfi*
+	  (gl-procedure "glClearNamedFramebufferfi" (GLuint GLenum GLint GLfloat GLint) void))
+    (set! *glBlitNamedFramebuffer*
+	  (gl-procedure "glBlitNamedFramebuffer" (GLuint GLuint GLint GLint GLint GLint GLint GLint GLint GLint GLbitfield GLenum) void))
+    (set! *glCheckNamedFramebufferStatus*
+	  (gl-procedure "glCheckNamedFramebufferStatus" (GLuint GLenum) GLenum))
+    (set! *glGetNamedFramebufferParameteriv*
+	  (gl-procedure "glGetNamedFramebufferParameteriv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetNamedFramebufferAttachmentParameteriv*
+	  (gl-procedure "glGetNamedFramebufferAttachmentParameteriv" (GLuint GLenum GLenum (* GLint)) void))
+    (set! *glCreateRenderbuffers*
+	  (gl-procedure "glCreateRenderbuffers" (GLsizei (* GLuint)) void))
+    (set! *glNamedRenderbufferStorage*
+	  (gl-procedure "glNamedRenderbufferStorage" (GLuint GLenum GLsizei GLsizei) void))
+    (set! *glNamedRenderbufferStorageMultisample*
+	  (gl-procedure "glNamedRenderbufferStorageMultisample" (GLuint GLsizei GLenum GLsizei GLsizei) void))
+    (set! *glGetNamedRenderbufferParameteriv*
+	  (gl-procedure "glGetNamedRenderbufferParameteriv" (GLuint GLenum (* GLint)) void))
+    (set! *glCreateTextures*
+	  (gl-procedure "glCreateTextures" (GLenum GLsizei (* GLuint)) void))
+    (set! *glTextureBuffer*
+	  (gl-procedure "glTextureBuffer" (GLuint GLenum GLuint) void))
+    (set! *glTextureBufferRange*
+	  (gl-procedure "glTextureBufferRange" (GLuint GLenum GLuint GLintptr GLsizeiptr) void))
+    (set! *glTextureStorage1D*
+	  (gl-procedure "glTextureStorage1D" (GLuint GLsizei GLenum GLsizei) void))
+    (set! *glTextureStorage2D*
+	  (gl-procedure "glTextureStorage2D" (GLuint GLsizei GLenum GLsizei GLsizei) void))
+    (set! *glTextureStorage3D*
+	  (gl-procedure "glTextureStorage3D" (GLuint GLsizei GLenum GLsizei GLsizei GLsizei) void))
+    (set! *glTextureStorage2DMultisample*
+	  (gl-procedure "glTextureStorage2DMultisample" (GLuint GLsizei GLenum GLsizei GLsizei GLboolean) void))
+    (set! *glTextureStorage3DMultisample*
+	  (gl-procedure "glTextureStorage3DMultisample" (GLuint GLsizei GLenum GLsizei GLsizei GLsizei GLboolean) void))
+    (set! *glTextureSubImage1D*
+	  (gl-procedure "glTextureSubImage1D" (GLuint GLint GLint GLsizei GLenum  GLenum  void*) void))
+    (set! *glTextureSubImage2D*
+	  (gl-procedure "glTextureSubImage2D" (GLuint GLint GLint GLint GLsizei GLsizei GLenum GLenum void*) void))
+    (set! *glTextureSubImage3D*
+	  (gl-procedure "glTextureSubImage3D" (GLuint GLint GLint GLint GLint GLsizei GLsizei GLsizei GLenum GLenum void*) void))
+    (set! *glCompressedTextureSubImage1D*
+	  (gl-procedure "glCompressedTextureSubImage1D" (GLuint GLint GLint GLsizei GLenum GLsizei void*) void))
+    (set! *glCompressedTextureSubImage2D*
+	  (gl-procedure "glCompressedTextureSubImage2D" (GLuint GLint GLint GLint GLsizei GLsizei GLenum GLsizei void*) void))
+    (set! *glCompressedTextureSubImage3D*
+	  (gl-procedure "glCompressedTextureSubImage3D" (GLuint GLint GLint GLint GLint GLsizei GLsizei GLsizei GLenum GLsizei void*) void))
+    (set! *glCopyTextureSubImage1D*
+	  (gl-procedure "glCopyTextureSubImage1D" (GLuint GLint GLint GLint GLint GLsizei) void))
+    (set! *glCopyTextureSubImage2D*
+	  (gl-procedure "glCopyTextureSubImage2D" (GLuint GLint GLint GLint GLint GLint GLsizei GLsizei) void))
+    (set! *glCopyTextureSubImage3D*
+	  (gl-procedure "glCopyTextureSubImage3D" (GLuint GLint GLint GLint GLint GLint GLint GLsizei GLsizei) void))
+    (set! *glTextureParameterf*
+	  (gl-procedure "glTextureParameterf" (GLuint GLenum GLfloat) void))
+    (set! *glTextureParameterfv*
+	  (gl-procedure "glTextureParameterfv" (GLuint GLenum (* GLfloat)) void))
+    (set! *glTextureParameteri*
+	  (gl-procedure "glTextureParameteri" (GLuint GLenum GLint) void))
+    (set! *glTextureParameterIiv*
+	  (gl-procedure "glTextureParameterIiv" (GLuint GLenum (* GLint)) void))
+    (set! *glTextureParameterIuiv*
+	  (gl-procedure "glTextureParameterIuiv" (GLuint GLenum (* GLuint)) void))
+    (set! *glTextureParameteriv*
+	  (gl-procedure "glTextureParameteriv" (GLuint GLenum (* GLint)) void))
+    (set! *glGenerateTextureMipmap*
+	  (gl-procedure "glGenerateTextureMipmap" (GLuint) void))
+    (set! *glBindTextureUnit*
+	  (gl-procedure "glBindTextureUnit" (GLuint GLuint) void))
+    (set! *glGetTextureImage*
+	  (gl-procedure "glGetTextureImage" (GLuint GLint GLenum GLenum GLsizei void*) void))
+    (set! *glGetCompressedTextureImage*
+	  (gl-procedure "glGetCompressedTextureImage" (GLuint GLint GLsizei void*) void))
+    (set! *glGetTextureLevelParameterfv*
+	  (gl-procedure "glGetTextureLevelParameterfv" (GLuint GLint GLenum (* GLfloat)) void))
+    (set! *glGetTextureLevelParameteriv*
+	  (gl-procedure "glGetTextureLevelParameteriv" (GLuint GLint GLenum (* GLint)) void))
+    (set! *glGetTextureParameterfv*
+	  (gl-procedure "glGetTextureParameterfv" (GLuint GLenum (* GLfloat)) void))
+    (set! *glGetTextureParameterIiv*
+	  (gl-procedure "glGetTextureParameterIiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetTextureParameterIuiv*
+	  (gl-procedure "glGetTextureParameterIuiv" (GLuint GLenum (* GLuint)) void))
+    (set! *glGetTextureParameteriv*
+	  (gl-procedure "glGetTextureParameteriv" (GLuint GLenum (* GLint)) void))
+    (set! *glCreateVertexArrays*
+	  (gl-procedure "glCreateVertexArrays" (GLsizei (* GLuint)) void))
+    (set! *glDisableVertexArrayAttrib*
+	  (gl-procedure "glDisableVertexArrayAttrib" (GLuint GLuint) void))
+    (set! *glEnableVertexArrayAttrib*
+	  (gl-procedure "glEnableVertexArrayAttrib" (GLuint GLuint) void))
+    (set! *glVertexArrayElementBuffer*
+	  (gl-procedure "glVertexArrayElementBuffer" (GLuint GLuint) void))
+    (set! *glVertexArrayVertexBuffer*
+	  (gl-procedure "glVertexArrayVertexBuffer" (GLuint GLuint GLuint GLintptr GLsizei) void))
+    (set! *glVertexArrayVertexBuffers*
+	  (gl-procedure "glVertexArrayVertexBuffers" (GLuint GLuint GLsizei (* GLuint) (* GLintptr) (* GLsizei)) void))
+    (set! *glVertexArrayAttribBinding*
+	  (gl-procedure "glVertexArrayAttribBinding" (GLuint GLuint GLuint) void))
+    (set! *glVertexArrayAttribFormat*
+	  (gl-procedure "glVertexArrayAttribFormat" (GLuint GLuint GLint GLenum GLboolean GLuint) void))
+    (set! *glVertexArrayAttribIFormat*
+	  (gl-procedure "glVertexArrayAttribIFormat" (GLuint GLuint GLint GLenum GLuint) void))
+    (set! *glVertexArrayAttribLFormat*
+	  (gl-procedure "glVertexArrayAttribLFormat" (GLuint GLuint GLint GLenum GLuint) void))
+    (set! *glVertexArrayBindingDivisor*
+	  (gl-procedure "glVertexArrayBindingDivisor" (GLuint GLuint  GLuint) void))
+    (set! *glGetVertexArrayiv*
+	  (gl-procedure "glGetVertexArrayiv" (GLuint GLenum (* GLint)) void))
+    (set! *glGetVertexArrayIndexediv*
+	  (gl-procedure "glGetVertexArrayIndexediv" (GLuint GLuint GLenum (* GLint)) void))
+    (set! *glGetVertexArrayIndexed64iv*
+	  (gl-procedure "glGetVertexArrayIndexed64iv" (GLuint GLuint GLenum (* GLint64)) void))
+    (set! *glCreateSamplers*
+	  (gl-procedure "glCreateSamplers" (GLsizei (* GLuint)) void))
+    (set! *glCreateProgramPipelines*
+	  (gl-procedure "glCreateProgramPipelines" (GLsizei (* GLuint)) void))
+    (set! *glCreateQueries*
+	  (gl-procedure "glCreateQueries" (GLenum GLsizei (* GLuint)) void))
+    (set! *glGetQueryBufferObjecti64v*
+	  (gl-procedure "glGetQueryBufferObjecti64v" (GLuint GLuint GLenum GLintptr) void))
+    (set! *glGetQueryBufferObjectiv*
+	  (gl-procedure "glGetQueryBufferObjectiv" (GLuint GLuint GLenum GLintptr) void))
+    (set! *glGetQueryBufferObjectui64v*
+	  (gl-procedure "glGetQueryBufferObjectui64v" (GLuint GLuint GLenum GLintptr) void))
+    (set! *glGetQueryBufferObjectuiv*
+	  (gl-procedure "glGetQueryBufferObjectuiv" (GLuint GLuint GLenum GLintptr) void))
+    (set! *glMemoryBarrierByRegion*
+	  (gl-procedure "glMemoryBarrierByRegion" (GLbitfield) void))
+    (set! *glGetTextureSubImage*
+	  (gl-procedure "glGetTextureSubImage" (GLuint GLint GLint GLint GLint GLsizei GLsizei GLsizei GLenum GLenum GLsizei void*) void))
+    (set! *glGetCompressedTextureSubImage*
+	  (gl-procedure "glGetCompressedTextureSubImage" (GLuint GLint GLint GLint GLint GLsizei GLsizei GLsizei GLsizei void*) void))
+    (set! *glGetGraphicsResetStatus*
+	  (gl-procedure "glGetGraphicsResetStatus" () GLenum))
+    (set! *glGetnCompressedTexImage*
+	  (gl-procedure "glGetnCompressedTexImage" (GLenum GLint GLsizei void*) void))
+    (set! *glGetnTexImage*
+	  (gl-procedure "glGetnTexImage" (GLenum GLint GLenum GLenum GLsizei void*) void))
+    (set! *glGetnUniformdv*
+	  (gl-procedure "glGetnUniformdv" (GLuint GLint GLsizei (* GLdouble)) void))
+    (set! *glGetnUniformfv*
+	  (gl-procedure "glGetnUniformfv" (GLuint GLint GLsizei (* GLfloat)) void))
+    (set! *glGetnUniformiv*
+	  (gl-procedure "glGetnUniformiv" (GLuint GLint GLsizei (* GLint)) void))
+    (set! *glGetnUniformuiv*
+	  (gl-procedure "glGetnUniformuiv" (GLuint GLint GLsizei (* GLuint)) void))
+    (set! *glReadnPixels*
+	  (gl-procedure "glReadnPixels" (GLint GLint GLsizei GLsizei GLenum GLenum GLsizei void*) void))
+    (set! *glTextureBarrier*
+	  (gl-procedure "glTextureBarrier" () void))
+
+    (set! *glSpecializeShader*
+	  (gl-procedure "glSpecializeShader" (GLuint string GLuint (* GLuint) (* GLuint)) void))
+    (set! *glMultiDrawArraysIndirectCount*
+	  (gl-procedure "glMultiDrawArraysIndirectCount" (GLenum void* GLintptr GLsizei GLsizei) void))
+    (set! *glMultiDrawElementsIndirectCount*
+	  (gl-procedure "glMultiDrawElementsIndirectCount" (GLenum GLenum void* GLintptr GLsizei GLsizei) void))
+    (set! *glPolygonOffsetClamp*
+	  (gl-procedure "glPolygonOffsetClamp" (GLfloat GLfloat GLfloat) void))))
