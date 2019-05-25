@@ -48,7 +48,7 @@
     (define (loop t)
       (define start-time (sdl-get-performance-counter))
  
-      (glClearColor (sin t) 0.4 (cos t) 1.0)
+      (glClearColor (sin t) 0.5 (cos t) 1.0)
       (glClear GL_COLOR_BUFFER_BIT)
       (sdl-gl-swap-window *window*)
 

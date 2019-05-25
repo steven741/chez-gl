@@ -2,4 +2,4 @@
 
 (scheme-start
  (lambda fns
-   (include "simple-ftype.ss")))
+   (include "gl3-ftype.ss")))

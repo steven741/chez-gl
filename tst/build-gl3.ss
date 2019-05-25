@@ -14,10 +14,10 @@
 (compile-compressed                    #t)
 (commonization-level                    0)
 
-(compile-program "boot-simple.ss")
-(compile-whole-program "boot-simple.wpo" "boot-simple.cwp")
-(make-boot-file "simple.boot" '("scheme" "petite") "boot-simple.cwp")
+(compile-program "boot-gl3.ss")
+(compile-whole-program "boot-gl3.wpo" "boot-gl3.cwp")
+(make-boot-file "gl3.boot" '("scheme" "petite") "boot-gl3.cwp")
 
-(delete-file "boot-simple.so")
-(delete-file "boot-simple.wpo")
-(delete-file "boot-simple.cwp")
+(delete-file "boot-gl3.so")
+(delete-file "boot-gl3.wpo")
+(delete-file "boot-gl3.cwp")
