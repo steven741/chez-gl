@@ -1,6 +1,7 @@
 ;;;; -*- mode: Scheme; -*-
 
 (import (chezscheme)
+	(gl)
 	(gl ftype)
 	(sdl))
 
@@ -35,34 +36,6 @@ void main()
 
 
 
-(define (with-c-string str proc)
-  (define address (foreign-alloc (foreign-sizeof 'void*)))
-
-  (define (string->foreign string)
-    (define address (foreign-alloc (+ 1 (string-length string))))
-
-    (define (loop offset string-list)
-      (if (null? string-list)
-	  (begin
-	    (foreign-set! 'char address offset #\nul)
-	    address)
-	  (begin
-	    (foreign-set! 'char address offset (car string-list))
-	    (loop (+ offset 1) (cdr string-list)))))
-
-    (loop 0 (string->list string)))
-
-  (define string-address (string->foreign str))
-
-  (foreign-set! 'void* address 0 string-address)
-
-  (let ((return (proc address)))
-    (foreign-free string-address)
-    (foreign-free address)
-    return))
-
-
-
 (define (print-error shader)
   (define info-log (foreign-alloc (* 512 (foreign-sizeof 'char))))
   (define (print-log offset)
@@ -82,23 +55,14 @@ void main()
 
 
 (define (create-shader-program)
-  (define gl-vertex-shader   (glCreateShader GL_VERTEX_SHADER))
-  (define gl-fragment-shader (glCreateShader GL_FRAGMENT_SHADER))
-  (define gl-program-shader  (glCreateProgram))
+  (define gl-vertex-shader   (gl-create-shader GL-VERTEX-SHADER))
+  (define gl-fragment-shader (gl-create-shader GL-FRAGMENT-SHADER))
+  (define gl-program-shader  (gl-create-program))
 
-  (with-c-string vertex-shader-source
-		 (lambda (str)
-		   (glShaderSource gl-vertex-shader 1
-				   (make-ftype-pointer char str)
-				   (make-ftype-pointer int 0))
-		   (glCompileShader gl-vertex-shader)))
-
-  (with-c-string fragment-shader-source
-		 (lambda (str)
-		   (glShaderSource gl-fragment-shader 1
-				   (make-ftype-pointer char str)
-				   (make-ftype-pointer int 0))
-		   (glCompileShader gl-fragment-shader)))
+  (gl-shader-source gl-vertex-shader vertex-shader-source)
+  (gl-compile-shader gl-vertex-shader)
+  (gl-shader-source gl-fragment-shader fragment-shader-source)
+  (gl-compile-shader gl-fragment-shader)
 
   #|
   (glGetShaderiv gl-fragment-shader GL_COMPILE_STATUS (make-ftype-pointer int gl-vao))
