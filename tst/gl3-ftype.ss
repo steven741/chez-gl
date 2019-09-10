@@ -36,24 +36,6 @@ void main()
 
 
 
-(define (print-error shader)
-  (define info-log (foreign-alloc (* 512 (foreign-sizeof 'char))))
-  (define (print-log offset)
-    (define c (foreign-ref 'char info-log offset))
-    (if (or (= offset 512)
-	    (char=? c #\nul))
-	0
-	(begin
-	  (printf "~c" c)
-	  (print-char (+ offset 1)))))
-  (glGetShaderInfoLog shader 512
-		      (make-ftype-pointer int 0)
-		      (make-ftype-pointer char info-log))
-  (print-log 0)
-  (foreign-free info-log))
-
-
-
 (define (create-shader-program)
   (define gl-vertex-shader   (gl-create-shader GL-VERTEX-SHADER))
   (define gl-fragment-shader (gl-create-shader GL-FRAGMENT-SHADER))
@@ -61,14 +43,13 @@ void main()
 
   (gl-shader-source gl-vertex-shader vertex-shader-source)
   (gl-compile-shader gl-vertex-shader)
+
   (gl-shader-source gl-fragment-shader fragment-shader-source)
   (gl-compile-shader gl-fragment-shader)
 
-  #|
   (glGetShaderiv gl-fragment-shader GL_COMPILE_STATUS (make-ftype-pointer int gl-vao))
   (pretty-print (foreign-ref 'unsigned gl-vao 0))
-  (print-error gl-fragment-shader)
-  |#
+  (gl-shader-info-log gl-fragment-shader)
 
   (glAttachShader gl-program-shader gl-vertex-shader)
   (glAttachShader gl-program-shader gl-fragment-shader)

@@ -6,6 +6,7 @@
 	  gl-create-program
 	  gl-shader-source
 	  gl-compile-shader
+	  gl-shader-info-log
 
 	  GL-DEPTH-BUFFER-BIT
 	  GL-STENCIL-BUFFER-BIT
@@ -2821,4 +2822,21 @@
 
 
   (define (gl-compile-shader shader)
-    (glCompileShader shader)))
+    (glCompileShader shader))
+
+
+  (define (gl-shader-info-log shader)
+    (define info-log (foreign-alloc (* 512 (foreign-sizeof 'char))))
+    (define (print-log offset)
+      (define c (foreign-ref 'char info-log offset))
+      (if (or (= offset 512)
+	      (char=? c #\nul))
+	  0
+	  (begin
+	    (printf "~c" c)
+	    (print-log (+ offset 1)))))
+    (glGetShaderInfoLog shader 512
+			(make-ftype-pointer int 0)
+			(make-ftype-pointer char info-log))
+    (print-log 0)
+    (foreign-free info-log)))
