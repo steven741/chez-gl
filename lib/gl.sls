@@ -2807,14 +2807,17 @@
     
     (let* ((string-port   (open-input-string source))
 	   (string-size   (port-length string-port))
-	   (c-string-addr (+ 1 (foreign-alloc string-size))))
+	   (c-string-addr (foreign-alloc (+ 1 string-size))))
 
       (make-c-string string-port c-string-addr 0)
-      (foreign-set! 'void* c-string-addrs 0 c-string-addr))
+      (foreign-set! 'void* c-string-addrs 0 c-string-addr)
 
-    (glShaderSource shader 1
-		    (make-ftype-pointer char c-string-addrs)
-		    (make-ftype-pointer int 0)))
+      (glShaderSource shader 1
+		      (make-ftype-pointer char c-string-addrs)
+		      (make-ftype-pointer int 0))
+
+      (foreign-free c-string-addr)
+      (foreign-free c-string-addrs)))
 
 
   (define (gl-compile-shader shader)
