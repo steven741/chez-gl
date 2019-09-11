@@ -4,8 +4,12 @@
   (export gl-init
 	  gl-create-shader
 	  gl-create-program
-	  gl-shader-source
 	  gl-compile-shader
+	  gl-attach-shader
+	  gl-link-program
+	  gl-delete-shader
+	  gl-use-program
+	  gl-shader-source
 	  gl-shader-info-log
 
 	  GL-DEPTH-BUFFER-BIT
@@ -2787,12 +2791,6 @@
   (define (gl-init)
     (gl-load-library))
 
-  (define (gl-create-shader type)
-    (glCreateShader type))
-
-  (define (gl-create-program)
-    (glCreateProgram))
-
   ;; TODO: Add support for lists of strings
   (define (gl-shader-source shader source)
     ;; Marshall scheme string to a c string.
@@ -2821,12 +2819,18 @@
       (foreign-free c-string-addrs)))
 
 
-  (define (gl-compile-shader shader)
-    (glCompileShader shader))
+  (define gl-create-shader  glCreateShader)
+  (define gl-create-program glCreateProgram)
+  (define gl-compile-shader glCompileShader)
+  (define gl-attach-shader  glAttachShader)
+  (define gl-link-program   glLinkProgram)
+  (define gl-delete-shader  glDeleteShader)
+  (define gl-use-program    glUseProgram)
 
 
   (define (gl-shader-info-log shader)
     (define info-log (foreign-alloc (* 512 (foreign-sizeof 'char))))
+
     (define (print-log offset)
       (define c (foreign-ref 'char info-log offset))
       (if (or (= offset 512)
@@ -2835,6 +2839,7 @@
 	  (begin
 	    (printf "~c" c)
 	    (print-log (+ offset 1)))))
+
     (glGetShaderInfoLog shader 512
 			(make-ftype-pointer int 0)
 			(make-ftype-pointer char info-log))

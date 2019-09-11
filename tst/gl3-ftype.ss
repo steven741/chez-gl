@@ -47,9 +47,9 @@ void main()
   (gl-shader-source gl-fragment-shader fragment-shader-source)
   (gl-compile-shader gl-fragment-shader)
 
-  (glGetShaderiv gl-fragment-shader GL_COMPILE_STATUS (make-ftype-pointer int gl-vao))
-  (pretty-print (foreign-ref 'unsigned gl-vao 0))
-  (gl-shader-info-log gl-fragment-shader)
+  ;;(glGetShaderiv gl-fragment-shader GL_COMPILE_STATUS (make-ftype-pointer int gl-vao))
+  ;;(pretty-print (foreign-ref 'unsigned gl-vao 0))
+  ;;(gl-shader-info-log gl-fragment-shader)
 
   (glAttachShader gl-program-shader gl-vertex-shader)
   (glAttachShader gl-program-shader gl-fragment-shader)
