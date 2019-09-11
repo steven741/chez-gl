@@ -29,9 +29,6 @@ void main()
 }")
 
 
-
-(define gl-vao (foreign-alloc (foreign-sizeof 'unsigned)))
-(define gl-vbo (foreign-alloc (foreign-sizeof 'unsigned)))
 (define triangle-data (foreign-alloc (* 9 (foreign-sizeof 'float))))
 
 
@@ -134,11 +131,9 @@ void main()
     (glViewport 0 0 640 480)
 
     ;; Create a shader program
-    (let ((gl-shader-program (create-shader-program)))
-
-      ;; Create a VAO and a VBO
-      (define gl-vbo (gl-gen-buffers 1))
-      (define gl-vao (gl-gen-vertex-arrays 1))
+    (let ((gl-shader-program (create-shader-program))
+	  (gl-vbo (gl-gen-buffers 1))
+	  (gl-vao (gl-gen-vertex-arrays 1)))
 
       (glBindVertexArray gl-vao)
       (glBindBuffer GL_ARRAY_BUFFER gl-vbo)
@@ -154,14 +149,12 @@ void main()
 	 (glDrawArrays GL_TRIANGLES 0 3)
 	 (sdl-gl-swap-window *window*)))
 
-      (glDeleteProgram gl-shader-program)))
+      (gl-delete-program gl-shader-program)
+      (gl-delete-vertex-arrays gl-vao)
+      (gl-delete-buffers gl-vbo)))
 
 
   (main-loop)
-
-  (glDeleteVertexArrays 1 (make-ftype-pointer unsigned gl-vao))
-  (glDeleteBuffers 1 (make-ftype-pointer unsigned gl-vbo))
-
   (sdl-gl-delete-context *gl-context*)
   (sdl-destroy-window *window*)
   (sdl-quit))
@@ -169,8 +162,6 @@ void main()
 
 
 (define (app-quit)
-  (foreign-free gl-vao)
-  (foreign-free gl-vbo)
   (foreign-free triangle-data))
 
 

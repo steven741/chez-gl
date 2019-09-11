@@ -8,12 +8,15 @@
 	  gl-attach-shader
 	  gl-link-program
 	  gl-delete-shader
+	  gl-delete-program
 	  gl-use-program
 	  gl-shader-source
 	  gl-shader-info-log
 
 	  gl-gen-buffers
 	  gl-gen-vertex-arrays
+	  gl-delete-buffers
+	  gl-delete-vertex-arrays
 
 	  GL-DEPTH-BUFFER-BIT
 	  GL-STENCIL-BUFFER-BIT
@@ -2865,4 +2868,18 @@
 	   (*** (glGenVertexArrays 1 (make-ftype-pointer unsigned vao)))
 	   (ret (foreign-ref 'unsigned vao 0)))
       (foreign-free vao)
-      ret)))
+      ret))
+
+  (define gl-delete-program glDeleteProgram)
+
+  (define (gl-delete-buffers vbos)
+    (let ((vbop (foreign-alloc (foreign-sizeof 'unsigned))))
+      (foreign-set! 'unsigned vbop 0 vbos)
+      (glDeleteBuffers 1 (make-ftype-pointer unsigned vbop))
+      (foreign-free vbop)))
+
+  (define (gl-delete-vertex-arrays vaos)
+    (let ((vaop (foreign-alloc (foreign-sizeof 'unsigned))))
+      (foreign-set! 'unsigned vaop 0 vaos)
+      (glDeleteVertexArrays 1 (make-ftype-pointer unsigned vaop))
+      (foreign-free vaop))))
