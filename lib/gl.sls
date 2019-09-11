@@ -2791,32 +2791,35 @@
   (define (gl-init)
     (gl-load-library))
 
-  ;; TODO: Add support for lists of strings
   (define (gl-shader-source shader source)
     ;; Marshall scheme string to a c string.
-    (define (make-c-string port address offset)
-      (define port-char (read-char port))
-      (if (eof-object? port-char)
-	  (foreign-set! 'char address offset #\nul)
-	  (begin
-	    (foreign-set! 'char address offset port-char)
-	    (make-c-string port address (+ 1 offset)))))
+    (define (make-c-string string)
+      ;; Read the scheme string into a c string
+      (define (read-all port address offset)
+	(define port-char (read-char port))
+	(if (eof-object? port-char)
+	    (foreign-set! 'char address offset #\nul)
+	    (begin
+	      (foreign-set! 'char address offset port-char)
+	      (read-all port address (+ 1 offset)))))
+ 
+      (let* ((string-port   (open-input-string string))
+	     (string-size   (port-length string-port))
+	     (c-string-addr (foreign-alloc (+ 1 string-size))))
+	(read-all string-port c-string-addr 0)
+	c-string-addr))
 
+    (define c-string-addr (make-c-string source))
     (define c-string-addrs (foreign-alloc (foreign-sizeof 'void*)))
-    
-    (let* ((string-port   (open-input-string source))
-	   (string-size   (port-length string-port))
-	   (c-string-addr (foreign-alloc (+ 1 string-size))))
 
-      (make-c-string string-port c-string-addr 0)
-      (foreign-set! 'void* c-string-addrs 0 c-string-addr)
+    (foreign-set! 'void* c-string-addrs 0 c-string-addr)
 
-      (glShaderSource shader 1
-		      (make-ftype-pointer char c-string-addrs)
-		      (make-ftype-pointer int 0))
+    (glShaderSource shader 1
+		    (make-ftype-pointer char c-string-addrs)
+		    (make-ftype-pointer int 0))
 
-      (foreign-free c-string-addr)
-      (foreign-free c-string-addrs)))
+    (foreign-free c-string-addr)
+    (foreign-free c-string-addrs))
 
 
   (define gl-create-shader  glCreateShader)

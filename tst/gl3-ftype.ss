@@ -51,12 +51,12 @@ void main()
   ;;(pretty-print (foreign-ref 'unsigned gl-vao 0))
   ;;(gl-shader-info-log gl-fragment-shader)
 
-  (glAttachShader gl-program-shader gl-vertex-shader)
-  (glAttachShader gl-program-shader gl-fragment-shader)
-  (glLinkProgram gl-program-shader)
-  (glDeleteShader gl-vertex-shader)
-  (glDeleteShader gl-fragment-shader)
-  (glUseProgram gl-program-shader)
+  (gl-attach-shader gl-program-shader gl-vertex-shader)
+  (gl-attach-shader gl-program-shader gl-fragment-shader)
+  (gl-link-program gl-program-shader)
+  (gl-delete-shader gl-vertex-shader)
+  (gl-delete-shader gl-fragment-shader)
+  (gl-use-program gl-program-shader)
   gl-program-shader)
 
 
