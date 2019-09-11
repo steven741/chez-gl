@@ -12,6 +12,9 @@
 	  gl-shader-source
 	  gl-shader-info-log
 
+	  gl-gen-buffers
+	  gl-gen-vertex-arrays
+
 	  GL-DEPTH-BUFFER-BIT
 	  GL-STENCIL-BUFFER-BIT
 	  GL-COLOR-BUFFER-BIT
@@ -2847,4 +2850,19 @@
 			(make-ftype-pointer int 0)
 			(make-ftype-pointer char info-log))
     (print-log 0)
-    (foreign-free info-log)))
+    (foreign-free info-log))
+
+
+  (define (gl-gen-buffers num)
+    (let* ((vbo (foreign-alloc (foreign-sizeof 'unsigned)))
+	   (*** (glGenBuffers 1 (make-ftype-pointer unsigned vbo)))
+	   (ret (foreign-ref 'unsigned vbo 0)))
+      (foreign-free vbo)
+      ret))
+
+  (define (gl-gen-vertex-arrays num)
+    (let* ((vao (foreign-alloc (foreign-sizeof 'unsigned)))
+	   (*** (glGenVertexArrays 1 (make-ftype-pointer unsigned vao)))
+	   (ret (foreign-ref 'unsigned vao 0)))
+      (foreign-free vao)
+      ret)))

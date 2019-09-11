@@ -137,11 +137,11 @@ void main()
     (let ((gl-shader-program (create-shader-program)))
 
       ;; Create a VAO and a VBO
-      (glGenVertexArrays 1 (make-ftype-pointer unsigned gl-vao))
-      (glGenBuffers 1 (make-ftype-pointer unsigned gl-vbo))
+      (define gl-vbo (gl-gen-buffers 1))
+      (define gl-vao (gl-gen-vertex-arrays 1))
 
-      (glBindVertexArray (foreign-ref 'unsigned gl-vao 0))
-      (glBindBuffer GL_ARRAY_BUFFER (foreign-ref 'unsigned gl-vbo 0))
+      (glBindVertexArray gl-vao)
+      (glBindBuffer GL_ARRAY_BUFFER gl-vbo)
       (glBufferData GL_ARRAY_BUFFER (* 9 (foreign-sizeof 'float)) triangle-data GL_STATIC_DRAW)
 
       (glVertexAttribPointer 0 3 GL_FLOAT GL_FALSE (* 3 (foreign-sizeof 'float)) 0)
