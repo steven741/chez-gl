@@ -2,6 +2,11 @@
 
 (library (gl)
   (export gl-init
+
+	  gl-clear-color
+	  gl-clear
+	  gl-draw-arrays
+
 	  gl-create-shader
 	  gl-create-program
 	  gl-compile-shader
@@ -2796,6 +2801,11 @@
 
   (define (gl-init)
     (gl-load-library))
+
+  (define gl-clear-color glClearColor)
+  (define gl-clear glClear)
+  (define gl-draw-arrays glDrawArrays)
+
 
   (define (gl-shader-source shader source)
     ;; Marshall scheme string to a c string.

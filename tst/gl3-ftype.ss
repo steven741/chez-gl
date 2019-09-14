@@ -44,10 +44,6 @@ void main()
   (gl-shader-source gl-fragment-shader fragment-shader-source)
   (gl-compile-shader gl-fragment-shader)
 
-  ;;(glGetShaderiv gl-fragment-shader GL_COMPILE_STATUS (make-ftype-pointer int gl-vao))
-  ;;(pretty-print (foreign-ref 'unsigned gl-vao 0))
-  ;;(gl-shader-info-log gl-fragment-shader)
-
   (gl-attach-shader gl-program-shader gl-vertex-shader)
   (gl-attach-shader gl-program-shader gl-fragment-shader)
   (gl-link-program gl-program-shader)
@@ -144,9 +140,9 @@ void main()
 
       (loop-with-time
        (lambda (t)
-	 (glClearColor (sin t) 0.5 (cos t) 1.0)
-	 (glClear GL_COLOR_BUFFER_BIT)
-	 (glDrawArrays GL_TRIANGLES 0 3)
+	 (gl-clear-color (sin t) 0.5 (cos t) 1.0)
+	 (gl-clear GL-COLOR-BUFFER-BIT)
+	 (gl-draw-arrays GL-TRIANGLES 0 3)
 	 (sdl-gl-swap-window *window*)))
 
       (gl-delete-program gl-shader-program)
