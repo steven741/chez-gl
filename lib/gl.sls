@@ -2880,6 +2880,19 @@
       (foreign-free vao)
       ret))
 
+  (define gl-bind-vertex-array          glBindVertexArray)
+  (define gl-bind-buffer                glBindBuffer)
+  (define gl-enable-vertex-attrib-array glEnableVertexAttribArray)
+
+  (define (gl-buffer-data target data usage)
+    (error 'GL "unimplemented" gl-buffer-data))
+
+  (define (gl-vertex-attrib-pointer)
+    (error 'GL "unimplemented" gl-vertex-attrib-pointer))
+
+  ;;(glBufferData GL_ARRAY_BUFFER (* 9 (foreign-sizeof 'float)) triangle-data GL_STATIC_DRAW)
+  ;;(glVertexAttribPointer 0 3 GL_FLOAT GL_FALSE (* 3 (foreign-sizeof 'float)) 0)
+
   (define gl-delete-program glDeleteProgram)
 
   (define (gl-delete-buffers vbos)
