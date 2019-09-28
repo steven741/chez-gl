@@ -29,7 +29,7 @@ void main()
 }")
 
 
-(define triangle-data (foreign-alloc (* 9 (foreign-sizeof 'float))))
+(define triangle-data (make-bytevector (* 4 9)))
 
 
 
@@ -69,17 +69,17 @@ void main()
   (sdl-gl-set-attribute! SDL-GL-CONTEXT-MAJOR-VERSION 3)
   (sdl-gl-set-attribute! SDL-GL-CONTEXT-MINOR-VERSION 3)
 
-  (foreign-set! 'float triangle-data  0 -0.5)
-  (foreign-set! 'float triangle-data  4 -0.5)
-  (foreign-set! 'float triangle-data  8  0.0)
+  (bytevector-ieee-single-native-set! triangle-data  0 -0.5)
+  (bytevector-ieee-single-native-set! triangle-data  4 -0.5)
+  (bytevector-ieee-single-native-set! triangle-data  8  0.0)
 
-  (foreign-set! 'float triangle-data 12  0.5)
-  (foreign-set! 'float triangle-data 16 -0.5)
-  (foreign-set! 'float triangle-data 20  0.0)
+  (bytevector-ieee-single-native-set! triangle-data 12  0.5)
+  (bytevector-ieee-single-native-set! triangle-data 16 -0.5)
+  (bytevector-ieee-single-native-set! triangle-data 20  0.0)
 
-  (foreign-set! 'float triangle-data 24  0.0)
-  (foreign-set! 'float triangle-data 28  0.5)
-  (foreign-set! 'float triangle-data 32  0.0))
+  (bytevector-ieee-single-native-set! triangle-data 24  0.0)
+  (bytevector-ieee-single-native-set! triangle-data 28  0.5)
+  (bytevector-ieee-single-native-set! triangle-data 32  0.0))
 
 
 
@@ -133,9 +133,9 @@ void main()
 
       (glBindVertexArray gl-vao)
       (glBindBuffer GL_ARRAY_BUFFER gl-vbo)
-      (glBufferData GL_ARRAY_BUFFER (* 9 (foreign-sizeof 'float)) triangle-data GL_STATIC_DRAW)
+      (glBufferData GL_ARRAY_BUFFER (bytevector-length triangle-data) triangle-data GL_STATIC_DRAW)
 
-      (glVertexAttribPointer 0 3 GL_FLOAT GL_FALSE (* 3 (foreign-sizeof 'float)) 0)
+      (glVertexAttribPointer 0 3 GL_FLOAT GL_FALSE (* 3 4) 0)
       (glEnableVertexAttribArray 0)
 
       (loop-with-time
@@ -157,11 +157,5 @@ void main()
 
 
 
-(define (app-quit)
-  (foreign-free triangle-data))
-
-
-
 (app-init)
 (app-main)
-(app-quit)

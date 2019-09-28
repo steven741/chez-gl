@@ -2885,6 +2885,7 @@
   (define gl-enable-vertex-attrib-array glEnableVertexAttribArray)
 
   (define (gl-buffer-data target data usage)
+    (glBufferData target (bytevector-length data) data usage)
     (error 'GL "unimplemented" gl-buffer-data))
 
   (define (gl-vertex-attrib-pointer)

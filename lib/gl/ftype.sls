@@ -5069,7 +5069,7 @@
     (set! *glIsBuffer*
 	  (gl-procedure "glIsBuffer" (GLuint) GLboolean))
     (set! *glBufferData*
-	  (gl-procedure "glBufferData" (GLenum GLsizeiptr void* GLenum) void))
+	  (gl-procedure "glBufferData" (GLenum GLsizeiptr u8* GLenum) void))
     (set! *glBufferSubData*
 	  (gl-procedure "glBufferSubData" (GLenum GLintptr GLsizeiptr void*) void))
     (set! *glGetBufferSubData*
