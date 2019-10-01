@@ -23,6 +23,10 @@
 	  gl-delete-buffers
 	  gl-delete-vertex-arrays
 	  gl-buffer-data
+	  gl-bind-vertex-array
+	  gl-bind-buffer
+	  gl-enable-vertex-attrib-array
+	  gl-vertex-attrib-pointer
 
 	  GL-DEPTH-BUFFER-BIT
 	  GL-STENCIL-BUFFER-BIT
@@ -2895,8 +2899,8 @@
 	  (else
 	   (error 'GL "Data should be a list, vector or bytevector." data))))
 
-  (define (gl-vertex-attrib-pointer)
-    (error 'GL "unimplemented" gl-vertex-attrib-pointer))
+  (define (gl-vertex-attrib-pointer index size type normalized? stride start)
+    (glVertexAttribPointer index size type normalized? stride start))
 
   (define gl-delete-program glDeleteProgram)
 

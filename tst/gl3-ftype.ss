@@ -131,12 +131,12 @@ void main()
 	  (gl-vbo (gl-gen-buffers 1))
 	  (gl-vao (gl-gen-vertex-arrays 1)))
 
-      (glBindVertexArray gl-vao)
-      (glBindBuffer GL_ARRAY_BUFFER gl-vbo)
+      (gl-bind-vertex-array gl-vao)
+      (gl-bind-buffer GL-ARRAY-BUFFER gl-vbo)
       (gl-buffer-data GL-ARRAY-BUFFER triangle-data GL-STATIC-DRAW)
 
-      (glVertexAttribPointer 0 3 GL_FLOAT GL_FALSE (* 3 4) 0)
-      (glEnableVertexAttribArray 0)
+      (gl-vertex-attrib-pointer 0 3 GL-FLOAT GL-FALSE (* 3 4) 0)
+      (gl-enable-vertex-attrib-array 0)
 
       (loop-with-time
        (lambda (t)
