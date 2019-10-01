@@ -133,7 +133,7 @@ void main()
 
       (glBindVertexArray gl-vao)
       (glBindBuffer GL_ARRAY_BUFFER gl-vbo)
-      (glBufferData GL_ARRAY_BUFFER (bytevector-length triangle-data) triangle-data GL_STATIC_DRAW)
+      (gl-buffer-data GL-ARRAY-BUFFER triangle-data GL-STATIC-DRAW)
 
       (glVertexAttribPointer 0 3 GL_FLOAT GL_FALSE (* 3 4) 0)
       (glEnableVertexAttribArray 0)
