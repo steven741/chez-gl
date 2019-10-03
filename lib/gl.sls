@@ -2889,15 +2889,38 @@
   (define gl-bind-buffer                glBindBuffer)
   (define gl-enable-vertex-attrib-array glEnableVertexAttribArray)
 
-  (define (gl-buffer-data target data usage)
+  (define (gl-buffer-data target data usage . data-type)
+    ;; Lists and vectors require an explicit binary datum
+    ;; description. If no data type is provided 32 bit
+    ;; IEEE floating point numbers are assumed.
+    (define (list->bytevector data)
+      (let ((data-type (if (null? data-type) 'float (car data-type)))
+	    (list-size (length data)))
+	(cond ((eq? data-type 'float)
+	       (let ((bv (make-bytevector (* list-size 4))))
+		 (fold-left (lambda (n x)
+			      (bytevector-ieee-single-native-set! bv n x)
+			      (+ n 4))
+			    0
+			    data)
+		 bv))
+	      ((eq? data-type 'double)
+	       (let ((bv (make-bytevector (* list-size 8))))
+		 (fold-left (lambda (n x)
+			      (bytevector-ieee-double-native-set! bv n x)
+			      (+ n 8))
+			    0
+			    data)
+		 bv))
+	      (else
+	       (error 'GL "unsupported data type" data-type)))))
     (cond ((list? data)
-	   (error 'GL "unimplemented data" data))
-	  ((vector? data)
-	   (error 'GL "unimplemented data" data))
-	  ((bytevector? data)
-	   (glBufferData target (bytevector-length data) data usage))
-	  (else
-	   (error 'GL "Data should be a list, vector or bytevector." data))))
+	   (let ((byte-data (list->bytevector data)))
+	     (glBufferData target (bytevector-length byte-data) byte-data usage)))
+	   ((bytevector? data)
+	    (glBufferData target (bytevector-length data) data usage))
+	   (else
+	    (error 'GL "Data should be a list or bytevector." data))))
 
   (define (gl-vertex-attrib-pointer index size type normalized? stride start)
     (glVertexAttribPointer index size type normalized? stride start))

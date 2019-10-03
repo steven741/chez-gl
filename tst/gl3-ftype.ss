@@ -29,10 +29,6 @@ void main()
 }")
 
 
-(define triangle-data (make-bytevector (* 4 9)))
-
-
-
 (define (create-shader-program)
   (define gl-vertex-shader   (gl-create-shader GL-VERTEX-SHADER))
   (define gl-fragment-shader (gl-create-shader GL-FRAGMENT-SHADER))
@@ -67,19 +63,7 @@ void main()
   (sdl-gl-set-attribute! SDL-GL-CONTEXT-PROFILE-MASK
 			 SDL-GL-CONTEXT-PROFILE-CORE)
   (sdl-gl-set-attribute! SDL-GL-CONTEXT-MAJOR-VERSION 3)
-  (sdl-gl-set-attribute! SDL-GL-CONTEXT-MINOR-VERSION 3)
-
-  (bytevector-ieee-single-native-set! triangle-data  0 -0.5)
-  (bytevector-ieee-single-native-set! triangle-data  4 -0.5)
-  (bytevector-ieee-single-native-set! triangle-data  8  0.0)
-
-  (bytevector-ieee-single-native-set! triangle-data 12  0.5)
-  (bytevector-ieee-single-native-set! triangle-data 16 -0.5)
-  (bytevector-ieee-single-native-set! triangle-data 20  0.0)
-
-  (bytevector-ieee-single-native-set! triangle-data 24  0.0)
-  (bytevector-ieee-single-native-set! triangle-data 28  0.5)
-  (bytevector-ieee-single-native-set! triangle-data 32  0.0))
+  (sdl-gl-set-attribute! SDL-GL-CONTEXT-MINOR-VERSION 3))
 
 
 
@@ -133,7 +117,7 @@ void main()
 
       (gl-bind-vertex-array gl-vao)
       (gl-bind-buffer GL-ARRAY-BUFFER gl-vbo)
-      (gl-buffer-data GL-ARRAY-BUFFER triangle-data GL-STATIC-DRAW)
+      (gl-buffer-data GL-ARRAY-BUFFER '(-0.5 -0.5 0.0 0.5 -0.5 0.0 0.0 0.5 0.0) GL-STATIC-DRAW)
 
       (gl-vertex-attrib-pointer 0 3 GL-FLOAT GL-FALSE (* 3 4) 0)
       (gl-enable-vertex-attrib-array 0)
