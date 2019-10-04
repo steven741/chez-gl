@@ -6,6 +6,7 @@
 	  gl-clear-color
 	  gl-clear
 	  gl-draw-arrays
+	  gl-viewport
 
 	  gl-create-shader
 	  gl-create-program
@@ -2807,6 +2808,7 @@
   (define (gl-init)
     (gl-load-library))
 
+  (define gl-viewport glViewport)
   (define gl-clear-color glClearColor)
   (define gl-clear glClear)
   (define gl-draw-arrays glDrawArrays)
