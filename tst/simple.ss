@@ -5,10 +5,21 @@
 	(sdl))
 
 
+;; Startup SDL 2 and request a window suitable
+;; for requesting an OpenGL context
 (sdl-init SDL-INIT-VIDEO
 	  SDL-INIT-EVENTS)
 
-;;
+(define *window*
+  (sdl-create-window "chezscheme"
+		     SDL-WINDOWPOS-UNDEFINED
+		     SDL-WINDOWPOS-UNDEFINED
+		     640
+		     480
+		     SDL-WINDOW-OPENGL))
+
+;; Setting hints for a 32-bit color depth OpenGL context
+;; with a double buffered framebuffer and a core 3.3 context.
 (sdl-gl-set-attribute! SDL-GL-RED-SIZE   8)
 (sdl-gl-set-attribute! SDL-GL-GREEN-SIZE 8)
 (sdl-gl-set-attribute! SDL-GL-BLUE-SIZE  8)
@@ -20,16 +31,6 @@
 		       SDL-GL-CONTEXT-PROFILE-CORE)
 (sdl-gl-set-attribute! SDL-GL-CONTEXT-MAJOR-VERSION 3)
 (sdl-gl-set-attribute! SDL-GL-CONTEXT-MINOR-VERSION 3)
-
-;;
-(define *window*
-  (sdl-create-window "chezscheme"
-		     SDL-WINDOWPOS-UNDEFINED
-		     SDL-WINDOWPOS-UNDEFINED
-		     640
-		     480
-		     SDL-WINDOW-OPENGL))
-
 
 (define *gl-context*
   (sdl-gl-create-context *window*))
@@ -114,7 +115,9 @@ void main()
 (gl-bind-vertex-array gl-vao)
 (gl-bind-buffer GL-ARRAY-BUFFER gl-vbo)
 (gl-buffer-data GL-ARRAY-BUFFER
-		'(-0.5 -0.5 0.0 0.5 -0.5 0.0 0.0 0.5 0.0)
+		'(-0.5 -0.5 0.0
+		   0.5 -0.5 0.0
+		   0.0  0.5 0.0)
 		GL-STATIC-DRAW)
 
 (gl-vertex-attrib-pointer 0 3 GL-FLOAT GL-FALSE (* 3 4) 0)
