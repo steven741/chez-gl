@@ -2916,13 +2916,39 @@
 		 bv))
 	      (else
 	       (error 'GL "unsupported data type" data-type)))))
+    (define (vector->bytevector data)
+      (let ((data-type (if (null? data-type) 'float (car data-type)))
+	    (vect-size (vector-length data)))
+	(cond ((eq? data-type 'float)
+	       (letrec ((bv (make-bytevector (* vect-size 4)))
+			(cp (lambda (n)
+			      (bytevector-ieee-single-native-set! bv (* n 4) (vector-ref data n))
+			      (if (= n vect-size)
+				  n
+				  (cp (+ n 1))))))
+		 (cp 0)
+		 bv))
+	      ((eq? data-type 'double)
+	       (letrec ((bv (make-bytevector (* vect-size 8)))
+			(cp (lambda (n)
+			      (bytevector-ieee-double-native-set! bv (* n 8) (vector-ref data n))
+			      (if (= n vect-size)
+				  n
+				  (cp (+ n 1))))))
+		 (cp 0)
+		 bv))
+	      (else
+	       (error 'GL "unsupported data type" data-type)))))
     (cond ((list? data)
 	   (let ((byte-data (list->bytevector data)))
 	     (glBufferData target (bytevector-length byte-data) byte-data usage)))
-	   ((bytevector? data)
-	    (glBufferData target (bytevector-length data) data usage))
-	   (else
-	    (error 'GL "Data should be a list or bytevector." data))))
+	  ((vector? data)
+	   (let ((byte-data (vector->bytevector data)))
+	     (glBufferData target (bytevector-length byte-data) byte-data usage)))
+	  ((bytevector? data)
+	   (glBufferData target (bytevector-length data) data usage))
+	  (else
+	   (error 'GL "Data should be a list or bytevector." data))))
 
   (define (gl-vertex-attrib-pointer index size type normalized? stride start)
     (glVertexAttribPointer index size type normalized? stride start))
